@@ -42,13 +42,13 @@
             <header>
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item active" :style="{'background-image':'url(assets/img/e753507e60b3096fb02daf618c212858.png)'}">
+                        <div class="carousel-item active" style="background-image: url('assets/img/e753507e60b3096fb02daf618c212858.png')">
                             <!-- <img src="./assets/img/e753507e60b3096fb02daf618c212858.png" class="d-block w-100" alt="..." /> -->
                         </div>
-                        <div class="carousel-item" :style="{'background-image':'url(assets/img/e753507e60b3096fb02daf618c212858.png)'}" >
+                        <div class="carousel-item"  style="background-image: url('assets/img/e753507e60b3096fb02daf618c212858.png')" >
                             <!-- <img src="./assets/img/e753507e60b3096fb02daf618c212858.png" class="d-block w-100" alt="..." /> -->
                         </div>
-                        <div class="carousel-item" :style="{'background-image':'url(assets/img/e753507e60b3096fb02daf618c212858.png)'}" >
+                        <div class="carousel-item" style="background-image: url('assets/img/e753507e60b3096fb02daf618c212858.png')"  >
                             <!-- <img src="./assets/img/e753507e60b3096fb02daf618c212858.png" class="d-block w-100" alt="..." /> -->
                         </div>
                     </div>

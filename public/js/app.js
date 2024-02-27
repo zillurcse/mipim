@@ -37046,31 +37046,7 @@ var render = function () {
             },
           },
           [
-            _c("div", { staticClass: "carousel-inner" }, [
-              _c("div", {
-                staticClass: "carousel-item active",
-                style: {
-                  "background-image":
-                    "url(assets/img/e753507e60b3096fb02daf618c212858.png)",
-                },
-              }),
-              _vm._v(" "),
-              _c("div", {
-                staticClass: "carousel-item",
-                style: {
-                  "background-image":
-                    "url(assets/img/e753507e60b3096fb02daf618c212858.png)",
-                },
-              }),
-              _vm._v(" "),
-              _c("div", {
-                staticClass: "carousel-item",
-                style: {
-                  "background-image":
-                    "url(assets/img/e753507e60b3096fb02daf618c212858.png)",
-                },
-              }),
-            ]),
+            _vm._m(0),
             _vm._v(" "),
             _c(
               "button",
@@ -37135,7 +37111,7 @@ var render = function () {
         ),
       ]),
       _vm._v(" "),
-      _vm._m(0),
+      _vm._m(1),
       _vm._v(" "),
       _c("section", { staticClass: "data-box-section" }, [
         _c("div", { staticClass: "container" }, [
@@ -37200,7 +37176,7 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(1),
+                _vm._m(2),
               ]),
             ]),
             _vm._v(" "),
@@ -37243,7 +37219,7 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(2),
+                _vm._m(3),
               ]),
             ]),
             _vm._v(" "),
@@ -37279,7 +37255,7 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(3),
+                _vm._m(4),
               ]),
             ]),
             _vm._v(" "),
@@ -37343,7 +37319,7 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(4),
+                _vm._m(5),
               ]),
             ]),
             _vm._v(" "),
@@ -37386,7 +37362,7 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(5),
+                _vm._m(6),
               ]),
             ]),
             _vm._v(" "),
@@ -37422,18 +37398,48 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(6),
+                _vm._m(7),
               ]),
             ]),
           ]),
         ]),
       ]),
       _vm._v(" "),
-      _vm._m(7),
+      _vm._m(8),
     ]),
   ])
 }
 var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "carousel-inner" }, [
+      _c("div", {
+        staticClass: "carousel-item active",
+        staticStyle: {
+          "background-image":
+            "url('assets/img/e753507e60b3096fb02daf618c212858.png')",
+        },
+      }),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "carousel-item",
+        staticStyle: {
+          "background-image":
+            "url('assets/img/e753507e60b3096fb02daf618c212858.png')",
+        },
+      }),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "carousel-item",
+        staticStyle: {
+          "background-image":
+            "url('assets/img/e753507e60b3096fb02daf618c212858.png')",
+        },
+      }),
+    ])
+  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
