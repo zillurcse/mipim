@@ -39,6 +39,11 @@ ul {
     background-image: url(../img/e753507e60b3096fb02daf618c212858.png);
 }
 
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-image: none;
+}
+
 .text-section {
     padding: 50px 0;
 }

@@ -8505,12 +8505,35 @@ var render = function render() {
     attrs: {
       "aria-hidden": "true"
     }
-  }, [_c("img", {
+  }, [_c("svg", {
     attrs: {
-      src: "assets/img/right_arrow 2.svg",
-      alt: ""
+      width: "21",
+      height: "37",
+      viewBox: "0 0 21 37",
+      fill: "none",
+      xmlns: "http://www.w3.org/2000/svg"
     }
-  })]), _vm._v(" "), _c("span", {
+  }, [_c("g", {
+    attrs: {
+      "clip-path": "url(#clip0_15_110)"
+    }
+  }, [_c("path", {
+    attrs: {
+      d: "M6.0604 18.4297L8.31543 20.8213L21 33.6236L17.6174 37L0.704695 20.1179C-0.281881 19.1331 -0.281881 17.7262 0.704695 16.7414L17.6174 -0.140686L21 3.37643L8.31543 16.038L6.0604 18.4297Z",
+      fill: "#F5F5F5"
+    }
+  })]), _vm._v(" "), _c("defs", [_c("clipPath", {
+    attrs: {
+      id: "clip0_15_110"
+    }
+  }, [_c("rect", {
+    attrs: {
+      width: "21",
+      height: "37",
+      fill: "white",
+      transform: "translate(21 37) rotate(180)"
+    }
+  })])])])]), _vm._v(" "), _c("span", {
     staticClass: "visually-hidden"
   }, [_vm._v("Previous")])]), _vm._v(" "), _c("button", {
     staticClass: "carousel-control-next",
@@ -8524,12 +8547,34 @@ var render = function render() {
     attrs: {
       "aria-hidden": "true"
     }
-  }, [_c("img", {
+  }, [_c("svg", {
     attrs: {
-      src: "/assets/img/right_arrow 1.svg",
-      alt: ""
+      width: "21",
+      height: "37",
+      viewBox: "0 0 21 37",
+      fill: "none",
+      xmlns: "http://www.w3.org/2000/svg"
     }
-  })]), _vm._v(" "), _c("span", {
+  }, [_c("g", {
+    attrs: {
+      "clip-path": "url(#clip0_15_108)"
+    }
+  }, [_c("path", {
+    attrs: {
+      d: "M14.9396 18.5703L12.6846 16.1787L0 3.37643L3.38255 0L20.2953 16.8821C21.2819 17.8669 21.2819 19.2738 20.2953 20.2586L3.38255 37.1407L0 33.6236L12.6846 20.962L14.9396 18.5703Z",
+      fill: "#F5F5F5"
+    }
+  })]), _vm._v(" "), _c("defs", [_c("clipPath", {
+    attrs: {
+      id: "clip0_15_108"
+    }
+  }, [_c("rect", {
+    attrs: {
+      width: "21",
+      height: "37",
+      fill: "white"
+    }
+  })])])])]), _vm._v(" "), _c("span", {
     staticClass: "visually-hidden"
   }, [_vm._v("Next")])])])]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("section", {
     staticClass: "data-box-section"
