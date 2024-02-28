@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Zaha';
+    src: url('./assets/Font/Zaha\ Hadid\ Sans.otf') format('woff2'),
+        url('./assets/Font/Zaha\ Hadid\ Sans.ttf') format('woff');
+    /* Add more src lines for other font formats if needed */
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,7 +12,7 @@
 }
 
 body {
-    font-family: "Tajawal", sans-serif;
+    font-family: "Zaha", sans-serif;
 }
 
 img {
@@ -35,13 +42,15 @@ ul {
     background-size: cover;
     background-repeat: no-repeat;
     overflow: hidden;
-    border-radius: 10px 10px 0px 0px;
-    background-image: url(../img/e753507e60b3096fb02daf618c212858.png);
+    /* border-radius: 10px 10px 0px 0px; */
 }
 
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    background-image: none;
+.main-nav {
+    padding: 20px 0;
+}
+
+.nav-item .nav-link {
+    color: #111;
 }
 
 .text-section {

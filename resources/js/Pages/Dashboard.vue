@@ -41,7 +41,7 @@
                         v-if="selectedTab === 'banner'">
                         <div class="flex justify-between items-center">
                             <h1 class="text-xl text-gray-800  font-bold ">Add Banner</h1>
-                            <div class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-700 text-white "
+                            <div class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-700 text-white cursor-pointer "
                                 @click="showModal = 'banner'">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" class="w-6 h-6">
@@ -363,14 +363,15 @@ export default {
                 thumbnailHeight: 140,
                 uploadMultiple: true,
                 parallelUploads: 20
-            }
+            },
+            dataURL: null
 
         }
     },
     async mounted() {
         await axios.get('/api/banner')
             .then(response => {
-                if(response.status == 200){
+                if (response.status == 200) {
                     this.items = response.data.data.item
 
                     console.log()
@@ -381,7 +382,7 @@ export default {
                 if (error.response.status == 422) {
                     this.errors = error.response.data.errors;
                 } else {
-                    this.toastMessage('error',error, 'check', '', 'times')
+                    this.toastMessage('error', error, 'check', '', 'times')
                 }
             })
             .finally(() => {
