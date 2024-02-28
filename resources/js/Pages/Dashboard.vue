@@ -371,8 +371,9 @@ export default {
     async mounted() {
         await axios.get('/api/banner')
             .then(response => {
+                console.log(response);
                 if (response.status == 200) {
-                    this.items = response.data.data.item
+                    // this.items = response.data.data.item
 
                     console.log()
                 }
@@ -393,9 +394,9 @@ export default {
 
     methods: {
         async uploadFiles() {
-            let formdata = new FormData();
-            formdata.append('bannerImg', this.bannaerImage)
-            await axios.post('/api/banner', formdata)
+            // let formdata = new FormData();
+            // formdata.append('bannerImg', this.bannaerImage)
+            await axios.post('/api/banner', this.bannaerImage)
                 .then(response => {
                     // Handle success
                     console.log('Response:', response.data);
