@@ -41,12 +41,9 @@
         <main>
             <header>
                 <nav class="navbar navbar-expand-xl bg-transparent text-brand container main-nav">
-                    <a class="navbar-brand text-brand" href="./index.html">
-                        <!-- <img src="../../../public/images/e753507e60b3096fb02daf618c212858.png" alt="" /> -->
-                        <!-- <img :src="activeImageUrl" alt=""> -->
-                        <img src="/assets/img/Logo 2.svg" alt="">
-
-                    </a>
+                    <Link class="navbar-brand text-brand" href="/">
+                        <img src="/assets/img/Logo 2.svg" alt="" />
+                    </Link>
                     <button class="navbar-toggler bg-transparent text-black px-3 py-2" type="button"
                         data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +63,7 @@
                             <div class="navbar-nav justify-content-end flex-grow-1 pe-3">
                                 <ul class="navbar-nav mb-2 mb-lg-0 gap-4 text-uppercase">
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="./index.html" target="_self" title="">Home</a>
+                                        <Link class="nav-link active" href="/" target="_self" title="">Home</Link>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#" target="_self" title="">About</a>
@@ -313,6 +310,8 @@
 </template>
 
 <script>
+import { Link } from '@inertiajs/inertia-vue'
+
 export default {
     props: {
         canLogin: Boolean,
@@ -320,10 +319,13 @@ export default {
         laravelVersion: String,
         phpVersion: String,
     },
+    components:{
+        Link
+    },
     data() {
         return {
-            activeImageUrl: '../../../public/assets/img/e753507e60b3096fb02daf618c212858',
-            // imagePath: require("@/assets/images/e753507e60b3096fb02daf618c212858.png"),
+            activeImageUrl: '/assets/img/e753507e60b3096fb02daf618c212858',
+
         };
     }
 }
