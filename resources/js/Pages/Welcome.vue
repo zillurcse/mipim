@@ -42,7 +42,7 @@
             <header>
                 <nav class="navbar navbar-expand-xl bg-transparent text-brand container main-nav">
                     <a class="navbar-brand text-brand" href="./index.html">
-                        <img src="./assets/img/Logo 2.svg" alt="" />
+                        <img src="/assets/img/Logo 2.svg" alt="" />
                     </a>
                     <button class="navbar-toggler bg-transparent text-black px-3 py-2" type="button"
                         data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas"
@@ -79,29 +79,29 @@
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active"
-                            style="background-image: url(./assets/img/e753507e60b3096fb02daf618c212858.png)">
-                            <!-- <img src="./assets/img/e753507e60b3096fb02daf618c212858.png" class="d-block w-100" alt="..." /> -->
+                            style="background-image: url(/assets/img/e753507e60b3096fb02daf618c212858.png)">
+                            <!-- <img src="/assets/img/e753507e60b3096fb02daf618c212858.png" class="d-block w-100" alt="..." /> -->
                         </div>
                         <div class="carousel-item"
-                            style="background-image: url(./assets/img/e753507e60b3096fb02daf618c212858.png)">
-                            <!-- <img src="./assets/img/e753507e60b3096fb02daf618c212858.png" class="d-block w-100" alt="..." /> -->
+                            style="background-image: url(/assets/img/e753507e60b3096fb02daf618c212858.png)">
+                            <!-- <img src="/assets/img/e753507e60b3096fb02daf618c212858.png" class="d-block w-100" alt="..." /> -->
                         </div>
                         <div class="carousel-item"
-                            style="background-image: url(./assets/img/e753507e60b3096fb02daf618c212858.png)">
-                            <!-- <img src="./assets/img/e753507e60b3096fb02daf618c212858.png" class="d-block w-100" alt="..." /> -->
+                            style="background-image: url(/assets/img/e753507e60b3096fb02daf618c212858.png)">
+                            <!-- <img src="/assets/img/e753507e60b3096fb02daf618c212858.png" class="d-block w-100" alt="..." /> -->
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
                         data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true">
-                            <img src="./assets/img/right_arrow 2.svg" alt="" />
+                            <img src="/assets/img/right_arrow 2.svg" alt="" />
                         </span>
                         <span class="visually-hidden">Previous</span>
                     </button>
                     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
                         data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true">
-                            <img src="./assets/img/right_arrow 1.svg" alt="" />
+                            <img src="/assets/img/right_arrow 1.svg" alt="" />
                         </span>
                         <span class="visually-hidden">Next</span>
                     </button>
