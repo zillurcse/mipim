@@ -63,7 +63,7 @@
                             <div class="navbar-nav justify-content-end flex-grow-1 pe-3">
                                 <ul class="navbar-nav mb-2 mb-lg-0 gap-4 text-uppercase">
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="./index.html" target="_self" title="">Home</a>
+                                        <Link class="nav-link active" href="/" target="_self" title="">Home</Link>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#" target="_self" title="">About</a>

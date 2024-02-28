@@ -42759,15 +42759,72 @@ var render = function () {
               ]
             ),
             _vm._v(" "),
-            _vm._m(0),
+            _c(
+              "div",
+              {
+                staticClass: "offcanvas offcanvas-end",
+                attrs: {
+                  id: "navbarOffcanvas",
+                  tabindex: "-1",
+                  "aria-labelledby": "offcanvasNavbarLabel",
+                },
+              },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "offcanvas-body" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "navbar-nav justify-content-end flex-grow-1 pe-3",
+                    },
+                    [
+                      _c(
+                        "ul",
+                        {
+                          staticClass:
+                            "navbar-nav mb-2 mb-lg-0 gap-4 text-uppercase",
+                        },
+                        [
+                          _c(
+                            "li",
+                            { staticClass: "nav-item" },
+                            [
+                              _c(
+                                "Link",
+                                {
+                                  staticClass: "nav-link active",
+                                  attrs: {
+                                    href: "/",
+                                    target: "_self",
+                                    title: "",
+                                  },
+                                },
+                                [_vm._v("Home")]
+                              ),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _vm._m(1),
+                          _vm._v(" "),
+                          _vm._m(2),
+                        ]
+                      ),
+                    ]
+                  ),
+                ]),
+              ]
+            ),
           ],
           1
         ),
         _vm._v(" "),
-        _vm._m(1),
+        _vm._m(3),
       ]),
       _vm._v(" "),
-      _vm._m(2),
+      _vm._m(4),
       _vm._v(" "),
       _c("section", { staticClass: "data-box-section" }, [
         _c("div", { staticClass: "container" }, [
@@ -42832,7 +42889,7 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(3),
+                _vm._m(5),
               ]),
             ]),
             _vm._v(" "),
@@ -42875,7 +42932,7 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(4),
+                _vm._m(6),
               ]),
             ]),
             _vm._v(" "),
@@ -42911,7 +42968,7 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(5),
+                _vm._m(7),
               ]),
             ]),
             _vm._v(" "),
@@ -42975,7 +43032,7 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(6),
+                _vm._m(8),
               ]),
             ]),
             _vm._v(" "),
@@ -43018,7 +43075,7 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(7),
+                _vm._m(9),
               ]),
             ]),
             _vm._v(" "),
@@ -43054,14 +43111,14 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(8),
+                _vm._m(10),
               ]),
             ]),
           ]),
         ]),
       ]),
       _vm._v(" "),
-      _vm._m(9),
+      _vm._m(11),
     ]),
   ])
 }
@@ -43070,80 +43127,46 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "offcanvas offcanvas-end",
+    return _c("div", { staticClass: "offcanvas-header" }, [
+      _c("button", {
+        staticClass: "btn-close text-reset",
         attrs: {
-          id: "navbarOffcanvas",
-          tabindex: "-1",
-          "aria-labelledby": "offcanvasNavbarLabel",
+          type: "button",
+          "data-bs-dismiss": "offcanvas",
+          "aria-label": "Close",
         },
-      },
-      [
-        _c("div", { staticClass: "offcanvas-header" }, [
-          _c("button", {
-            staticClass: "btn-close text-reset",
-            attrs: {
-              type: "button",
-              "data-bs-dismiss": "offcanvas",
-              "aria-label": "Close",
-            },
-          }),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "offcanvas-body" }, [
-          _c(
-            "div",
-            { staticClass: "navbar-nav justify-content-end flex-grow-1 pe-3" },
-            [
-              _c(
-                "ul",
-                { staticClass: "navbar-nav mb-2 mb-lg-0 gap-4 text-uppercase" },
-                [
-                  _c("li", { staticClass: "nav-item" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "nav-link active",
-                        attrs: {
-                          href: "./index.html",
-                          target: "_self",
-                          title: "",
-                        },
-                      },
-                      [_vm._v("Home")]
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "nav-item" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "nav-link",
-                        attrs: { href: "#", target: "_self", title: "" },
-                      },
-                      [_vm._v("About")]
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "nav-item" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "nav-link",
-                        attrs: { href: "#", target: "_self", title: "" },
-                      },
-                      [_vm._v("Contact us")]
-                    ),
-                  ]),
-                ]
-              ),
-            ]
-          ),
-        ]),
-      ]
-    )
+      }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c(
+        "a",
+        {
+          staticClass: "nav-link",
+          attrs: { href: "#", target: "_self", title: "" },
+        },
+        [_vm._v("About")]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c(
+        "a",
+        {
+          staticClass: "nav-link",
+          attrs: { href: "#", target: "_self", title: "" },
+        },
+        [_vm._v("Contact us")]
+      ),
+    ])
   },
   function () {
     var _vm = this
