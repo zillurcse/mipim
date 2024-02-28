@@ -95,11 +95,10 @@
                     <div class="row justify-content-center">
                         <div class="col-md-5">
                             <div class="text-box">
-                                <h2>Welcome to OMAN AT MIPIM page</h2>
+                                <h2>OMAN: ENDLESS HORIZONS</h2>
+                                <br>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                    Welcome to the Oman at MIPIM page! Dive into a world where tradition meets innovation, and discover the vast array of projects Oman has to offer. From groundbreaking real estate developments to sustainable ventures, we're showcasing Oman's commitment to growth and prosperity. Explore our projects and learn how Oman is shaping the future of investment and development. Join us on this journey to unlock opportunities in one of the most dynamic markets in the Middle East.
                                 </p>
                             </div>
                         </div>

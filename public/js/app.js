@@ -4712,6 +4712,155 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Partials/ImageChooser.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Partials/ImageChooser.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "image-chooser",
+  props: ['show', 'height', 'width'],
+  data: function data() {
+    return {
+      img_path: 'https://d30komtae77sjh.cloudfront.net',
+      img_src: 'https://d30komtae77sjh.cloudfront.net/bcknd/src/assets/img/',
+      image: '',
+      active_tab: 'upload',
+      gallery_images: [],
+      is_loading: true,
+      is_uploading: false
+    };
+  },
+  methods: {
+    close: function close() {
+      this.$emit('close');
+    },
+    handleUploaded: function handleUploaded(resp) {
+      this.image = resp;
+      this.is_uploading = false;
+    },
+    imageSelected: function imageSelected() {
+      this.$emit('imageSelected', this.image);
+      this.close();
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/image-gallery/get').then(function (res) {
+      _this.gallery_images = res.data.data;
+      _this.is_loading = false;
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/PrivacyPolicy.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/PrivacyPolicy.vue?vue&type=script&lang=js& ***!
@@ -5623,7 +5772,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
 //
 //
 //
@@ -29968,6 +30116,45 @@ component.options.__file = "resources/js/Pages/Dashboard.vue"
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Partials/ImageChooser.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/Pages/Partials/ImageChooser.vue ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ImageChooser_vue_vue_type_template_id_937f71f8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ImageChooser.vue?vue&type=template&id=937f71f8&scoped=true& */ "./resources/js/Pages/Partials/ImageChooser.vue?vue&type=template&id=937f71f8&scoped=true&");
+/* harmony import */ var _ImageChooser_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ImageChooser.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Partials/ImageChooser.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ImageChooser_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ImageChooser_vue_vue_type_template_id_937f71f8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ImageChooser_vue_vue_type_template_id_937f71f8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "937f71f8",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Pages/Partials/ImageChooser.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/Pages/PrivacyPolicy.vue":
 /*!**********************************************!*\
   !*** ./resources/js/Pages/PrivacyPolicy.vue ***!
@@ -30831,6 +31018,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Partials/ImageChooser.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/Pages/Partials/ImageChooser.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ImageChooser_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ImageChooser.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Partials/ImageChooser.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ImageChooser_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/Pages/PrivacyPolicy.vue?vue&type=script&lang=js&":
 /*!***********************************************************************!*\
   !*** ./resources/js/Pages/PrivacyPolicy.vue?vue&type=script&lang=js& ***!
@@ -31630,6 +31833,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_template_id_097ba13b_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_template_id_097ba13b_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Dashboard.vue?vue&type=template&id=097ba13b&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Dashboard.vue?vue&type=template&id=097ba13b&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Partials/ImageChooser.vue?vue&type=template&id=937f71f8&scoped=true&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/Pages/Partials/ImageChooser.vue?vue&type=template&id=937f71f8&scoped=true& ***!
+  \*************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ImageChooser_vue_vue_type_template_id_937f71f8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ImageChooser_vue_vue_type_template_id_937f71f8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ImageChooser_vue_vue_type_template_id_937f71f8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ImageChooser.vue?vue&type=template&id=937f71f8&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Partials/ImageChooser.vue?vue&type=template&id=937f71f8&scoped=true&");
 
 
 /***/ }),
@@ -36796,6 +37016,481 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Partials/ImageChooser.vue?vue&type=template&id=937f71f8&scoped=true&":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Partials/ImageChooser.vue?vue&type=template&id=937f71f8&scoped=true& ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "popupi flex justify-center items-center",
+      staticStyle: {
+        width: "100%",
+        height: "100vh",
+        position: "fixed",
+        top: "0",
+        left: "0",
+        "background-color": "rgba(0, 0, 0, 0.8)",
+        "z-index": "99999999",
+      },
+    },
+    [
+      _c(
+        "div",
+        {
+          staticClass:
+            "flex justify-center items-center bg-white rounded-6 overflow-hidden",
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "flex justify-center items-center rounded-6" },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "rounded-6",
+                  staticStyle: {
+                    "box-shadow": "0px 0px 4px 3px rgba(167, 166, 166, 0.24)",
+                    width: "700px",
+                  },
+                },
+                [
+                  _c("div", { staticClass: "px-20 pb-10" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "pt-20 flex justify-between align-items-center",
+                      },
+                      [
+                        _vm._m(0),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "w-24 h-24 rounded-full bg-white flex justify-center items-center cursor-pointer",
+                            staticStyle: {
+                              "box-shadow":
+                                "-3px 4px 10px -8px rgba(0, 0, 0, 0.85)",
+                            },
+                            on: {
+                              click: function ($event) {
+                                $event.preventDefault()
+                                return _vm.$emit("close")
+                              },
+                            },
+                          },
+                          [
+                            _c("img", {
+                              staticClass: "w-10 h-10",
+                              attrs: {
+                                src: _vm.img_src + "cancel-icon.svg",
+                                alt: "",
+                              },
+                            }),
+                          ]
+                        ),
+                      ]
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "px-20 pt-10 pb-20" }, [
+                    _c("div", { staticClass: "flex" }, [
+                      _c(
+                        "button",
+                        {
+                          class: [
+                            "px-20 py-7 text-12 uppercase font-bold",
+                            _vm.active_tab == "upload"
+                              ? "bg-brand text-white"
+                              : "bg-greaywhite text-stromgreay",
+                          ],
+                          staticStyle: { "border-radius": "6px 0px 0px 6px" },
+                          on: {
+                            click: function ($event) {
+                              _vm.active_tab = "upload"
+                            },
+                          },
+                        },
+                        [
+                          _vm._v(
+                            "\n                            UPLOAD\n                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          class: [
+                            "px-20 py-7 text-12 uppercase",
+                            _vm.active_tab == "gallery"
+                              ? "bg-brand text-white"
+                              : "bg-greaywhite text-stromgreay",
+                          ],
+                          staticStyle: { "border-radius": "0px 6px 6px 0px" },
+                          on: {
+                            click: function ($event) {
+                              _vm.active_tab = "gallery"
+                            },
+                          },
+                        },
+                        [
+                          _vm._v(
+                            "\n                            GALLERY\n                        "
+                          ),
+                        ]
+                      ),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _vm.active_tab == "upload"
+                    ? _c(
+                        "div",
+                        { staticClass: "flex w-full justify-center py-50" },
+                        [
+                          _c("avatar-cropper", {
+                            attrs: {
+                              trigger: "#pick-image",
+                              "upload-url": "/getCroptedImage",
+                              labels: { submit: "Crop", cancel: "Cancel" },
+                              "output-quality": 0.9,
+                              "output-mime": "image/jpeg",
+                              "output-options": {
+                                width: this.width,
+                                height: this.height,
+                              },
+                              "cropper-options": {
+                                aspectRatio: this.width / this.height,
+                                autoCropArea: 2,
+                                viewMode: 1,
+                                movable: true,
+                                zoomable: false,
+                              },
+                            },
+                            on: {
+                              uploaded: _vm.handleUploaded,
+                              uploading: function ($event) {
+                                _vm.is_uploading = true
+                              },
+                            },
+                          }),
+                          _vm._v(" "),
+                          _vm.is_uploading
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "flex rounded-6 justify-center w-390 items-center flex-col h-200 border-dotted border-stromgreay border-1 border-opacity-40 cursor-pointer hover_border_input",
+                                  staticStyle: { background: "#f4f5f7" },
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        _vm.img_path +
+                                        "/svgs/meeting/loading.svg",
+                                      alt: "placeholder",
+                                    },
+                                  }),
+                                ]
+                              )
+                            : _vm.image.length
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "flex rounded-6 justify-center w-390 items-center flex-col h-200 border-dotted border-stromgreay border-1 border-opacity-40 cursor-pointer hover_border_input",
+                                  staticStyle: { background: "#f4f5f7" },
+                                },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "w-24 h-24 rounded-full bg-white flex justify-center items-center cursor-pointer",
+                                      staticStyle: {
+                                        "box-shadow":
+                                          "-3px 4px 10px -8px rgba(0, 0, 0, 0.85)",
+                                        position: "absolute",
+                                      },
+                                      on: {
+                                        click: function ($event) {
+                                          $event.preventDefault()
+                                          _vm.image = ""
+                                        },
+                                      },
+                                    },
+                                    [
+                                      _c("img", {
+                                        staticClass: "w-10 h-10",
+                                        attrs: {
+                                          src: _vm.img_src + "cancel-icon.svg",
+                                          alt: "",
+                                        },
+                                      }),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("img", {
+                                    staticStyle: {
+                                      "max-width": "100%",
+                                      "max-height": "100%",
+                                    },
+                                    attrs: {
+                                      src: _vm.$page.app.asset_url + _vm.image,
+                                      alt: "placeholder",
+                                    },
+                                  }),
+                                ]
+                              )
+                            : _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "flex rounded-6 justify-center w-390 items-center flex-col h-200 border-dotted border-stromgreay border-1 border-opacity-40 cursor-pointer hover_border_input",
+                                  staticStyle: { background: "#f4f5f7" },
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.$refs.pick_image.click()
+                                    },
+                                  },
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: _vm.img_src + "imageplaceholder.svg",
+                                      alt: "placeholder",
+                                    },
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "p",
+                                    {
+                                      staticClass:
+                                        "text-14 mt-10 text-stromgreay opacity-60 text-center font-bold",
+                                    },
+                                    [_vm._v("Upload a new image ")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "p",
+                                    {
+                                      staticClass:
+                                        "text-12 text-stromgreay opacity-70 text-center",
+                                    },
+                                    [_vm._v("Maximum : 2 MB")]
+                                  ),
+                                ]
+                              ),
+                          _vm._v(" "),
+                          _c("button", {
+                            ref: "pick_image",
+                            staticStyle: { display: "none" },
+                            attrs: { id: "pick-image" },
+                          }),
+                        ],
+                        1
+                      )
+                    : _c("div", { staticClass: "w-full px-20 py-20" }, [
+                        _c(
+                          "div",
+                          { staticClass: "flex items-center flex-wrap" },
+                          _vm._l(_vm.gallery_images, function (img) {
+                            return _c(
+                              "div",
+                              {
+                                key: "glry" + img.id,
+                                staticClass:
+                                  "relative selectBtn cursor-pointer",
+                                staticStyle: {
+                                  margin: "2px",
+                                  "border-radius": "10px",
+                                  "align-items": "center",
+                                  display: "flex",
+                                  width: "24%",
+                                  height: "120px",
+                                  border: "1px solid gray",
+                                },
+                                on: {
+                                  click: function ($event) {
+                                    _vm.image = img.url
+                                  },
+                                },
+                              },
+                              [
+                                _c("img", {
+                                  staticStyle: {
+                                    "max-width": "150px!important",
+                                    "max-height": "110px!important",
+                                    margin: "auto",
+                                    "border-radius": "5px",
+                                  },
+                                  attrs: {
+                                    src: _vm.$page.app.asset_url + img.url,
+                                    alt: "",
+                                  },
+                                }),
+                                _vm._v(" "),
+                                _vm.image == img.url
+                                  ? _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "absolute px-3 py-3 rounded-full select displayin",
+                                        staticStyle: {
+                                          "background-color": "#37af47",
+                                          border: "1px solid white",
+                                          bottom: "6px",
+                                          right: "6px",
+                                          opacity: "0",
+                                          visibility: "hidden",
+                                        },
+                                      },
+                                      [
+                                        _c("img", {
+                                          staticClass: "w-12 h-12",
+                                          attrs: {
+                                            src: _vm.img_src + "check.svg",
+                                            alt: "",
+                                          },
+                                        }),
+                                      ]
+                                    )
+                                  : _vm._e(),
+                              ]
+                            )
+                          }),
+                          0
+                        ),
+                      ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "py-20 px-30",
+                      staticStyle: { "background-color": "#f4f5f7" },
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "flex justify-end items-center space-x-10",
+                        },
+                        [
+                          _c("div", [
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "w-116 h-35 text-14 font-semibold text-capcod rounded-6",
+                                staticStyle: { "padding-top": "7px" },
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function ($event) {
+                                    $event.preventDefault()
+                                    return _vm.$emit("close")
+                                  },
+                                },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                Cancel\n                            "
+                                ),
+                              ]
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", [
+                            _vm.image.length
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "w-116 h-35 text-14 font-semibold uppercase bg-brand text-white rounded-6",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function ($event) {
+                                        $event.preventDefault()
+                                        return _vm.imageSelected()
+                                      },
+                                    },
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                Select\n                            "
+                                    ),
+                                  ]
+                                )
+                              : _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "w-116 h-35 text-14 font-semibold uppercase text-white rounded-6",
+                                    staticStyle: {
+                                      background: "rgb(197 198 199)",
+                                    },
+                                    attrs: { type: "button" },
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                Select\n                            "
+                                    ),
+                                  ]
+                                ),
+                          ]),
+                        ]
+                      ),
+                    ]
+                  ),
+                ]
+              ),
+            ]
+          ),
+        ]
+      ),
+    ]
+  )
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "space-y-5" }, [
+      _c("h2", { staticClass: "text-16 text-capcod font-bold" }, [
+        _vm._v("Select Images for Gallery"),
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "text-14 text-stromgreay" }, [
+        _vm._v(
+          "\n                                You can upload any image or choose anyone that you already uploaded to gallery.\n                            "
+        ),
+      ]),
+    ])
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/PrivacyPolicy.vue?vue&type=template&id=41527301&":
 /*!********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/PrivacyPolicy.vue?vue&type=template&id=41527301& ***!
@@ -38647,11 +39342,13 @@ var staticRenderFns = [
         _c("div", { staticClass: "row justify-content-center" }, [
           _c("div", { staticClass: "col-md-5" }, [
             _c("div", { staticClass: "text-box" }, [
-              _c("h2", [_vm._v("Welcome to OMAN AT MIPIM page")]),
+              _c("h2", [_vm._v("OMAN: ENDLESS HORIZONS")]),
+              _vm._v(" "),
+              _c("br"),
               _vm._v(" "),
               _c("p", [
                 _vm._v(
-                  "\n                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor\n                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud\n                                exercitation ullamco laboris nisi ut aliquip ex ea commodo\n                            "
+                  "\n                                Welcome to the Oman at MIPIM page! Dive into a world where tradition meets innovation, and discover the vast array of projects Oman has to offer. From groundbreaking real estate developments to sustainable ventures, we're showcasing Oman's commitment to growth and prosperity. Explore our projects and learn how Oman is shaping the future of investment and development. Join us on this journey to unlock opportunities in one of the most dynamic markets in the Middle East.\n                            "
                 ),
               ]),
             ]),
@@ -50943,6 +51640,8 @@ var map = {
 	"./Auth/VerifyEmail.vue": "./resources/js/Pages/Auth/VerifyEmail.vue",
 	"./Dashboard": "./resources/js/Pages/Dashboard.vue",
 	"./Dashboard.vue": "./resources/js/Pages/Dashboard.vue",
+	"./Partials/ImageChooser": "./resources/js/Pages/Partials/ImageChooser.vue",
+	"./Partials/ImageChooser.vue": "./resources/js/Pages/Partials/ImageChooser.vue",
 	"./PrivacyPolicy": "./resources/js/Pages/PrivacyPolicy.vue",
 	"./PrivacyPolicy.vue": "./resources/js/Pages/PrivacyPolicy.vue",
 	"./Profile/DeleteUserForm": "./resources/js/Pages/Profile/DeleteUserForm.vue",

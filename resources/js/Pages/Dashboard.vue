@@ -236,6 +236,7 @@ export default {
 
         }
     },
+
     methods: {
         s3UploadError(errorMessage){
 
