@@ -99,9 +99,8 @@
                                                 <vue-dropzone ref="myVueDropzone" :include-styling="false"
                                                     :useCustomSlot="true" id="dropzone"
                                                     @vdropzone-upload-progress="uploadProgress" :options="dropzoneOptions"
-                                                    @vdropzone-file-added="fileAdded"
-                                                    @vdropzone-sending-multiple="sendingFiles"
-                                                    @vdropzone-success-multiple="success">
+                                                    @vdropzone-file-added="fileAdded" @vdropzone-success-multiple="success"
+                                                    @vdropzone-sending-multiple="sendingFiles">
                                                     <div class="dropzone-container">
                                                         <div class="file-selector text-center">
                                                             <figure class="flex justify-center items-center">
@@ -318,7 +317,7 @@ import Welcome from '@/Jetstream/Welcome'
 import vue2Dropzone from "vue2-dropzone";
 import "vue2-dropzone/dist/vue2Dropzone.min.css";
 import AttachmentList from './AttachmentList.vue'
-
+import axios from 'axios';
 export default {
     components: {
         AppLayout,
@@ -332,6 +331,8 @@ export default {
             items: [],
             selectedTab: 'banner',
             showModal: '',
+            bannaerImage: null,
+
             awss3: {
                 signingURL: 'http://aws-direct-s3.dev/',
                 headers: {},
@@ -355,6 +356,7 @@ export default {
                     return "file[]";
                 },
                 dictDefaultMessage: "Upload Files Here xD",
+                maxFiles: 1,
                 includeStyling: false,
                 previewsContainer: false,
                 thumbnailWidth: 250,
@@ -388,15 +390,25 @@ export default {
     },
 
     methods: {
-        uploadFiles() {
-            // Access dropzone instance and perform upload
-            this.$refs.myDropzone.processQueue();
+        async uploadFiles() {
+            let formdata = new FormData();
+            formdata.append('bannerImg', this.bannaerImage)
+            await axios.post(url, formdata)
+                .then(response => {
+                    // Handle success
+                    console.log('Response:', response.data);
+                })
+                .catch(error => {
+                    // Handle error
+                    console.error('Error:', error);
+                });
         },
         s3UploadError(errorMessage) {
+            console.log(errorMessage, "errorMessage");
 
         },
         s3UploadSuccess(s3ObjectLocation) {
-            console.log(s3ObjectLocation)
+            console.log(s3ObjectLocation, "s3ObjectLocation")
         },
         // openModal() {
         //     console.log('tt');
@@ -406,7 +418,7 @@ export default {
             this.showModal = false;
         },
         fileAdded(file) {
-            console.log("File Dropped => ", file);
+            // console.log("File Dropped => ", file);
             // Construct your file object to render in the UI
             let attachment = {};
             attachment._id = file.upload.uuid;
@@ -422,16 +434,17 @@ export default {
             attachment.size = file.size;
             this.tempAttachments = [...this.tempAttachments, attachment];
         },
+
         // a middle layer function where you can change the XHR request properties
         sendingFiles(files, xhr, formData) {
-            console.log(
-                "if you want to change the upload time or add data to the formData you can do it here."
-            );
-            console.log("Files sending", files);
+            // console.log(
+            //     "if you want to change the upload time or add data to the formData you can do it here."
+            // );
+            // console.log("Files sending", files);
         },
         // function where we get the upload progress
         uploadProgress(file, progress, bytesSent) {
-            console.log("File Upload Progress", progress);
+            // console.log("File Upload Progress", progress);
             this.tempAttachments.map(attachment => {
                 if (attachment.title === file.name) {
                     attachment.progress = `${Math.floor(progress)}`;
@@ -440,8 +453,13 @@ export default {
         },
         // called on successful upload of a file
         success(file, response) {
-            console.log("File uploaded successfully");
+            // console.log("File uploaded successfully");
             console.log("Response is ->", response);
+            console.log(file);
+            file.forEach(element => {
+                this.bannaerImage = element.dataURL
+            });;
+            console.log(this.bannaerImage.length, "dataUrl");
         }
     },
     computed: {

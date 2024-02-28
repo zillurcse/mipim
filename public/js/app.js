@@ -4524,6 +4524,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue2_dropzone__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue2_dropzone__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var vue2_dropzone_dist_vue2Dropzone_min_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue2-dropzone/dist/vue2Dropzone.min.css */ "./node_modules/vue2-dropzone/dist/vue2Dropzone.min.css");
 /* harmony import */ var _AttachmentList_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AttachmentList.vue */ "./resources/js/Pages/AttachmentList.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -4855,7 +4857,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
+
 
 
 
@@ -4873,6 +4875,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       items: [],
       selectedTab: 'banner',
       showModal: '',
+      bannaerImage: null,
       awss3: {
         signingURL: 'http://aws-direct-s3.dev/',
         headers: {},
@@ -4896,6 +4899,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           return "file[]";
         },
         dictDefaultMessage: "Upload Files Here xD",
+        maxFiles: 1,
         includeStyling: false,
         previewsContainer: false,
         thumbnailWidth: 250,
@@ -4914,7 +4918,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return axios.get('/api/banner').then(function (response) {
+              return axios__WEBPACK_IMPORTED_MODULE_6___default().get('/api/banner').then(function (response) {
                 if (response.status == 200) {
                   _this.items = response.data.data.item;
                   console.log();
@@ -4937,12 +4941,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     uploadFiles: function uploadFiles() {
-      // Access dropzone instance and perform upload
-      this.$refs.myDropzone.processQueue();
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var formdata;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                formdata = new FormData();
+                formdata.append('bannerImg', _this2.bannaerImage);
+                _context2.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_6___default().post(url, formdata).then(function (response) {
+                  // Handle success
+                  console.log('Response:', response.data);
+                })["catch"](function (error) {
+                  // Handle error
+                  console.error('Error:', error);
+                });
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     },
-    s3UploadError: function s3UploadError(errorMessage) {},
+    s3UploadError: function s3UploadError(errorMessage) {
+      console.log(errorMessage, "errorMessage");
+    },
     s3UploadSuccess: function s3UploadSuccess(s3ObjectLocation) {
-      console.log(s3ObjectLocation);
+      console.log(s3ObjectLocation, "s3ObjectLocation");
     },
     // openModal() {
     //     console.log('tt');
@@ -4952,8 +4982,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.showModal = false;
     },
     fileAdded: function fileAdded(file) {
-      console.log("File Dropped => ", file); // Construct your file object to render in the UI
-
+      // console.log("File Dropped => ", file);
+      // Construct your file object to render in the UI
       var attachment = {};
       attachment._id = file.upload.uuid;
       attachment.title = file.name;
@@ -4969,13 +4999,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.tempAttachments = [].concat(_toConsumableArray(this.tempAttachments), [attachment]);
     },
     // a middle layer function where you can change the XHR request properties
-    sendingFiles: function sendingFiles(files, xhr, formData) {
-      console.log("if you want to change the upload time or add data to the formData you can do it here.");
-      console.log("Files sending", files);
+    sendingFiles: function sendingFiles(files, xhr, formData) {// console.log(
+      //     "if you want to change the upload time or add data to the formData you can do it here."
+      // );
+      // console.log("Files sending", files);
     },
     // function where we get the upload progress
     uploadProgress: function uploadProgress(file, progress, bytesSent) {
-      console.log("File Upload Progress", progress);
+      // console.log("File Upload Progress", progress);
       this.tempAttachments.map(function (attachment) {
         if (attachment.title === file.name) {
           attachment.progress = "".concat(Math.floor(progress));
@@ -4984,8 +5015,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // called on successful upload of a file
     success: function success(file, response) {
-      console.log("File uploaded successfully");
+      var _this3 = this;
+
+      // console.log("File uploaded successfully");
       console.log("Response is ->", response);
+      console.log(file);
+      file.forEach(function (element) {
+        _this3.bannaerImage = element.dataURL;
+      });
+      ;
+      console.log(this.bannaerImage.length, "dataUrl");
     }
   },
   computed: {
@@ -38033,10 +38072,10 @@ var render = function () {
                                                   _vm.uploadProgress,
                                                 "vdropzone-file-added":
                                                   _vm.fileAdded,
-                                                "vdropzone-sending-multiple":
-                                                  _vm.sendingFiles,
                                                 "vdropzone-success-multiple":
                                                   _vm.success,
+                                                "vdropzone-sending-multiple":
+                                                  _vm.sendingFiles,
                                               },
                                             },
                                             [
