@@ -54,8 +54,8 @@
 
                             <div class="row ">
                                 <div class="col-md-6" v-for="item in items" :key="item.id">
-                                    <figure class="rounded-md overflow-hidden" v-for="(img, i) in  item.images" :key="i">
-                                        <img :src="img.url" alt="">
+                                    <figure class="rounded-md overflow-hidden">
+                                        <img :src="item.images" alt="">
                                     </figure>
                                 </div>
                             </div>
@@ -345,34 +345,34 @@ export default {
             dropzoneOptions: {
                 // The Url Where Dropped or Selected files will be sent
                 url: `https://httpbin.org/post`,
-                thumbnailWidth: 200,
-                thumbnailHeight: 200,
-                addRemoveLinks: true,
-                method: "post",
-                thumbnailMethod: "crop",//contain or crop.
-                maxFiles: 1,
-                maxFilesize: 6, // MB,
-                uploadMultiple: true,
-                parallelUploads: 100,
-                acceptedFiles: ".jpeg,.jpg,.png,.gif,.JPEG,.JPG,.PNG,.GIF",
-                // // File Size allowed in MB
-                // maxFilesize: 102400000,
-                // // Authentication Headers like Access_Token of your application
-                // headers: {
-                //     Authorization: `Access Token`
-                // },
-                // // The way you want to receive the files in the server
-                // paramName: function (n) {
-                //     return "file[]";
-                // },
-                // dictDefaultMessage: "Upload Files Here xD",
+                // thumbnailWidth: 200,
+                // thumbnailHeight: 200,
+                // addRemoveLinks: true,
+                // method: "post",
+                // thumbnailMethod: "crop",//contain or crop.
                 // maxFiles: 1,
-                // includeStyling: false,
-                // previewsContainer: false,
-                // thumbnailWidth: 250,
-                // thumbnailHeight: 140,
+                // maxFilesize: 6, // MB,
                 // uploadMultiple: true,
-                // parallelUploads: 20
+                // parallelUploads: 100,
+                // acceptedFiles: ".jpeg,.jpg,.png,.gif,.JPEG,.JPG,.PNG,.GIF",
+                // File Size allowed in MB
+                maxFilesize: 102400000,
+                // Authentication Headers like Access_Token of your application
+                headers: {
+                    Authorization: `Access Token`
+                },
+                // The way you want to receive the files in the server
+                paramName: function (n) {
+                    return "file[]";
+                },
+                dictDefaultMessage: "Upload Files Here xD",
+                maxFiles: 1,
+                includeStyling: false,
+                previewsContainer: false,
+                thumbnailWidth: 250,
+                thumbnailHeight: 140,
+                uploadMultiple: true,
+                parallelUploads: 20
             },
             dataURL: null
 
