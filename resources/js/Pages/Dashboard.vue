@@ -382,7 +382,8 @@ export default {
                 if (error.response.status == 422) {
                     this.errors = error.response.data.errors;
                 } else {
-                    this.toastMessage('error', error, 'check', '', 'times')
+                    // this.toastMessage('error', error, 'check', '', 'times')
+                    console.log(error);
                 }
             })
             .finally(() => {
@@ -394,7 +395,7 @@ export default {
         async uploadFiles() {
             let formdata = new FormData();
             formdata.append('bannerImg', this.bannaerImage)
-            await axios.post(url, formdata)
+            await axios.post('/api/banner', formdata)
                 .then(response => {
                     // Handle success
                     console.log('Response:', response.data);

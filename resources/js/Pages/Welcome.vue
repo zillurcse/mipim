@@ -42,7 +42,10 @@
             <header>
                 <nav class="navbar navbar-expand-xl bg-transparent text-brand container main-nav">
                     <a class="navbar-brand text-brand" href="./index.html">
-                        <img src="./assets/img/Logo 2.svg" alt="" />
+                        <!-- <img src="../../../public/images/e753507e60b3096fb02daf618c212858.png" alt="" /> -->
+                        <!-- <img :src="activeImageUrl" alt=""> -->
+                        <img src="/assets/img/Logo 2.svg" alt="">
+
                     </a>
                     <button class="navbar-toggler bg-transparent text-black px-3 py-2" type="button"
                         data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas"
@@ -78,30 +81,49 @@
                 </nav>
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item active"
-                            style="background-image: url(./assets/img/e753507e60b3096fb02daf618c212858.png)">
-                            <!-- <img src="./assets/img/e753507e60b3096fb02daf618c212858.png" class="d-block w-100" alt="..." /> -->
+                        <div class="carousel-item active">
                         </div>
-                        <div class="carousel-item"
-                            style="background-image: url(./assets/img/e753507e60b3096fb02daf618c212858.png)">
-                            <!-- <img src="./assets/img/e753507e60b3096fb02daf618c212858.png" class="d-block w-100" alt="..." /> -->
+                        <div class="carousel-item">
                         </div>
-                        <div class="carousel-item"
-                            style="background-image: url(./assets/img/e753507e60b3096fb02daf618c212858.png)">
-                            <!-- <img src="./assets/img/e753507e60b3096fb02daf618c212858.png" class="d-block w-100" alt="..." /> -->
+                        <div class="carousel-item">
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
                         data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true">
-                            <img src="./assets/img/right_arrow 2.svg" alt="" />
+                            <svg width="21" height="37" viewBox="0 0 21 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_15_110)">
+                                    <path
+                                        d="M6.0604 18.4297L8.31543 20.8213L21 33.6236L17.6174 37L0.704695 20.1179C-0.281881 19.1331 -0.281881 17.7262 0.704695 16.7414L17.6174 -0.140686L21 3.37643L8.31543 16.038L6.0604 18.4297Z"
+                                        fill="#F5F5F5" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_15_110">
+                                        <rect width="21" height="37" fill="white"
+                                            transform="translate(21 37) rotate(180)" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+
                         </span>
                         <span class="visually-hidden">Previous</span>
                     </button>
                     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
                         data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true">
-                            <img src="./assets/img/right_arrow 1.svg" alt="" />
+                            <svg width="21" height="37" viewBox="0 0 21 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_15_108)">
+                                    <path
+                                        d="M14.9396 18.5703L12.6846 16.1787L0 3.37643L3.38255 0L20.2953 16.8821C21.2819 17.8669 21.2819 19.2738 20.2953 20.2586L3.38255 37.1407L0 33.6236L12.6846 20.962L14.9396 18.5703Z"
+                                        fill="#F5F5F5" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_15_108">
+                                        <rect width="21" height="37" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+
                         </span>
                         <span class="visually-hidden">Next</span>
                     </button>
@@ -301,7 +323,7 @@ export default {
     data() {
         return {
             activeImageUrl: '../../../public/assets/img/e753507e60b3096fb02daf618c212858',
-
+            // imagePath: require("@/assets/images/e753507e60b3096fb02daf618c212858.png"),
         };
     }
 }
