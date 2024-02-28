@@ -53,9 +53,9 @@
 
 
                             <div class="row ">
-                                <div class="col-md-6">
-                                    <figure class="rounded-md overflow-hidden">
-                                        <img src="/assets/img/e753507e60b3096fb02daf618c212858.png" alt="">
+                                <div class="col-md-6" v-for="item in items" :key="item.id">
+                                    <figure class="rounded-md overflow-hidden" v-for="(img, i) in  item.images" :key="i">
+                                        <img :src="img.url" alt="">
                                     </figure>
                                 </div>
                             </div>
@@ -371,9 +371,9 @@ export default {
     async mounted() {
         await axios.get('/api/banner')
             .then(response => {
-                console.log(response);
+                console.log();
                 if (response.status == 200) {
-                    // this.items = response.data.data.item
+                    this.items = response.data.data.items
 
                     console.log()
                 }

@@ -5812,10 +5812,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _context.next = 2;
               return axios__WEBPACK_IMPORTED_MODULE_6__["default"].get('/api/banner').then(function (response) {
-                console.log(response);
+                console.log();
 
                 if (response.status == 200) {
-                  // this.items = response.data.data.item
+                  _this.items = response.data.data.items;
                   console.log();
                 }
               })["catch"](function (error) {
@@ -40114,22 +40114,32 @@ var render = function () {
                     ),
                     _vm._v(" "),
                     _c("div", { staticClass: "my-4" }, [
-                      _c("div", { staticClass: "row " }, [
-                        _c("div", { staticClass: "col-md-6" }, [
-                          _c(
-                            "figure",
-                            { staticClass: "rounded-md overflow-hidden" },
-                            [
-                              _c("img", {
-                                attrs: {
-                                  src: "/assets/img/e753507e60b3096fb02daf618c212858.png",
-                                  alt: "",
+                      _c(
+                        "div",
+                        { staticClass: "row " },
+                        _vm._l(_vm.items, function (item) {
+                          return _c(
+                            "div",
+                            { key: item.id, staticClass: "col-md-6" },
+                            _vm._l(item.images, function (img, i) {
+                              return _c(
+                                "figure",
+                                {
+                                  key: i,
+                                  staticClass: "rounded-md overflow-hidden",
                                 },
-                              }),
-                            ]
-                          ),
-                        ]),
-                      ]),
+                                [
+                                  _c("img", {
+                                    attrs: { src: img.url, alt: "" },
+                                  }),
+                                ]
+                              )
+                            }),
+                            0
+                          )
+                        }),
+                        0
+                      ),
                       _vm._v(" "),
                       _vm.showModal === "banner"
                         ? _c("div", { staticClass: "modal" }, [

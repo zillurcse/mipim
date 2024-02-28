@@ -19,6 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/image-gallery/get', [ImageController::class, 'get_gallery']);
-Route::get('/banner', [\App\Http\Controllers\BannerController::class, 'index']);
-Route::post('/banner', [\App\Http\Controllers\BannerController::class, 'store']);
+Route::post('/image-gallery/get',[ImageController::class,'get_gallery']);
+Route::get('/banner',[\App\Http\Controllers\BannerController::class,'index']);
+Route::post('/banner',[\App\Http\Controllers\BannerController::class,'store']);
+Route::get('/content',[\App\Http\Controllers\ContentController::class,'index']);
+Route::post('/content',[\App\Http\Controllers\ContentController::class,'store']);

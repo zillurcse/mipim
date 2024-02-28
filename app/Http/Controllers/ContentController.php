@@ -14,7 +14,13 @@ class ContentController extends Controller
      */
     public function index()
     {
-        //
+        $data['items'] = Content::all();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Banner has been updated',
+            'data'=> $data
+        ]);
     }
 
     /**
@@ -35,32 +41,23 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the incoming request data
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'link' => 'required|url',
-            'type' => 'required|string|max:50',
-            'pdf' => 'required|file|mimes:pdf|max:2048', // Adjust validation rules as needed
+        $data['title'] = $request->title;
+        $data['type'] = $request->type;
+        $data['link'] = $request->link;
+        $banner = Content::create($data);
+        $this->fileUpload([
+            'model' => $banner,
+            'file' => $request['file'],
+            'multi_upload' => false,
+            'request_type' => 'base64',
+            'collection_name' => 'gallery',
         ]);
-
-        // Store content data
-        $content = new Content();
-        $content->title = $request->title;
-        $content->link = $request->link;
-        $content->type = $request->type;
-        $content->save();
-
-        // Handle PDF file upload
-        $pdfPath = $request->file('pdf')->store('pdfs'); // Adjust storage path as needed
-        $content->pdf = $pdfPath;
-        $content->save();
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Content has been created successfully',
-            'data' => $content,
+            'message' => 'Content has been updated',
+            'data'=> $banner
         ]);
-        //
     }
 
     /**
