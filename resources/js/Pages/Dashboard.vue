@@ -203,12 +203,12 @@
                                     </div>
                                     <attachment-list :tempAttachments="getTempAttachments" :attachments="getAttachments" />
                                     <!-- Submit button -->
-                                    <div class="">
-                                        <button type="button" @click="uploadFiles"
-                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                            Submit
-                                        </button>
-                                    </div>
+<!--                                    <div class="">-->
+<!--                                        <button type="button" @click="uploadFiles"-->
+<!--                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">-->
+<!--                                            Submit-->
+<!--                                        </button>-->
+<!--                                    </div>-->
                                 </div>
                             </div>
                         </div>
@@ -347,33 +347,10 @@ export default {
             dropzoneOptions: {
                 // The Url Where Dropped or Selected files will be sent
                 url: `http://mipim.test/api/banner`,
-                // thumbnailWidth: 200,
-                // thumbnailHeight: 200,
-                // addRemoveLinks: true,
-                // method: "post",
-                // thumbnailMethod: "crop",//contain or crop.
-                // maxFiles: 1,
-                // maxFilesize: 6, // MB,
-                // uploadMultiple: true,
-                // parallelUploads: 1,
-                // acceptedFiles: ".jpeg,.jpg,.png,.gif,.JPEG,.JPG,.PNG,.GIF",
-                // File Size allowed in MB
                 maxFilesize: 5,
-                // Authentication Headers like Access_Token of your application
-                headers: {
-                    Authorization: `Access Token`
-                },
-                // The way you want to receive the files in the server
-                paramName: function (n) {
-                    return "file[]";
-                },
-                dictDefaultMessage: "Upload Files Here xD",
-                maxFiles: 1,
-                includeStyling: false,
-                previewsContainer: false,
                 thumbnailWidth: 250,
                 thumbnailHeight: 140,
-                uploadMultiple: true,
+                uploadMultiple: false,
                 parallelUploads: 20
             },
             dataURL: null
@@ -468,6 +445,7 @@ export default {
         },
         // called on successful upload of a file
         success(file, response) {
+            this.showModal = false;
             console.log(file);
             //
 
