@@ -326,8 +326,10 @@ export default {
         vueDropzone: vue2Dropzone,
         AttachmentList
     },
+
     data() {
         return {
+            items: [],
             selectedTab: 'banner',
             showModal: '',
             awss3: {
@@ -362,6 +364,27 @@ export default {
             }
 
         }
+    },
+    async mounted() {
+        await axios.get('/api/banner')
+            .then(response => {
+                if(response.status == 200){
+                    this.items = response.data.data.item
+
+                    console.log()
+                }
+
+            })
+            .catch(error => {
+                if (error.response.status == 422) {
+                    this.errors = error.response.data.errors;
+                } else {
+                    this.toastMessage('error',error, 'check', '', 'times')
+                }
+            })
+            .finally(() => {
+
+            })
     },
 
     methods: {
