@@ -43,6 +43,7 @@ ul {
     background-repeat: no-repeat;
     overflow: hidden;
     /* border-radius: 10px 10px 0px 0px; */
+    background-image: url(../img/e753507e60b3096fb02daf618c212858.png);
 }
 
 .main-nav {
@@ -51,6 +52,11 @@ ul {
 
 .nav-item .nav-link {
     color: #111;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-image: none;
 }
 
 .text-section {
