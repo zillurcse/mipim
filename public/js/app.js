@@ -5780,24 +5780,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       dropzoneOptions: {
         // The Url Where Dropped or Selected files will be sent
         url: "https://httpbin.org/post",
-        // File Size allowed in MB
-        maxFilesize: 102400000,
-        // Authentication Headers like Access_Token of your application
-        headers: {
-          Authorization: "Access Token"
-        },
-        // The way you want to receive the files in the server
-        paramName: function paramName(n) {
-          return "file[]";
-        },
-        dictDefaultMessage: "Upload Files Here xD",
+        thumbnailWidth: 200,
+        thumbnailHeight: 200,
+        addRemoveLinks: true,
+        method: "post",
+        thumbnailMethod: "crop",
+        //contain or crop.
         maxFiles: 1,
-        includeStyling: false,
-        previewsContainer: false,
-        thumbnailWidth: 250,
-        thumbnailHeight: 140,
+        maxFilesize: 6,
+        // MB,
         uploadMultiple: true,
-        parallelUploads: 20
+        parallelUploads: 100,
+        acceptedFiles: ".jpeg,.jpg,.png,.gif,.JPEG,.JPG,.PNG,.GIF" // // File Size allowed in MB
+        // maxFilesize: 102400000,
+        // // Authentication Headers like Access_Token of your application
+        // headers: {
+        //     Authorization: `Access Token`
+        // },
+        // // The way you want to receive the files in the server
+        // paramName: function (n) {
+        //     return "file[]";
+        // },
+        // dictDefaultMessage: "Upload Files Here xD",
+        // maxFiles: 1,
+        // includeStyling: false,
+        // previewsContainer: false,
+        // thumbnailWidth: 250,
+        // thumbnailHeight: 140,
+        // uploadMultiple: true,
+        // parallelUploads: 20
+
       },
       dataURL: null
     };
@@ -5845,7 +5857,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_6__["default"].post('/api/banner', _this2.bannaerImage).then(function (response) {
+                return axios__WEBPACK_IMPORTED_MODULE_6__["default"].post('/api/banner', _this2.dataURL).then(function (response) {
                   // Handle success
                   console.log('Response:', response.data);
                 })["catch"](function (error) {
@@ -5914,10 +5926,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       console.log("Response is ->", response);
       console.log(file);
       file.forEach(function (element) {
-        _this3.bannaerImage = element.dataURL;
+        _this3.bannaerImage = element.dataURL; // this.handleFileUpload(element.dataURL)
+
+        _this3.handleFileUpload();
       });
-      ;
-      console.log(this.bannaerImage.length, "dataUrl");
+    },
+    handleFileUpload: function handleFileUpload() {
+      var _this4 = this;
+
+      console.log(this.bannaerImage); // Convert the file to base64
+
+      var reader = new FileReader();
+      reader.readAsDataURL(this.bannaerImage);
+
+      reader.onload = function () {
+        var base64String = reader.result;
+        _this4.dataURL = base64String; // Do whatever you want with the base64 string
+
+        console.log(dataURL, 'dataURL');
+      };
     }
   },
   computed: {
@@ -40182,447 +40209,25 @@ var render = function () {
                                           attrs: { for: "dropzone-file" },
                                         },
                                         [
-                                          _c(
-                                            "vue-dropzone",
-                                            {
-                                              ref: "myVueDropzone",
-                                              attrs: {
-                                                "include-styling": false,
-                                                useCustomSlot: true,
-                                                id: "dropzone",
-                                                options: _vm.dropzoneOptions,
-                                              },
-                                              on: {
-                                                "vdropzone-upload-progress":
-                                                  _vm.uploadProgress,
-                                                "vdropzone-file-added":
-                                                  _vm.fileAdded,
-                                                "vdropzone-success-multiple":
-                                                  _vm.success,
-                                                "vdropzone-sending-multiple":
-                                                  _vm.sendingFiles,
-                                              },
+                                          _c("vue-dropzone", {
+                                            ref: "myVueDropzone",
+                                            attrs: {
+                                              "include-styling": false,
+                                              useCustomSlot: true,
+                                              id: "dropzone",
+                                              options: _vm.dropzoneOptions,
                                             },
-                                            [
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    "dropzone-container",
-                                                },
-                                                [
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "file-selector text-center",
-                                                    },
-                                                    [
-                                                      _c(
-                                                        "figure",
-                                                        {
-                                                          staticClass:
-                                                            "flex justify-center items-center",
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "svg",
-                                                            {
-                                                              attrs: {
-                                                                width: "104px",
-                                                                height: "104px",
-                                                                viewBox:
-                                                                  "0 0 104 104",
-                                                                version: "1.1",
-                                                                xmlns:
-                                                                  "http://www.w3.org/2000/svg",
-                                                                "xmlns:xlink":
-                                                                  "http://www.w3.org/1999/xlink",
-                                                              },
-                                                            },
-                                                            [
-                                                              _c("defs", [
-                                                                _c("circle", {
-                                                                  attrs: {
-                                                                    id: "path-1",
-                                                                    cx: "36",
-                                                                    cy: "36",
-                                                                    r: "36",
-                                                                  },
-                                                                }),
-                                                                _vm._v(" "),
-                                                                _c(
-                                                                  "filter",
-                                                                  {
-                                                                    attrs: {
-                                                                      x: "-37.5%",
-                                                                      y: "-29.2%",
-                                                                      width:
-                                                                        "175.0%",
-                                                                      height:
-                                                                        "175.0%",
-                                                                      filterUnits:
-                                                                        "objectBoundingBox",
-                                                                      id: "filter-2",
-                                                                    },
-                                                                  },
-                                                                  [
-                                                                    _c(
-                                                                      "feOffset",
-                                                                      {
-                                                                        attrs: {
-                                                                          dx: "0",
-                                                                          dy: "6",
-                                                                          in: "SourceAlpha",
-                                                                          result:
-                                                                            "shadowOffsetOuter1",
-                                                                        },
-                                                                      }
-                                                                    ),
-                                                                    _vm._v(" "),
-                                                                    _c(
-                                                                      "feGaussianBlur",
-                                                                      {
-                                                                        attrs: {
-                                                                          stdDeviation:
-                                                                            "8",
-                                                                          in: "shadowOffsetOuter1",
-                                                                          result:
-                                                                            "shadowBlurOuter1",
-                                                                        },
-                                                                      }
-                                                                    ),
-                                                                    _vm._v(" "),
-                                                                    _c(
-                                                                      "feColorMatrix",
-                                                                      {
-                                                                        attrs: {
-                                                                          values:
-                                                                            "0 0 0 0 0.0117647059   0 0 0 0 0.0862745098   0 0 0 0 0.160784314  0 0 0 0.08 0",
-                                                                          type: "matrix",
-                                                                          in: "shadowBlurOuter1",
-                                                                          result:
-                                                                            "shadowMatrixOuter1",
-                                                                        },
-                                                                      }
-                                                                    ),
-                                                                    _vm._v(" "),
-                                                                    _c(
-                                                                      "feOffset",
-                                                                      {
-                                                                        attrs: {
-                                                                          dx: "0",
-                                                                          dy: "1",
-                                                                          in: "SourceAlpha",
-                                                                          result:
-                                                                            "shadowOffsetOuter2",
-                                                                        },
-                                                                      }
-                                                                    ),
-                                                                    _vm._v(" "),
-                                                                    _c(
-                                                                      "feGaussianBlur",
-                                                                      {
-                                                                        attrs: {
-                                                                          stdDeviation:
-                                                                            "1",
-                                                                          in: "shadowOffsetOuter2",
-                                                                          result:
-                                                                            "shadowBlurOuter2",
-                                                                        },
-                                                                      }
-                                                                    ),
-                                                                    _vm._v(" "),
-                                                                    _c(
-                                                                      "feColorMatrix",
-                                                                      {
-                                                                        attrs: {
-                                                                          values:
-                                                                            "0 0 0 0 0.0117647059   0 0 0 0 0.0862745098   0 0 0 0 0.160784314  0 0 0 0.11 0",
-                                                                          type: "matrix",
-                                                                          in: "shadowBlurOuter2",
-                                                                          result:
-                                                                            "shadowMatrixOuter2",
-                                                                        },
-                                                                      }
-                                                                    ),
-                                                                    _vm._v(" "),
-                                                                    _c(
-                                                                      "feMerge",
-                                                                      [
-                                                                        _c(
-                                                                          "feMergeNode",
-                                                                          {
-                                                                            attrs:
-                                                                              {
-                                                                                in: "shadowMatrixOuter1",
-                                                                              },
-                                                                          }
-                                                                        ),
-                                                                        _vm._v(
-                                                                          " "
-                                                                        ),
-                                                                        _c(
-                                                                          "feMergeNode",
-                                                                          {
-                                                                            attrs:
-                                                                              {
-                                                                                in: "shadowMatrixOuter2",
-                                                                              },
-                                                                          }
-                                                                        ),
-                                                                      ],
-                                                                      1
-                                                                    ),
-                                                                  ],
-                                                                  1
-                                                                ),
-                                                              ]),
-                                                              _vm._v(" "),
-                                                              _c(
-                                                                "g",
-                                                                {
-                                                                  attrs: {
-                                                                    id: "Page-1",
-                                                                    stroke:
-                                                                      "none",
-                                                                    "stroke-width":
-                                                                      "1",
-                                                                    fill: "none",
-                                                                    "fill-rule":
-                                                                      "evenodd",
-                                                                  },
-                                                                },
-                                                                [
-                                                                  _c(
-                                                                    "g",
-                                                                    {
-                                                                      attrs: {
-                                                                        id: "Artboard",
-                                                                        transform:
-                                                                          "translate(-460.000000, -125.000000)",
-                                                                      },
-                                                                    },
-                                                                    [
-                                                                      _c(
-                                                                        "g",
-                                                                        {
-                                                                          attrs:
-                                                                            {
-                                                                              id: "Group-4",
-                                                                              transform:
-                                                                                "translate(412.000000, 129.000000)",
-                                                                            },
-                                                                        },
-                                                                        [
-                                                                          _c(
-                                                                            "g",
-                                                                            {
-                                                                              attrs:
-                                                                                {
-                                                                                  id: "Group-2",
-                                                                                  transform:
-                                                                                    "translate(58.000000, 0.000000)",
-                                                                                },
-                                                                            },
-                                                                            [
-                                                                              _c(
-                                                                                "circle",
-                                                                                {
-                                                                                  attrs:
-                                                                                    {
-                                                                                      id: "Oval",
-                                                                                      fill: "#3560FF",
-                                                                                      opacity:
-                                                                                        "0.100000001",
-                                                                                      cx: "42",
-                                                                                      cy: "42",
-                                                                                      r: "42",
-                                                                                    },
-                                                                                }
-                                                                              ),
-                                                                              _vm._v(
-                                                                                " "
-                                                                              ),
-                                                                              _c(
-                                                                                "g",
-                                                                                {
-                                                                                  attrs:
-                                                                                    {
-                                                                                      id: "Group",
-                                                                                      transform:
-                                                                                        "translate(6.000000, 6.000000)",
-                                                                                    },
-                                                                                },
-                                                                                [
-                                                                                  _c(
-                                                                                    "g",
-                                                                                    {
-                                                                                      attrs:
-                                                                                        {
-                                                                                          id: "Oval",
-                                                                                        },
-                                                                                    },
-                                                                                    [
-                                                                                      _c(
-                                                                                        "use",
-                                                                                        {
-                                                                                          attrs:
-                                                                                            {
-                                                                                              fill: "black",
-                                                                                              "fill-opacity":
-                                                                                                "1",
-                                                                                              filter:
-                                                                                                "url(#filter-2)",
-                                                                                              "xlink:href":
-                                                                                                "#path-1",
-                                                                                            },
-                                                                                        }
-                                                                                      ),
-                                                                                      _vm._v(
-                                                                                        " "
-                                                                                      ),
-                                                                                      _c(
-                                                                                        "use",
-                                                                                        {
-                                                                                          attrs:
-                                                                                            {
-                                                                                              fill: "#FFFFFF",
-                                                                                              "fill-rule":
-                                                                                                "evenodd",
-                                                                                              "xlink:href":
-                                                                                                "#path-1",
-                                                                                            },
-                                                                                        }
-                                                                                      ),
-                                                                                    ]
-                                                                                  ),
-                                                                                  _vm._v(
-                                                                                    " "
-                                                                                  ),
-                                                                                  _c(
-                                                                                    "g",
-                                                                                    {
-                                                                                      attrs:
-                                                                                        {
-                                                                                          id: "upload-cloud",
-                                                                                          transform:
-                                                                                            "translate(21.818182, 24.000000)",
-                                                                                          "stroke-linecap":
-                                                                                            "round",
-                                                                                          "stroke-linejoin":
-                                                                                            "round",
-                                                                                          "stroke-width":
-                                                                                            "2",
-                                                                                        },
-                                                                                    },
-                                                                                    [
-                                                                                      _c(
-                                                                                        "polyline",
-                                                                                        {
-                                                                                          attrs:
-                                                                                            {
-                                                                                              id: "Path",
-                                                                                              stroke:
-                                                                                                "#000000",
-                                                                                              points:
-                                                                                                "19.6458087 17.3789847 14.3565525 12.0897285 9.06729634 17.3789847",
-                                                                                            },
-                                                                                        }
-                                                                                      ),
-                                                                                      _vm._v(
-                                                                                        " "
-                                                                                      ),
-                                                                                      _c(
-                                                                                        "path",
-                                                                                        {
-                                                                                          attrs:
-                                                                                            {
-                                                                                              d: "M14.3565525,12.0897285 L14.3565525,24.1794569",
-                                                                                              id: "Path",
-                                                                                              stroke:
-                                                                                                "#3560FF",
-                                                                                            },
-                                                                                        }
-                                                                                      ),
-                                                                                      _vm._v(
-                                                                                        " "
-                                                                                      ),
-                                                                                      _c(
-                                                                                        "path",
-                                                                                        {
-                                                                                          attrs:
-                                                                                            {
-                                                                                              d: "M25.6438239,20.7792208 C28.2965835,19.3021499 29.6312816,16.1761528 28.8860265,13.1856562 C28.1407715,10.1951596 25.5052337,8.10125672 22.4838689,8.09921935 L20.8179512,8.09921935 C19.7219904,3.76967373 16.1275086,0.577339516 11.7773112,0.0700384831 C7.42711383,-0.43726255 3.22057026,1.84535014 1.19724759,5.81113853 C-0.826075091,9.77692693 -0.247870665,14.6059952 2.6515151,17.9569414",
-                                                                                              id: "Path",
-                                                                                              stroke:
-                                                                                                "#3560FF",
-                                                                                            },
-                                                                                        }
-                                                                                      ),
-                                                                                      _vm._v(
-                                                                                        " "
-                                                                                      ),
-                                                                                      _c(
-                                                                                        "polyline",
-                                                                                        {
-                                                                                          attrs:
-                                                                                            {
-                                                                                              id: "Path",
-                                                                                              stroke:
-                                                                                                "#3560FF",
-                                                                                              points:
-                                                                                                "19.6458087 17.3789847 14.3565525 12.0897285 9.06729634 17.3789847",
-                                                                                            },
-                                                                                        }
-                                                                                      ),
-                                                                                    ]
-                                                                                  ),
-                                                                                ]
-                                                                              ),
-                                                                            ]
-                                                                          ),
-                                                                        ]
-                                                                      ),
-                                                                    ]
-                                                                  ),
-                                                                ]
-                                                              ),
-                                                            ]
-                                                          ),
-                                                        ]
-                                                      ),
-                                                      _vm._v(
-                                                        "\n                                                        Drop Or Add Files Here\n                                                        "
-                                                      ),
-                                                      _c(
-                                                        "p",
-                                                        {
-                                                          staticClass:
-                                                            "separator",
-                                                        },
-                                                        [
-                                                          _c("span", [
-                                                            _vm._v(" or "),
-                                                          ]),
-                                                        ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "button",
-                                                        {
-                                                          attrs: {
-                                                            type: "button",
-                                                          },
-                                                        },
-                                                        [_vm._v("Browse")]
-                                                      ),
-                                                    ]
-                                                  ),
-                                                ]
-                                              ),
-                                            ]
-                                          ),
+                                            on: {
+                                              "vdropzone-upload-progress":
+                                                _vm.uploadProgress,
+                                              "vdropzone-file-added":
+                                                _vm.fileAdded,
+                                              "vdropzone-success-multiple":
+                                                _vm.success,
+                                              "vdropzone-sending-multiple":
+                                                _vm.sendingFiles,
+                                            },
+                                          }),
                                         ],
                                         1
                                       ),

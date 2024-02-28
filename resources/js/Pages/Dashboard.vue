@@ -101,7 +101,7 @@
                                                     @vdropzone-upload-progress="uploadProgress" :options="dropzoneOptions"
                                                     @vdropzone-file-added="fileAdded" @vdropzone-success-multiple="success"
                                                     @vdropzone-sending-multiple="sendingFiles">
-                                                    <div class="dropzone-container">
+                                                    <!-- <div class="dropzone-container">
                                                         <div class="file-selector text-center">
                                                             <figure class="flex justify-center items-center">
                                                                 <svg width="104px" height="104px" viewBox="0 0 104 104"
@@ -193,7 +193,7 @@
                                                             <p class="separator"><span> or </span></p>
                                                             <button type="button">Browse</button>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                 </vue-dropzone>
                                             </label>
 
@@ -345,24 +345,34 @@ export default {
             dropzoneOptions: {
                 // The Url Where Dropped or Selected files will be sent
                 url: `https://httpbin.org/post`,
-                // File Size allowed in MB
-                maxFilesize: 102400000,
-                // Authentication Headers like Access_Token of your application
-                headers: {
-                    Authorization: `Access Token`
-                },
-                // The way you want to receive the files in the server
-                paramName: function (n) {
-                    return "file[]";
-                },
-                dictDefaultMessage: "Upload Files Here xD",
+                thumbnailWidth: 200,
+                thumbnailHeight: 200,
+                addRemoveLinks: true,
+                method: "post",
+                thumbnailMethod: "crop",//contain or crop.
                 maxFiles: 1,
-                includeStyling: false,
-                previewsContainer: false,
-                thumbnailWidth: 250,
-                thumbnailHeight: 140,
+                maxFilesize: 6, // MB,
                 uploadMultiple: true,
-                parallelUploads: 20
+                parallelUploads: 100,
+                acceptedFiles: ".jpeg,.jpg,.png,.gif,.JPEG,.JPG,.PNG,.GIF",
+                // // File Size allowed in MB
+                // maxFilesize: 102400000,
+                // // Authentication Headers like Access_Token of your application
+                // headers: {
+                //     Authorization: `Access Token`
+                // },
+                // // The way you want to receive the files in the server
+                // paramName: function (n) {
+                //     return "file[]";
+                // },
+                // dictDefaultMessage: "Upload Files Here xD",
+                // maxFiles: 1,
+                // includeStyling: false,
+                // previewsContainer: false,
+                // thumbnailWidth: 250,
+                // thumbnailHeight: 140,
+                // uploadMultiple: true,
+                // parallelUploads: 20
             },
             dataURL: null
 
@@ -396,7 +406,7 @@ export default {
         async uploadFiles() {
             // let formdata = new FormData();
             // formdata.append('bannerImg', this.bannaerImage)
-            await axios.post('/api/banner', this.bannaerImage)
+            await axios.post('/api/banner', this.dataURL)
                 .then(response => {
                     // Handle success
                     console.log('Response:', response.data);
@@ -461,9 +471,27 @@ export default {
             console.log(file);
             file.forEach(element => {
                 this.bannaerImage = element.dataURL
-            });;
-            console.log(this.bannaerImage.length, "dataUrl");
-        }
+                // this.handleFileUpload(element.dataURL)
+                this.handleFileUpload()
+            });
+
+
+        },
+
+
+        handleFileUpload() {
+            console.log(this.bannaerImage);
+            // Convert the file to base64
+            const reader = new FileReader()
+            reader.readAsDataURL(this.bannaerImage)
+            reader.onload = () => {
+                const base64String = reader.result
+                this.dataURL = base64String
+                // Do whatever you want with the base64 string
+                console.log(dataURL, 'dataURL')
+
+            }
+        },
     },
     computed: {
         getTempAttachments() {
@@ -474,6 +502,7 @@ export default {
         }
     }
 }
+
 </script>
 <style scoped>
 .active {
