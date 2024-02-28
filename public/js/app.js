@@ -4959,12 +4959,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var formdata;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_6__["default"].post('/api/banner', _this2.dataURL).then(function (response) {
+                formdata = new FormData();
+                formdata.append('banner_image', _this2.bannaerImage);
+                _context2.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_6__["default"].post('/api/banner', formdata).then(function (response) {
                   // Handle success
                   console.log('Response:', response.data);
                 })["catch"](function (error) {
@@ -4972,7 +4975,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   console.error('Error:', error);
                 });
 
-              case 2:
+              case 4:
               case "end":
                 return _context2.stop();
             }
@@ -5030,16 +5033,48 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this3 = this;
 
       // console.log("File uploaded successfully");
-      console.log("Response is ->", response);
-      console.log(file);
-      file.forEach(function (element) {
-        _this3.bannaerImage = element.dataURL; // this.handleFileUpload(element.dataURL)
+      // console.log("Response is ->", response);
+      console.log(file); //
 
-        _this3.handleFileUpload();
+      file.forEach(function (element) {
+        _this3.readFileAsBase64(element); // console.log('bas64img', bas64img)
+        // this.handleFileUpload(element.dataURL)
+        // this.handleFileUpload()
+
       });
     },
-    handleFileUpload: function handleFileUpload() {
+    readFileAsBase64: function readFileAsBase64(file) {
       var _this4 = this;
+
+      var reader = new FileReader();
+
+      reader.onload = function (event) {
+        // console.log('event', event)
+        if (event.target && event.target.result) {
+          _this4.bannaerImage = event.target.result; // console.log('base64Data', this.bannaerImage)
+          // console.log('Base64 data:', base64Data);
+          // console.log("file")
+          // console.log(file.upload.uuid)
+          // // this.$emit('updateInput',this.attachments);
+          // if (this.maxFiles == 1) {
+          //     this.attachments = [{id: file.upload.uuid, file: base64Data}]
+          //
+          //     this.$emit('updateInput', base64Data);
+          // } else {
+          //     this.attachments.push({id: file.upload.uuid, file: base64Data})
+          //
+          //     this.$emit('updateInput', this.attachments.map(obj => obj.file));
+          // }          // Now you can use the base64Data as needed
+          // For example, you might want to store it in your component's data or perform other actions.
+        } else {
+          console.error('Failed to read file as base64.');
+        }
+      };
+
+      reader.readAsDataURL(file);
+    },
+    handleFileUpload: function handleFileUpload() {
+      var _this5 = this;
 
       console.log(this.bannaerImage); // Convert the file to base64
 
@@ -5048,7 +5083,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       reader.onload = function () {
         var base64String = reader.result;
-        _this4.dataURL = base64String; // Do whatever you want with the base64 string
+        _this5.dataURL = base64String; // Do whatever you want with the base64 string
 
         console.log(dataURL, 'dataURL');
       };

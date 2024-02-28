@@ -404,9 +404,9 @@ export default {
 
     methods: {
         async uploadFiles() {
-            // let formdata = new FormData();
-            // formdata.append('bannerImg', this.bannaerImage)
-            await axios.post('/api/banner', this.dataURL)
+            let formdata = new FormData();
+            formdata.append('banner_image', this.bannaerImage)
+            await axios.post('/api/banner', formdata)
                 .then(response => {
                     // Handle success
                     console.log('Response:', response.data);
@@ -467,15 +467,48 @@ export default {
         // called on successful upload of a file
         success(file, response) {
             // console.log("File uploaded successfully");
-            console.log("Response is ->", response);
+            // console.log("Response is ->", response);
             console.log(file);
+            //
+
             file.forEach(element => {
-                this.bannaerImage = element.dataURL
+                this.readFileAsBase64(element);
+                // console.log('bas64img', bas64img)
                 // this.handleFileUpload(element.dataURL)
-                this.handleFileUpload()
+                // this.handleFileUpload()
             });
 
 
+        },
+
+        readFileAsBase64(file) {
+            const reader = new FileReader();
+
+            reader.onload = (event) => {
+                // console.log('event', event)
+                if (event.target && event.target.result) {
+                    this.bannaerImage = event.target.result
+                    // console.log('base64Data', this.bannaerImage)
+                    // console.log('Base64 data:', base64Data);
+                    // console.log("file")
+                    // console.log(file.upload.uuid)
+                    // // this.$emit('updateInput',this.attachments);
+                    // if (this.maxFiles == 1) {
+                    //     this.attachments = [{id: file.upload.uuid, file: base64Data}]
+                    //
+                    //     this.$emit('updateInput', base64Data);
+                    // } else {
+                    //     this.attachments.push({id: file.upload.uuid, file: base64Data})
+                    //
+                    //     this.$emit('updateInput', this.attachments.map(obj => obj.file));
+                    // }          // Now you can use the base64Data as needed
+                    // For example, you might want to store it in your component's data or perform other actions.
+                } else {
+                    console.error('Failed to read file as base64.');
+                }
+            };
+
+            reader.readAsDataURL(file);
         },
 
 

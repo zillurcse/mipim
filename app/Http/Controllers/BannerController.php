@@ -47,19 +47,6 @@ class BannerController extends Controller
         $banner = Banner::create($data);
 
 
-        if ($request->file('banner_image') != null){
-            $files = $request->file('banner_image');
-            foreach ($files as $file){
-                $doc = new Banner();
-                $doc->banner_image = $file['banner_image']->store('banner-image-file-'.$banner->id, config('infinity.file_system_driver'));
-//                dd($doc->file);
-                $doc->event()->associate($event);
-                $doc->exhibitor()->associate($exhibitor);
-                $doc->save();
-                //array_push($docs, $doc);
-            }
-        }
-
         $this->fileUpload([
             'model' => $banner,
             'file' => $request['banner_image'],
