@@ -3771,6 +3771,56 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/AttachmentList.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/AttachmentList.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "AttachmentList",
+  methods: {
+    checkProgress: function checkProgress(attachment) {
+      return attachment.progress === null ? false : true;
+    }
+  },
+  props: {
+    tempAttachments: {
+      type: Array
+    },
+    attachments: {
+      type: Array
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Auth/ConfirmPassword.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Auth/ConfirmPassword.vue?vue&type=script&lang=js& ***!
@@ -4460,6 +4510,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue2_dropzone__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue2-dropzone */ "./node_modules/vue2-dropzone/dist/vue2Dropzone.js");
 /* harmony import */ var vue2_dropzone__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue2_dropzone__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var vue2_dropzone_dist_vue2Dropzone_min_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue2-dropzone/dist/vue2Dropzone.min.css */ "./node_modules/vue2-dropzone/dist/vue2Dropzone.min.css");
+/* harmony import */ var _AttachmentList_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AttachmentList.vue */ "./resources/js/Pages/AttachmentList.vue");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 //
 //
 //
@@ -4672,6 +4735,109 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -4680,7 +4846,8 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
     Welcome: _Jetstream_Welcome__WEBPACK_IMPORTED_MODULE_1__["default"],
-    vueDropzone: (vue2_dropzone__WEBPACK_IMPORTED_MODULE_2___default())
+    vueDropzone: (vue2_dropzone__WEBPACK_IMPORTED_MODULE_2___default()),
+    AttachmentList: _AttachmentList_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   data: function data() {
     return {
@@ -4692,10 +4859,37 @@ __webpack_require__.r(__webpack_exports__);
         params: {},
         sendFileToServer: true,
         withCredentials: false
+      },
+      tempAttachments: [],
+      attachments: [],
+      dropzoneOptions: {
+        // The Url Where Dropped or Selected files will be sent
+        url: "https://httpbin.org/post",
+        // File Size allowed in MB
+        maxFilesize: 102400000,
+        // Authentication Headers like Access_Token of your application
+        headers: {
+          Authorization: "Access Token"
+        },
+        // The way you want to receive the files in the server
+        paramName: function paramName(n) {
+          return "file[]";
+        },
+        dictDefaultMessage: "Upload Files Here xD",
+        includeStyling: false,
+        previewsContainer: false,
+        thumbnailWidth: 250,
+        thumbnailHeight: 140,
+        uploadMultiple: true,
+        parallelUploads: 20
       }
     };
   },
   methods: {
+    uploadFiles: function uploadFiles() {
+      // Access dropzone instance and perform upload
+      this.$refs.myDropzone.processQueue();
+    },
     s3UploadError: function s3UploadError(errorMessage) {},
     s3UploadSuccess: function s3UploadSuccess(s3ObjectLocation) {
       console.log(s3ObjectLocation);
@@ -4706,6 +4900,50 @@ __webpack_require__.r(__webpack_exports__);
     // },
     closeModal: function closeModal() {
       this.showModal = false;
+    },
+    fileAdded: function fileAdded(file) {
+      console.log("File Dropped => ", file); // Construct your file object to render in the UI
+
+      var attachment = {};
+      attachment._id = file.upload.uuid;
+      attachment.title = file.name;
+      attachment.type = "file";
+      attachment.extension = "." + file.type.split("/")[1];
+      attachment.user = JSON.parse(localStorage.getItem("user"));
+      attachment.content = "File Upload by Select or Drop";
+      attachment.thumb = file.dataURL;
+      attachment.thumb_list = file.dataURL;
+      attachment.isLoading = true;
+      attachment.progress = null;
+      attachment.size = file.size;
+      this.tempAttachments = [].concat(_toConsumableArray(this.tempAttachments), [attachment]);
+    },
+    // a middle layer function where you can change the XHR request properties
+    sendingFiles: function sendingFiles(files, xhr, formData) {
+      console.log("if you want to change the upload time or add data to the formData you can do it here.");
+      console.log("Files sending", files);
+    },
+    // function where we get the upload progress
+    uploadProgress: function uploadProgress(file, progress, bytesSent) {
+      console.log("File Upload Progress", progress);
+      this.tempAttachments.map(function (attachment) {
+        if (attachment.title === file.name) {
+          attachment.progress = "".concat(Math.floor(progress));
+        }
+      });
+    },
+    // called on successful upload of a file
+    success: function success(file, response) {
+      console.log("File uploaded successfully");
+      console.log("Response is ->", response);
+    }
+  },
+  computed: {
+    getTempAttachments: function getTempAttachments() {
+      return this.tempAttachments;
+    },
+    getAttachments: function getAttachments() {
+      return this.attachments;
     }
   }
 });
@@ -6231,6 +6469,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "/*\n * The MIT License\n * Copyright (c) 2012 Matias Meno <m@tias.me>\n */\n@-webkit-keyframes passing-through {\n  0% {\n    opacity: 0;\n    transform: translateY(40px); }\n  30%, 70% {\n    opacity: 1;\n    transform: translateY(0px); }\n  100% {\n    opacity: 0;\n    transform: translateY(-40px); } }\n@keyframes passing-through {\n  0% {\n    opacity: 0;\n    transform: translateY(40px); }\n  30%, 70% {\n    opacity: 1;\n    transform: translateY(0px); }\n  100% {\n    opacity: 0;\n    transform: translateY(-40px); } }\n@-webkit-keyframes slide-in {\n  0% {\n    opacity: 0;\n    transform: translateY(40px); }\n  30% {\n    opacity: 1;\n    transform: translateY(0px); } }\n@keyframes slide-in {\n  0% {\n    opacity: 0;\n    transform: translateY(40px); }\n  30% {\n    opacity: 1;\n    transform: translateY(0px); } }\n@-webkit-keyframes pulse {\n  0% {\n    transform: scale(1); }\n  10% {\n    transform: scale(1.1); }\n  20% {\n    transform: scale(1); } }\n@keyframes pulse {\n  0% {\n    transform: scale(1); }\n  10% {\n    transform: scale(1.1); }\n  20% {\n    transform: scale(1); } }\n.dropzone, .dropzone * {\n  box-sizing: border-box; }\n\n.dropzone {\n  min-height: 150px;\n  border: 2px solid rgba(0, 0, 0, 0.3);\n  background: white;\n  padding: 20px 20px; }\n  .dropzone.dz-clickable {\n    cursor: pointer; }\n    .dropzone.dz-clickable * {\n      cursor: default; }\n    .dropzone.dz-clickable .dz-message, .dropzone.dz-clickable .dz-message * {\n      cursor: pointer; }\n  .dropzone.dz-started .dz-message {\n    display: none; }\n  .dropzone.dz-drag-hover {\n    border-style: solid; }\n    .dropzone.dz-drag-hover .dz-message {\n      opacity: 0.5; }\n  .dropzone .dz-message {\n    text-align: center;\n    margin: 2em 0; }\n  .dropzone .dz-preview {\n    position: relative;\n    display: inline-block;\n    vertical-align: top;\n    margin: 16px;\n    min-height: 100px; }\n    .dropzone .dz-preview:hover {\n      z-index: 1000; }\n      .dropzone .dz-preview:hover .dz-details {\n        opacity: 1; }\n    .dropzone .dz-preview.dz-file-preview .dz-image {\n      border-radius: 20px;\n      background: #999;\n      background: linear-gradient(to bottom, #eee, #ddd); }\n    .dropzone .dz-preview.dz-file-preview .dz-details {\n      opacity: 1; }\n    .dropzone .dz-preview.dz-image-preview {\n      background: white; }\n      .dropzone .dz-preview.dz-image-preview .dz-details {\n        transition: opacity 0.2s linear; }\n    .dropzone .dz-preview .dz-remove {\n      font-size: 14px;\n      text-align: center;\n      display: block;\n      cursor: pointer;\n      border: none; }\n      .dropzone .dz-preview .dz-remove:hover {\n        text-decoration: underline; }\n    .dropzone .dz-preview:hover .dz-details {\n      opacity: 1; }\n    .dropzone .dz-preview .dz-details {\n      z-index: 20;\n      position: absolute;\n      top: 0;\n      left: 0;\n      opacity: 0;\n      font-size: 13px;\n      min-width: 100%;\n      max-width: 100%;\n      padding: 2em 1em;\n      text-align: center;\n      color: rgba(0, 0, 0, 0.9);\n      line-height: 150%; }\n      .dropzone .dz-preview .dz-details .dz-size {\n        margin-bottom: 1em;\n        font-size: 16px; }\n      .dropzone .dz-preview .dz-details .dz-filename {\n        white-space: nowrap; }\n        .dropzone .dz-preview .dz-details .dz-filename:hover span {\n          border: 1px solid rgba(200, 200, 200, 0.8);\n          background-color: rgba(255, 255, 255, 0.8); }\n        .dropzone .dz-preview .dz-details .dz-filename:not(:hover) {\n          overflow: hidden;\n          text-overflow: ellipsis; }\n          .dropzone .dz-preview .dz-details .dz-filename:not(:hover) span {\n            border: 1px solid transparent; }\n      .dropzone .dz-preview .dz-details .dz-filename span, .dropzone .dz-preview .dz-details .dz-size span {\n        background-color: rgba(255, 255, 255, 0.4);\n        padding: 0 0.4em;\n        border-radius: 3px; }\n    .dropzone .dz-preview:hover .dz-image img {\n      transform: scale(1.05, 1.05);\n      filter: blur(8px); }\n    .dropzone .dz-preview .dz-image {\n      border-radius: 20px;\n      overflow: hidden;\n      width: 120px;\n      height: 120px;\n      position: relative;\n      display: block;\n      z-index: 10; }\n      .dropzone .dz-preview .dz-image img {\n        display: block; }\n    .dropzone .dz-preview.dz-success .dz-success-mark {\n      -webkit-animation: passing-through 3s cubic-bezier(0.77, 0, 0.175, 1);\n      animation: passing-through 3s cubic-bezier(0.77, 0, 0.175, 1); }\n    .dropzone .dz-preview.dz-error .dz-error-mark {\n      opacity: 1;\n      -webkit-animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1);\n      animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1); }\n    .dropzone .dz-preview .dz-success-mark, .dropzone .dz-preview .dz-error-mark {\n      pointer-events: none;\n      opacity: 0;\n      z-index: 500;\n      position: absolute;\n      display: block;\n      top: 50%;\n      left: 50%;\n      margin-left: -27px;\n      margin-top: -27px; }\n      .dropzone .dz-preview .dz-success-mark svg, .dropzone .dz-preview .dz-error-mark svg {\n        display: block;\n        width: 54px;\n        height: 54px; }\n    .dropzone .dz-preview.dz-processing .dz-progress {\n      opacity: 1;\n      transition: all 0.2s linear; }\n    .dropzone .dz-preview.dz-complete .dz-progress {\n      opacity: 0;\n      transition: opacity 0.4s ease-in; }\n    .dropzone .dz-preview:not(.dz-processing) .dz-progress {\n      -webkit-animation: pulse 6s ease infinite;\n      animation: pulse 6s ease infinite; }\n    .dropzone .dz-preview .dz-progress {\n      opacity: 1;\n      z-index: 1000;\n      pointer-events: none;\n      position: absolute;\n      height: 16px;\n      left: 50%;\n      top: 50%;\n      margin-top: -8px;\n      width: 80px;\n      margin-left: -40px;\n      background: rgba(255, 255, 255, 0.9);\n      -webkit-transform: scale(1);\n      border-radius: 8px;\n      overflow: hidden; }\n      .dropzone .dz-preview .dz-progress .dz-upload {\n        background: #333;\n        background: linear-gradient(to bottom, #666, #444);\n        position: absolute;\n        top: 0;\n        left: 0;\n        bottom: 0;\n        width: 0;\n        transition: width 300ms ease-in-out; }\n    .dropzone .dz-preview.dz-error .dz-error-message {\n      display: block; }\n    .dropzone .dz-preview.dz-error:hover .dz-error-message {\n      opacity: 1;\n      pointer-events: auto; }\n    .dropzone .dz-preview .dz-error-message {\n      pointer-events: none;\n      z-index: 1000;\n      position: absolute;\n      display: block;\n      display: none;\n      opacity: 0;\n      transition: opacity 0.3s ease;\n      border-radius: 8px;\n      font-size: 13px;\n      top: 130px;\n      left: -10px;\n      width: 140px;\n      background: #be2626;\n      background: linear-gradient(to bottom, #be2626, #a92222);\n      padding: 0.5em 1.2em;\n      color: white; }\n      .dropzone .dz-preview .dz-error-message:after {\n        content: '';\n        position: absolute;\n        top: -6px;\n        left: 64px;\n        width: 0;\n        height: 0;\n        border-left: 6px solid transparent;\n        border-right: 6px solid transparent;\n        border-bottom: 6px solid #be2626; }\n.vue-dropzone{border:2px solid #e5e5e5;font-family:Arial,sans-serif;letter-spacing:.2px;color:#777;transition:.2s linear}.vue-dropzone:hover{background-color:#f6f6f6}.vue-dropzone>i{color:#ccc}.vue-dropzone>.dz-preview .dz-image{border-radius:0;width:100%;height:100%}.vue-dropzone>.dz-preview .dz-image img:not([src]){width:200px;height:200px}.vue-dropzone>.dz-preview .dz-image:hover img{transform:none;-webkit-filter:none}.vue-dropzone>.dz-preview .dz-details{bottom:0;top:0;color:#fff;background-color:rgba(33,150,243,.8);transition:opacity .2s linear;text-align:left}.vue-dropzone>.dz-preview .dz-details .dz-filename{overflow:hidden}.vue-dropzone>.dz-preview .dz-details .dz-filename span,.vue-dropzone>.dz-preview .dz-details .dz-size span{background-color:transparent}.vue-dropzone>.dz-preview .dz-details .dz-filename:not(:hover) span{border:none}.vue-dropzone>.dz-preview .dz-details .dz-filename:hover span{background-color:transparent;border:none}.vue-dropzone>.dz-preview .dz-progress .dz-upload{background:#ccc}.vue-dropzone>.dz-preview .dz-remove{position:absolute;z-index:30;color:#fff;margin-left:15px;padding:10px;top:inherit;bottom:15px;border:2px #fff solid;text-decoration:none;text-transform:uppercase;font-size:.8rem;font-weight:800;letter-spacing:1.1px;opacity:0}.vue-dropzone>.dz-preview:hover .dz-remove{opacity:1}.vue-dropzone>.dz-preview .dz-error-mark,.vue-dropzone>.dz-preview .dz-success-mark{margin-left:auto;margin-top:auto;width:100%;top:35%;left:0}.vue-dropzone>.dz-preview .dz-error-mark svg,.vue-dropzone>.dz-preview .dz-success-mark svg{margin-left:auto;margin-right:auto}.vue-dropzone>.dz-preview .dz-error-message{margin-left:auto;margin-right:auto;left:0;width:100%;text-align:center}.vue-dropzone>.dz-preview .dz-error-message:after{display:none}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/AttachmentList.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/AttachmentList.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\nul {\n    display: flex;\n    flex-wrap: wrap;\n    list-style: none;\n    padding: 0px;\n}\nli {\n    border: 1px solid;\n    margin-bottom: 8px;\n    border-radius: 8px;\n    margin-right: 8px;\n    padding: 0 10px;\n}\n.file-name {\n    min-width: 150px;\n    font-size: 13px;\n}\n.uploaded-date {\n    font-size: 12px;\n}\n.upload-progress {\n    font-size: 12px;\n}\n.file-info {\n    display: flex;\n    justify-content: space-between;\n    margin-bottom: 10px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -28335,6 +28597,36 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/AttachmentList.vue?vue&type=style&index=0&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/AttachmentList.vue?vue&type=style&index=0&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AttachmentList_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AttachmentList.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/AttachmentList.vue?vue&type=style&index=0&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AttachmentList_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AttachmentList_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Dashboard.vue?vue&type=style&index=0&id=097ba13b&scoped=true&lang=css&":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Dashboard.vue?vue&type=style&index=0&id=097ba13b&scoped=true&lang=css& ***!
@@ -29802,6 +30094,47 @@ component.options.__file = "resources/js/Pages/API/Index.vue"
 
 /***/ }),
 
+/***/ "./resources/js/Pages/AttachmentList.vue":
+/*!***********************************************!*\
+  !*** ./resources/js/Pages/AttachmentList.vue ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _AttachmentList_vue_vue_type_template_id_82085c6c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AttachmentList.vue?vue&type=template&id=82085c6c& */ "./resources/js/Pages/AttachmentList.vue?vue&type=template&id=82085c6c&");
+/* harmony import */ var _AttachmentList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AttachmentList.vue?vue&type=script&lang=js& */ "./resources/js/Pages/AttachmentList.vue?vue&type=script&lang=js&");
+/* harmony import */ var _AttachmentList_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AttachmentList.vue?vue&type=style&index=0&lang=css& */ "./resources/js/Pages/AttachmentList.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _AttachmentList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AttachmentList_vue_vue_type_template_id_82085c6c___WEBPACK_IMPORTED_MODULE_0__.render,
+  _AttachmentList_vue_vue_type_template_id_82085c6c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Pages/AttachmentList.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Auth/ConfirmPassword.vue":
 /*!*****************************************************!*\
   !*** ./resources/js/Pages/Auth/ConfirmPassword.vue ***!
@@ -30890,6 +31223,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Pages/AttachmentList.vue?vue&type=script&lang=js&":
+/*!************************************************************************!*\
+  !*** ./resources/js/Pages/AttachmentList.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AttachmentList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AttachmentList.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/AttachmentList.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AttachmentList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Auth/ConfirmPassword.vue?vue&type=script&lang=js&":
 /*!******************************************************************************!*\
   !*** ./resources/js/Pages/Auth/ConfirmPassword.vue?vue&type=script&lang=js& ***!
@@ -31175,6 +31524,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Welcome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Welcome.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Welcome.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Welcome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/AttachmentList.vue?vue&type=style&index=0&lang=css&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/Pages/AttachmentList.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AttachmentList_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AttachmentList.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/AttachmentList.vue?vue&type=style&index=0&lang=css&");
+
 
 /***/ }),
 
@@ -31697,6 +32059,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_df56dab8___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_df56dab8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Index.vue?vue&type=template&id=df56dab8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/API/Index.vue?vue&type=template&id=df56dab8&");
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/AttachmentList.vue?vue&type=template&id=82085c6c&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/Pages/AttachmentList.vue?vue&type=template&id=82085c6c& ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AttachmentList_vue_vue_type_template_id_82085c6c___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AttachmentList_vue_vue_type_template_id_82085c6c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AttachmentList_vue_vue_type_template_id_82085c6c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AttachmentList.vue?vue&type=template&id=82085c6c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/AttachmentList.vue?vue&type=template&id=82085c6c&");
 
 
 /***/ }),
@@ -35467,6 +35846,69 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/AttachmentList.vue?vue&type=template&id=82085c6c&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/AttachmentList.vue?vue&type=template&id=82085c6c& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.tempAttachments.length > 0
+      ? _c(
+          "ul",
+          _vm._l(_vm.tempAttachments, function (tempAttachment) {
+            return _c("li", { key: tempAttachment._id }, [
+              _c("div", { staticClass: "file-details" }, [
+                _c(
+                  "div",
+                  { staticClass: "file-name display-flex align-center" },
+                  [
+                    _c("p", { ref: "attachmentTitle", refInFor: true }, [
+                      _vm._v(_vm._s(tempAttachment.title)),
+                    ]),
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "file-info" }, [
+                  _c("span", { staticClass: "uploaded-date" }, [
+                    _vm._v(" " + _vm._s(tempAttachment.size) + " bytes "),
+                  ]),
+                  _vm._v(" "),
+                  _vm.checkProgress(tempAttachment)
+                    ? _c("span", { staticClass: "upload-prgress" }, [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(tempAttachment.progress + " %") +
+                            "\n                    "
+                        ),
+                      ])
+                    : _vm._e(),
+                ]),
+              ]),
+            ])
+          }),
+          0
+        )
+      : _vm._e(),
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Auth/ConfirmPassword.vue?vue&type=template&id=475ae21d&":
 /*!***************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Auth/ConfirmPassword.vue?vue&type=template&id=475ae21d& ***!
@@ -36576,7 +37018,7 @@ var render = function () {
                   staticClass:
                     "font-semibold text-xl text-gray-800 leading-tight",
                 },
-                [_vm._v("\n                MIPIM - Dashboard\n            ")]
+                [_vm._v("\n            MIPIM - Dashboard\n        ")]
               ),
             ]
           },
@@ -36614,7 +37056,7 @@ var render = function () {
                         },
                         [
                           _vm._v(
-                            "\n                                        Banner\n                                    "
+                            "\n                                    Banner\n                                "
                           ),
                         ]
                       ),
@@ -36636,7 +37078,7 @@ var render = function () {
                         },
                         [
                           _vm._v(
-                            "\n                                        PDF\n                                    "
+                            "\n                                    PDF\n                                "
                           ),
                         ]
                       ),
@@ -36728,77 +37170,514 @@ var render = function () {
                               on: { click: _vm.closeModal },
                             }),
                             _vm._v(" "),
-                            _c("div", { staticClass: "modal-content" }, [
-                              _c("div", { staticClass: "mb-6" }, [
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass:
-                                      "text-sm text-gray-600 block mb-1 font-semibold",
-                                    attrs: { for: "#" },
-                                  },
-                                  [
-                                    _vm._v(
-                                      "Choose\n                                            Banner"
-                                    ),
-                                  ]
-                                ),
+                            _c(
+                              "div",
+                              { staticClass: "modal-content" },
+                              [
+                                _c("div", { staticClass: "mb-6" }, [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "text-sm text-gray-600 block mb-1 font-semibold",
+                                      attrs: { for: "#" },
+                                    },
+                                    [
+                                      _vm._v(
+                                        "Choose\n                                        Banner"
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "flex items-center justify-center w-full",
+                                    },
+                                    [
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600",
+                                          attrs: { for: "dropzone-file" },
+                                        },
+                                        [
+                                          _c(
+                                            "vue-dropzone",
+                                            {
+                                              ref: "myVueDropzone",
+                                              attrs: {
+                                                "include-styling": false,
+                                                useCustomSlot: true,
+                                                id: "dropzone",
+                                                options: _vm.dropzoneOptions,
+                                              },
+                                              on: {
+                                                "vdropzone-upload-progress":
+                                                  _vm.uploadProgress,
+                                                "vdropzone-file-added":
+                                                  _vm.fileAdded,
+                                                "vdropzone-sending-multiple":
+                                                  _vm.sendingFiles,
+                                                "vdropzone-success-multiple":
+                                                  _vm.success,
+                                              },
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "dropzone-container",
+                                                },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "file-selector text-center",
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "figure",
+                                                        {
+                                                          staticClass:
+                                                            "flex justify-center items-center",
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "svg",
+                                                            {
+                                                              attrs: {
+                                                                width: "104px",
+                                                                height: "104px",
+                                                                viewBox:
+                                                                  "0 0 104 104",
+                                                                version: "1.1",
+                                                                xmlns:
+                                                                  "http://www.w3.org/2000/svg",
+                                                                "xmlns:xlink":
+                                                                  "http://www.w3.org/1999/xlink",
+                                                              },
+                                                            },
+                                                            [
+                                                              _c("defs", [
+                                                                _c("circle", {
+                                                                  attrs: {
+                                                                    id: "path-1",
+                                                                    cx: "36",
+                                                                    cy: "36",
+                                                                    r: "36",
+                                                                  },
+                                                                }),
+                                                                _vm._v(" "),
+                                                                _c(
+                                                                  "filter",
+                                                                  {
+                                                                    attrs: {
+                                                                      x: "-37.5%",
+                                                                      y: "-29.2%",
+                                                                      width:
+                                                                        "175.0%",
+                                                                      height:
+                                                                        "175.0%",
+                                                                      filterUnits:
+                                                                        "objectBoundingBox",
+                                                                      id: "filter-2",
+                                                                    },
+                                                                  },
+                                                                  [
+                                                                    _c(
+                                                                      "feOffset",
+                                                                      {
+                                                                        attrs: {
+                                                                          dx: "0",
+                                                                          dy: "6",
+                                                                          in: "SourceAlpha",
+                                                                          result:
+                                                                            "shadowOffsetOuter1",
+                                                                        },
+                                                                      }
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c(
+                                                                      "feGaussianBlur",
+                                                                      {
+                                                                        attrs: {
+                                                                          stdDeviation:
+                                                                            "8",
+                                                                          in: "shadowOffsetOuter1",
+                                                                          result:
+                                                                            "shadowBlurOuter1",
+                                                                        },
+                                                                      }
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c(
+                                                                      "feColorMatrix",
+                                                                      {
+                                                                        attrs: {
+                                                                          values:
+                                                                            "0 0 0 0 0.0117647059   0 0 0 0 0.0862745098   0 0 0 0 0.160784314  0 0 0 0.08 0",
+                                                                          type: "matrix",
+                                                                          in: "shadowBlurOuter1",
+                                                                          result:
+                                                                            "shadowMatrixOuter1",
+                                                                        },
+                                                                      }
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c(
+                                                                      "feOffset",
+                                                                      {
+                                                                        attrs: {
+                                                                          dx: "0",
+                                                                          dy: "1",
+                                                                          in: "SourceAlpha",
+                                                                          result:
+                                                                            "shadowOffsetOuter2",
+                                                                        },
+                                                                      }
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c(
+                                                                      "feGaussianBlur",
+                                                                      {
+                                                                        attrs: {
+                                                                          stdDeviation:
+                                                                            "1",
+                                                                          in: "shadowOffsetOuter2",
+                                                                          result:
+                                                                            "shadowBlurOuter2",
+                                                                        },
+                                                                      }
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c(
+                                                                      "feColorMatrix",
+                                                                      {
+                                                                        attrs: {
+                                                                          values:
+                                                                            "0 0 0 0 0.0117647059   0 0 0 0 0.0862745098   0 0 0 0 0.160784314  0 0 0 0.11 0",
+                                                                          type: "matrix",
+                                                                          in: "shadowBlurOuter2",
+                                                                          result:
+                                                                            "shadowMatrixOuter2",
+                                                                        },
+                                                                      }
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c(
+                                                                      "feMerge",
+                                                                      [
+                                                                        _c(
+                                                                          "feMergeNode",
+                                                                          {
+                                                                            attrs:
+                                                                              {
+                                                                                in: "shadowMatrixOuter1",
+                                                                              },
+                                                                          }
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "feMergeNode",
+                                                                          {
+                                                                            attrs:
+                                                                              {
+                                                                                in: "shadowMatrixOuter2",
+                                                                              },
+                                                                          }
+                                                                        ),
+                                                                      ],
+                                                                      1
+                                                                    ),
+                                                                  ],
+                                                                  1
+                                                                ),
+                                                              ]),
+                                                              _vm._v(" "),
+                                                              _c(
+                                                                "g",
+                                                                {
+                                                                  attrs: {
+                                                                    id: "Page-1",
+                                                                    stroke:
+                                                                      "none",
+                                                                    "stroke-width":
+                                                                      "1",
+                                                                    fill: "none",
+                                                                    "fill-rule":
+                                                                      "evenodd",
+                                                                  },
+                                                                },
+                                                                [
+                                                                  _c(
+                                                                    "g",
+                                                                    {
+                                                                      attrs: {
+                                                                        id: "Artboard",
+                                                                        transform:
+                                                                          "translate(-460.000000, -125.000000)",
+                                                                      },
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "g",
+                                                                        {
+                                                                          attrs:
+                                                                            {
+                                                                              id: "Group-4",
+                                                                              transform:
+                                                                                "translate(412.000000, 129.000000)",
+                                                                            },
+                                                                        },
+                                                                        [
+                                                                          _c(
+                                                                            "g",
+                                                                            {
+                                                                              attrs:
+                                                                                {
+                                                                                  id: "Group-2",
+                                                                                  transform:
+                                                                                    "translate(58.000000, 0.000000)",
+                                                                                },
+                                                                            },
+                                                                            [
+                                                                              _c(
+                                                                                "circle",
+                                                                                {
+                                                                                  attrs:
+                                                                                    {
+                                                                                      id: "Oval",
+                                                                                      fill: "#3560FF",
+                                                                                      opacity:
+                                                                                        "0.100000001",
+                                                                                      cx: "42",
+                                                                                      cy: "42",
+                                                                                      r: "42",
+                                                                                    },
+                                                                                }
+                                                                              ),
+                                                                              _vm._v(
+                                                                                " "
+                                                                              ),
+                                                                              _c(
+                                                                                "g",
+                                                                                {
+                                                                                  attrs:
+                                                                                    {
+                                                                                      id: "Group",
+                                                                                      transform:
+                                                                                        "translate(6.000000, 6.000000)",
+                                                                                    },
+                                                                                },
+                                                                                [
+                                                                                  _c(
+                                                                                    "g",
+                                                                                    {
+                                                                                      attrs:
+                                                                                        {
+                                                                                          id: "Oval",
+                                                                                        },
+                                                                                    },
+                                                                                    [
+                                                                                      _c(
+                                                                                        "use",
+                                                                                        {
+                                                                                          attrs:
+                                                                                            {
+                                                                                              fill: "black",
+                                                                                              "fill-opacity":
+                                                                                                "1",
+                                                                                              filter:
+                                                                                                "url(#filter-2)",
+                                                                                              "xlink:href":
+                                                                                                "#path-1",
+                                                                                            },
+                                                                                        }
+                                                                                      ),
+                                                                                      _vm._v(
+                                                                                        " "
+                                                                                      ),
+                                                                                      _c(
+                                                                                        "use",
+                                                                                        {
+                                                                                          attrs:
+                                                                                            {
+                                                                                              fill: "#FFFFFF",
+                                                                                              "fill-rule":
+                                                                                                "evenodd",
+                                                                                              "xlink:href":
+                                                                                                "#path-1",
+                                                                                            },
+                                                                                        }
+                                                                                      ),
+                                                                                    ]
+                                                                                  ),
+                                                                                  _vm._v(
+                                                                                    " "
+                                                                                  ),
+                                                                                  _c(
+                                                                                    "g",
+                                                                                    {
+                                                                                      attrs:
+                                                                                        {
+                                                                                          id: "upload-cloud",
+                                                                                          transform:
+                                                                                            "translate(21.818182, 24.000000)",
+                                                                                          "stroke-linecap":
+                                                                                            "round",
+                                                                                          "stroke-linejoin":
+                                                                                            "round",
+                                                                                          "stroke-width":
+                                                                                            "2",
+                                                                                        },
+                                                                                    },
+                                                                                    [
+                                                                                      _c(
+                                                                                        "polyline",
+                                                                                        {
+                                                                                          attrs:
+                                                                                            {
+                                                                                              id: "Path",
+                                                                                              stroke:
+                                                                                                "#000000",
+                                                                                              points:
+                                                                                                "19.6458087 17.3789847 14.3565525 12.0897285 9.06729634 17.3789847",
+                                                                                            },
+                                                                                        }
+                                                                                      ),
+                                                                                      _vm._v(
+                                                                                        " "
+                                                                                      ),
+                                                                                      _c(
+                                                                                        "path",
+                                                                                        {
+                                                                                          attrs:
+                                                                                            {
+                                                                                              d: "M14.3565525,12.0897285 L14.3565525,24.1794569",
+                                                                                              id: "Path",
+                                                                                              stroke:
+                                                                                                "#3560FF",
+                                                                                            },
+                                                                                        }
+                                                                                      ),
+                                                                                      _vm._v(
+                                                                                        " "
+                                                                                      ),
+                                                                                      _c(
+                                                                                        "path",
+                                                                                        {
+                                                                                          attrs:
+                                                                                            {
+                                                                                              d: "M25.6438239,20.7792208 C28.2965835,19.3021499 29.6312816,16.1761528 28.8860265,13.1856562 C28.1407715,10.1951596 25.5052337,8.10125672 22.4838689,8.09921935 L20.8179512,8.09921935 C19.7219904,3.76967373 16.1275086,0.577339516 11.7773112,0.0700384831 C7.42711383,-0.43726255 3.22057026,1.84535014 1.19724759,5.81113853 C-0.826075091,9.77692693 -0.247870665,14.6059952 2.6515151,17.9569414",
+                                                                                              id: "Path",
+                                                                                              stroke:
+                                                                                                "#3560FF",
+                                                                                            },
+                                                                                        }
+                                                                                      ),
+                                                                                      _vm._v(
+                                                                                        " "
+                                                                                      ),
+                                                                                      _c(
+                                                                                        "polyline",
+                                                                                        {
+                                                                                          attrs:
+                                                                                            {
+                                                                                              id: "Path",
+                                                                                              stroke:
+                                                                                                "#3560FF",
+                                                                                              points:
+                                                                                                "19.6458087 17.3789847 14.3565525 12.0897285 9.06729634 17.3789847",
+                                                                                            },
+                                                                                        }
+                                                                                      ),
+                                                                                    ]
+                                                                                  ),
+                                                                                ]
+                                                                              ),
+                                                                            ]
+                                                                          ),
+                                                                        ]
+                                                                      ),
+                                                                    ]
+                                                                  ),
+                                                                ]
+                                                              ),
+                                                            ]
+                                                          ),
+                                                        ]
+                                                      ),
+                                                      _vm._v(
+                                                        "\n                                                        Drop Or Add Files Here\n                                                        "
+                                                      ),
+                                                      _c(
+                                                        "p",
+                                                        {
+                                                          staticClass:
+                                                            "separator",
+                                                        },
+                                                        [
+                                                          _c("span", [
+                                                            _vm._v(" or "),
+                                                          ]),
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "button",
+                                                        {
+                                                          attrs: {
+                                                            type: "button",
+                                                          },
+                                                        },
+                                                        [_vm._v("Browse")]
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ]
+                                              ),
+                                            ]
+                                          ),
+                                        ],
+                                        1
+                                      ),
+                                    ]
+                                  ),
+                                ]),
                                 _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "flex items-center justify-center w-full",
+                                _c("attachment-list", {
+                                  attrs: {
+                                    tempAttachments: _vm.getTempAttachments,
+                                    attachments: _vm.getAttachments,
                                   },
-                                  [
-                                    _c(
-                                      "label",
-                                      {
-                                        staticClass:
-                                          "flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600",
-                                        attrs: { for: "dropzone-file" },
-                                      },
-                                      [
-                                        _c("vue-dropzone", {
-                                          attrs: { awss3: _vm.awss3 },
-                                          on: {
-                                            "vdropzone-s3-upload-error":
-                                              _vm.s3UploadError,
-                                            "vdropzone-s3-upload-success":
-                                              _vm.s3UploadSuccess,
-                                          },
-                                        }),
-                                        _vm._v(" "),
-                                        _c("input", {
-                                          staticClass: "hidden",
-                                          attrs: {
-                                            id: "dropzone-file",
-                                            type: "file",
-                                          },
-                                        }),
-                                      ],
-                                      1
-                                    ),
-                                  ]
-                                ),
-                              ]),
-                              _vm._v(" "),
-                              _c("div", {}, [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
-                                    attrs: { type: "button" },
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                            Submit\n                                        "
-                                    ),
-                                  ]
-                                ),
-                              ]),
-                            ]),
+                                }),
+                                _vm._v(" "),
+                                _c("div", {}, [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+                                      attrs: { type: "button" },
+                                      on: { click: _vm.uploadFiles },
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        Submit\n                                    "
+                                      ),
+                                    ]
+                                  ),
+                                ]),
+                              ],
+                              1
+                            ),
                           ])
                         : _vm._e(),
                     ]),
@@ -36992,7 +37871,7 @@ var render = function () {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                            Submit\n                                        "
+                                    "\n                                    Submit\n                                "
                                   ),
                                 ]
                               ),
@@ -51624,6 +52503,8 @@ var map = {
 	"./API/ApiTokenManager.vue": "./resources/js/Pages/API/ApiTokenManager.vue",
 	"./API/Index": "./resources/js/Pages/API/Index.vue",
 	"./API/Index.vue": "./resources/js/Pages/API/Index.vue",
+	"./AttachmentList": "./resources/js/Pages/AttachmentList.vue",
+	"./AttachmentList.vue": "./resources/js/Pages/AttachmentList.vue",
 	"./Auth/ConfirmPassword": "./resources/js/Pages/Auth/ConfirmPassword.vue",
 	"./Auth/ConfirmPassword.vue": "./resources/js/Pages/Auth/ConfirmPassword.vue",
 	"./Auth/ForgotPassword": "./resources/js/Pages/Auth/ForgotPassword.vue",

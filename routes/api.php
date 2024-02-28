@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/image-gallery/get',[ImageController::class,'get_gallery']);
+Route::post('/banner',[\App\Http\Controllers\BannerController::class,'store']);
