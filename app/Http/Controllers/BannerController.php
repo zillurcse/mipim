@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class BannerController extends Controller
 {
@@ -14,7 +15,13 @@ class BannerController extends Controller
      */
     public function index()
     {
-        //
+        $data['items'] = Banner::all();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Banner has been updated',
+            'data'=> $data
+        ]);
     }
 
     /**
