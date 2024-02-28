@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Content;
 use Illuminate\Http\Request;
 
 class ContentController extends Controller
@@ -13,7 +14,13 @@ class ContentController extends Controller
      */
     public function index()
     {
-        //
+        $data['items'] = Content::all();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Banner has been updated',
+            'data'=> $data
+        ]);
     }
 
     /**
@@ -34,7 +41,23 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data['title'] = $request->title;
+        $data['type'] = $request->type;
+        $data['link'] = $request->link;
+        $banner = Content::create($data);
+        $this->fileUpload([
+            'model' => $banner,
+            'file' => $request['file'],
+            'multi_upload' => false,
+            'request_type' => 'base64',
+            'collection_name' => 'gallery',
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Content has been updated',
+            'data'=> $banner
+        ]);
     }
 
     /**
