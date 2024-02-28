@@ -41,7 +41,7 @@
                         v-if="selectedTab === 'banner'">
                         <div class="flex justify-between items-center">
                             <h1 class="text-xl text-gray-800  font-bold ">Add Banner</h1>
-                            <div class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-700 text-white "
+                            <div class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-700 text-white cursor-pointer "
                                 @click="showModal = 'banner'">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" class="w-6 h-6">
@@ -318,7 +318,7 @@ import Welcome from '@/Jetstream/Welcome'
 import vue2Dropzone from "vue2-dropzone";
 import "vue2-dropzone/dist/vue2Dropzone.min.css";
 import AttachmentList from './AttachmentList.vue'
-
+import axios from 'axios'
 export default {
     components: {
         AppLayout,
@@ -359,15 +359,23 @@ export default {
                 thumbnailHeight: 140,
                 uploadMultiple: true,
                 parallelUploads: 20
-            }
+            },
+            dataURL: null
 
         }
     },
 
     methods: {
         uploadFiles() {
-            // Access dropzone instance and perform upload
-            this.$refs.myDropzone.processQueue();
+            axios.post("/api/banner", this.dataURL)
+                .then(response => {
+                    // Handle success
+                    console.log('Response:', response.data);
+                })
+                .catch(error => {
+                    // Handle error
+                    console.error('Error:', error);
+                });
         },
         s3UploadError(errorMessage) {
 
@@ -419,6 +427,9 @@ export default {
         success(file, response) {
             console.log("File uploaded successfully");
             console.log("Response is ->", response);
+            file.forEach(element => {
+                this.dataURL = element.dataURL
+            });
         }
     },
     computed: {

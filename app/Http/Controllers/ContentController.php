@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Content;
 use Illuminate\Http\Request;
 
 class ContentController extends Controller
@@ -34,6 +35,31 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
+        // Validate the incoming request data
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'link' => 'required|url',
+            'type' => 'required|string|max:50',
+            'pdf' => 'required|file|mimes:pdf|max:2048', // Adjust validation rules as needed
+        ]);
+
+        // Store content data
+        $content = new Content();
+        $content->title = $request->title;
+        $content->link = $request->link;
+        $content->type = $request->type;
+        $content->save();
+
+        // Handle PDF file upload
+        $pdfPath = $request->file('pdf')->store('pdfs'); // Adjust storage path as needed
+        $content->pdf = $pdfPath;
+        $content->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Content has been created successfully',
+            'data' => $content,
+        ]);
         //
     }
 
