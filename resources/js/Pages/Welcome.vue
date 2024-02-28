@@ -42,7 +42,7 @@
             <header>
                 <nav class="navbar navbar-expand-xl bg-transparent text-brand container main-nav">
                     <Link class="navbar-brand text-brand" href="/">
-                        <img src="/assets/img/Logo 2.svg" alt="" />
+                        <img src="https://mipim-file.s3.amazonaws.com/public/logo/gMYl3ElSYwvgWPzF73kSMk3FQCIRvuoe3P79AkrN.svg" alt="" />
                     </Link>
                     <button class="navbar-toggler bg-transparent text-black px-3 py-2" type="button"
                         data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas"

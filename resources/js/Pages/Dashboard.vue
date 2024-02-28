@@ -55,7 +55,7 @@
                             <div class="row ">
                                 <div class="col-md-6" v-for="item in items" :key="item.id">
                                     <figure class="rounded-md overflow-hidden">
-                                        <img :src="item.images" alt="">
+                                        <img :src="item.banner_image" alt="">
                                     </figure>
                                 </div>
                             </div>
@@ -89,18 +89,19 @@
                                                     v-on:vdropzone-s3-upload-error="s3UploadError"
                                                     v-on:vdropzone-s3-upload-success="s3UploadSuccess">
                                                 </vue-dropzone> -->
-                                                <!-- <vue-dropzone ref="myVueDropzone" :include-styling="false"
+                                               <vue-dropzone ref="myVueDropzone" :include-styling="false"
                                                     :useCustomSlot="true" id="dropzone"
                                                     @vdropzone-upload-progress="uploadProgress" :options="dropzoneOptions"
                                                     @vdropzone-file-added="fileAdded"
                                                     @vdropzone-sending-multiple="sendingFiles"
                                                     @vdropzone-success-multiple="success" />
-                                                <input id="dropzone-file" type="file" class="hidden" /> -->
-                                                <vue-dropzone ref="myVueDropzone" :include-styling="false"
-                                                    :useCustomSlot="true" id="dropzone"
-                                                    @vdropzone-upload-progress="uploadProgress" :options="dropzoneOptions"
-                                                    @vdropzone-file-added="fileAdded" @vdropzone-success-multiple="success"
-                                                    @vdropzone-sending-multiple="sendingFiles">
+                                                <input id="dropzone-file" type="file" class="hidden" />
+
+<!--                                                <vue-dropzone ref="myVueDropzone" :include-styling="false"-->
+<!--                                                    :useCustomSlot="true" id="dropzone"-->
+<!--                                                    @vdropzone-upload-progress="uploadProgress" :options="dropzoneOptions"-->
+<!--                                                    @vdropzone-file-added="fileAdded" @vdropzone-success-multiple="success"-->
+<!--                                                    @vdropzone-sending-multiple="sendingFiles">-->
                                                     <!-- <div class="dropzone-container">
                                                         <div class="file-selector text-center">
                                                             <figure class="flex justify-center items-center">
@@ -194,7 +195,8 @@
                                                             <button type="button">Browse</button>
                                                         </div>
                                                     </div> -->
-                                                </vue-dropzone>
+<!--                                                </vue-dropzone>-->
+
                                             </label>
 
                                         </div>
@@ -344,7 +346,7 @@ export default {
             attachments: [],
             dropzoneOptions: {
                 // The Url Where Dropped or Selected files will be sent
-                url: `https://httpbin.org/post`,
+                url: `http://mipim.test/api/banner`,
                 // thumbnailWidth: 200,
                 // thumbnailHeight: 200,
                 // addRemoveLinks: true,
@@ -353,10 +355,10 @@ export default {
                 // maxFiles: 1,
                 // maxFilesize: 6, // MB,
                 // uploadMultiple: true,
-                // parallelUploads: 100,
+                // parallelUploads: 1,
                 // acceptedFiles: ".jpeg,.jpg,.png,.gif,.JPEG,.JPG,.PNG,.GIF",
                 // File Size allowed in MB
-                maxFilesize: 102400000,
+                maxFilesize: 5,
                 // Authentication Headers like Access_Token of your application
                 headers: {
                     Authorization: `Access Token`
@@ -466,13 +468,14 @@ export default {
         },
         // called on successful upload of a file
         success(file, response) {
-            // console.log("File uploaded successfully");
-            // console.log("Response is ->", response);
             console.log(file);
             //
 
             file.forEach(element => {
-                this.readFileAsBase64(element);
+                console.log('File Path:', element.File);
+                this.bannaerImage = element
+
+                // this.readFileAsBase64(element);
                 // console.log('bas64img', bas64img)
                 // this.handleFileUpload(element.dataURL)
                 // this.handleFileUpload()

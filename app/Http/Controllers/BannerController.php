@@ -43,17 +43,19 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
+        $path = $request->file('file')->storePublicly('public/banner');
         $data['title'] = 'Banner';
+        $data['banner_image'] = 'https://mipim-file.s3.amazonaws.com/'.$path;
         $banner = Banner::create($data);
 
 
-        $this->fileUpload([
-            'model' => $banner,
-            'file' => $request['banner_image'],
-            'multi_upload' => false,
-            'request_type' => 'base64',
-            'collection_name' => 'gallery',
-        ]);
+//        $this->fileUpload([
+//            'model' => $banner,
+//            'file' => $request['banner_image'],
+//            'multi_upload' => false,
+//            'request_type' => 'base64',
+//            'collection_name' => 'gallery',
+//        ]);
 
         return response()->json([
             'status' => 'success',
