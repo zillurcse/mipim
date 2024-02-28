@@ -41,9 +41,9 @@
         <main>
             <header>
                 <nav class="navbar navbar-expand-xl bg-transparent text-brand container main-nav">
-                    <a class="navbar-brand text-brand" href="./index.html">
+                    <Link class="navbar-brand text-brand" href="/">
                         <img src="/assets/img/Logo 2.svg" alt="" />
-                    </a>
+                    </Link>
                     <button class="navbar-toggler bg-transparent text-black px-3 py-2" type="button"
                         data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -291,6 +291,8 @@
 </template>
 
 <script>
+import { Link } from '@inertiajs/inertia-vue'
+
 export default {
     props: {
         canLogin: Boolean,
@@ -298,9 +300,12 @@ export default {
         laravelVersion: String,
         phpVersion: String,
     },
+    components:{
+        Link
+    },
     data() {
         return {
-            activeImageUrl: '../../../public/assets/img/e753507e60b3096fb02daf618c212858',
+            activeImageUrl: '/assets/img/e753507e60b3096fb02daf618c212858',
 
         };
     }

@@ -6098,6 +6098,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia-vue */ "./node_modules/@inertiajs/inertia-vue/dist/index.js");
 //
 //
 //
@@ -6390,6 +6391,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     canLogin: Boolean,
@@ -6397,9 +6399,12 @@ __webpack_require__.r(__webpack_exports__);
     laravelVersion: String,
     phpVersion: String
   },
+  components: {
+    Link: _inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_0__.Link
+  },
   data: function data() {
     return {
-      activeImageUrl: '../../../public/assets/img/e753507e60b3096fb02daf618c212858'
+      activeImageUrl: '/assets/img/e753507e60b3096fb02daf618c212858'
     };
   }
 });
@@ -42707,7 +42712,11 @@ var render = function () {
               "navbar navbar-expand-xl bg-transparent text-brand container main-nav",
           },
           [
-            _vm._m(0),
+            _c(
+              "Link",
+              { staticClass: "navbar-brand text-brand", attrs: { href: "/" } },
+              [_c("img", { attrs: { src: "/assets/img/Logo 2.svg", alt: "" } })]
+            ),
             _vm._v(" "),
             _c(
               "button",
@@ -42750,14 +42759,15 @@ var render = function () {
               ]
             ),
             _vm._v(" "),
-            _vm._m(1),
-          ]
+            _vm._m(0),
+          ],
+          1
         ),
         _vm._v(" "),
-        _vm._m(2),
+        _vm._m(1),
       ]),
       _vm._v(" "),
-      _vm._m(3),
+      _vm._m(2),
       _vm._v(" "),
       _c("section", { staticClass: "data-box-section" }, [
         _c("div", { staticClass: "container" }, [
@@ -42822,7 +42832,7 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(4),
+                _vm._m(3),
               ]),
             ]),
             _vm._v(" "),
@@ -42865,7 +42875,7 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(5),
+                _vm._m(4),
               ]),
             ]),
             _vm._v(" "),
@@ -42901,7 +42911,7 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(6),
+                _vm._m(5),
               ]),
             ]),
             _vm._v(" "),
@@ -42965,7 +42975,7 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(7),
+                _vm._m(6),
               ]),
             ]),
             _vm._v(" "),
@@ -43008,7 +43018,7 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(8),
+                _vm._m(7),
               ]),
             ]),
             _vm._v(" "),
@@ -43044,31 +43054,18 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(9),
+                _vm._m(8),
               ]),
             ]),
           ]),
         ]),
       ]),
       _vm._v(" "),
-      _vm._m(10),
+      _vm._m(9),
     ]),
   ])
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "navbar-brand text-brand",
-        attrs: { href: "./index.html" },
-      },
-      [_c("img", { attrs: { src: "/assets/img/Logo 2.svg", alt: "" } })]
-    )
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
