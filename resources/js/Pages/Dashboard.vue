@@ -93,8 +93,21 @@
                                     Submit button -->
                                     <div class="">
                                         <button type="button" @click="uploadFiles"
-                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                            class="text-white  flex items-center justify-center h-12 gap-4 bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5  text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                             Submit
+
+
+                                            <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" wodth="30"
+                                                v-if="isLoading" height="30" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0"
+                                                xml:space="preserve">
+                                                <path fill="#fff"
+                                                    d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                                                    <animateTransform attributeName="transform" attributeType="XML"
+                                                        type="rotate" dur="1s" from="0 50 50" to="360 50 50"
+                                                        repeatCount="indefinite" />
+                                                </path>
+                                            </svg>
                                         </button>
                                     </div>
                                 </div>
@@ -200,8 +213,19 @@
 
                                     <div class="">
                                         <button type="button" @click="uploadContentFiles"
-                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                            class="text-white flex items-center justify-center gap-4 bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 h-12  text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                             Submit
+                                            <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" wodth="30"
+                                                v-if="isLoading" height="30" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0"
+                                                xml:space="preserve">
+                                                <path fill="#fff"
+                                                    d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                                                    <animateTransform attributeName="transform" attributeType="XML"
+                                                        type="rotate" dur="1s" from="0 50 50" to="360 50 50"
+                                                        repeatCount="indefinite" />
+                                                </path>
+                                            </svg>
                                         </button>
                                     </div>
                                 </div>
@@ -240,6 +264,7 @@ export default {
             showModal: '',
             bannerImage: null,
 
+            isLoading: false,
 
             title: '', // Store the title input value
             link: '', // Store the link input value
@@ -355,6 +380,7 @@ export default {
         async uploadContentFiles() {
             try {
                 // Create FormData and append all data
+                this.isLoading = true;
                 let formData = new FormData();
                 formData.append('title', this.title);
                 formData.append('link', this.link);
@@ -373,26 +399,42 @@ export default {
                 this.link = '';
                 this.type = '';
                 this.contentFile = null;
+                this.isLoading = false;
+
             } catch (error) {
                 // Handle error
+                this.isLoading = true;
+
                 console.error('Error:', error);
             }
         },
         async uploadFiles() {
-            let formdata = new FormData();
-            formdata.append('file', this.bannerImage)
-            await axios.post('/api/banner', formdata)
-                .then(response => {
-                    // Handle success
-                    console.log('Response:', response.data);
-                    this.getBannerData()
-                    this.showModal = false;
 
-                })
-                .catch(error => {
-                    // Handle error
-                    console.error('Error:', error);
-                });
+            try {
+                // Create FormData and append all data
+                this.isLoading = true;
+                let formdata = new FormData();
+                formdata.append('file', this.bannerImage)
+
+                // Make POST request to upload the file and data
+                const response = await axios.post('/api/banner', formdata)
+
+                // Handle success
+                console.log('Response:', response.data);
+                this.getBannerData()
+                this.showModal = false;
+                this.isLoading = false;
+                this.bannerImage = null
+            } catch (error) {
+                // Handle error
+                this.isLoading = true;
+
+                console.error('Error:', error);
+            }
+
+
+
+
         },
 
         s3UploadError(errorMessage) {
