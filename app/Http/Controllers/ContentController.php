@@ -95,8 +95,14 @@ class ContentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Content $content)
     {
-        //
+        try {
+            $content->delete();
+
+            return response()->json(['message' => 'Content deleted successfully'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Failed to delete banner'], 500);
+        }
     }
 }
