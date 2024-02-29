@@ -43,7 +43,7 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all);
+//        dd($request->all());
 
         $path = $request->file('file')->storePublicly('public/banner');
         $data['title'] = 'Banner';
