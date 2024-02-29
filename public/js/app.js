@@ -5655,6 +5655,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5675,6 +5699,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       selectedTab: 'banner',
       showModal: '',
       bannerImage: null,
+      isLoading: false,
       title: '',
       // Store the title input value
       link: '',
@@ -5828,16 +5853,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context4.prev = 0;
                 // Create FormData and append all data
+                _this4.isLoading = true;
                 formData = new FormData();
                 formData.append('title', _this4.title);
                 formData.append('link', _this4.link);
                 formData.append('type', _this4.type);
                 formData.append('file', _this4.contentFile); // Make POST request to upload the file and data
 
-                _context4.next = 8;
+                _context4.next = 9;
                 return axios__WEBPACK_IMPORTED_MODULE_6__["default"].post('/api/content', formData);
 
-              case 8:
+              case 9:
                 response = _context4.sent;
                 // Handle success
                 console.log('Response:', response.data);
@@ -5852,53 +5878,69 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this4.link = '';
                 _this4.type = '';
                 _this4.contentFile = null;
-                _context4.next = 21;
+                _this4.isLoading = false;
+                _context4.next = 24;
                 break;
 
-              case 18:
-                _context4.prev = 18;
+              case 20:
+                _context4.prev = 20;
                 _context4.t0 = _context4["catch"](0);
                 // Handle error
+                _this4.isLoading = true;
                 console.error('Error:', _context4.t0);
 
-              case 21:
+              case 24:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, null, [[0, 18]]);
+        }, _callee4, null, [[0, 20]]);
       }))();
     },
     uploadFiles: function uploadFiles() {
       var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
-        var formdata;
+        var formdata, response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
+                _context5.prev = 0;
+                // Create FormData and append all data
+                _this5.isLoading = true;
                 formdata = new FormData();
-                formdata.append('file', _this5.bannerImage);
-                _context5.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_6__["default"].post('/api/banner', formdata).then(function (response) {
-                  // Handle success
-                  console.log('Response:', response.data);
+                formdata.append('file', _this5.bannerImage); // Make POST request to upload the file and data
 
-                  _this5.getBannerData();
+                _context5.next = 6;
+                return axios__WEBPACK_IMPORTED_MODULE_6__["default"].post('/api/banner', formdata);
 
-                  _this5.showModal = false;
-                })["catch"](function (error) {
-                  // Handle error
-                  console.error('Error:', error);
-                });
+              case 6:
+                response = _context5.sent;
+                // Handle success
+                console.log('Response:', response.data);
 
-              case 4:
+                _this5.getBannerData();
+
+                _this5.showModal = false;
+                _this5.isLoading = false;
+                _this5.bannerImage = null;
+                _context5.next = 18;
+                break;
+
+              case 14:
+                _context5.prev = 14;
+                _context5.t0 = _context5["catch"](0);
+                // Handle error
+                _this5.isLoading = true;
+                console.error('Error:', _context5.t0);
+
+              case 18:
               case "end":
                 return _context5.stop();
             }
           }
-        }, _callee5);
+        }, _callee5, null, [[0, 14]]);
       }))();
     },
     s3UploadError: function s3UploadError(errorMessage) {
@@ -40405,14 +40447,62 @@ var render = function () {
                                   "button",
                                   {
                                     staticClass:
-                                      "text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+                                      "text-white  flex items-center justify-center h-12 gap-4 bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5  text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
                                     attrs: { type: "button" },
                                     on: { click: _vm.uploadFiles },
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                        Submit\n                                    "
+                                      "\n                                        Submit\n\n\n                                        "
                                     ),
+                                    _vm.isLoading
+                                      ? _c(
+                                          "svg",
+                                          {
+                                            attrs: {
+                                              version: "1.1",
+                                              id: "L9",
+                                              xmlns:
+                                                "http://www.w3.org/2000/svg",
+                                              wodth: "30",
+                                              height: "30",
+                                              "xmlns:xlink":
+                                                "http://www.w3.org/1999/xlink",
+                                              x: "0px",
+                                              y: "0px",
+                                              viewBox: "0 0 100 100",
+                                              "enable-background":
+                                                "new 0 0 0 0",
+                                              "xml:space": "preserve",
+                                            },
+                                          },
+                                          [
+                                            _c(
+                                              "path",
+                                              {
+                                                attrs: {
+                                                  fill: "#fff",
+                                                  d: "M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50",
+                                                },
+                                              },
+                                              [
+                                                _c("animateTransform", {
+                                                  attrs: {
+                                                    attributeName: "transform",
+                                                    attributeType: "XML",
+                                                    type: "rotate",
+                                                    dur: "1s",
+                                                    from: "0 50 50",
+                                                    to: "360 50 50",
+                                                    repeatCount: "indefinite",
+                                                  },
+                                                }),
+                                              ],
+                                              1
+                                            ),
+                                          ]
+                                        )
+                                      : _vm._e(),
                                   ]
                                 ),
                               ]),
@@ -40846,14 +40936,62 @@ var render = function () {
                                   "button",
                                   {
                                     staticClass:
-                                      "text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+                                      "text-white flex items-center justify-center gap-4 bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 h-12  text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
                                     attrs: { type: "button" },
                                     on: { click: _vm.uploadContentFiles },
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                        Submit\n                                    "
+                                      "\n                                        Submit\n                                        "
                                     ),
+                                    _vm.isLoading
+                                      ? _c(
+                                          "svg",
+                                          {
+                                            attrs: {
+                                              version: "1.1",
+                                              id: "L9",
+                                              xmlns:
+                                                "http://www.w3.org/2000/svg",
+                                              wodth: "30",
+                                              height: "30",
+                                              "xmlns:xlink":
+                                                "http://www.w3.org/1999/xlink",
+                                              x: "0px",
+                                              y: "0px",
+                                              viewBox: "0 0 100 100",
+                                              "enable-background":
+                                                "new 0 0 0 0",
+                                              "xml:space": "preserve",
+                                            },
+                                          },
+                                          [
+                                            _c(
+                                              "path",
+                                              {
+                                                attrs: {
+                                                  fill: "#fff",
+                                                  d: "M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50",
+                                                },
+                                              },
+                                              [
+                                                _c("animateTransform", {
+                                                  attrs: {
+                                                    attributeName: "transform",
+                                                    attributeType: "XML",
+                                                    type: "rotate",
+                                                    dur: "1s",
+                                                    from: "0 50 50",
+                                                    to: "360 50 50",
+                                                    repeatCount: "indefinite",
+                                                  },
+                                                }),
+                                              ],
+                                              1
+                                            ),
+                                          ]
+                                        )
+                                      : _vm._e(),
                                   ]
                                 ),
                               ]),
