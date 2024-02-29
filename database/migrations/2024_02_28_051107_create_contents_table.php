@@ -18,6 +18,7 @@ class CreateContentsTable extends Migration
             $table->string('title');
             $table->string('type');
             $table->string('link')->nullable();
+            $table->string('file')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
