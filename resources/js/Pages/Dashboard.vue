@@ -54,8 +54,23 @@
 
                             <div class="row ">
                                 <div class="col-md-6 mb-3" v-for="item in items" :key="item.id">
-                                    <figure class="rounded-md overflow-hidden h-60">
+                                    <figure class="rounded-md overflow-hidden h-60 relative">
                                         <img :src="item.banner_image" alt="" class="object-cover">
+                                        <div class="absolute top-2 right-2 text-gray-400 cursor-pointer"
+                                            @click="clickTool(item.id)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                                            </svg>
+                                            <div class="w-40 p-3 absolute  right-0 rounded-md bg-white text-gray-700 "
+                                                v-if="isOpenTool === item.id">
+                                                <button class="cursor-pointer hover:text-red-700"
+                                                    @click="deleteBannerItem(item.id)">
+                                                    Delete Banner
+                                                </button>
+                                            </div>
+                                        </div>
                                     </figure>
                                 </div>
                             </div>
@@ -136,11 +151,27 @@
                                 <div class="col-md-6 mb-3" v-for="item in contentItems" :key="item.id">
                                     <div class="p-4 border rounded-md bg-gray-100">
 
-                                        <figure class="rounded-md overflow-hidden h-60">
+                                        <figure class="rounded-md overflow-hidden h-60 relative">
                                             <div class='embed-responsive h-full' v-if="item.type === 'PDF'">
                                                 <embed :src="item.file" type="application/pdf" width="100%" height="100%" />
                                             </div>
                                             <img :src="item.file" alt="" class="object-cover" v-else>
+
+                                            <div class="absolute top-2 right-2 text-gray-400 cursor-pointer"
+                                                @click="clickTool(item.id)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                                                </svg>
+                                                <div class="w-40 p-3 absolute  right-0 rounded-md bg-white text-gray-700 "
+                                                    v-if="isOpenTool === item.id">
+                                                    <button class="cursor-pointer hover:text-red-700"
+                                                        @click="deleteContentItem(item.id)">
+                                                        Delete Content
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </figure>
                                         <h2 class="text-xl text-gray-800 font-semibold">{{ item.title }}</h2>
                                         <h3 class="text-lg text-gray-700 font-medium">{{ item.type }}</h3>
@@ -269,6 +300,7 @@ export default {
             bannerImage: null,
 
             isLoading: false,
+            isOpenTool: null,
 
             title: '', // Store the title input value
             link: '', // Store the link input value
@@ -440,102 +472,39 @@ export default {
 
 
         },
-
-        s3UploadError(errorMessage) {
-            console.log(errorMessage, "errorMessage");
-
+        deleteContentItem(id) {
+            // Send a DELETE request to the backend with the item's ID
+            axios.delete(`/api/content/${id}`)
+                .then(response => {
+                    console.log(response.data.message);
+                    // Assuming you want to remove the item from the frontend after successful deletion
+                    // You can trigger a method to refresh the list of items or remove the deleted item from the UI
+                })
+                .catch(error => {
+                    console.error('Error deleting resource:', error);
+                    // Handle error if needed
+                });
         },
-        s3UploadSuccess(s3ObjectLocation) {
-            console.log(s3ObjectLocation, "s3ObjectLocation")
-        },
-        // openModal() {
-        //     console.log('tt');
-        //     this.showModal = true;
-        // },
-        closeModal() {
-            this.showModal = false;
-        },
-        fileAdded(file) {
-            // console.log("File Dropped => ", file);
-            // Construct your file object to render in the UI
-            let attachment = {};
-            attachment._id = file.upload.uuid;
-            attachment.title = file.name;
-            attachment.type = "file";
-            attachment.extension = "." + file.type.split("/")[1];
-            attachment.user = JSON.parse(localStorage.getItem("user"));
-            attachment.content = "File Upload by Select or Drop";
-            attachment.thumb = file.dataURL;
-            attachment.thumb_list = file.dataURL;
-            attachment.isLoading = true;
-            attachment.progress = null;
-            attachment.size = file.size;
-            this.tempAttachments = [...this.tempAttachments, attachment];
+        deleteBannerItem(id) {
+            // Send a DELETE request to the backend with the item's ID
+            axios.delete(`/api/banner/${id}`)
+                .then(response => {
+                    console.log(response.data.message);
+                    // Assuming you want to remove the item from the frontend after successful deletion
+                    // You can trigger a method to refresh the list of items or remove the deleted item from the UI
+                })
+                .catch(error => {
+                    console.error('Error deleting resource:', error);
+                    // Handle error if needed
+                });
         },
 
-        // a middle layer function where you can change the XHR request properties
-        sendingFiles(files, xhr, formData) {
-            // console.log(
-            //     "if you want to change the upload time or add data to the formData you can do it here."
-            // );
-            // console.log("Files sending", files);
-        },
-        // function where we get the upload progress
-        uploadProgress(file, progress, bytesSent) {
-            // console.log("File Upload Progress", progress);
-            this.tempAttachments.map(attachment => {
-                if (attachment.title === file.name) {
-                    attachment.progress = `${Math.floor(progress)}`;
-                }
-            });
-        },
-        // called on successful upload of a file
-        success(file, response) {
-            this.showModal = false;
-            console.log(file);
-            //
-
-            file.forEach(element => {
-                console.log('File Path:', element.File);
-                this.bannaerImage = element
-
-                // this.readFileAsBase64(element);
-                // console.log('bas64img', bas64img)
-                // this.handleFileUpload(element.dataURL)
-                // this.handleFileUpload()
-            });
-
-
-        },
-
-        readFileAsBase64(file) {
-            const reader = new FileReader();
-
-            reader.onload = (event) => {
-                // console.log('event', event)
-                if (event.target && event.target.result) {
-                    this.bannaerImage = event.target.result
-                    // console.log('base64Data', this.bannaerImage)
-                    // console.log('Base64 data:', base64Data);
-                    // console.log("file")
-                    // console.log(file.upload.uuid)
-                    // // this.$emit('updateInput',this.attachments);
-                    // if (this.maxFiles == 1) {
-                    //     this.attachments = [{id: file.upload.uuid, file: base64Data}]
-                    //
-                    //     this.$emit('updateInput', base64Data);
-                    // } else {
-                    //     this.attachments.push({id: file.upload.uuid, file: base64Data})
-                    //
-                    //     this.$emit('updateInput', this.attachments.map(obj => obj.file));
-                    // }          // Now you can use the base64Data as needed
-                    // For example, you might want to store it in your component's data or perform other actions.
-                } else {
-                    console.error('Failed to read file as base64.');
-                }
-            };
-
-            reader.readAsDataURL(file);
+        clickTool(id) {
+            if (this.isOpenTool == id) {
+                this.isOpenTool = -1
+            } else {
+                this.isOpenTool = id;
+            }
         },
 
 
