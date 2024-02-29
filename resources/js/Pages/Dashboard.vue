@@ -53,9 +53,9 @@
 
 
                             <div class="row ">
-                                <div class="col-md-6" v-for="item in items" :key="item.id">
-                                    <figure class="rounded-md overflow-hidden">
-                                        <img :src="item.banner_image" alt="">
+                                <div class="col-md-6 mb-3" v-for="item in items" :key="item.id">
+                                    <figure class="rounded-md overflow-hidden h-60">
+                                        <img :src="item.banner_image" alt="" class="object-cover">
                                     </figure>
                                 </div>
                             </div>
@@ -120,7 +120,7 @@
 
 
                             <div class="row ">
-                                <div class="col-md-6" v-for="item in contentItems" :key="item.id">
+                                <div class="col-md-6 mb-3" v-for="item in contentItems" :key="item.id">
                                     <div class="p-4 border rounded-md bg-gray-100">
                                         <figure class="rounded-md overflow-hidden h-60">
                                             <img :src="item.file" alt="" class="object-cover">
@@ -368,6 +368,11 @@ export default {
                 console.log('Response:', response.data);
                 this.getContentData(); // Update content data
                 this.showModal = false; // Close the modal after successful upload
+                // Reset all data
+                this.title = '';
+                this.link = '';
+                this.type = '';
+                this.contentFile = null;
             } catch (error) {
                 // Handle error
                 console.error('Error:', error);
