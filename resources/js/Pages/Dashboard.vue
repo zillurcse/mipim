@@ -95,7 +95,7 @@
                                                     @vdropzone-file-added="fileAdded"
                                                     @vdropzone-sending-multiple="sendingFiles"
                                                     @vdropzone-success-multiple="success" />
-                                                <input id="dropzone-file" type="file" class="hidden" />
+<!--                                                <input id="dropzone-file" type="file" class="hidden" />-->
 
 <!--                                                <vue-dropzone ref="myVueDropzone" :include-styling="false"-->
 <!--                                                    :useCustomSlot="true" id="dropzone"-->
@@ -346,12 +346,13 @@ export default {
             attachments: [],
             dropzoneOptions: {
                 // The Url Where Dropped or Selected files will be sent
-                url: `http://mipim.test/api/banner`,
-                maxFilesize: 5,
-                thumbnailWidth: 250,
-                thumbnailHeight: 140,
+                url: `/api/banner`,
+                maxFilesize: 10,
                 uploadMultiple: false,
-                parallelUploads: 20
+                parallelUploads: 20,
+                headers: {
+                    "X-CSRF-TOKEN": document.head.querySelector("[name=csrf-token]").content
+                }
             },
             dataURL: null
 

@@ -78,11 +78,9 @@
                 </nav>
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                        </div>
-                        <div class="carousel-item">
-                        </div>
-                        <div class="carousel-item">
+
+                        <div v-for="item in items" :key="item.id" class="carousel-item">
+                            <img :src=" item.banner_image " alt="">
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
@@ -311,6 +309,7 @@
 
 <script>
 import { Link } from '@inertiajs/inertia-vue'
+import axios from "axios";
 
 export default {
     props: {
@@ -324,9 +323,29 @@ export default {
     },
     data() {
         return {
-            activeImageUrl: '/assets/img/e753507e60b3096fb02daf618c212858',
-
+            items: [],
         };
-    }
+    },
+
+    async mounted() {
+        await axios.get('/api/banner')
+            .then(response => {
+                if (response.status == 200) {
+                    this.items = response.data.data.items
+                }
+
+            })
+            .catch(error => {
+                if (error.response.status == 422) {
+                    this.errors = error.response.data.errors;
+                } else {
+                    // this.toastMessage('error', error, 'check', '', 'times')
+                    console.log(error);
+                }
+            })
+            .finally(() => {
+
+            })
+    },
 }
 </script>

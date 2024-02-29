@@ -4888,12 +4888,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       attachments: [],
       dropzoneOptions: {
         // The Url Where Dropped or Selected files will be sent
-        url: "http://mipim.test/api/banner",
-        maxFilesize: 5,
-        thumbnailWidth: 250,
-        thumbnailHeight: 140,
+        url: "/api/banner",
+        maxFilesize: 10,
         uploadMultiple: false,
-        parallelUploads: 20
+        parallelUploads: 20,
+        headers: {
+          "X-CSRF-TOKEN": document.head.querySelector("[name=csrf-token]").content
+        }
       },
       dataURL: null
     };
@@ -6137,9 +6138,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia-vue */ "./node_modules/@inertiajs/inertia-vue/dist/index.js");
-//
-//
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue */ "./node_modules/@inertiajs/inertia-vue/dist/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -6450,6 +6458,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     canLogin: Boolean,
@@ -6458,12 +6467,42 @@ __webpack_require__.r(__webpack_exports__);
     phpVersion: String
   },
   components: {
-    Link: _inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_0__.Link
+    Link: _inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_1__.Link
   },
   data: function data() {
     return {
-      activeImageUrl: '/assets/img/e753507e60b3096fb02daf618c212858'
+      items: []
     };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/banner').then(function (response) {
+                if (response.status == 200) {
+                  _this.items = response.data.data.items;
+                }
+              })["catch"](function (error) {
+                if (error.response.status == 422) {
+                  _this.errors = error.response.data.errors;
+                } else {
+                  // this.toastMessage('error', error, 'check', '', 'times')
+                  console.log(error);
+                }
+              })["finally"](function () {});
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   }
 });
 
@@ -40237,14 +40276,6 @@ var render = function () {
                                                 _vm.success,
                                             },
                                           }),
-                                          _vm._v(" "),
-                                          _c("input", {
-                                            staticClass: "hidden",
-                                            attrs: {
-                                              id: "dropzone-file",
-                                              type: "file",
-                                            },
-                                          }),
                                         ],
                                         1
                                       ),
@@ -42471,7 +42502,18 @@ var render = function () {
             },
           },
           [
-            _vm._m(3),
+            _c(
+              "div",
+              { staticClass: "carousel-inner" },
+              _vm._l(_vm.items, function (item) {
+                return _c(
+                  "div",
+                  { key: item.id, staticClass: "carousel-item" },
+                  [_c("img", { attrs: { src: item.banner_image, alt: "" } })]
+                )
+              }),
+              0
+            ),
             _vm._v(" "),
             _c(
               "button",
@@ -42607,7 +42649,7 @@ var render = function () {
         ),
       ]),
       _vm._v(" "),
-      _vm._m(4),
+      _vm._m(3),
       _vm._v(" "),
       _c("section", { staticClass: "data-box-section" }, [
         _c("div", { staticClass: "container" }, [
@@ -42672,7 +42714,7 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(5),
+                _vm._m(4),
               ]),
             ]),
             _vm._v(" "),
@@ -42715,7 +42757,7 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(6),
+                _vm._m(5),
               ]),
             ]),
             _vm._v(" "),
@@ -42751,7 +42793,7 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(7),
+                _vm._m(6),
               ]),
             ]),
             _vm._v(" "),
@@ -42815,7 +42857,7 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(8),
+                _vm._m(7),
               ]),
             ]),
             _vm._v(" "),
@@ -42858,7 +42900,7 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(9),
+                _vm._m(8),
               ]),
             ]),
             _vm._v(" "),
@@ -42894,14 +42936,14 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _vm._m(10),
+                _vm._m(9),
               ]),
             ]),
           ]),
         ]),
       ]),
       _vm._v(" "),
-      _vm._m(11),
+      _vm._m(10),
     ]),
   ])
 }
@@ -42949,18 +42991,6 @@ var staticRenderFns = [
         },
         [_vm._v("Contact us")]
       ),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "carousel-inner" }, [
-      _c("div", { staticClass: "carousel-item active" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "carousel-item" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "carousel-item" }),
     ])
   },
   function () {
