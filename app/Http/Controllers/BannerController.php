@@ -110,7 +110,7 @@ class BannerController extends Controller
     {
         try {
             $banner = Banner::find($id);
-           
+
             $banner->delete();
 
             return response()->json(['message' => 'Banner deleted successfully'], 200);
