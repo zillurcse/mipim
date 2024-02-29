@@ -25,4 +25,4 @@ Route::post('/banner',[\App\Http\Controllers\BannerController::class,'store']);
 Route::delete('/banner/{id}',[\App\Http\Controllers\BannerController::class,'destroy']);
 Route::get('/content',[\App\Http\Controllers\ContentController::class,'index']);
 Route::post('/content',[\App\Http\Controllers\ContentController::class,'store']);
-Route::delete('/content/{id}',[\App\Http\Controllers\BannerController::class,'destroy']);
+Route::delete('/content/{id}',[\App\Http\Controllers\ContentController::class,'destroy']);
