@@ -42,7 +42,8 @@
             <header>
                 <nav class="navbar navbar-expand-xl bg-transparent text-brand container main-nav">
                     <Link class="navbar-brand text-brand" href="/">
-                        <img src="https://mipim-file.s3.amazonaws.com/public/logo/gMYl3ElSYwvgWPzF73kSMk3FQCIRvuoe3P79AkrN.svg" alt="" />
+                    <img src="https://mipim-file.s3.amazonaws.com/public/logo/gMYl3ElSYwvgWPzF73kSMk3FQCIRvuoe3P79AkrN.svg"
+                        alt="" />
                     </Link>
                     <button class="navbar-toggler bg-transparent text-black px-3 py-2" type="button"
                         data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas"
@@ -78,9 +79,13 @@
                 </nav>
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
-
-                        <div v-for="item in items" :key="item.id" class="carousel-item">
-                            <img :src=" item.banner_image " alt="">
+                        <!-- <div v-for="(item, index) in items" :key="index"
+                            :class="{ 'carousel-item': true, 'active': index === 0 }">
+                            <img :src="item.banner_image" class="d-block w-100" :alt="'Image ' + (index + 1)">
+                        </div> -->
+                        <div v-for="(item, index) in items" :key="index"
+                            :class="{ 'carousel-item': true, 'active': index === 0 }"
+                            :style="{ 'background-image': 'url(' + item.banner_image + ')' }">
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
@@ -123,6 +128,7 @@
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
+
             </header>
             <section class="text-section">
                 <div class="container">
@@ -318,7 +324,7 @@ export default {
         laravelVersion: String,
         phpVersion: String,
     },
-    components:{
+    components: {
         Link
     },
     data() {
@@ -328,24 +334,32 @@ export default {
     },
 
     async mounted() {
-        await axios.get('/api/banner')
-            .then(response => {
-                if (response.status == 200) {
-                    this.items = response.data.data.items
-                }
-
-            })
-            .catch(error => {
-                if (error.response.status == 422) {
-                    this.errors = error.response.data.errors;
-                } else {
-                    // this.toastMessage('error', error, 'check', '', 'times')
-                    console.log(error);
-                }
-            })
-            .finally(() => {
-
-            })
+        this.getBannerData()
     },
+    methods: {
+        async getBannerData() {
+            await axios.get('/api/banner')
+                .then(response => {
+                    console.log();
+                    if (response.status == 200) {
+                        this.items = response.data.data.items
+                        console.log(this.items);
+                        console.log()
+                    }
+
+                })
+                .catch(error => {
+                    if (error.response.status == 422) {
+                        this.errors = error.response.data.errors;
+                    } else {
+                        // this.toastMessage('error', error, 'check', '', 'times')
+                        console.log(error);
+                    }
+                })
+                .finally(() => {
+
+                })
+        },
+    }
 }
 </script>

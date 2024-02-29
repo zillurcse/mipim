@@ -4953,22 +4953,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
                 _this4.showModal = false; // Close the modal after successful upload
+                // Reset all data
 
-                _context4.next = 17;
+                _this4.title = '';
+                _this4.link = '';
+                _this4.type = '';
+                _this4.contentFile = null;
+                _context4.next = 21;
                 break;
 
-              case 14:
-                _context4.prev = 14;
+              case 18:
+                _context4.prev = 18;
                 _context4.t0 = _context4["catch"](0);
                 // Handle error
                 console.error('Error:', _context4.t0);
 
-              case 17:
+              case 21:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, null, [[0, 14]]);
+        }, _callee4, null, [[0, 18]]);
       }))();
     },
     uploadFiles: function uploadFiles() {
@@ -6484,6 +6489,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -6509,27 +6520,51 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/banner').then(function (response) {
-                if (response.status == 200) {
-                  _this.items = response.data.data.items;
-                }
-              })["catch"](function (error) {
-                if (error.response.status == 422) {
-                  _this.errors = error.response.data.errors;
-                } else {
-                  // this.toastMessage('error', error, 'check', '', 'times')
-                  console.log(error);
-                }
-              })["finally"](function () {});
+              _this.getBannerData();
 
-            case 2:
+            case 1:
             case "end":
               return _context.stop();
           }
         }
       }, _callee);
     }))();
+  },
+  methods: {
+    getBannerData: function getBannerData() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/banner').then(function (response) {
+                  console.log();
+
+                  if (response.status == 200) {
+                    _this2.items = response.data.data.items;
+                    console.log(_this2.items);
+                    console.log();
+                  }
+                })["catch"](function (error) {
+                  if (error.response.status == 422) {
+                    _this2.errors = error.response.data.errors;
+                  } else {
+                    // this.toastMessage('error', error, 'check', '', 'times')
+                    console.log(error);
+                  }
+                })["finally"](function () {});
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    }
   }
 });
 
@@ -40226,13 +40261,17 @@ var render = function () {
                         _vm._l(_vm.items, function (item) {
                           return _c(
                             "div",
-                            { key: item.id, staticClass: "col-md-6" },
+                            { key: item.id, staticClass: "col-md-6 mb-3" },
                             [
                               _c(
                                 "figure",
-                                { staticClass: "rounded-md overflow-hidden" },
+                                {
+                                  staticClass:
+                                    "rounded-md overflow-hidden h-60",
+                                },
                                 [
                                   _c("img", {
+                                    staticClass: "object-cover",
                                     attrs: { src: item.banner_image, alt: "" },
                                   }),
                                 ]
@@ -40447,7 +40486,7 @@ var render = function () {
                         _vm._l(_vm.contentItems, function (item) {
                           return _c(
                             "div",
-                            { key: item.id, staticClass: "col-md-6" },
+                            { key: item.id, staticClass: "col-md-6 mb-3" },
                             [
                               _c(
                                 "div",
@@ -42834,12 +42873,14 @@ var render = function () {
             _c(
               "div",
               { staticClass: "carousel-inner" },
-              _vm._l(_vm.items, function (item) {
-                return _c(
-                  "div",
-                  { key: item.id, staticClass: "carousel-item" },
-                  [_c("img", { attrs: { src: item.banner_image, alt: "" } })]
-                )
+              _vm._l(_vm.items, function (item, index) {
+                return _c("div", {
+                  key: index,
+                  class: { "carousel-item": true, active: index === 0 },
+                  style: {
+                    "background-image": "url(" + item.banner_image + ")",
+                  },
+                })
               }),
               0
             ),
