@@ -4746,118 +4746,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -4876,7 +4764,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       items: [],
       selectedTab: 'banner',
       showModal: '',
-      bannaerImage: null,
+      bannerImage: null,
+      // Store the selected file
+      fileURL: null,
+      // Store the URL of the selected file
       awss3: {
         signingURL: 'http://aws-direct-s3.dev/',
         headers: {},
@@ -4913,6 +4804,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (response.status == 200) {
                   _this.items = response.data.data.items;
+                  console.log(_this.items);
                   console.log();
                 }
               })["catch"](function (error) {
@@ -4933,6 +4825,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: {
+    // handleFileUpload() {
+    //     // Trigger the file input when submit button is clicked
+    //     document.getElementById('dropzone-file').click();
+    // },
+    handleFileChange: function handleFileChange(event) {
+      // Update bannerImage with the selected file
+      this.bannerImage = event.target.files[0];
+      console.log(this.bannerImage); // // Read the selected file as a data URL
+      // const reader = new FileReader();
+      // reader.onload = () => {
+      //     this.fileURL = reader.result; // Store the data URL
+      // };
+      // reader.readAsDataURL(this.bannerImage);
+      // console.log(this.fileURL);
+    },
     uploadFiles: function uploadFiles() {
       var _this2 = this;
 
@@ -4943,7 +4850,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 formdata = new FormData();
-                formdata.append('banner_image', _this2.bannaerImage);
+                formdata.append('file', _this2.bannerImage);
                 _context2.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_6__["default"].post('/api/banner', formdata).then(function (response) {
                   // Handle success
@@ -5050,21 +4957,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       };
 
       reader.readAsDataURL(file);
-    },
-    handleFileUpload: function handleFileUpload() {
-      var _this5 = this;
-
-      console.log(this.bannaerImage); // Convert the file to base64
-
-      var reader = new FileReader();
-      reader.readAsDataURL(this.bannaerImage);
-
-      reader.onload = function () {
-        var base64String = reader.result;
-        _this5.dataURL = base64String; // Do whatever you want with the base64 string
-
-        console.log(dataURL, 'dataURL');
-      };
     }
   },
   computed: {
@@ -40065,7 +39957,7 @@ var render = function () {
                   staticClass:
                     "font-semibold text-xl text-gray-800 leading-tight",
                 },
-                [_vm._v("\n                MIPIM - Dashboard\n            ")]
+                [_vm._v("\n            MIPIM - Dashboard\n        ")]
               ),
             ]
           },
@@ -40103,7 +39995,7 @@ var render = function () {
                         },
                         [
                           _vm._v(
-                            "\n                                        Banner\n                                    "
+                            "\n                                    Banner\n                                "
                           ),
                         ]
                       ),
@@ -40125,7 +40017,7 @@ var render = function () {
                         },
                         [
                           _vm._v(
-                            "\n                                        PDF\n                                    "
+                            "\n                                    PDF\n                                "
                           ),
                         ]
                       ),
@@ -40223,75 +40115,134 @@ var render = function () {
                               on: { click: _vm.closeModal },
                             }),
                             _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "modal-content" },
-                              [
-                                _c("div", { staticClass: "mb-6" }, [
-                                  _c(
-                                    "label",
-                                    {
-                                      staticClass:
-                                        "text-sm text-gray-600 block mb-1 font-semibold",
-                                      attrs: { for: "#" },
-                                    },
-                                    [
-                                      _vm._v(
-                                        "Choose\n                                            Banner"
-                                      ),
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "flex items-center justify-center w-full",
-                                    },
-                                    [
-                                      _c(
-                                        "label",
-                                        {
-                                          staticClass:
-                                            "flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600",
-                                          attrs: { for: "dropzone-file" },
-                                        },
-                                        [
-                                          _c("vue-dropzone", {
-                                            ref: "myVueDropzone",
-                                            attrs: {
-                                              "include-styling": false,
-                                              useCustomSlot: true,
-                                              id: "dropzone",
-                                              options: _vm.dropzoneOptions,
-                                            },
-                                            on: {
-                                              "vdropzone-upload-progress":
-                                                _vm.uploadProgress,
-                                              "vdropzone-file-added":
-                                                _vm.fileAdded,
-                                              "vdropzone-sending-multiple":
-                                                _vm.sendingFiles,
-                                              "vdropzone-success-multiple":
-                                                _vm.success,
-                                            },
-                                          }),
-                                        ],
-                                        1
-                                      ),
-                                    ]
-                                  ),
-                                ]),
-                                _vm._v(" "),
-                                _c("attachment-list", {
-                                  attrs: {
-                                    tempAttachments: _vm.getTempAttachments,
-                                    attachments: _vm.getAttachments,
+                            _c("div", { staticClass: "modal-content" }, [
+                              _c("div", { staticClass: "mb-6" }, [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass:
+                                      "text-sm text-gray-600 block mb-1 font-semibold",
+                                    attrs: { for: "#" },
                                   },
-                                }),
-                              ],
-                              1
-                            ),
+                                  [
+                                    _vm._v(
+                                      "Choose\n                                        Banner"
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "flex items-center justify-center w-full",
+                                  },
+                                  [
+                                    _c(
+                                      "label",
+                                      {
+                                        staticClass:
+                                          "flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600",
+                                        attrs: { for: "file" },
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "flex flex-col items-center justify-center pt-5 pb-6",
+                                          },
+                                          [
+                                            _c(
+                                              "svg",
+                                              {
+                                                staticClass:
+                                                  "w-8 h-8 mb-4 text-gray-500 dark:text-gray-400",
+                                                attrs: {
+                                                  "aria-hidden": "true",
+                                                  xmlns:
+                                                    "http://www.w3.org/2000/svg",
+                                                  fill: "none",
+                                                  viewBox: "0 0 20 16",
+                                                },
+                                              },
+                                              [
+                                                _c("path", {
+                                                  attrs: {
+                                                    stroke: "currentColor",
+                                                    "stroke-linecap": "round",
+                                                    "stroke-linejoin": "round",
+                                                    "stroke-width": "2",
+                                                    d: "M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2",
+                                                  },
+                                                }),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "p",
+                                              {
+                                                staticClass:
+                                                  "mb-2 text-sm text-gray-500 dark:text-gray-400",
+                                              },
+                                              [
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "font-semibold",
+                                                  },
+                                                  [_vm._v("Click to upload")]
+                                                ),
+                                                _vm._v(
+                                                  " or drag and drop\n                                                "
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "p",
+                                              {
+                                                staticClass:
+                                                  "text-xs text-gray-500 dark:text-gray-400",
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "SVG, PNG, JPG or GIF\n                                                    (MAX. 800x400px)"
+                                                ),
+                                              ]
+                                            ),
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          staticClass: "hidden",
+                                          attrs: { id: "file", type: "file" },
+                                          on: { change: _vm.handleFileChange },
+                                        }),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("div", {}, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+                                    attrs: { type: "button" },
+                                    on: { click: _vm.uploadFiles },
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                        Submit\n                                    "
+                                    ),
+                                  ]
+                                ),
+                              ]),
+                            ]),
                           ])
                         : _vm._e(),
                     ]),
@@ -40485,7 +40436,7 @@ var render = function () {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                        Submit\n                                    "
+                                    "\n                                    Submit\n                                "
                                   ),
                                 ]
                               ),
