@@ -473,10 +473,12 @@ export default {
 
         },
         deleteContentItem(id) {
+            console.log(id);
             // Send a DELETE request to the backend with the item's ID
             axios.delete(`/api/content/${id}`)
                 .then(response => {
                     console.log(response.data.message);
+                    this.getContentData()
                     // Assuming you want to remove the item from the frontend after successful deletion
                     // You can trigger a method to refresh the list of items or remove the deleted item from the UI
                 })
@@ -490,6 +492,8 @@ export default {
             axios.delete(`/api/banner/${id}`)
                 .then(response => {
                     console.log(response.data.message);
+                    this.getBannerData()
+
                     // Assuming you want to remove the item from the frontend after successful deletion
                     // You can trigger a method to refresh the list of items or remove the deleted item from the UI
                 })

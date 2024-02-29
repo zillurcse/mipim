@@ -95,9 +95,11 @@ class ContentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Content $content)
+    public function destroy($id)
     {
         try {
+            $content = Content::find($id);
+           
             $content->delete();
 
             return response()->json(['message' => 'Content deleted successfully'], 200);

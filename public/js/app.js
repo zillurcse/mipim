@@ -5968,19 +5968,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     deleteContentItem: function deleteContentItem(id) {
-      // Send a DELETE request to the backend with the item's ID
+      var _this6 = this;
+
+      console.log(id); // Send a DELETE request to the backend with the item's ID
+
       axios__WEBPACK_IMPORTED_MODULE_6__["default"]["delete"]("/api/content/".concat(id)).then(function (response) {
-        console.log(response.data.message); // Assuming you want to remove the item from the frontend after successful deletion
+        console.log(response.data.message);
+
+        _this6.getContentData(); // Assuming you want to remove the item from the frontend after successful deletion
         // You can trigger a method to refresh the list of items or remove the deleted item from the UI
+
       })["catch"](function (error) {
         console.error('Error deleting resource:', error); // Handle error if needed
       });
     },
     deleteBannerItem: function deleteBannerItem(id) {
+      var _this7 = this;
+
       // Send a DELETE request to the backend with the item's ID
       axios__WEBPACK_IMPORTED_MODULE_6__["default"]["delete"]("/api/banner/".concat(id)).then(function (response) {
-        console.log(response.data.message); // Assuming you want to remove the item from the frontend after successful deletion
+        console.log(response.data.message);
+
+        _this7.getBannerData(); // Assuming you want to remove the item from the frontend after successful deletion
         // You can trigger a method to refresh the list of items or remove the deleted item from the UI
+
       })["catch"](function (error) {
         console.error('Error deleting resource:', error); // Handle error if needed
       });

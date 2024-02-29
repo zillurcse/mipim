@@ -106,9 +106,11 @@ class BannerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Banner $banner)
+    public function destroy($id)
     {
         try {
+            $banner = Banner::find($id);
+           
             $banner->delete();
 
             return response()->json(['message' => 'Banner deleted successfully'], 200);
