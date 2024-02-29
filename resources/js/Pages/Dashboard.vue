@@ -27,7 +27,7 @@
                                     <a href="#"
                                         class="inline-flex items-center px-4 py-3 text-base no-underline text-gray-500 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
                                         @click="selectedTab = 'pdf'" :class="{ 'active': selectedTab === 'pdf' }">
-                                        PDF
+                                        Content
                                     </a>
                                 </li>
 
@@ -104,7 +104,7 @@
                     <div class="bg-white overflow-hidden shadow-xl px-4 py-4 w-3/4   sm:rounded-lg"
                         v-else-if="selectedTab === 'pdf'">
                         <div class="flex justify-between items-center" @click="showModal = 'pdf'">
-                            <h1 class="text-xl text-gray-800  font-bold ">Add PDF</h1>
+                            <h1 class="text-xl text-gray-800  font-bold ">Add Content</h1>
 
                             <div class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-700 text-white ">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -129,7 +129,36 @@
                                 <div class="modal-overlay" @click="closeModal"></div>
                                 <div class="modal-content">
                                     <div class="mb-6">
+                                        <div class="mb-6">
+                                            <label for="#" class="text-sm text-gray-600 block mb-1 font-semibold">Choose
+                                                Banner</label>
 
+                                            <div class="flex items-center justify-center w-full">
+                                                <label for="file"
+                                                    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                            fill="none" viewBox="0 0 20 16">
+                                                            <path stroke="currentColor" stroke-linecap="round"
+                                                                stroke-linejoin="round" stroke-width="2"
+                                                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                                        </svg>
+                                                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
+                                                                class="font-semibold">Click to upload</span> or drag and
+                                                            drop
+                                                        </p>
+                                                        <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or
+                                                            GIF
+                                                            (MAX. 800x400px)</p>
+                                                    </div>
+                                                    <input id="file" type="file" class="hidden"
+                                                        @change="handleContentFileChange" />
+                                                </label>
+                                            </div>
+
+
+                                        </div>
                                         <label for="type"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
                                         <select id="type"
@@ -219,10 +248,12 @@ export default {
     data() {
         return {
             items: [],
+            contentItems: [],
             selectedTab: 'banner',
             showModal: '',
-            bannerImage: null, // Store the selected file
-            fileURL: null, // Store the URL of the selected file
+            bannerImage: null,
+            contentFile: null,
+
 
 
             awss3: {
@@ -249,46 +280,86 @@ export default {
         }
     },
     async mounted() {
-        await axios.get('/api/banner')
-            .then(response => {
-                console.log();
-                if (response.status == 200) {
-                    this.items = response.data.data.items
-                    console.log(this.items);
-                    console.log()
-                }
+        this.getBannerData()
+        this.getContentData()
 
-            })
-            .catch(error => {
-                if (error.response.status == 422) {
-                    this.errors = error.response.data.errors;
-                } else {
-                    // this.toastMessage('error', error, 'check', '', 'times')
-                    console.log(error);
-                }
-            })
-            .finally(() => {
-
-            })
     },
 
     methods: {
+        async getBannerData() {
+            await axios.get('/api/banner')
+                .then(response => {
+                    console.log();
+                    if (response.status == 200) {
+                        this.items = response.data.data.items
+                        console.log(this.items);
+                        console.log()
+                    }
 
-        // handleFileUpload() {
-        //     // Trigger the file input when submit button is clicked
-        //     document.getElementById('dropzone-file').click();
-        // },
+                })
+                .catch(error => {
+                    if (error.response.status == 422) {
+                        this.errors = error.response.data.errors;
+                    } else {
+                        // this.toastMessage('error', error, 'check', '', 'times')
+                        console.log(error);
+                    }
+                })
+                .finally(() => {
+
+                })
+        },
+        async getContentData() {
+            await axios.get('/api/content')
+                .then(response => {
+                    console.log();
+                    if (response.status == 200) {
+                        this.contentItems = response.data.data.items
+                        console.log(this.contentItems);
+                        console.log()
+                    }
+
+                })
+                .catch(error => {
+                    if (error.response.status == 422) {
+                        this.errors = error.response.data.errors;
+                    } else {
+                        // this.toastMessage('error', error, 'check', '', 'times')
+                        console.log(error);
+                    }
+                })
+                .finally(() => {
+
+                })
+        },
+
         handleFileChange(event) {
-            // Update bannerImage with the selected file
+
             this.bannerImage = event.target.files[0];
             console.log(this.bannerImage);
-            // // Read the selected file as a data URL
-            // const reader = new FileReader();
-            // reader.onload = () => {
-            //     this.fileURL = reader.result; // Store the data URL
-            // };
-            // reader.readAsDataURL(this.bannerImage);
-            // console.log(this.fileURL);
+
+        },
+        handleContentFileChange(event) {
+
+            this.contentFile = event.target.files[0];
+            console.log(this.contentFile);
+
+        },
+        async uploadContentFiles() {
+            let formdata = new FormData();
+            formdata.append('file', this.contentFile)
+            await axios.post('/api/content', formdata)
+                .then(response => {
+                    // Handle success
+                    console.log('Response:', response.data);
+                    this.getContentData()
+                    this.showModal = false;
+
+                })
+                .catch(error => {
+                    // Handle error
+                    console.error('Error:', error);
+                });
         },
         async uploadFiles() {
             let formdata = new FormData();
@@ -297,6 +368,9 @@ export default {
                 .then(response => {
                     // Handle success
                     console.log('Response:', response.data);
+                    this.getBannerData()
+                    this.showModal = false;
+
                 })
                 .catch(error => {
                     // Handle error

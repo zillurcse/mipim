@@ -5639,6 +5639,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5655,12 +5684,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       items: [],
+      contentItems: [],
       selectedTab: 'banner',
       showModal: '',
       bannerImage: null,
-      // Store the selected file
-      fileURL: null,
-      // Store the URL of the selected file
+      contentFile: null,
       awss3: {
         signingURL: 'http://aws-direct-s3.dev/',
         headers: {},
@@ -5691,23 +5719,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_6__["default"].get('/api/banner').then(function (response) {
-                console.log();
+              _this.getBannerData();
 
-                if (response.status == 200) {
-                  _this.items = response.data.data.items;
-                  console.log(_this.items);
-                  console.log();
-                }
-              })["catch"](function (error) {
-                if (error.response.status == 422) {
-                  _this.errors = error.response.data.errors;
-                } else {
-                  // this.toastMessage('error', error, 'check', '', 'times')
-                  console.log(error);
-                }
-              })["finally"](function () {});
+              _this.getContentData();
 
             case 2:
             case "end":
@@ -5718,36 +5732,101 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: {
-    // handleFileUpload() {
-    //     // Trigger the file input when submit button is clicked
-    //     document.getElementById('dropzone-file').click();
-    // },
-    handleFileChange: function handleFileChange(event) {
-      // Update bannerImage with the selected file
-      this.bannerImage = event.target.files[0];
-      console.log(this.bannerImage); // // Read the selected file as a data URL
-      // const reader = new FileReader();
-      // reader.onload = () => {
-      //     this.fileURL = reader.result; // Store the data URL
-      // };
-      // reader.readAsDataURL(this.bannerImage);
-      // console.log(this.fileURL);
-    },
-    uploadFiles: function uploadFiles() {
+    getBannerData: function getBannerData() {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var formdata;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
+                _context2.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_6__["default"].get('/api/banner').then(function (response) {
+                  console.log();
+
+                  if (response.status == 200) {
+                    _this2.items = response.data.data.items;
+                    console.log(_this2.items);
+                    console.log();
+                  }
+                })["catch"](function (error) {
+                  if (error.response.status == 422) {
+                    _this2.errors = error.response.data.errors;
+                  } else {
+                    // this.toastMessage('error', error, 'check', '', 'times')
+                    console.log(error);
+                  }
+                })["finally"](function () {});
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    getContentData: function getContentData() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_6__["default"].get('/api/content').then(function (response) {
+                  console.log();
+
+                  if (response.status == 200) {
+                    _this3.contentItems = response.data.data.items;
+                    console.log(_this3.contentItems);
+                    console.log();
+                  }
+                })["catch"](function (error) {
+                  if (error.response.status == 422) {
+                    _this3.errors = error.response.data.errors;
+                  } else {
+                    // this.toastMessage('error', error, 'check', '', 'times')
+                    console.log(error);
+                  }
+                })["finally"](function () {});
+
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    handleFileChange: function handleFileChange(event) {
+      this.bannerImage = event.target.files[0];
+      console.log(this.bannerImage);
+    },
+    handleContentFileChange: function handleContentFileChange(event) {
+      this.contentFile = event.target.files[0];
+      console.log(this.contentFile);
+    },
+    uploadContentFiles: function uploadContentFiles() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var formdata;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
                 formdata = new FormData();
-                formdata.append('file', _this2.bannerImage);
-                _context2.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_6__["default"].post('/api/banner', formdata).then(function (response) {
+                formdata.append('file', _this4.contentFile);
+                _context4.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_6__["default"].post('/api/content', formdata).then(function (response) {
                   // Handle success
                   console.log('Response:', response.data);
+
+                  _this4.getContentData();
+
+                  _this4.showModal = false;
                 })["catch"](function (error) {
                   // Handle error
                   console.error('Error:', error);
@@ -5755,10 +5834,42 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 4:
               case "end":
-                return _context2.stop();
+                return _context4.stop();
             }
           }
-        }, _callee2);
+        }, _callee4);
+      }))();
+    },
+    uploadFiles: function uploadFiles() {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        var formdata;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                formdata = new FormData();
+                formdata.append('file', _this5.bannerImage);
+                _context5.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_6__["default"].post('/api/banner', formdata).then(function (response) {
+                  // Handle success
+                  console.log('Response:', response.data);
+
+                  _this5.getBannerData();
+
+                  _this5.showModal = false;
+                })["catch"](function (error) {
+                  // Handle error
+                  console.error('Error:', error);
+                });
+
+              case 4:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
       }))();
     },
     s3UploadError: function s3UploadError(errorMessage) {
@@ -5808,28 +5919,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // called on successful upload of a file
     success: function success(file, response) {
-      var _this3 = this;
+      var _this6 = this;
 
       this.showModal = false;
       console.log(file); //
 
       file.forEach(function (element) {
         console.log('File Path:', element.File);
-        _this3.bannaerImage = element; // this.readFileAsBase64(element);
+        _this6.bannaerImage = element; // this.readFileAsBase64(element);
         // console.log('bas64img', bas64img)
         // this.handleFileUpload(element.dataURL)
         // this.handleFileUpload()
       });
     },
     readFileAsBase64: function readFileAsBase64(file) {
-      var _this4 = this;
+      var _this7 = this;
 
       var reader = new FileReader();
 
       reader.onload = function (event) {
         // console.log('event', event)
         if (event.target && event.target.result) {
-          _this4.bannaerImage = event.target.result; // console.log('base64Data', this.bannaerImage)
+          _this7.bannaerImage = event.target.result; // console.log('base64Data', this.bannaerImage)
           // console.log('Base64 data:', base64Data);
           // console.log("file")
           // console.log(file.upload.uuid)
@@ -40017,7 +40128,7 @@ var render = function () {
                         },
                         [
                           _vm._v(
-                            "\n                                    PDF\n                                "
+                            "\n                                    Content\n                                "
                           ),
                         ]
                       ),
@@ -40270,7 +40381,7 @@ var render = function () {
                         _c(
                           "h1",
                           { staticClass: "text-xl text-gray-800  font-bold " },
-                          [_vm._v("Add PDF")]
+                          [_vm._v("Add Content")]
                         ),
                         _vm._v(" "),
                         _c(
@@ -40334,6 +40445,120 @@ var render = function () {
                             _vm._v(" "),
                             _c("div", { staticClass: "modal-content" }, [
                               _c("div", { staticClass: "mb-6" }, [
+                                _c("div", { staticClass: "mb-6" }, [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "text-sm text-gray-600 block mb-1 font-semibold",
+                                      attrs: { for: "#" },
+                                    },
+                                    [
+                                      _vm._v(
+                                        "Choose\n                                            Banner"
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "flex items-center justify-center w-full",
+                                    },
+                                    [
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass:
+                                            "flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600",
+                                          attrs: { for: "file" },
+                                        },
+                                        [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "flex flex-col items-center justify-center pt-5 pb-6",
+                                            },
+                                            [
+                                              _c(
+                                                "svg",
+                                                {
+                                                  staticClass:
+                                                    "w-8 h-8 mb-4 text-gray-500 dark:text-gray-400",
+                                                  attrs: {
+                                                    "aria-hidden": "true",
+                                                    xmlns:
+                                                      "http://www.w3.org/2000/svg",
+                                                    fill: "none",
+                                                    viewBox: "0 0 20 16",
+                                                  },
+                                                },
+                                                [
+                                                  _c("path", {
+                                                    attrs: {
+                                                      stroke: "currentColor",
+                                                      "stroke-linecap": "round",
+                                                      "stroke-linejoin":
+                                                        "round",
+                                                      "stroke-width": "2",
+                                                      d: "M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2",
+                                                    },
+                                                  }),
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "p",
+                                                {
+                                                  staticClass:
+                                                    "mb-2 text-sm text-gray-500 dark:text-gray-400",
+                                                },
+                                                [
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "font-semibold",
+                                                    },
+                                                    [_vm._v("Click to upload")]
+                                                  ),
+                                                  _vm._v(
+                                                    " or drag and\n                                                        drop\n                                                    "
+                                                  ),
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "p",
+                                                {
+                                                  staticClass:
+                                                    "text-xs text-gray-500 dark:text-gray-400",
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "SVG, PNG, JPG or\n                                                        GIF\n                                                        (MAX. 800x400px)"
+                                                  ),
+                                                ]
+                                              ),
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            staticClass: "hidden",
+                                            attrs: { id: "file", type: "file" },
+                                            on: {
+                                              change:
+                                                _vm.handleContentFileChange,
+                                            },
+                                          }),
+                                        ]
+                                      ),
+                                    ]
+                                  ),
+                                ]),
+                                _vm._v(" "),
                                 _c(
                                   "label",
                                   {

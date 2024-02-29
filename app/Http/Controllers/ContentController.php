@@ -19,7 +19,7 @@ class ContentController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Banner has been updated',
-            'data'=> $data
+            'data' => $data
         ]);
     }
 
@@ -56,7 +56,7 @@ class ContentController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Content has been updated',
-            'data'=> $banner
+            'data' => $banner
         ]);
     }
 
