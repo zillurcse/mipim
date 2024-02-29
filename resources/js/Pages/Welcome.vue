@@ -307,7 +307,7 @@
                 </div>
             </section>
             <footer>
-                <p>© Ministry of Housing and Urban Planning, Oman. 2024</p>
+                <p>© Ministry of Housing and Urban Planning, Oman. 2024 </p>
             </footer>
         </main>
     </div>

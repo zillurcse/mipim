@@ -41,7 +41,7 @@
                         v-if="selectedTab === 'banner'">
                         <div class="flex justify-between items-center">
                             <h1 class="text-xl text-gray-800  font-bold ">Add Banner</h1>
-                            <div class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-700 text-white cursor-pointer "
+                            <div class="w-10 h-10 flex items-center justify-center  rounded-full bg-brand text-white cursor-pointer "
                                 @click="showModal = 'banner'">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" class="w-6 h-6">
@@ -108,7 +108,7 @@
                                     Submit button -->
                                     <div class="">
                                         <button type="button" @click="uploadFiles"
-                                            class="text-white  flex items-center justify-center h-12 gap-4 bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5  text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                            class="text-white  flex items-center justify-center h-12 gap-4  bg-brand hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5  text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                             Submit
 
 
@@ -134,7 +134,7 @@
                         <div class="flex justify-between items-center ">
                             <h1 class="text-xl text-gray-800  font-bold ">Add Content</h1>
 
-                            <div class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-700 text-white cursor-pointer "
+                            <div class="w-10 h-10 flex items-center justify-center rounded-full  bg-brand text-white cursor-pointer "
                                 @click="showModal = 'pdf'">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" class="w-6 h-6">
@@ -248,7 +248,7 @@
 
                                     <div class="">
                                         <button type="button" @click="uploadContentFiles"
-                                            class="text-white flex items-center justify-center gap-4 bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 h-12  text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                            class="text-white flex items-center justify-center gap-4  bg-brand hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 h-12  text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                             Submit
                                             <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" wodth="30"
                                                 v-if="isLoading" height="30" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -526,8 +526,12 @@ export default {
 
 </script>
 <style scoped>
+.bg-brand {
+    background-color: #9A5626;
+}
+
 .active {
-    background: #1d4ed8 !important;
+    background: #9A5626 !important;
     color: #fff !important;
 }
 

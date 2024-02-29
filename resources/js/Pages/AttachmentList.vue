@@ -37,7 +37,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 ul {
     display: flex;
     flex-wrap: wrap;
@@ -70,4 +70,5 @@ li {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
-}</style>
+}
+</style>
