@@ -5743,6 +5743,73 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5760,7 +5827,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       items: [],
       contentItems: [],
-      selectedTab: 'banner',
+      selectedTab: 'bio',
       showModal: '',
       bannerImage: null,
       isLoading: false,
@@ -40167,6 +40234,28 @@ var render = function () {
                         {
                           staticClass:
                             "inline-flex items-center px-4 py-3 text-base no-underline text-gray-500 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white",
+                          class: { active: _vm.selectedTab === "bio" },
+                          attrs: { href: "#" },
+                          on: {
+                            click: function ($event) {
+                              _vm.selectedTab = "bio"
+                            },
+                          },
+                        },
+                        [
+                          _vm._v(
+                            "\n                                    Bio\n                                "
+                          ),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          staticClass:
+                            "inline-flex items-center px-4 py-3 text-base no-underline text-gray-500 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white",
                           class: { active: _vm.selectedTab === "banner" },
                           attrs: { href: "#" },
                           on: {
@@ -41126,6 +41215,208 @@ var render = function () {
                           ])
                         : _vm._e(),
                     ]),
+                  ]
+                )
+              : _vm.selectedTab === "bio"
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "bg-white overflow-hidden shadow-xl px-4 py-4 w-3/4   sm:rounded-lg",
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "flex justify-between items-center " },
+                      [
+                        _c(
+                          "h1",
+                          { staticClass: "text-xl text-gray-800  font-bold " },
+                          [_vm._v("Add Bio")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "w-10 h-10 flex items-center justify-center rounded-full  bg-brand text-white cursor-pointer ",
+                            on: {
+                              click: function ($event) {
+                                _vm.showModal = "bio"
+                              },
+                            },
+                          },
+                          [
+                            _c(
+                              "svg",
+                              {
+                                staticClass: "w-6 h-6",
+                                attrs: {
+                                  xmlns: "http://www.w3.org/2000/svg",
+                                  fill: "none",
+                                  viewBox: "0 0 24 24",
+                                  "stroke-width": "1.5",
+                                  stroke: "currentColor",
+                                },
+                              },
+                              [
+                                _c("path", {
+                                  attrs: {
+                                    "stroke-linecap": "round",
+                                    "stroke-linejoin": "round",
+                                    d: "M12 4.5v15m7.5-7.5h-15",
+                                  },
+                                }),
+                              ]
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm.showModal === "bio"
+                          ? _c("div", { staticClass: "modal" }, [
+                              _c("div", {
+                                staticClass: "modal-overlay",
+                                on: { click: _vm.closeModal },
+                              }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "modal-content" }, [
+                                _c("div", { staticClass: "mb-6" }, [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block mb-2 text-sm font-medium text-gray-900 dark:text-white",
+                                      attrs: { for: "title" },
+                                    },
+                                    [_vm._v("Title")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.title,
+                                        expression: "title",
+                                      },
+                                    ],
+                                    staticClass:
+                                      "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                                    attrs: {
+                                      type: "title",
+                                      id: "title",
+                                      placeholder: "Enter Title",
+                                      required: "",
+                                    },
+                                    domProps: { value: _vm.title },
+                                    on: {
+                                      input: function ($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.title = $event.target.value
+                                      },
+                                    },
+                                  }),
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "mb-6" }, [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block mb-2 text-sm font-medium text-gray-900 dark:text-white",
+                                      attrs: { for: "message" },
+                                    },
+                                    [
+                                      _vm._v(
+                                        "Your\n                                        message"
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("textarea", {
+                                    staticClass:
+                                      "block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                                    attrs: {
+                                      id: "message",
+                                      rows: "4",
+                                      placeholder:
+                                        "Write your thoughts here...",
+                                    },
+                                  }),
+                                ]),
+                                _vm._v(" "),
+                                _c("div", {}, [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "text-white flex items-center justify-center gap-4  bg-brand hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 h-12  text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+                                      attrs: { type: "button" },
+                                      on: { click: _vm.uploadContentFiles },
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        Submit\n                                        "
+                                      ),
+                                      _vm.isLoading
+                                        ? _c(
+                                            "svg",
+                                            {
+                                              attrs: {
+                                                version: "1.1",
+                                                id: "L9",
+                                                xmlns:
+                                                  "http://www.w3.org/2000/svg",
+                                                wodth: "30",
+                                                height: "30",
+                                                "xmlns:xlink":
+                                                  "http://www.w3.org/1999/xlink",
+                                                x: "0px",
+                                                y: "0px",
+                                                viewBox: "0 0 100 100",
+                                                "enable-background":
+                                                  "new 0 0 0 0",
+                                                "xml:space": "preserve",
+                                              },
+                                            },
+                                            [
+                                              _c(
+                                                "path",
+                                                {
+                                                  attrs: {
+                                                    fill: "#fff",
+                                                    d: "M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50",
+                                                  },
+                                                },
+                                                [
+                                                  _c("animateTransform", {
+                                                    attrs: {
+                                                      attributeName:
+                                                        "transform",
+                                                      attributeType: "XML",
+                                                      type: "rotate",
+                                                      dur: "1s",
+                                                      from: "0 50 50",
+                                                      to: "360 50 50",
+                                                      repeatCount: "indefinite",
+                                                    },
+                                                  }),
+                                                ],
+                                                1
+                                              ),
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                    ]
+                                  ),
+                                ]),
+                              ]),
+                            ])
+                          : _vm._e(),
+                      ]
+                    ),
                   ]
                 )
               : _vm._e(),
