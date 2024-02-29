@@ -5679,6 +5679,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -40592,10 +40596,28 @@ var render = function () {
                                         "rounded-md overflow-hidden h-60",
                                     },
                                     [
-                                      _c("img", {
-                                        staticClass: "object-cover",
-                                        attrs: { src: item.file, alt: "" },
-                                      }),
+                                      item.type === "PDF"
+                                        ? _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "embed-responsive h-full",
+                                            },
+                                            [
+                                              _c("embed", {
+                                                attrs: {
+                                                  src: item.file,
+                                                  type: "application/pdf",
+                                                  width: "100%",
+                                                  height: "100%",
+                                                },
+                                              }),
+                                            ]
+                                          )
+                                        : _c("img", {
+                                            staticClass: "object-cover",
+                                            attrs: { src: item.file, alt: "" },
+                                          }),
                                     ]
                                   ),
                                   _vm._v(" "),

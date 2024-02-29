@@ -135,8 +135,12 @@
                             <div class="row ">
                                 <div class="col-md-6 mb-3" v-for="item in contentItems" :key="item.id">
                                     <div class="p-4 border rounded-md bg-gray-100">
+
                                         <figure class="rounded-md overflow-hidden h-60">
-                                            <img :src="item.file" alt="" class="object-cover">
+                                            <div class='embed-responsive h-full' v-if="item.type === 'PDF'">
+                                                <embed :src="item.file" type="application/pdf" width="100%" height="100%" />
+                                            </div>
+                                            <img :src="item.file" alt="" class="object-cover" v-else>
                                         </figure>
                                         <h2 class="text-xl text-gray-800 font-semibold">{{ item.title }}</h2>
                                         <h3 class="text-lg text-gray-700 font-medium">{{ item.type }}</h3>
