@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Banner;
+use App\Models\BioContainer;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Inertia\Inertia;
 
-class BannerController extends Controller
+class BioContainerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +14,7 @@ class BannerController extends Controller
      */
     public function index()
     {
-        $data['items'] = Banner::all();
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Banner has been updated',
-            'data' => $data
-        ]);
+        //
     }
 
     /**
@@ -43,14 +35,15 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
-        $path = $request->file('file')->storePublicly('public/banner');
-        $data['title'] = 'Banner';
-        $data['banner_image'] = 'https://mipim-file.s3.amazonaws.com/' . $path;
-        $banner = Banner::create($data);
+//        $path = $request->file('file')->storePublicly('public/banner');
+        $data['title'] = $request->title;
+        $data['description'] = $request->description;
+//        $data['banner_image'] = 'https://mipim-file.s3.amazonaws.com/' . $path;
+        $banner = BioContainer::create($data);
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Banner has been updated',
+            'message' => 'Data has been updated',
             'data' => $banner
         ]);
     }
@@ -58,10 +51,10 @@ class BannerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\BioContainer  $bioContainer
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(BioContainer $bioContainer)
     {
         //
     }
@@ -69,10 +62,10 @@ class BannerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\BioContainer  $bioContainer
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(BioContainer $bioContainer)
     {
         //
     }
@@ -81,30 +74,29 @@ class BannerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\BioContainer  $bioContainer
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        $bioContainer = BioContainer::find($id);
+        $bioContainer = $bioContainer->update($request->all());
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Data has been updated',
+            'data' => BioContainer::find($id)
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\BioContainer  $bioContainer
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(BioContainer $bioContainer)
     {
-        try {
-            $banner = Banner::find($id);
-
-            $banner->delete();
-
-            return response()->json(['message' => 'Banner deleted successfully'], 200);
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'Failed to delete banner'], 500);
-        }
+        //
     }
 }

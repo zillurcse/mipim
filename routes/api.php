@@ -26,3 +26,6 @@ Route::delete('/banner/{id}',[\App\Http\Controllers\BannerController::class,'des
 Route::get('/content',[\App\Http\Controllers\ContentController::class,'index']);
 Route::post('/content',[\App\Http\Controllers\ContentController::class,'store']);
 Route::delete('/content/{id}',[\App\Http\Controllers\ContentController::class,'destroy']);
+
+Route::post('/bio-container',[\App\Http\Controllers\BioContainerController::class,'store']);
+Route::post('/bio-container/{id}',[\App\Http\Controllers\BioContainerController::class,'update']);

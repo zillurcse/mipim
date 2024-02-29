@@ -43297,7 +43297,7 @@ var render = function () {
                   "a",
                   {
                     staticClass: "data-box no-underline",
-                    attrs: { href: item.link, target: "_blank" },
+                    attrs: { href: item.file, target: "_blank" },
                   },
                   [
                     _c("div", { staticClass: "data-box-icon" }, [
