@@ -4352,6 +4352,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -37544,11 +37548,14 @@ var render = function () {
                           "inertia-link",
                           { attrs: { href: _vm.route("dashboard") } },
                           [
-                            _c("jet-application-mark", {
-                              staticClass: "block h-9 w-auto",
+                            _c("img", {
+                              staticClass: "block h-14 w-14 rounded-lg",
+                              attrs: {
+                                src: "https://mipim-file.s3.amazonaws.com/public/logo/DoLc4MkRPKzUaMv3dMvhHwf4HaAsHydBrn3CKDQl.svg",
+                                alt: "",
+                              },
                             }),
-                          ],
-                          1
+                          ]
                         ),
                       ],
                       1
