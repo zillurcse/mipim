@@ -258,7 +258,7 @@ export default {
     },
     methods: {
         async getBannerData() {
-            await axios.get('/api/banner')
+            await axios.get('/api/web/banner')
                 .then(response => {
                     console.log();
                     if (response.status == 200) {
@@ -281,7 +281,7 @@ export default {
                 })
         },
         async getContentData() {
-            await axios.get('/api/content')
+            await axios.get('/api/web/content')
                 .then(response => {
                     console.log();
                     if (response.status == 200) {

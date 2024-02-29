@@ -6515,7 +6515,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/banner').then(function (response) {
+                return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/web/banner').then(function (response) {
                   console.log();
 
                   if (response.status == 200) {
@@ -6549,7 +6549,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/content').then(function (response) {
+                return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/web/content').then(function (response) {
                   console.log();
 
                   if (response.status == 200) {

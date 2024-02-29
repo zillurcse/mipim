@@ -14,7 +14,13 @@ class BioContainerController extends Controller
      */
     public function index()
     {
-        //
+        $data['items'] = BioContainer::first();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Data fetch',
+            'data' => $data
+        ]);
     }
 
     /**
