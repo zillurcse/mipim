@@ -155,7 +155,7 @@
                     <div class="row data-box-row">
 
                         <div class="col-md-4" v-for="item in contentItems" :key="item.id">
-                            <a :href="item.link" class="data-box no-underline" target="_blank">
+                            <a :href="item.file" class="data-box no-underline" target="_blank">
                                 <div class="data-box-icon">
                                     <svg v-if="item.type === 'Social links'" width="85" height="85" viewBox="0 0 85 85"
                                         fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -258,7 +258,7 @@ export default {
     },
     methods: {
         async getBannerData() {
-            await axios.get('/api/banner')
+            await axios.get('/api/web/banner')
                 .then(response => {
                     console.log();
                     if (response.status == 200) {
@@ -281,7 +281,7 @@ export default {
                 })
         },
         async getContentData() {
-            await axios.get('/api/content')
+            await axios.get('/api/web/content')
                 .then(response => {
                     console.log();
                     if (response.status == 200) {
