@@ -44,19 +44,14 @@ class ContentController extends Controller
         $data['title'] = $request->title;
         $data['type'] = $request->type;
         $data['link'] = $request->link;
-        $banner = Content::create($data);
-        $this->fileUpload([
-            'model' => $banner,
-            'file' => $request['file'],
-            'multi_upload' => false,
-            'request_type' => 'base64',
-            'collection_name' => 'gallery',
-        ]);
+        $path = $request->file('file')->storePublicly('public/content');
+        $data['file'] = 'https://mipim-file.s3.amazonaws.com/' . $path;
+        $Content = Content::create($data);
 
         return response()->json([
             'status' => 'success',
             'message' => 'Content has been updated',
-            'data' => $banner
+            'data' => $Content
         ]);
     }
 

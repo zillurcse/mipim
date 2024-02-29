@@ -5655,19 +5655,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -5688,7 +5675,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       selectedTab: 'banner',
       showModal: '',
       bannerImage: null,
+      title: '',
+      // Store the title input value
+      link: '',
+      // Store the link input value
+      type: '',
+      // Store the type input value
       contentFile: null,
+      // Store the selected file
       awss3: {
         signingURL: 'http://aws-direct-s3.dev/',
         headers: {},
@@ -5808,36 +5802,66 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.contentFile = event.target.files[0];
       console.log(this.contentFile);
     },
+    // async uploadContentFiles() {
+    //     let formdata = new FormData();
+    //     formdata.append('file', this.contentFile)
+    //     await axios.post('/api/content', formdata)
+    //         .then(response => {
+    //             // Handle success
+    //             console.log('Response:', response.data);
+    //             this.getContentData()
+    //             this.showModal = false;
+    //         })
+    //         .catch(error => {
+    //             // Handle error
+    //             console.error('Error:', error);
+    //         });
+    // },
     uploadContentFiles: function uploadContentFiles() {
       var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        var formdata;
+        var formData, response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                formdata = new FormData();
-                formdata.append('file', _this4.contentFile);
-                _context4.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_6__["default"].post('/api/content', formdata).then(function (response) {
-                  // Handle success
-                  console.log('Response:', response.data);
+                _context4.prev = 0;
+                // Create FormData and append all data
+                formData = new FormData();
+                formData.append('title', _this4.title);
+                formData.append('link', _this4.link);
+                formData.append('type', _this4.type);
+                formData.append('file', _this4.contentFile); // Make POST request to upload the file and data
 
-                  _this4.getContentData();
+                _context4.next = 8;
+                return axios__WEBPACK_IMPORTED_MODULE_6__["default"].post('/api/content', formData);
 
-                  _this4.showModal = false;
-                })["catch"](function (error) {
-                  // Handle error
-                  console.error('Error:', error);
-                });
+              case 8:
+                response = _context4.sent;
+                // Handle success
+                console.log('Response:', response.data);
 
-              case 4:
+                _this4.getContentData(); // Update content data
+
+
+                _this4.showModal = false; // Close the modal after successful upload
+
+                _context4.next = 17;
+                break;
+
+              case 14:
+                _context4.prev = 14;
+                _context4.t0 = _context4["catch"](0);
+                // Handle error
+                console.error('Error:', _context4.t0);
+
+              case 17:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4);
+        }, _callee4, null, [[0, 14]]);
       }))();
     },
     uploadFiles: function uploadFiles() {
@@ -40369,14 +40393,7 @@ var render = function () {
                   [
                     _c(
                       "div",
-                      {
-                        staticClass: "flex justify-between items-center",
-                        on: {
-                          click: function ($event) {
-                            _vm.showModal = "pdf"
-                          },
-                        },
-                      },
+                      { staticClass: "flex justify-between items-center " },
                       [
                         _c(
                           "h1",
@@ -40388,7 +40405,12 @@ var render = function () {
                           "div",
                           {
                             staticClass:
-                              "w-10 h-10 flex items-center justify-center rounded-full bg-blue-700 text-white ",
+                              "w-10 h-10 flex items-center justify-center rounded-full bg-blue-700 text-white cursor-pointer ",
+                            on: {
+                              click: function ($event) {
+                                _vm.showModal = "pdf"
+                              },
+                            },
                           },
                           [
                             _c(
@@ -40419,22 +40441,68 @@ var render = function () {
                     ),
                     _vm._v(" "),
                     _c("div", { staticClass: "my-4" }, [
-                      _c("div", { staticClass: "row " }, [
-                        _c("div", { staticClass: "col-md-6" }, [
-                          _c(
-                            "figure",
-                            { staticClass: "rounded-md overflow-hidden" },
+                      _c(
+                        "div",
+                        { staticClass: "row " },
+                        _vm._l(_vm.contentItems, function (item) {
+                          return _c(
+                            "div",
+                            { key: item.id, staticClass: "col-md-6" },
                             [
-                              _c("img", {
-                                attrs: {
-                                  src: "/assets/img/e753507e60b3096fb02daf618c212858.png",
-                                  alt: "",
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "p-4 border rounded-md bg-gray-100",
                                 },
-                              }),
+                                [
+                                  _c(
+                                    "figure",
+                                    {
+                                      staticClass:
+                                        "rounded-md overflow-hidden h-60",
+                                    },
+                                    [
+                                      _c("img", {
+                                        staticClass: "object-cover",
+                                        attrs: { src: item.file, alt: "" },
+                                      }),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "h2",
+                                    {
+                                      staticClass:
+                                        "text-xl text-gray-800 font-semibold",
+                                    },
+                                    [_vm._v(_vm._s(item.title))]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "h3",
+                                    {
+                                      staticClass:
+                                        "text-lg text-gray-700 font-medium",
+                                    },
+                                    [_vm._v(_vm._s(item.type))]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "h4",
+                                    {
+                                      staticClass:
+                                        "text-base text-gray-700 font-medium",
+                                    },
+                                    [_vm._v(_vm._s(item.link))]
+                                  ),
+                                ]
+                              ),
                             ]
-                          ),
-                        ]),
-                      ]),
+                          )
+                        }),
+                        0
+                      ),
                       _vm._v(" "),
                       _vm.showModal === "pdf"
                         ? _c("div", { staticClass: "modal" }, [
@@ -40572,31 +40640,83 @@ var render = function () {
                                 _c(
                                   "select",
                                   {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.type,
+                                        expression: "type",
+                                      },
+                                    ],
                                     staticClass:
                                       "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
                                     attrs: { id: "type" },
+                                    on: {
+                                      change: function ($event) {
+                                        var $$selectedVal =
+                                          Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function (o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function (o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                        _vm.type = $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      },
+                                    },
                                   },
                                   [
                                     _c("option", { attrs: { selected: "" } }, [
                                       _vm._v("Select Type"),
                                     ]),
                                     _vm._v(" "),
+                                    _c("option", { attrs: { value: "PDF" } }, [
+                                      _vm._v("PDF"),
+                                    ]),
+                                    _vm._v(" "),
                                     _c(
                                       "option",
-                                      { attrs: { value: "Type1" } },
-                                      [_vm._v("Type 1")]
+                                      { attrs: { value: "Video (YouTube)" } },
+                                      [_vm._v("Video (YouTube)")]
                                     ),
                                     _vm._v(" "),
                                     _c(
                                       "option",
-                                      { attrs: { value: "Type2" } },
-                                      [_vm._v("Type 2")]
+                                      {
+                                        attrs: {
+                                          value: "Documents (word, ppt, excel)",
+                                        },
+                                      },
+                                      [
+                                        _vm._v(
+                                          "Documents (word, ppt, excel)\n                                        "
+                                        ),
+                                      ]
                                     ),
                                     _vm._v(" "),
                                     _c(
                                       "option",
-                                      { attrs: { value: "Type3" } },
-                                      [_vm._v("Type 3")]
+                                      { attrs: { value: "Social links" } },
+                                      [_vm._v("Social links")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("option", { attrs: { value: "URLs" } }, [
+                                      _vm._v("URLs"),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "option",
+                                      { attrs: { value: "Images" } },
+                                      [_vm._v("Images")]
                                     ),
                                   ]
                                 ),
@@ -40614,6 +40734,14 @@ var render = function () {
                                 ),
                                 _vm._v(" "),
                                 _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.title,
+                                      expression: "title",
+                                    },
+                                  ],
                                   staticClass:
                                     "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
                                   attrs: {
@@ -40621,6 +40749,15 @@ var render = function () {
                                     id: "title",
                                     placeholder: "Enter Title",
                                     required: "",
+                                  },
+                                  domProps: { value: _vm.title },
+                                  on: {
+                                    input: function ($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.title = $event.target.value
+                                    },
                                   },
                                 }),
                               ]),
@@ -40637,6 +40774,14 @@ var render = function () {
                                 ),
                                 _vm._v(" "),
                                 _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.link,
+                                      expression: "link",
+                                    },
+                                  ],
                                   staticClass:
                                     "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
                                   attrs: {
@@ -40645,26 +40790,34 @@ var render = function () {
                                     placeholder: "Enter link",
                                     required: "",
                                   },
+                                  domProps: { value: _vm.link },
+                                  on: {
+                                    input: function ($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.link = $event.target.value
+                                    },
+                                  },
                                 }),
                               ]),
                               _vm._v(" "),
-                              _c("div", { staticClass: "mb-6" }),
-                            ]),
-                            _vm._v(" "),
-                            _c("div", {}, [
-                              _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
-                                  attrs: { type: "button" },
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                    Submit\n                                "
-                                  ),
-                                ]
-                              ),
+                              _c("div", {}, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+                                    attrs: { type: "button" },
+                                    on: { click: _vm.uploadContentFiles },
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                        Submit\n                                    "
+                                    ),
+                                  ]
+                                ),
+                              ]),
                             ]),
                           ])
                         : _vm._e(),
