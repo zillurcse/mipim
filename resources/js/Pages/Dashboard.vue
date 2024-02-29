@@ -511,7 +511,9 @@ export default {
             }
         },
 
-
+        closeModal() {
+            this.showModal = false
+        }
 
     },
     computed: {
