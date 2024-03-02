@@ -5211,31 +5211,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     handleDrop: function handleDrop(to_index, from_index) {
-      console.log(to_index);
+      console.log(to_index, from_index);
       var temp = this.items[to_index];
+      console.log(temp);
       this.items[to_index] = this.items[from_index];
       this.items[from_index] = temp;
-      this.over = false; // axios.post('/admin/event/' + this.event.id + '/details/speakers/update_order', { speakers: this.items })
-      //     .then(res => {
-      //         // this.$toasted.success(res.data.message, {
-      //         //     theme: "toasted-primary",
-      //         //     position: "top-center",
-      //         //     duration : 5000
-      //         // });
-      //         console.log(res);
-      //     })
-      //     .catch(err => {
-      //         // this.$toasted.show(err.response.data.message, {
-      //         //     theme: "toasted-primary",
-      //         //     position: "top-center",
-      //         //     duration : 5000
-      //         // });
-      //         console.log(err);
-      //     })
-      //     .finally(res => {
-      //         console.log(res);
-      //     })
-      // console.log(to_index, from_index);
+      console.log(this.items);
+      this.over = false;
+      axios__WEBPACK_IMPORTED_MODULE_3__["default"].post('/api/banner/update_order', {
+        banners: this.items
+      }).then(function (res) {
+        // this.$toasted.success(res.data.message, {
+        //     theme: "toasted-primary",
+        //     position: "top-center",
+        //     duration : 5000
+        // });
+        console.log(res, 'banners');
+      })["catch"](function (err) {
+        // this.$toasted.show(err.response.data.message, {
+        //     theme: "toasted-primary",
+        //     position: "top-center",
+        //     duration : 5000
+        // });
+        console.log(err);
+      })["finally"](function (res) {
+        console.log(res);
+      }); // console.log(to_index, from_index);
       //alert(`You dropped with data: ${JSON.stringify(data)}`);
     },
     getBannerData: function getBannerData() {
@@ -41446,7 +41447,7 @@ var render = function () {
             ? _c(
                 "div",
                 { staticClass: "row" },
-                _vm._l(_vm.items, function (item) {
+                _vm._l(_vm.items, function (item, index) {
                   return _c(
                     "div",
                     { key: item.id, staticClass: "col-md-6 mb-3" },
@@ -41468,7 +41469,7 @@ var render = function () {
                               while (i--) argsArray[i] = arguments[i]
                               return _vm.handleDrop.apply(
                                 void 0,
-                                [item.id].concat(argsArray)
+                                [index].concat(argsArray)
                               )
                             },
                           },
@@ -41478,7 +41479,7 @@ var render = function () {
                             "drag",
                             {
                               staticClass: "cursor-pointer",
-                              attrs: { "transfer-data": item.id },
+                              attrs: { "transfer-data": index },
                               on: {
                                 dragstart: function ($event) {
                                   _vm.is_dragging = true

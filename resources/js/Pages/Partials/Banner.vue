@@ -13,11 +13,11 @@
         <div class="my-4">
             <div class="">
                 <div v-if="items.length > 0" class="row">
-                    <div class="col-md-6 mb-3" v-for="item in items" :key="item.id">
+                    <div class="col-md-6 mb-3" v-for="(item, index) in items" :key="item.id">
                         <drop :tag="'span'" @dragover="over = true" @dragleave="over = false"
-                            @drop="handleDrop(item.id, ...arguments)">
+                            @drop="handleDrop(index, ...arguments)">
 
-                            <drag class="cursor-pointer" :transfer-data="item.id" @dragstart="is_dragging = true"
+                            <drag class="cursor-pointer" :transfer-data="index" @dragstart="is_dragging = true"
                                 @dragend="is_dragging = false">
 
                                 <figure class="rounded-md overflow-hidden h-60 relative">
@@ -145,33 +145,37 @@ export default {
     methods: {
 
         handleDrop(to_index, from_index) {
-            console.log(to_index);
+            console.log(to_index, from_index);
+
             var temp = this.items[to_index];
+            console.log(temp);
+
             this.items[to_index] = this.items[from_index];
             this.items[from_index] = temp;
+            console.log(this.items);
             this.over = false;
-            // axios.post('/admin/event/' + this.event.id + '/details/speakers/update_order', { speakers: this.items })
-            //     .then(res => {
-            //         // this.$toasted.success(res.data.message, {
-            //         //     theme: "toasted-primary",
-            //         //     position: "top-center",
-            //         //     duration : 5000
-            //         // });
-            //         console.log(res);
-            //     })
-            //     .catch(err => {
-            //         // this.$toasted.show(err.response.data.message, {
-            //         //     theme: "toasted-primary",
-            //         //     position: "top-center",
-            //         //     duration : 5000
-            //         // });
-            //         console.log(err);
+            axios.post('/api/banner/update_order', { banners: this.items })
+                .then(res => {
+                    // this.$toasted.success(res.data.message, {
+                    //     theme: "toasted-primary",
+                    //     position: "top-center",
+                    //     duration : 5000
+                    // });
+                    console.log(res, 'banners');
+                })
+                .catch(err => {
+                    // this.$toasted.show(err.response.data.message, {
+                    //     theme: "toasted-primary",
+                    //     position: "top-center",
+                    //     duration : 5000
+                    // });
+                    console.log(err);
 
-            //     })
-            //     .finally(res => {
-            //         console.log(res);
+                })
+                .finally(res => {
+                    console.log(res);
 
-            //     })
+                })
             // console.log(to_index, from_index);
             //alert(`You dropped with data: ${JSON.stringify(data)}`);
         },

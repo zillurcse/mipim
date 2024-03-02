@@ -89,7 +89,17 @@ class BannerController extends Controller
     {
         //
     }
+    public function update_order(Request $request)
+    {
+        $banners = $request->get('banners');
+        foreach ($banners as $index => $banner) {
+            $sp = Banner::find($banner['id']);
+            $sp->order = $index;
+            $sp->save();
+        }
 
+        return response()->json(['status' => 'success', 'message' => 'Speakers successfully ordered.']);
+    }
     /**
      * Remove the specified resource from storage.
      *

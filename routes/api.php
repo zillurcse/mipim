@@ -31,7 +31,7 @@ Route::post('/sanctum/token', function (Request $request) {
 
     $user = User::where('email', $request->email)->first();
 
-    if (! $user || ! Hash::check($request->password, $user->password)) {
+    if (!$user || !Hash::check($request->password, $user->password)) {
         throw ValidationException::withMessages([
             'email' => ['The provided credentials are incorrect.'],
         ]);
@@ -41,22 +41,24 @@ Route::post('/sanctum/token', function (Request $request) {
 });
 
 //Route::group(['middleware'=>['auth:sanctum']], function (){
-    Route::post('/image-gallery/get',[ImageController::class,'get_gallery']);
+Route::post('/image-gallery/get', [ImageController::class, 'get_gallery']);
 
-    Route::get('/banner',[\App\Http\Controllers\BannerController::class,'index']);
-    Route::post('/banner',[\App\Http\Controllers\BannerController::class,'store']);
-    Route::delete('/banner/{id}',[\App\Http\Controllers\BannerController::class,'destroy']);
+Route::get('/banner', [\App\Http\Controllers\BannerController::class, 'index']);
+Route::post('/banner', [\App\Http\Controllers\BannerController::class, 'store']);
+Route::post('/banner/update_order', [\App\Http\Controllers\BannerController::class, 'update_order']);
 
-    Route::get('/content',[\App\Http\Controllers\ContentController::class,'index']);
-    Route::post('/content',[\App\Http\Controllers\ContentController::class,'store']);
-    Route::delete('/content/{id}',[\App\Http\Controllers\ContentController::class,'destroy']);
+Route::delete('/banner/{id}', [\App\Http\Controllers\BannerController::class, 'destroy']);
 
-    Route::get('/bio-container',[\App\Http\Controllers\BioContainerController::class,'index']);
-    Route::post('/bio-container',[\App\Http\Controllers\BioContainerController::class,'store']);
-    Route::post('/bio-container/{id}',[\App\Http\Controllers\BioContainerController::class,'update']);
+Route::get('/content', [\App\Http\Controllers\ContentController::class, 'index']);
+Route::post('/content', [\App\Http\Controllers\ContentController::class, 'store']);
+Route::delete('/content/{id}', [\App\Http\Controllers\ContentController::class, 'destroy']);
+
+Route::get('/bio-container', [\App\Http\Controllers\BioContainerController::class, 'index']);
+Route::post('/bio-container', [\App\Http\Controllers\BioContainerController::class, 'store']);
+Route::post('/bio-container/{id}', [\App\Http\Controllers\BioContainerController::class, 'update']);
 //});
 
-Route::post('/sanctum/token',[\App\Http\Controllers\BannerController::class,'token']);
-Route::get('/web/banner',[\App\Http\Controllers\BannerController::class,'index']);
-Route::get('/web/content',[\App\Http\Controllers\ContentController::class,'index']);
-Route::get('/web/bio-container',[\App\Http\Controllers\BioContainerController::class,'index']);
+Route::post('/sanctum/token', [\App\Http\Controllers\BannerController::class, 'token']);
+Route::get('/web/banner', [\App\Http\Controllers\BannerController::class, 'index']);
+Route::get('/web/content', [\App\Http\Controllers\ContentController::class, 'index']);
+Route::get('/web/bio-container', [\App\Http\Controllers\BioContainerController::class, 'index']);
