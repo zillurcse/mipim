@@ -40,7 +40,7 @@ Route::post('/sanctum/token', function (Request $request) {
     return $user->createToken($request->device_name)->plainTextToken;
 });
 
-Route::group(['middleware'=>['auth:sanctum']], function (){
+//Route::group(['middleware'=>['auth:sanctum']], function (){
     Route::post('/image-gallery/get',[ImageController::class,'get_gallery']);
 
     Route::get('/banner',[\App\Http\Controllers\BannerController::class,'index']);
@@ -54,8 +54,9 @@ Route::group(['middleware'=>['auth:sanctum']], function (){
     Route::get('/bio-container',[\App\Http\Controllers\BioContainerController::class,'index']);
     Route::post('/bio-container',[\App\Http\Controllers\BioContainerController::class,'store']);
     Route::post('/bio-container/{id}',[\App\Http\Controllers\BioContainerController::class,'update']);
-});
+//});
 
+Route::post('/sanctum/token',[\App\Http\Controllers\BannerController::class,'token']);
 Route::get('/web/banner',[\App\Http\Controllers\BannerController::class,'index']);
 Route::get('/web/content',[\App\Http\Controllers\ContentController::class,'index']);
 Route::get('/web/bio-container',[\App\Http\Controllers\BioContainerController::class,'index']);
