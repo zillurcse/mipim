@@ -17,7 +17,7 @@ class BannerController extends Controller
      */
     public function index()
     {
-        $data['items'] = Banner::all();
+        $data['items'] = Banner::orderBy('order', 'asc')->get();
 
         return response()->json([
             'status' => 'success',
@@ -98,7 +98,7 @@ class BannerController extends Controller
             $sp->save();
         }
 
-        return response()->json(['status' => 'success', 'message' => 'Speakers successfully ordered.']);
+        return response()->json(['status' => 'success', 'message' => 'Banner successfully ordered.']);
     }
     /**
      * Remove the specified resource from storage.

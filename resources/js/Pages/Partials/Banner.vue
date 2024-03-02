@@ -145,23 +145,21 @@ export default {
     methods: {
 
         handleDrop(to_index, from_index) {
-            console.log(to_index, from_index);
-
             var temp = this.items[to_index];
-            console.log(temp);
 
             this.items[to_index] = this.items[from_index];
             this.items[from_index] = temp;
-            console.log(this.items);
             this.over = false;
+
             axios.post('/api/banner/update_order', { banners: this.items })
                 .then(res => {
-                    // this.$toasted.success(res.data.message, {
-                    //     theme: "toasted-primary",
-                    //     position: "top-center",
-                    //     duration : 5000
-                    // });
-                    console.log(res, 'banners');
+                    this.$toasted.success(res.data.message, {
+                        theme: "toasted-primary",
+                        position: "top-center",
+                        duration : 5000
+                    });
+                    this.items = res.data.items;
+                    // console.log('banners', res);
                 })
                 .catch(err => {
                     // this.$toasted.show(err.response.data.message, {

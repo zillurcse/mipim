@@ -5211,22 +5211,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     handleDrop: function handleDrop(to_index, from_index) {
-      console.log(to_index, from_index);
+      var _this2 = this;
+
       var temp = this.items[to_index];
-      console.log(temp);
       this.items[to_index] = this.items[from_index];
       this.items[from_index] = temp;
-      console.log(this.items);
       this.over = false;
       axios__WEBPACK_IMPORTED_MODULE_3__["default"].post('/api/banner/update_order', {
         banners: this.items
       }).then(function (res) {
-        // this.$toasted.success(res.data.message, {
-        //     theme: "toasted-primary",
-        //     position: "top-center",
-        //     duration : 5000
-        // });
-        console.log(res, 'banners');
+        _this2.$toasted.success(res.data.message, {
+          theme: "toasted-primary",
+          position: "top-center",
+          duration: 5000
+        });
+
+        _this2.items = res.data.items; // console.log('banners', res);
       })["catch"](function (err) {
         // this.$toasted.show(err.response.data.message, {
         //     theme: "toasted-primary",
@@ -5240,7 +5240,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       //alert(`You dropped with data: ${JSON.stringify(data)}`);
     },
     getBannerData: function getBannerData() {
-      var _this2 = this;
+      var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
@@ -5252,13 +5252,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   console.log();
 
                   if (response.status == 200) {
-                    _this2.items = response.data.data.items;
-                    console.log(_this2.items);
+                    _this3.items = response.data.data.items;
+                    console.log(_this3.items);
                     console.log();
                   }
                 })["catch"](function (error) {
                   if (error.response.status == 422) {
-                    _this2.errors = error.response.data.errors;
+                    _this3.errors = error.response.data.errors;
                   } else {
                     // this.toastMessage('error', error, 'check', '', 'times')
                     console.log(error);
@@ -5278,7 +5278,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       console.log(this.bannerImage);
     },
     uploadFiles: function uploadFiles() {
-      var _this3 = this;
+      var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
         var formdata, response;
@@ -5288,9 +5288,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context3.prev = 0;
                 // Create FormData and append all data
-                _this3.isLoading = true;
+                _this4.isLoading = true;
                 formdata = new FormData();
-                formdata.append("file", _this3.bannerImage); // Make POST request to upload the file and data
+                formdata.append("file", _this4.bannerImage); // Make POST request to upload the file and data
 
                 _context3.next = 6;
                 return axios__WEBPACK_IMPORTED_MODULE_3__["default"].post("/api/banner", formdata);
@@ -5300,11 +5300,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 // Handle success
                 console.log("Response:", response.data);
 
-                _this3.getBannerData();
+                _this4.getBannerData();
 
-                _this3.showModal = false;
-                _this3.isLoading = false;
-                _this3.bannerImage = null;
+                _this4.showModal = false;
+                _this4.isLoading = false;
+                _this4.bannerImage = null;
                 _context3.next = 18;
                 break;
 
@@ -5312,7 +5312,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context3.prev = 14;
                 _context3.t0 = _context3["catch"](0);
                 // Handle error
-                _this3.isLoading = true;
+                _this4.isLoading = true;
                 console.error("Error:", _context3.t0);
 
               case 18:
@@ -5324,13 +5324,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     deleteBannerItem: function deleteBannerItem(id) {
-      var _this4 = this;
+      var _this5 = this;
 
       // Send a DELETE request to the backend with the item's ID
       axios__WEBPACK_IMPORTED_MODULE_3__["default"]["delete"]("/api/banner/".concat(id)).then(function (response) {
         console.log(response.data.message);
 
-        _this4.getBannerData(); // Assuming you want to remove the item from the frontend after successful deletion
+        _this5.getBannerData(); // Assuming you want to remove the item from the frontend after successful deletion
         // You can trigger a method to refresh the list of items or remove the deleted item from the UI
 
       })["catch"](function (error) {

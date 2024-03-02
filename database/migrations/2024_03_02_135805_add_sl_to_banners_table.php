@@ -14,7 +14,7 @@ class AddSlToBannersTable extends Migration
     public function up()
     {
         Schema::table('banners', function (Blueprint $table) {
-            $table->integer('sl')->nullable();
+            $table->integer('order')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddSlToBannersTable extends Migration
     public function down()
     {
         Schema::table('banners', function (Blueprint $table) {
-            $table->dropColumn('sl');
+            $table->dropColumn('order');
         });
     }
 }

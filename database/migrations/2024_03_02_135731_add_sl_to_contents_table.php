@@ -14,7 +14,7 @@ class AddSlToContentsTable extends Migration
     public function up()
     {
         Schema::table('contents', function (Blueprint $table) {
-            $table->integer('sl')->nullable();
+            $table->integer('order')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddSlToContentsTable extends Migration
     public function down()
     {
         Schema::table('contents', function (Blueprint $table) {
-            $table->dropColumn('sl');
+            $table->dropColumn('order');
         });
     }
 }
