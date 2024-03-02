@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -106,5 +107,12 @@ class BannerController extends Controller
         } catch (\Exception $e) {
             return response()->json(['message' => 'Failed to delete banner'], 500);
         }
+    }
+
+    public function token(Request $request)
+    {
+        $token = auth()->user();
+
+        return $token;
     }
 }
