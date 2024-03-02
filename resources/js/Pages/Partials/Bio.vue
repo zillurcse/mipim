@@ -12,6 +12,35 @@
             </div>
 
 
+        </div>
+        <div class="my-4">
+
+            <div class=" ">
+                <div v-if="bioItems" class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="p-3 border rounded-lg">
+                            <h2 class="text-2xl text-gray-800 mb-2">{{ bioItems.title }}</h2>
+                            <p class="text-sm text-gray-700">
+                                {{ bioItems.description }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div v-else>
+                    <div class="col-md-12">
+                        <div class="flex flex-col justify-center gap-2 items-center py-4 text-gray-500  ">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-14">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                            </svg>
+                            <h2 class="text-2xl text-gray-500 font-medium">No Data Found</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
             <div class="modal" v-if="showModal === 'bio'">
                 <div class="modal-overlay" @click="closeModal"></div>
                 <div class="modal-content">
@@ -52,11 +81,12 @@
 
             </div>
         </div>
-
     </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     data() {
         return {
@@ -90,11 +120,11 @@ export default {
         async getBioData() {
             await axios.get('/api/bio-container')
                 .then(response => {
-                    console.log();
+
                     if (response.status == 200) {
                         this.bioItems = response.data.data.items
-                        console.log(this.contentItems);
-                        console.log()
+                        console.log(this.bioItems, 'response.data.data.items');
+
                     }
 
                 })
@@ -138,10 +168,9 @@ export default {
                 this.getBioData(); // Update content data
                 this.showModal = false; // Close the modal after successful upload
                 // Reset all data
-                this.title = '';
-                this.link = '';
-                this.type = '';
-                this.contentFile = null;
+                this.bioTitle = '';
+                this.bioDesc = '';
+
                 this.isLoading = false;
 
             } catch (error) {

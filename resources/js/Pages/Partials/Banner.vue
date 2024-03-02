@@ -11,24 +11,51 @@
             </div>
         </div>
         <div class="my-4">
-            <div class="row">
-                <div class="col-md-6 mb-3" v-for="item in items" :key="item.id">
-                    <figure class="rounded-md overflow-hidden h-60 relative">
-                        <img :src="item.banner_image" alt="" class="object-cover" />
-                        <div class="absolute top-2 right-2 text-gray-400 cursor-pointer" @click="clickTool(item.id)">
+            <div class="">
+                <div v-if="items.length > 0" class="row">
+                    <div class="col-md-6 mb-3" v-for="item in items" :key="item.id">
+                        <drop :tag="'span'" @dragover="over = true" @dragleave="over = false"
+                            @drop="handleDrop(item.id, ...arguments)">
+
+                            <drag class="cursor-pointer" :transfer-data="item.id" @dragstart="is_dragging = true"
+                                @dragend="is_dragging = false">
+
+                                <figure class="rounded-md overflow-hidden h-60 relative">
+                                    <v-lazy-image style="border-radius: 9px 9px 0px 0px" :src="item.banner_image"
+                                        class="object-cover"
+                                        src-placeholder="https://d30komtae77sjh.cloudfront.net/assets/svgs/loading-image.svg" />
+                                    <div class="absolute top-2 right-2 text-gray-400 cursor-pointer"
+                                        @click="clickTool(item.id)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                                        </svg>
+                                        <div class="w-40 p-3 absolute right-0 rounded-md bg-white text-gray-700"
+                                            v-if="isOpenTool === item.id">
+                                            <button class="cursor-pointer hover:text-red-700"
+                                                @click="deleteBannerItem(item.id)">
+                                                Delete Banner
+                                            </button>
+                                        </div>
+                                    </div>
+                                </figure>
+                            </drag>
+                        </drop>
+
+                    </div>
+                </div>
+                <div v-else>
+                    <div class="col-md-12">
+                        <div class="flex flex-col justify-center gap-2 items-center py-4 text-gray-500  ">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="w-6 h-6">
+                                stroke="currentColor" class="w-14">
                                 <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                                    d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
                             </svg>
-                            <div class="w-40 p-3 absolute right-0 rounded-md bg-white text-gray-700"
-                                v-if="isOpenTool === item.id">
-                                <button class="cursor-pointer hover:text-red-700" @click="deleteBannerItem(item.id)">
-                                    Delete Banner
-                                </button>
-                            </div>
+                            <h2 class="text-2xl text-gray-500 font-medium">No Data Found</h2>
                         </div>
-                    </figure>
+                    </div>
                 </div>
             </div>
             <div class="modal" v-if="showModal === 'banner'">
@@ -84,9 +111,23 @@
 </template>
 
 <script>
+import axios from 'axios';
+import VLazyImage from "v-lazy-image";
+import { Drag, Drop } from 'vue-drag-drop';
 export default {
+    components: {
+        VLazyImage,
+        Drag, Drop
+
+    },
     data() {
         return {
+            is_dragging: false,
+
+            over: false,
+            drag: false,
+
+
             items: [],
             selectedTab: "bio",
             showModal: "",
@@ -102,6 +143,38 @@ export default {
     },
 
     methods: {
+
+        handleDrop(to_index, from_index) {
+            console.log(to_index);
+            var temp = this.items[to_index];
+            this.items[to_index] = this.items[from_index];
+            this.items[from_index] = temp;
+            this.over = false;
+            // axios.post('/admin/event/' + this.event.id + '/details/speakers/update_order', { speakers: this.items })
+            //     .then(res => {
+            //         // this.$toasted.success(res.data.message, {
+            //         //     theme: "toasted-primary",
+            //         //     position: "top-center",
+            //         //     duration : 5000
+            //         // });
+            //         console.log(res);
+            //     })
+            //     .catch(err => {
+            //         // this.$toasted.show(err.response.data.message, {
+            //         //     theme: "toasted-primary",
+            //         //     position: "top-center",
+            //         //     duration : 5000
+            //         // });
+            //         console.log(err);
+
+            //     })
+            //     .finally(res => {
+            //         console.log(res);
+
+            //     })
+            // console.log(to_index, from_index);
+            //alert(`You dropped with data: ${JSON.stringify(data)}`);
+        },
         async getBannerData() {
             await axios
                 .get("/api/banner")

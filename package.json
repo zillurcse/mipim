@@ -29,6 +29,8 @@
     },
     "dependencies": {
         "chokidar": "^3.6.0",
+        "v-lazy-image": "^1.4.0",
+        "vue-drag-drop": "^1.1.4",
         "vue2-dropzone": "^3.6.0"
     }
 }

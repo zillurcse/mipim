@@ -62,7 +62,6 @@ import Welcome from '@/Jetstream/Welcome'
 import vue2Dropzone from "vue2-dropzone";
 import "vue2-dropzone/dist/vue2Dropzone.min.css";
 import AttachmentList from './AttachmentList.vue'
-import axios from 'axios';
 import Banner from './Partials/Banner.vue';
 import Content from './Partials/Content.vue';
 import Bio from './Partials/Bio.vue';
