@@ -225,12 +225,12 @@ export default {
 
                 })
                 .catch(err => {
-                    // this.$toasted.show(err.response.data.message, {
-                    //     theme: "toasted-primary",
-                    //     position: "top-center",
-                    //     duration : 5000
-                    // });
-                    console.log(err);
+                    this.$toasted.show(err.response.data.message, {
+                        theme: "toasted-primary",
+                        position: "top-center",
+                        duration: 5000
+                    });
+
 
                 })
                 .finally(res => {
@@ -274,6 +274,14 @@ export default {
 
         async uploadContentFiles() {
             try {
+                if (this.title === "" || this.link === '' || this.type === "" || this.contentFile === null) {
+                    this.$toasted.show("please fill up all fields", {
+                        theme: "toasted-primary",
+                        position: "top-center",
+                        duration: 5000
+                    });
+                    return false
+                }
                 // Create FormData and append all data
                 this.isLoading = true;
                 let formData = new FormData();
@@ -286,7 +294,7 @@ export default {
                 const response = await axios.post('/api/content', formData);
 
                 // Handle success
-                console.log('Response:', response.data);
+
                 this.getContentData(); // Update content data
                 this.showModal = false; // Close the modal after successful upload
                 // Reset all data
@@ -295,11 +303,20 @@ export default {
                 this.type = '';
                 this.contentFile = null;
                 this.isLoading = false;
+                this.$toasted.success(response.data.message, {
+                    theme: "toasted-primary",
+                    position: "top-center",
+                    duration: 5000
+                });
 
             } catch (error) {
                 // Handle error
                 this.isLoading = true;
-
+                this.$toasted.show(error.response.data.message, {
+                    theme: "toasted-primary",
+                    position: "top-center",
+                    duration: 5000
+                });
                 console.error('Error:', error);
             }
         },

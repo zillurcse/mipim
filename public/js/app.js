@@ -6183,15 +6183,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.prev = 0;
+
+                if (!(_this4.bannerImage === null)) {
+                  _context3.next = 4;
+                  break;
+                }
+
+                _this4.$toasted.show("please fill up all fields", {
+                  theme: "toasted-primary",
+                  position: "top-center",
+                  duration: 5000
+                });
+
+                return _context3.abrupt("return", false);
+
+              case 4:
                 // Create FormData and append all data
                 _this4.isLoading = true;
                 formdata = new FormData();
                 formdata.append("file", _this4.bannerImage); // Make POST request to upload the file and data
 
-                _context3.next = 6;
+                _context3.next = 9;
                 return axios__WEBPACK_IMPORTED_MODULE_3__["default"].post("/api/banner", formdata);
 
-              case 6:
+              case 9:
                 response = _context3.sent;
                 // Handle success
                 console.log("Response:", response.data);
@@ -6201,22 +6216,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this4.showModal = false;
                 _this4.isLoading = false;
                 _this4.bannerImage = null;
-                _context3.next = 18;
+                _context3.next = 21;
                 break;
 
-              case 14:
-                _context3.prev = 14;
+              case 17:
+                _context3.prev = 17;
                 _context3.t0 = _context3["catch"](0);
                 // Handle error
                 _this4.isLoading = true;
                 console.error("Error:", _context3.t0);
 
-              case 18:
+              case 21:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[0, 14]]);
+        }, _callee3, null, [[0, 17]]);
       }))();
     },
     deleteBannerItem: function deleteBannerItem(id) {
@@ -6354,6 +6369,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -6363,6 +6406,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       showModal: '',
       isLoading: false,
       isOpenTool: null,
+      isUpdate: false,
       bioTitle: '',
       bioDesc: '',
       tempAttachments: [],
@@ -6437,16 +6481,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.prev = 0;
+
+                if (!(_this3.bioTitle === "" || _this3.bioDesc === '')) {
+                  _context3.next = 4;
+                  break;
+                }
+
+                _this3.$toasted.show("please fill up all fields", {
+                  theme: "toasted-primary",
+                  position: "top-center",
+                  duration: 5000
+                });
+
+                return _context3.abrupt("return", false);
+
+              case 4:
                 // Create FormData and append all data
                 _this3.isLoading = true;
                 formData = new FormData();
                 formData.append('title', _this3.bioTitle);
                 formData.append('description', _this3.bioDesc); // Make POST request to upload the file and data
 
-                _context3.next = 7;
+                _context3.next = 10;
                 return axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/bio-container', formData);
 
-              case 7:
+              case 10:
                 response = _context3.sent;
                 // Handle success
                 console.log('Response:', response.data);
@@ -6460,22 +6519,83 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this3.bioTitle = '';
                 _this3.bioDesc = '';
                 _this3.isLoading = false;
-                _context3.next = 20;
+                _context3.next = 23;
                 break;
 
-              case 16:
-                _context3.prev = 16;
+              case 19:
+                _context3.prev = 19;
                 _context3.t0 = _context3["catch"](0);
                 // Handle error
                 _this3.isLoading = true;
                 console.error('Error:', _context3.t0);
 
-              case 20:
+              case 23:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[0, 16]]);
+        }, _callee3, null, [[0, 19]]);
+      }))();
+    },
+    updateBio: function updateBio(item) {
+      console.log(item);
+      this.showModal = 'bio';
+      this.isUpdate = true;
+      this.bioTitle = item.title;
+      this.bioDesc = item.description;
+    },
+    updateBioFiles: function updateBioFiles(id) {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                console.log(id);
+                _context4.prev = 1;
+                _this4.isLoading = true; // let formData = new FormData();
+                // formData.append('title', this.bioTitle);
+                // formData.append('description', this.bioDesc);
+                // Make POST request to upload the file and data
+
+                _context4.next = 5;
+                return axios__WEBPACK_IMPORTED_MODULE_1__["default"].post("/bio-container/".concat(id), {
+                  id: id
+                });
+
+              case 5:
+                response = _context4.sent;
+                // Handle success
+                console.log('Response:', response.data);
+
+                _this4.getBioData(); // Update content data
+
+
+                _this4.showModal = false; // Close the modal after successful upload
+                // Reset all data
+
+                _this4.bioTitle = '';
+                _this4.bioDesc = '';
+                _this4.isLoading = false;
+                _this4.isUpdate = false;
+                _context4.next = 19;
+                break;
+
+              case 15:
+                _context4.prev = 15;
+                _context4.t0 = _context4["catch"](1);
+                // Handle error
+                _this4.isLoading = true;
+                console.error('Error:', _context4.t0);
+
+              case 19:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[1, 15]]);
       }))();
     },
     clickTool: function clickTool(id) {
@@ -6750,12 +6870,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
         _this2.getContentData();
       })["catch"](function (err) {
-        // this.$toasted.show(err.response.data.message, {
-        //     theme: "toasted-primary",
-        //     position: "top-center",
-        //     duration : 5000
-        // });
-        console.log(err);
+        _this2.$toasted.show(err.response.data.message, {
+          theme: "toasted-primary",
+          position: "top-center",
+          duration: 5000
+        });
       })["finally"](function (res) {
         console.log(res);
       }); // console.log(to_index, from_index);
@@ -6809,6 +6928,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.prev = 0;
+
+                if (!(_this4.title === "" || _this4.link === '' || _this4.type === "" || _this4.contentFile === null)) {
+                  _context3.next = 4;
+                  break;
+                }
+
+                _this4.$toasted.show("please fill up all fields", {
+                  theme: "toasted-primary",
+                  position: "top-center",
+                  duration: 5000
+                });
+
+                return _context3.abrupt("return", false);
+
+              case 4:
                 // Create FormData and append all data
                 _this4.isLoading = true;
                 formData = new FormData();
@@ -6817,14 +6951,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 formData.append('type', _this4.type);
                 formData.append('file', _this4.contentFile); // Make POST request to upload the file and data
 
-                _context3.next = 9;
+                _context3.next = 12;
                 return axios__WEBPACK_IMPORTED_MODULE_3__["default"].post('/api/content', formData);
 
-              case 9:
+              case 12:
                 response = _context3.sent;
-                // Handle success
-                console.log('Response:', response.data);
 
+                // Handle success
                 _this4.getContentData(); // Update content data
 
 
@@ -6836,22 +6969,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this4.type = '';
                 _this4.contentFile = null;
                 _this4.isLoading = false;
-                _context3.next = 24;
+
+                _this4.$toasted.success(response.data.message, {
+                  theme: "toasted-primary",
+                  position: "top-center",
+                  duration: 5000
+                });
+
+                _context3.next = 28;
                 break;
 
-              case 20:
-                _context3.prev = 20;
+              case 23:
+                _context3.prev = 23;
                 _context3.t0 = _context3["catch"](0);
                 // Handle error
                 _this4.isLoading = true;
+
+                _this4.$toasted.show(_context3.t0.response.data.message, {
+                  theme: "toasted-primary",
+                  position: "top-center",
+                  duration: 5000
+                });
+
                 console.error('Error:', _context3.t0);
 
-              case 24:
+              case 28:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[0, 20]]);
+        }, _callee3, null, [[0, 23]]);
       }))();
     },
     deleteContentItem: function deleteContentItem(id) {
@@ -8181,9 +8328,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -8199,7 +8343,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       items: [],
-      contentItems: []
+      contentItems: [],
+      bioItems: []
     };
   },
   mounted: function mounted() {
@@ -8214,7 +8359,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               _this.getContentData();
 
-            case 2:
+              _this.getBioData();
+
+            case 3:
             case "end":
               return _context.stop();
           }
@@ -8223,7 +8370,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: {
-    getBannerData: function getBannerData() {
+    getBioData: function getBioData() {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
@@ -8232,13 +8379,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/web/banner').then(function (response) {
-                  console.log();
-
+                return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/bio-container').then(function (response) {
                   if (response.status == 200) {
-                    _this2.items = response.data.data.items;
-                    console.log(_this2.items);
-                    console.log();
+                    _this2.bioItems = response.data.data.items;
+                    console.log(_this2.bioItems, 'response.data.data.items');
                   }
                 })["catch"](function (error) {
                   if (error.response.status == 422) {
@@ -8257,7 +8401,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    getContentData: function getContentData() {
+    getBannerData: function getBannerData() {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
@@ -8266,12 +8410,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/web/content').then(function (response) {
+                return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/web/banner').then(function (response) {
                   console.log();
 
                   if (response.status == 200) {
-                    _this3.contentItems = response.data.data.items;
-                    console.log(_this3.contentItems);
+                    _this3.items = response.data.data.items;
+                    console.log(_this3.items);
                     console.log();
                   }
                 })["catch"](function (error) {
@@ -8289,6 +8433,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee3);
+      }))();
+    },
+    getContentData: function getContentData() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/web/content').then(function (response) {
+                  console.log();
+
+                  if (response.status == 200) {
+                    _this4.contentItems = response.data.data.items;
+                    console.log(_this4.contentItems);
+                    console.log();
+                  }
+                })["catch"](function (error) {
+                  if (error.response.status == 422) {
+                    _this4.errors = error.response.data.errors;
+                  } else {
+                    // this.toastMessage('error', error, 'check', '', 'times')
+                    console.log(error);
+                  }
+                })["finally"](function () {});
+
+              case 2:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
       }))();
     }
   }
@@ -42011,7 +42189,7 @@ var render = function () {
           _vm.bioItems
             ? _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-md-6 mb-3" }, [
-                  _c("div", { staticClass: "p-3 border rounded-lg" }, [
+                  _c("div", { staticClass: "p-3 border rounded-lg relative" }, [
                     _c("h2", { staticClass: "text-2xl text-gray-800 mb-2" }, [
                       _vm._v(_vm._s(_vm.bioItems.title)),
                     ]),
@@ -42023,6 +42201,72 @@ var render = function () {
                           "\n                        "
                       ),
                     ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "absolute top-2 right-2 text-gray-400 cursor-pointer",
+                        on: {
+                          click: function ($event) {
+                            return _vm.clickTool(_vm.bioItems.id)
+                          },
+                        },
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "w-6 h-6",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              fill: "none",
+                              viewBox: "0 0 24 24",
+                              "stroke-width": "1.5",
+                              stroke: "currentColor",
+                            },
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                "stroke-linecap": "round",
+                                "stroke-linejoin": "round",
+                                d: "M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z",
+                              },
+                            }),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm.isOpenTool === _vm.bioItems.id
+                          ? _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "w-40 p-3 absolute  right-0 rounded-md bg-white text-gray-700 ",
+                              },
+                              [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "cursor-pointer hover:text-red-700",
+                                    on: {
+                                      click: function ($event) {
+                                        return _vm.updateBio(_vm.bioItems)
+                                      },
+                                    },
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                    Update Bio\n                                "
+                                    ),
+                                  ]
+                                ),
+                              ]
+                            )
+                          : _vm._e(),
+                      ]
+                    ),
                   ]),
                 ]),
               ])
@@ -42157,65 +42401,135 @@ var render = function () {
                 ]),
                 _vm._v(" "),
                 _c("div", {}, [
-                  _c(
-                    "button",
-                    {
-                      staticClass:
-                        "text-white flex items-center justify-center gap-4  bg-brand hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 h-12  text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
-                      attrs: { type: "button" },
-                      on: { click: _vm.uploadBioFiles },
-                    },
-                    [
-                      _vm._v(
-                        "\n                        Submit\n                        "
-                      ),
-                      _vm.isLoading
-                        ? _c(
-                            "svg",
-                            {
-                              attrs: {
-                                version: "1.1",
-                                id: "L9",
-                                xmlns: "http://www.w3.org/2000/svg",
-                                wodth: "30",
-                                height: "30",
-                                "xmlns:xlink": "http://www.w3.org/1999/xlink",
-                                x: "0px",
-                                y: "0px",
-                                viewBox: "0 0 100 100",
-                                "enable-background": "new 0 0 0 0",
-                                "xml:space": "preserve",
-                              },
-                            },
-                            [
-                              _c(
-                                "path",
+                  !_vm.isUpdate
+                    ? _c(
+                        "button",
+                        {
+                          staticClass:
+                            "text-white flex items-center justify-center gap-4  bg-brand hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 h-12  text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+                          attrs: { type: "button" },
+                          on: { click: _vm.uploadBioFiles },
+                        },
+                        [
+                          _vm._v(
+                            "\n                        Submit\n                        "
+                          ),
+                          _vm.isLoading
+                            ? _c(
+                                "svg",
                                 {
                                   attrs: {
-                                    fill: "#fff",
-                                    d: "M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50",
+                                    version: "1.1",
+                                    id: "L9",
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    wodth: "30",
+                                    height: "30",
+                                    "xmlns:xlink":
+                                      "http://www.w3.org/1999/xlink",
+                                    x: "0px",
+                                    y: "0px",
+                                    viewBox: "0 0 100 100",
+                                    "enable-background": "new 0 0 0 0",
+                                    "xml:space": "preserve",
                                   },
                                 },
                                 [
-                                  _c("animateTransform", {
-                                    attrs: {
-                                      attributeName: "transform",
-                                      attributeType: "XML",
-                                      type: "rotate",
-                                      dur: "1s",
-                                      from: "0 50 50",
-                                      to: "360 50 50",
-                                      repeatCount: "indefinite",
+                                  _c(
+                                    "path",
+                                    {
+                                      attrs: {
+                                        fill: "#fff",
+                                        d: "M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50",
+                                      },
                                     },
-                                  }),
-                                ],
-                                1
-                              ),
-                            ]
-                          )
-                        : _vm._e(),
-                    ]
-                  ),
+                                    [
+                                      _c("animateTransform", {
+                                        attrs: {
+                                          attributeName: "transform",
+                                          attributeType: "XML",
+                                          type: "rotate",
+                                          dur: "1s",
+                                          from: "0 50 50",
+                                          to: "360 50 50",
+                                          repeatCount: "indefinite",
+                                        },
+                                      }),
+                                    ],
+                                    1
+                                  ),
+                                ]
+                              )
+                            : _vm._e(),
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isUpdate
+                    ? _c(
+                        "button",
+                        {
+                          staticClass:
+                            "text-white flex items-center justify-center gap-4  bg-brand hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 h-12  text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.updateBioFiles(_vm.bioItems.id)
+                            },
+                          },
+                        },
+                        [
+                          _vm._v(
+                            "\n                        Update\n                        "
+                          ),
+                          _vm.isLoading
+                            ? _c(
+                                "svg",
+                                {
+                                  attrs: {
+                                    version: "1.1",
+                                    id: "L9",
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    wodth: "30",
+                                    height: "30",
+                                    "xmlns:xlink":
+                                      "http://www.w3.org/1999/xlink",
+                                    x: "0px",
+                                    y: "0px",
+                                    viewBox: "0 0 100 100",
+                                    "enable-background": "new 0 0 0 0",
+                                    "xml:space": "preserve",
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "path",
+                                    {
+                                      attrs: {
+                                        fill: "#fff",
+                                        d: "M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50",
+                                      },
+                                    },
+                                    [
+                                      _c("animateTransform", {
+                                        attrs: {
+                                          attributeName: "transform",
+                                          attributeType: "XML",
+                                          type: "rotate",
+                                          dur: "1s",
+                                          from: "0 50 50",
+                                          to: "360 50 50",
+                                          repeatCount: "indefinite",
+                                        },
+                                      }),
+                                    ],
+                                    1
+                                  ),
+                                ]
+                              )
+                            : _vm._e(),
+                        ]
+                      )
+                    : _vm._e(),
                 ]),
               ]),
             ])
@@ -45035,7 +45349,27 @@ var render = function () {
         ),
       ]),
       _vm._v(" "),
-      _vm._m(3),
+      _c("section", { staticClass: "text-section" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "row justify-content-center" }, [
+            _c("div", { staticClass: "col-md-5" }, [
+              _c("div", { staticClass: "text-box" }, [
+                _c("h2", [_vm._v(_vm._s(_vm.bioItems.title))]),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    "\n                                " +
+                      _vm._s(_vm.bioItems.description) +
+                      "\n                            "
+                  ),
+                ]),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
       _vm._v(" "),
       _c("section", { staticClass: "data-box-section" }, [
         _c("div", { staticClass: "container" }, [
@@ -45233,7 +45567,7 @@ var render = function () {
         ]),
       ]),
       _vm._v(" "),
-      _vm._m(4),
+      _vm._m(3),
     ]),
   ])
 }
@@ -45281,30 +45615,6 @@ var staticRenderFns = [
         },
         [_vm._v("Contact us")]
       ),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "text-section" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "row justify-content-center" }, [
-          _c("div", { staticClass: "col-md-5" }, [
-            _c("div", { staticClass: "text-box" }, [
-              _c("h2", [_vm._v("OMAN: ENDLESS HORIZONS")]),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v(
-                  "\n                                Welcome to the Oman at MIPIM page! Dive into a world where tradition meets innovation,\n                                and discover the vast array of projects Oman has to offer. From groundbreaking real\n                                estate developments to sustainable ventures, we're showcasing Oman's commitment to\n                                growth and prosperity. Explore our projects and learn how Oman is shaping the future of\n                                investment and development. Join us on this journey to unlock opportunities in one of\n                                the most dynamic markets in the Middle East.\n                            "
-                ),
-              ]),
-            ]),
-          ]),
-        ]),
-      ]),
     ])
   },
   function () {

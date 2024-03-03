@@ -210,6 +210,14 @@ export default {
 
         async uploadFiles() {
             try {
+                if (this.bannerImage === null) {
+                    this.$toasted.show("please fill up all fields", {
+                        theme: "toasted-primary",
+                        position: "top-center",
+                        duration: 5000
+                    });
+                    return false
+                }
                 // Create FormData and append all data
                 this.isLoading = true;
                 let formdata = new FormData();

@@ -18,11 +18,26 @@
             <div class=" ">
                 <div v-if="bioItems" class="row">
                     <div class="col-md-6 mb-3">
-                        <div class="p-3 border rounded-lg">
+                        <div class="p-3 border rounded-lg relative">
                             <h2 class="text-2xl text-gray-800 mb-2">{{ bioItems.title }}</h2>
                             <p class="text-sm text-gray-700">
                                 {{ bioItems.description }}
                             </p>
+
+                            <div class="absolute top-2 right-2 text-gray-400 cursor-pointer"
+                                @click="clickTool(bioItems.id)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                                </svg>
+                                <div class="w-40 p-3 absolute  right-0 rounded-md bg-white text-gray-700 "
+                                    v-if="isOpenTool === bioItems.id">
+                                    <button class="cursor-pointer hover:text-red-700" @click="updateBio(bioItems)">
+                                        Update Bio
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -63,9 +78,22 @@
                     </div>
 
                     <div class="">
-                        <button type="button" @click="uploadBioFiles"
+                        <button type="button" @click="uploadBioFiles" v-if="!isUpdate"
                             class="text-white flex items-center justify-center gap-4  bg-brand hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 h-12  text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Submit
+                            <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" wodth="30" v-if="isLoading"
+                                height="30" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                                <path fill="#fff"
+                                    d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                                    <animateTransform attributeName="transform" attributeType="XML" type="rotate"
+                                        dur="1s" from="0 50 50" to="360 50 50" repeatCount="indefinite" />
+                                </path>
+                            </svg>
+                        </button>
+                        <button type="button" @click="updateBioFiles(bioItems.id)" v-if="isUpdate"
+                            class="text-white flex items-center justify-center gap-4  bg-brand hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 h-12  text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Update
                             <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" wodth="30" v-if="isLoading"
                                 height="30" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                 viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
@@ -97,7 +125,7 @@ export default {
 
             isLoading: false,
             isOpenTool: null,
-
+            isUpdate: false,
 
             bioTitle: '',
             bioDesc: '',
@@ -154,6 +182,14 @@ export default {
         },
         async uploadBioFiles() {
             try {
+                if (this.bioTitle === "" || this.bioDesc === '') {
+                    this.$toasted.show("please fill up all fields", {
+                        theme: "toasted-primary",
+                        position: "top-center",
+                        duration: 5000
+                    });
+                    return false
+                }
                 // Create FormData and append all data
                 this.isLoading = true;
                 let formData = new FormData();
@@ -181,7 +217,44 @@ export default {
             }
         },
 
+        updateBio(item) {
+            console.log(item);
+            this.showModal = 'bio';
+            this.isUpdate = true
+            this.bioTitle = item.title;
+            this.bioDesc = item.description
+        },
 
+        async updateBioFiles(id) {
+            console.log(id);
+            try {
+
+                this.isLoading = true;
+                // let formData = new FormData();
+                // formData.append('title', this.bioTitle);
+                // formData.append('description', this.bioDesc);
+
+                // Make POST request to upload the file and data
+                const response = await axios.post(`/bio-container/${id}`, { id });
+
+                // Handle success
+                console.log('Response:', response.data);
+                this.getBioData(); // Update content data
+                this.showModal = false; // Close the modal after successful upload
+                // Reset all data
+                this.bioTitle = '';
+                this.bioDesc = '';
+                this.isLoading = false;
+                this.isUpdate = false
+
+
+            } catch (error) {
+                // Handle error
+                this.isLoading = true;
+
+                console.error('Error:', error);
+            }
+        },
         clickTool(id) {
             if (this.isOpenTool == id) {
                 this.isOpenTool = -1

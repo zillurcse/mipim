@@ -41,10 +41,10 @@ class BioContainerController extends Controller
      */
     public function store(Request $request)
     {
-//        $path = $request->file('file')->storePublicly('public/banner');
+        //        $path = $request->file('file')->storePublicly('public/banner');
         $data['title'] = $request->title;
         $data['description'] = $request->description;
-//        $data['banner_image'] = 'https://mipim-file.s3.amazonaws.com/' . $path;
+        //        $data['banner_image'] = 'https://mipim-file.s3.amazonaws.com/' . $path;
         $banner = BioContainer::create($data);
 
         return response()->json([
@@ -85,6 +85,7 @@ class BioContainerController extends Controller
      */
     public function update(Request $request, $id)
     {
+        dd($request);
         $bioContainer = BioContainer::find($id);
         $bioContainer = $bioContainer->update($request->all());
 

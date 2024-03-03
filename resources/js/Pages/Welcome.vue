@@ -91,7 +91,8 @@
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
                         data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true">
-                            <svg width="21" height="37" viewBox="0 0 21 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="21" height="37" viewBox="0 0 21 37" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_15_110)">
                                     <path
                                         d="M6.0604 18.4297L8.31543 20.8213L21 33.6236L17.6174 37L0.704695 20.1179C-0.281881 19.1331 -0.281881 17.7262 0.704695 16.7414L17.6174 -0.140686L21 3.37643L8.31543 16.038L6.0604 18.4297Z"
@@ -111,7 +112,8 @@
                     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
                         data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true">
-                            <svg width="21" height="37" viewBox="0 0 21 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="21" height="37" viewBox="0 0 21 37" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_15_108)">
                                     <path
                                         d="M14.9396 18.5703L12.6846 16.1787L0 3.37643L3.38255 0L20.2953 16.8821C21.2819 17.8669 21.2819 19.2738 20.2953 20.2586L3.38255 37.1407L0 33.6236L12.6846 20.962L14.9396 18.5703Z"
@@ -135,15 +137,10 @@
                     <div class="row justify-content-center">
                         <div class="col-md-5">
                             <div class="text-box">
-                                <h2>OMAN: ENDLESS HORIZONS</h2>
+                                <h2>{{ bioItems.title }}</h2>
                                 <br>
                                 <p>
-                                    Welcome to the Oman at MIPIM page! Dive into a world where tradition meets innovation,
-                                    and discover the vast array of projects Oman has to offer. From groundbreaking real
-                                    estate developments to sustainable ventures, we're showcasing Oman's commitment to
-                                    growth and prosperity. Explore our projects and learn how Oman is shaping the future of
-                                    investment and development. Join us on this journey to unlock opportunities in one of
-                                    the most dynamic markets in the Middle East.
+                                    {{ bioItems.description }}
                                 </p>
                             </div>
                         </div>
@@ -179,8 +176,8 @@
                                         </defs>
                                     </svg>
 
-                                    <svg v-if="item.type === 'Video (YouTube)'" width="85" height="85" viewBox="0 0 85 85"
-                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <svg v-if="item.type === 'Video (YouTube)'" width="85" height="85"
+                                        viewBox="0 0 85 85" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M37.4168 34.3579L50.6757 42.5L37.4168 50.6477V34.3579Z" fill="#996B4B">
                                         </path>
                                         <path
@@ -188,8 +185,8 @@
                                             fill="#996B4B"></path>
                                     </svg>
 
-                                    <svg v-if="item.type === 'PDF'" width="75" height="85" viewBox="0 0 75 85" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
+                                    <svg v-if="item.type === 'PDF'" width="75" height="85" viewBox="0 0 75 85"
+                                        fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M5.31246 0H50.4501L74.375 23.832V79.6877C74.375 82.6228 71.9951 85.0002 69.0625 85.0002H5.31246C2.37987 85.0002 0 82.6228 0 79.6877V5.31246C0 2.3774 2.38015 0 5.31246 0Z"
                                             fill="#996B4B"></path>
@@ -201,8 +198,8 @@
                                             fill="white"></path>
                                     </svg>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="75"
-                                        height="85" v-if="item.type === 'Documents (word, ppt, excel)'" stroke-width="1.5"
-                                        stroke="#9A5626">
+                                        height="85" v-if="item.type === 'Documents (word, ppt, excel)'"
+                                        stroke-width="1.5" stroke="#9A5626">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
                                     </svg>
@@ -247,16 +244,41 @@ export default {
         return {
             items: [],
             contentItems: [],
+            bioItems: []
 
         };
     },
 
     async mounted() {
         this.getBannerData();
-        this.getContentData()
+        this.getContentData();
+        this.getBioData()
 
     },
     methods: {
+        async getBioData() {
+            await axios.get('/api/bio-container')
+                .then(response => {
+
+                    if (response.status == 200) {
+                        this.bioItems = response.data.data.items
+                        console.log(this.bioItems, 'response.data.data.items');
+
+                    }
+
+                })
+                .catch(error => {
+                    if (error.response.status == 422) {
+                        this.errors = error.response.data.errors;
+                    } else {
+                        // this.toastMessage('error', error, 'check', '', 'times')
+                        console.log(error);
+                    }
+                })
+                .finally(() => {
+
+                })
+        },
         async getBannerData() {
             await axios.get('/api/web/banner')
                 .then(response => {
