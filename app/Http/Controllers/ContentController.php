@@ -88,7 +88,18 @@ class ContentController extends Controller
     {
         //
     }
+    public function update_order(Request $request)
+    {
+        $contents = $request->get('contents');
 
+        foreach ($contents as $index => $content) {
+            $sp = Content::find($content['id']);
+            $sp->order = $index;
+            $sp->save();
+        }
+
+        return response()->json(['status' => 'success', 'message' => 'Content successfully ordered.']);
+    }
     /**
      * Remove the specified resource from storage.
      *

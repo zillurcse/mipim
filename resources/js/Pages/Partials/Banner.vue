@@ -20,7 +20,8 @@
                             <drag class="cursor-pointer" :transfer-data="index" @dragstart="is_dragging = true"
                                 @dragend="is_dragging = false">
 
-                                <figure class="rounded-md overflow-hidden h-60 relative">
+                                <figure class="rounded-md overflow-hidden h-60 relative"
+                                    :class="[is_dragging ? 'is_dragging' : '']">
                                     <v-lazy-image style="border-radius: 9px 9px 0px 0px" :src="item.banner_image"
                                         class="object-cover"
                                         src-placeholder="https://d30komtae77sjh.cloudfront.net/assets/svgs/loading-image.svg" />
@@ -113,11 +114,13 @@
 <script>
 import axios from 'axios';
 import VLazyImage from "v-lazy-image";
+import Vue from 'vue';
 import { Drag, Drop } from 'vue-drag-drop';
 export default {
     components: {
         VLazyImage,
-        Drag, Drop
+        Drag, Drop,
+
 
     },
     data() {
@@ -153,13 +156,14 @@ export default {
 
             axios.post('/api/banner/update_order', { banners: this.items })
                 .then(res => {
+                    // Vue.toasted.show('hola billo');
                     this.$toasted.success(res.data.message, {
                         theme: "toasted-primary",
                         position: "top-center",
-                        duration : 5000
+                        duration: 5000
                     });
-                    this.items = res.data.items;
-                    // console.log('banners', res);
+                    this.getBannerData()
+
                 })
                 .catch(err => {
                     // this.$toasted.show(err.response.data.message, {
