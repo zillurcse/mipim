@@ -235,7 +235,7 @@ export default {
                 // formData.append('description', this.bioDesc);
 
                 // Make POST request to upload the file and data
-                const response = await axios.post(`/bio-container/${id}`, { id });
+                const response = await axios.post(`/api/bio-container/${id}`, { id });
 
                 // Handle success
                 console.log('Response:', response.data);
