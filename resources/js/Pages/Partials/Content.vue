@@ -237,7 +237,7 @@ export default {
                     console.log(res);
 
                 })
-            // console.log(to_index, from_index);
+            console.log(to_index, from_index);
             //alert(`You dropped with data: ${JSON.stringify(data)}`);
         },
         async getContentData() {
