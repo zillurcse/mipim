@@ -14,7 +14,7 @@ class ContentController extends Controller
      */
     public function index()
     {
-        $data['items'] = Content::all();
+        $data['items'] = Content::orderBy('order', 'asc')->get();
 
         return response()->json([
             'status' => 'success',

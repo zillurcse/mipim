@@ -5984,8 +5984,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         });
       })["finally"](function (res) {
         console.log(res);
-      }); // console.log(to_index, from_index);
-      //alert(`You dropped with data: ${JSON.stringify(data)}`);
+      });
+      console.log(to_index, from_index); //alert(`You dropped with data: ${JSON.stringify(data)}`);
     },
     getContentData: function getContentData() {
       var _this3 = this;
