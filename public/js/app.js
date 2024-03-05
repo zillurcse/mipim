@@ -3134,6 +3134,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     type: {
@@ -4810,6 +4811,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -4864,6 +4869,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_Input__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/Input */ "./resources/js/Jetstream/Input.vue");
 /* harmony import */ var _Jetstream_Label__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/Label */ "./resources/js/Jetstream/Label.vue");
 /* harmony import */ var _Jetstream_ValidationErrors__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/ValidationErrors */ "./resources/js/Jetstream/ValidationErrors.vue");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4953,6 +4964,11 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5117,6 +5133,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5177,6 +5202,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_Input__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/Input */ "./resources/js/Jetstream/Input.vue");
 /* harmony import */ var _Jetstream_Label__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/Label */ "./resources/js/Jetstream/Label.vue");
 /* harmony import */ var _Jetstream_ValidationErrors__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/ValidationErrors */ "./resources/js/Jetstream/ValidationErrors.vue");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5382,6 +5412,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_AuthenticationCard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/AuthenticationCard */ "./resources/js/Jetstream/AuthenticationCard.vue");
 /* harmony import */ var _Jetstream_AuthenticationCardLogo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/AuthenticationCardLogo */ "./resources/js/Jetstream/AuthenticationCardLogo.vue");
 /* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -37567,7 +37603,7 @@ var render = function () {
     "button",
     {
       staticClass:
-        "inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150",
+        "inline-flex items-center px-4 py-2 bg-brand border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150",
       attrs: { type: _vm.type },
     },
     [_vm._t("default")],
@@ -40590,7 +40626,15 @@ var render = function () {
         {
           key: "logo",
           fn: function () {
-            return [_c("jet-authentication-card-logo")]
+            return [
+              _c("img", {
+                staticClass: "block h-14 w-14 rounded-lg",
+                attrs: {
+                  src: "https://mipim-file.s3.amazonaws.com/public/logo/DoLc4MkRPKzUaMv3dMvhHwf4HaAsHydBrn3CKDQl.svg",
+                  alt: "",
+                },
+              }),
+            ]
           },
           proxy: true,
         },
@@ -40697,7 +40741,15 @@ var render = function () {
         {
           key: "logo",
           fn: function () {
-            return [_c("jet-authentication-card-logo")]
+            return [
+              _c("img", {
+                staticClass: "block h-14 w-14 rounded-lg",
+                attrs: {
+                  src: "https://mipim-file.s3.amazonaws.com/public/logo/DoLc4MkRPKzUaMv3dMvhHwf4HaAsHydBrn3CKDQl.svg",
+                  alt: "",
+                },
+              }),
+            ]
           },
           proxy: true,
         },
@@ -40707,7 +40759,7 @@ var render = function () {
       _vm._v(" "),
       _c("div", { staticClass: "mb-4 text-sm text-gray-600" }, [
         _vm._v(
-          "\n        Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.\n    "
+          "\n        Forgot your password? No problem. Just let us know your email address and we will email you a password reset\n        link\n        that will allow you to choose a new one.\n    "
         ),
       ]),
       _vm._v(" "),
@@ -40812,7 +40864,15 @@ var render = function () {
         {
           key: "logo",
           fn: function () {
-            return [_c("jet-authentication-card-logo")]
+            return [
+              _c("img", {
+                staticClass: "block h-14 w-14 rounded-lg",
+                attrs: {
+                  src: "https://mipim-file.s3.amazonaws.com/public/logo/DoLc4MkRPKzUaMv3dMvhHwf4HaAsHydBrn3CKDQl.svg",
+                  alt: "",
+                },
+              }),
+            ]
           },
           proxy: true,
         },
@@ -40986,7 +41046,15 @@ var render = function () {
         {
           key: "logo",
           fn: function () {
-            return [_c("jet-authentication-card-logo")]
+            return [
+              _c("img", {
+                staticClass: "block h-14 w-14 rounded-lg",
+                attrs: {
+                  src: "https://mipim-file.s3.amazonaws.com/public/logo/DoLc4MkRPKzUaMv3dMvhHwf4HaAsHydBrn3CKDQl.svg",
+                  alt: "",
+                },
+              }),
+            ]
           },
           proxy: true,
         },
@@ -41233,7 +41301,15 @@ var render = function () {
         {
           key: "logo",
           fn: function () {
-            return [_c("jet-authentication-card-logo")]
+            return [
+              _c("img", {
+                staticClass: "block h-14 w-14 rounded-lg",
+                attrs: {
+                  src: "https://mipim-file.s3.amazonaws.com/public/logo/DoLc4MkRPKzUaMv3dMvhHwf4HaAsHydBrn3CKDQl.svg",
+                  alt: "",
+                },
+              }),
+            ]
           },
           proxy: true,
         },
@@ -41564,7 +41640,15 @@ var render = function () {
         {
           key: "logo",
           fn: function () {
-            return [_c("jet-authentication-card-logo")]
+            return [
+              _c("img", {
+                staticClass: "block h-14 w-14 rounded-lg",
+                attrs: {
+                  src: "https://mipim-file.s3.amazonaws.com/public/logo/DoLc4MkRPKzUaMv3dMvhHwf4HaAsHydBrn3CKDQl.svg",
+                  alt: "",
+                },
+              }),
+            ]
           },
           proxy: true,
         },
@@ -41574,7 +41658,7 @@ var render = function () {
       _vm._v(" "),
       _c("div", { staticClass: "mb-4 text-sm text-gray-600" }, [
         _vm._v(
-          "\n        Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.\n    "
+          "\n        Thanks for signing up! Before getting started, could you verify your email address by clicking on the link\n        we just\n        emailed to you? If you didn't receive the email, we will gladly send you another.\n    "
         ),
       ]),
       _vm._v(" "),
