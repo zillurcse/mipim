@@ -5233,6 +5233,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -5282,17 +5286,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, _callee);
     }))();
   },
+  updated: function updated() {// this.cropImage()
+  },
   methods: {
     getCropImage: function getCropImage() {
+      this.cropImage();
       this.cropImgData = this.cropImg;
       this.isCroping = false;
     },
     cropImage: function cropImage() {
       // get image data for post processing, e.g. upload or setting image src
-      this.cropImg = this.$refs.cropper.getCroppedCanvas({
-        width: 1036,
-        height: 350
-      }).toDataURL(); // this.$refs.cropper.getCroppedCanvas({ width: 1280, height: 720 }).toBlob((blob) => {
+      // this.cropImg = this.$refs.cropper.getCroppedCanvas({ width: 1036, height: 350 }).toDataURL();
+      this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL(); // this.$refs.cropper.getCroppedCanvas({ width: 1280, height: 720 }).toBlob((blob) => {
       //     this.cropImg = blob
       // });
     },
@@ -5342,8 +5347,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           var croppedFile = new File([_this2.dataURItoBlob(event.target.result)], file.name, {
             type: file.type
           }); // Now you can use 'croppedFile' as the cropped image file
-
-          console.log(croppedFile);
+          // console.log(croppedFile);
         };
 
         reader.readAsDataURL(file);
@@ -5437,11 +5441,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var byteCharacters, byteNumbers, i, byteArray, blob, file;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                console.log(_this5.cropImg); // try {
+                // console.log(this.cropImg);
+                byteCharacters = atob(_this5.cropImg);
+                byteNumbers = new Array(byteCharacters.length);
+
+                for (i = 0; i < byteCharacters.length; i++) {
+                  byteNumbers[i] = byteCharacters.charCodeAt(i);
+                }
+
+                byteArray = new Uint8Array(byteNumbers);
+                blob = new Blob([byteArray], {
+                  type: 'image/png'
+                }); // Adjust the MIME type as per your data
+                // Create File object from Blob
+
+                file = new File([blob], 'filename.png', {
+                  type: 'image/png'
+                });
+                console.log(file, 'file'); // try {
                 //     if (this.cropImgData === null) {
                 //         this.$toasted.show("please fill up all fields", {
                 //             theme: "toasted-primary",
@@ -5468,7 +5490,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 //     console.error("Error:", error);
                 // }
 
-              case 1:
+              case 7:
               case "end":
                 return _context3.stop();
             }
@@ -46068,12 +46090,14 @@ var render = function () {
                     ])
                   : _vm._e(),
                 _vm._v(" "),
-                _c("div", { staticClass: "h-64" }, [
-                  _c("img", {
-                    staticClass: "object-cover",
-                    attrs: { src: _vm.cropImgData, alt: "" },
-                  }),
-                ]),
+                _vm.cropImgData
+                  ? _c("div", { staticClass: "h-64" }, [
+                      _c("img", {
+                        staticClass: "object-cover",
+                        attrs: { src: _vm.cropImgData, alt: "" },
+                      }),
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
                 _c("div", {}, [
                   _c(

@@ -89,6 +89,10 @@
                     </div>
                     <div class="mb-6" v-if="isCroping">
                         <section class="cropper-area">
+                            <!-- <vue-cropper ref="cropper" :guides="true" :view-mode="2" drag-mode="crop" @crop="cropImage"
+                                :src="bannerImage" alt="Source Image" :cropmove="cropImage" :aspectRatio="3 / 1"
+                                :initialAspectRatio="3 / 1" :autoCropArea="0.8" :zoomable="true" :autoCrop="true">
+                            </vue-cropper> -->
                             <vue-cropper ref="cropper" :src="bannerImage" alt="Source Image" :cropmove="cropImage"
                                 :aspectRatio="16 / 9" :initialAspectRatio="16 / 9" :autoCropArea="1" :zoomable="false">
                             </vue-cropper>
@@ -102,7 +106,7 @@
                             </a>
                         </section>
                     </div>
-                    <div class="h-64">
+                    <div class="h-64" v-if="cropImgData">
                         <img :src="cropImgData" alt="" class="object-cover">
                     </div>
                     <!-- <attachment-list :tempAttachments="getTempAttachments" :attachments="getAttachments" />
@@ -164,17 +168,22 @@ export default {
     async mounted() {
         this.getBannerData();
     },
-
+    updated() {
+        // this.cropImage()
+    },
     methods: {
+
         getCropImage() {
+            this.cropImage()
+
             this.cropImgData = this.cropImg
             this.isCroping = false;
-
         },
         cropImage() {
-            // get image data for post processing, e.g. upload or setting image src
-            this.cropImg = this.$refs.cropper.getCroppedCanvas({ width: 1036, height: 350 }).toDataURL();
 
+            // get image data for post processing, e.g. upload or setting image src
+            // this.cropImg = this.$refs.cropper.getCroppedCanvas({ width: 1036, height: 350 }).toDataURL();
+            this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL();
 
             // this.$refs.cropper.getCroppedCanvas({ width: 1280, height: 720 }).toBlob((blob) => {
             //     this.cropImg = blob
@@ -231,7 +240,7 @@ export default {
                     const croppedFile = new File([this.dataURItoBlob(event.target.result)], file.name, { type: file.type });
 
                     // Now you can use 'croppedFile' as the cropped image file
-                    console.log(croppedFile);
+                    // console.log(croppedFile);
                 };
 
                 reader.readAsDataURL(file);
@@ -314,8 +323,18 @@ export default {
         },
 
         async uploadFiles() {
-            console.log(this.cropImg);
+            // console.log(this.cropImg);
+            const byteCharacters = atob(this.cropImg);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            const blob = new Blob([byteArray], { type: 'image/png' }); // Adjust the MIME type as per your data
 
+            // Create File object from Blob
+            const file = new File([blob], 'filename.png', { type: 'image/png' });
+            console.log(file, 'file');
             // try {
             //     if (this.cropImgData === null) {
             //         this.$toasted.show("please fill up all fields", {
