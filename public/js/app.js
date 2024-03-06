@@ -5233,10 +5233,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -5441,61 +5437,75 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var byteCharacters, byteNumbers, i, byteArray, blob, file;
+        var formdata, response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                // console.log(this.cropImg);
-                byteCharacters = atob(_this5.cropImg);
-                byteNumbers = new Array(byteCharacters.length);
+                _context3.prev = 0;
 
-                for (i = 0; i < byteCharacters.length; i++) {
-                  byteNumbers[i] = byteCharacters.charCodeAt(i);
+                if (!(_this5.cropImgData === null)) {
+                  _context3.next = 4;
+                  break;
                 }
 
-                byteArray = new Uint8Array(byteNumbers);
-                blob = new Blob([byteArray], {
-                  type: 'image/png'
-                }); // Adjust the MIME type as per your data
-                // Create File object from Blob
-
-                file = new File([blob], 'filename.png', {
-                  type: 'image/png'
+                _this5.$toasted.show("please fill up all fields", {
+                  theme: "toasted-primary",
+                  position: "top-center",
+                  duration: 5000
                 });
-                console.log(file, 'file'); // try {
-                //     if (this.cropImgData === null) {
-                //         this.$toasted.show("please fill up all fields", {
-                //             theme: "toasted-primary",
-                //             position: "top-center",
-                //             duration: 5000
-                //         });
-                //         return false
-                //     }
-                //     // Create FormData and append all data
-                //     this.isLoading = true;
-                //     let formdata = new FormData();
-                //     formdata.append("file", this.cropImg);
-                //     // Make POST request to upload the file and data
-                //     const response = await axios.post("/api/banner", formdata);
-                //     // Handle success
-                //     console.log("Response:", response.data);
-                //     this.getBannerData();
-                //     this.showModal = false;
-                //     this.isLoading = false;
-                //     this.bannerImage = null;
-                // } catch (error) {
-                //     // Handle error
-                //     this.isLoading = true;
-                //     console.error("Error:", error);
-                // }
 
-              case 7:
+                return _context3.abrupt("return", false);
+
+              case 4:
+                // Create FormData and append all data
+                _this5.isLoading = true;
+                formdata = new FormData();
+                formdata.append("file", _this5.cropImg); // Make POST request to upload the file and data
+
+                _context3.next = 9;
+                return axios__WEBPACK_IMPORTED_MODULE_5__["default"].post("/api/banner", formdata);
+
+              case 9:
+                response = _context3.sent;
+
+                // console.log(response.data)
+                if (response.status === 200) {
+                  // console.log(response.data.status)
+                  // console.log(response.data)
+                  _this5.getBannerData();
+
+                  _this5.showModal = false;
+                  _this5.isLoading = false;
+                  _this5.bannerImage = null;
+
+                  _this5.$toasted.show(response.data.message, {
+                    theme: "toasted-primary",
+                    position: "top-center",
+                    duration: 5000
+                  });
+
+                  _this5.bannerImage = '';
+                  _this5.cropImg = '';
+                  _this5.cropImgData = '';
+                }
+
+                _context3.next = 17;
+                break;
+
+              case 13:
+                _context3.prev = 13;
+                _context3.t0 = _context3["catch"](0);
+                // Handle error
+                _this5.isLoading = true;
+                console.error("Error:", _context3.t0);
+
+              case 17:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3);
+        }, _callee3, null, [[0, 13]]);
       }))();
     },
     deleteBannerItem: function deleteBannerItem(id) {
@@ -5503,8 +5513,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       // Send a DELETE request to the backend with the item's ID
       axios__WEBPACK_IMPORTED_MODULE_5__["default"]["delete"]("/api/banner/".concat(id)).then(function (response) {
-        console.log(response.data.message);
-
+        // console.log(response.data.message);
         _this6.getBannerData(); // Assuming you want to remove the item from the frontend after successful deletion
         // You can trigger a method to refresh the list of items or remove the deleted item from the UI
 
@@ -46038,8 +46047,8 @@ var render = function () {
                               src: _vm.bannerImage,
                               alt: "Source Image",
                               cropmove: _vm.cropImage,
-                              aspectRatio: 16 / 9,
-                              initialAspectRatio: 16 / 9,
+                              aspectRatio: 3 / 1,
+                              initialAspectRatio: 3 / 1,
                               autoCropArea: 1,
                               zoomable: false,
                             },
