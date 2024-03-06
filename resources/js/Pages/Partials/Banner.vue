@@ -314,37 +314,37 @@ export default {
         },
 
         async uploadFiles() {
-            // console.log(this.cropImg);
+            console.log(this.cropImg);
 
-            try {
-                if (this.cropImgData === null) {
-                    this.$toasted.show("please fill up all fields", {
-                        theme: "toasted-primary",
-                        position: "top-center",
-                        duration: 5000
-                    });
-                    return false
-                }
-                // Create FormData and append all data
-                this.isLoading = true;
-                let formdata = new FormData();
-                formdata.append("file", this.cropImg);
+            // try {
+            //     if (this.cropImgData === null) {
+            //         this.$toasted.show("please fill up all fields", {
+            //             theme: "toasted-primary",
+            //             position: "top-center",
+            //             duration: 5000
+            //         });
+            //         return false
+            //     }
+            //     // Create FormData and append all data
+            //     this.isLoading = true;
+            //     let formdata = new FormData();
+            //     formdata.append("file", this.cropImg);
 
-                // Make POST request to upload the file and data
-                const response = await axios.post("/api/banner", formdata);
+            //     // Make POST request to upload the file and data
+            //     const response = await axios.post("/api/banner", formdata);
 
-                // Handle success
-                console.log("Response:", response.data);
-                this.getBannerData();
-                this.showModal = false;
-                this.isLoading = false;
-                this.bannerImage = null;
-            } catch (error) {
-                // Handle error
-                this.isLoading = true;
+            //     // Handle success
+            //     console.log("Response:", response.data);
+            //     this.getBannerData();
+            //     this.showModal = false;
+            //     this.isLoading = false;
+            //     this.bannerImage = null;
+            // } catch (error) {
+            //     // Handle error
+            //     this.isLoading = true;
 
-                console.error("Error:", error);
-            }
+            //     console.error("Error:", error);
+            // }
 
         },
 

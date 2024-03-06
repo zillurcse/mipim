@@ -6,6 +6,7 @@ use App\Models\Banner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class BannerController extends Controller
@@ -46,16 +47,20 @@ class BannerController extends Controller
     {
         $image = $request->file;
 
-        $extension = explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
-        $replace = substr($image, 0, strpos($image, ',')+1);
-        $image = str_replace($replace, '', $image);
-        $image = str_replace(' ', '+', $image);
-        $image_name = time() . '.' . $extension;
-        $res = Storage::disk('s3')->put('public/banner/'.$image_name, base64_decode($image), 'public');
-        
-        if ($res){
+// Extract file extension using pathinfo
+        $extension = pathinfo($image, PATHINFO_EXTENSION);
+        $imageData = substr($image, strpos($image, ',') + 1);
+        $imageData = str_replace(' ', '+', $imageData);
+// Generate a unique image name
+        $imageName = Str::random(40) . '.' . $extension;
+
+// Store the image in the S3 bucket with public visibility
+        $res = Storage::disk('s3')->put('public/banner/' . $imageName, base64_decode($imageData), 'public');
+
+        if ($res) {
+            // Image successfully uploaded
             $data['title'] = 'Banner';
-            $data['banner_image'] = 'https://mipim-file.s3.amazonaws.com/' . 'public/banner/'.$image_name;
+            $data['banner_image'] = 'https://mipim-file.s3.amazonaws.com/public/banner/' . $imageName;
             $banner = Banner::create($data);
 
             return response()->json([
@@ -63,12 +68,14 @@ class BannerController extends Controller
                 'message' => 'Banner has been updated',
                 'data' => $banner
             ]);
-        }else{
+        } else {
+            // Error during image upload
             return response()->json([
-                'status' => 'success',
-                'message' => 'Error'
+                'status' => 'error',
+                'message' => 'Error storing the banner image'
             ]);
         }
+
     }
 
     /**

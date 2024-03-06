@@ -5437,61 +5437,43 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var formdata, response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _context3.prev = 0;
+                console.log(_this5.cropImg); // try {
+                //     if (this.cropImgData === null) {
+                //         this.$toasted.show("please fill up all fields", {
+                //             theme: "toasted-primary",
+                //             position: "top-center",
+                //             duration: 5000
+                //         });
+                //         return false
+                //     }
+                //     // Create FormData and append all data
+                //     this.isLoading = true;
+                //     let formdata = new FormData();
+                //     formdata.append("file", this.cropImg);
+                //     // Make POST request to upload the file and data
+                //     const response = await axios.post("/api/banner", formdata);
+                //     // Handle success
+                //     console.log("Response:", response.data);
+                //     this.getBannerData();
+                //     this.showModal = false;
+                //     this.isLoading = false;
+                //     this.bannerImage = null;
+                // } catch (error) {
+                //     // Handle error
+                //     this.isLoading = true;
+                //     console.error("Error:", error);
+                // }
 
-                if (!(_this5.cropImgData === null)) {
-                  _context3.next = 4;
-                  break;
-                }
-
-                _this5.$toasted.show("please fill up all fields", {
-                  theme: "toasted-primary",
-                  position: "top-center",
-                  duration: 5000
-                });
-
-                return _context3.abrupt("return", false);
-
-              case 4:
-                // Create FormData and append all data
-                _this5.isLoading = true;
-                formdata = new FormData();
-                formdata.append("file", _this5.cropImg); // Make POST request to upload the file and data
-
-                _context3.next = 9;
-                return axios__WEBPACK_IMPORTED_MODULE_5__["default"].post("/api/banner", formdata);
-
-              case 9:
-                response = _context3.sent;
-                // Handle success
-                console.log("Response:", response.data);
-
-                _this5.getBannerData();
-
-                _this5.showModal = false;
-                _this5.isLoading = false;
-                _this5.bannerImage = null;
-                _context3.next = 21;
-                break;
-
-              case 17:
-                _context3.prev = 17;
-                _context3.t0 = _context3["catch"](0);
-                // Handle error
-                _this5.isLoading = true;
-                console.error("Error:", _context3.t0);
-
-              case 21:
+              case 1:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[0, 17]]);
+        }, _callee3);
       }))();
     },
     deleteBannerItem: function deleteBannerItem(id) {
