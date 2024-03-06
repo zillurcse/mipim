@@ -89,10 +89,6 @@
                     </div>
                     <div class="mb-6" v-if="isCroping">
                         <section class="cropper-area">
-                            <!-- <vue-cropper ref="cropper" :guides="true" :view-mode="2" drag-mode="crop" @crop="cropImage"
-                                :src="bannerImage" alt="Source Image" :cropmove="cropImage" :aspectRatio="3 / 1"
-                                :initialAspectRatio="3 / 1" :autoCropArea="0.8" :zoomable="true" :autoCrop="true">
-                            </vue-cropper> -->
                             <vue-cropper ref="cropper" :src="bannerImage" alt="Source Image" :cropmove="cropImage"
                                 :aspectRatio="3 / 1" :initialAspectRatio="3 / 1" :autoCropArea="1" :zoomable="false">
                             </vue-cropper>
@@ -323,47 +319,48 @@ export default {
         },
 
         async uploadFiles() {
-            // console.log(this.cropImg);
-            const byteCharacters = atob(this.cropImg);
-            const byteNumbers = new Array(byteCharacters.length);
-            for (let i = 0; i < byteCharacters.length; i++) {
-                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            try {
+                if (this.cropImgData === null) {
+                    this.$toasted.show("please fill up all fields", {
+                        theme: "toasted-primary",
+                        position: "top-center",
+                        duration: 5000
+                    });
+                    return false
+                }
+                // Create FormData and append all data
+                this.isLoading = true;
+                let formdata = new FormData();
+                formdata.append("file", this.cropImg);
+
+                // Make POST request to upload the file and data
+                const response = await axios.post("/api/banner", formdata);
+                // console.log(response.data)
+                if (response.status===200){
+                    // console.log(response.data.status)
+                    // console.log(response.data)
+                    this.getBannerData();
+                    this.showModal = false;
+                    this.isLoading = false;
+                    this.bannerImage = null;
+
+                    this.$toasted.show(response.data.message, {
+                        theme: "toasted-primary",
+                        position: "top-center",
+                        duration: 5000
+                    });
+
+                    this.bannerImage = '';
+                    this.cropImg = '';
+                    this.cropImgData = '';
+                }
+
+            } catch (error) {
+                // Handle error
+                this.isLoading = true;
+
+                console.error("Error:", error);
             }
-            const byteArray = new Uint8Array(byteNumbers);
-            const blob = new Blob([byteArray], { type: 'image/png' }); // Adjust the MIME type as per your data
-
-            // Create File object from Blob
-            const file = new File([blob], 'filename.png', { type: 'image/png' });
-            console.log(file, 'file');
-            // try {
-            //     if (this.cropImgData === null) {
-            //         this.$toasted.show("please fill up all fields", {
-            //             theme: "toasted-primary",
-            //             position: "top-center",
-            //             duration: 5000
-            //         });
-            //         return false
-            //     }
-            //     // Create FormData and append all data
-            //     this.isLoading = true;
-            //     let formdata = new FormData();
-            //     formdata.append("file", this.cropImg);
-
-            //     // Make POST request to upload the file and data
-            //     const response = await axios.post("/api/banner", formdata);
-
-            //     // Handle success
-            //     console.log("Response:", response.data);
-            //     this.getBannerData();
-            //     this.showModal = false;
-            //     this.isLoading = false;
-            //     this.bannerImage = null;
-            // } catch (error) {
-            //     // Handle error
-            //     this.isLoading = true;
-
-            //     console.error("Error:", error);
-            // }
 
         },
 
@@ -372,7 +369,7 @@ export default {
             axios
                 .delete(`/api/banner/${id}`)
                 .then((response) => {
-                    console.log(response.data.message);
+                    // console.log(response.data.message);
                     this.getBannerData();
 
                     // Assuming you want to remove the item from the frontend after successful deletion

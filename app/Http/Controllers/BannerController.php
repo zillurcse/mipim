@@ -6,6 +6,7 @@ use App\Models\Banner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class BannerController extends Controller
@@ -44,16 +45,37 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
-        $path = $request->file('file')->storePublicly('public/banner');
-        $data['title'] = 'Banner';
-        $data['banner_image'] = 'https://mipim-file.s3.amazonaws.com/' . $path;
-        $banner = Banner::create($data);
+        $image = $request->file;
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Banner has been updated',
-            'data' => $banner
-        ]);
+// Extract file extension using pathinfo
+        $extension = pathinfo($image, PATHINFO_EXTENSION);
+        $imageData = substr($image, strpos($image, ',') + 1);
+        $imageData = str_replace(' ', '+', $imageData);
+// Generate a unique image name
+        $imageName = Str::random(40) . '.' . $extension;
+
+// Store the image in the S3 bucket with public visibility
+        $res = Storage::disk('s3')->put('public/banner/' . $imageName, base64_decode($imageData), 'public');
+
+        if ($res) {
+            // Image successfully uploaded
+            $data['title'] = 'Banner';
+            $data['banner_image'] = 'https://mipim-file.s3.amazonaws.com/public/banner/' . $imageName;
+            $banner = Banner::create($data);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Banner has been updated',
+                'data' => $banner
+            ]);
+        } else {
+            // Error during image upload
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Error storing the banner image'
+            ]);
+        }
+
     }
 
     /**
