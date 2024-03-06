@@ -1,11 +1,17 @@
 <template>
     <jet-authentication-card>
         <template #logo>
-            <jet-authentication-card-logo />
+            <!-- <jet-authentication-card-logo />
+             -->
+            <img class="block h-14 w-14 rounded-lg"
+                src="https://mipim-file.s3.amazonaws.com/public/logo/DoLc4MkRPKzUaMv3dMvhHwf4HaAsHydBrn3CKDQl.svg"
+                alt="">
         </template>
 
         <div class="mb-4 text-sm text-gray-600">
-            Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.
+            Forgot your password? No problem. Just let us know your email address and we will email you a password reset
+            link
+            that will allow you to choose a new one.
         </div>
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
@@ -30,39 +36,39 @@
 </template>
 
 <script>
-    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
-    import JetButton from '@/Jetstream/Button'
-    import JetInput from '@/Jetstream/Input'
-    import JetLabel from '@/Jetstream/Label'
-    import JetValidationErrors from '@/Jetstream/ValidationErrors'
+import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
+import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
+import JetButton from '@/Jetstream/Button'
+import JetInput from '@/Jetstream/Input'
+import JetLabel from '@/Jetstream/Label'
+import JetValidationErrors from '@/Jetstream/ValidationErrors'
 
-    export default {
-        components: {
-            JetAuthenticationCard,
-            JetAuthenticationCardLogo,
-            JetButton,
-            JetInput,
-            JetLabel,
-            JetValidationErrors
-        },
+export default {
+    components: {
+        JetAuthenticationCard,
+        JetAuthenticationCardLogo,
+        JetButton,
+        JetInput,
+        JetLabel,
+        JetValidationErrors
+    },
 
-        props: {
-            status: String
-        },
+    props: {
+        status: String
+    },
 
-        data() {
-            return {
-                form: this.$inertia.form({
-                    email: ''
-                })
-            }
-        },
+    data() {
+        return {
+            form: this.$inertia.form({
+                email: ''
+            })
+        }
+    },
 
-        methods: {
-            submit() {
-                this.form.post(this.route('password.email'))
-            }
+    methods: {
+        submit() {
+            this.form.post(this.route('password.email'))
         }
     }
+}
 </script>

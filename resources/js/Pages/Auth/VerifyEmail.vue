@@ -1,14 +1,19 @@
 <template>
     <jet-authentication-card>
         <template #logo>
-            <jet-authentication-card-logo />
+            <!-- <jet-authentication-card-logo /> -->
+            <img class="block h-14 w-14 rounded-lg"
+                src="https://mipim-file.s3.amazonaws.com/public/logo/DoLc4MkRPKzUaMv3dMvhHwf4HaAsHydBrn3CKDQl.svg"
+                alt="">
         </template>
 
         <div class="mb-4 text-sm text-gray-600">
-            Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.
+            Thanks for signing up! Before getting started, could you verify your email address by clicking on the link
+            we just
+            emailed to you? If you didn't receive the email, we will gladly send you another.
         </div>
 
-        <div class="mb-4 font-medium text-sm text-green-600" v-if="verificationLinkSent" >
+        <div class="mb-4 font-medium text-sm text-green-600" v-if="verificationLinkSent">
             A new verification link has been sent to the email address you provided during registration.
         </div>
 
@@ -18,44 +23,45 @@
                     Resend Verification Email
                 </jet-button>
 
-                <inertia-link :href="route('logout')" method="post" as="button" class="underline text-sm text-gray-600 hover:text-gray-900">Logout</inertia-link>
+                <inertia-link :href="route('logout')" method="post" as="button"
+                    class="underline text-sm text-gray-600 hover:text-gray-900">Logout</inertia-link>
             </div>
         </form>
     </jet-authentication-card>
 </template>
 
 <script>
-    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
-    import JetButton from '@/Jetstream/Button'
+import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
+import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
+import JetButton from '@/Jetstream/Button'
 
-    export default {
-        components: {
-            JetAuthenticationCard,
-            JetAuthenticationCardLogo,
-            JetButton,
+export default {
+    components: {
+        JetAuthenticationCard,
+        JetAuthenticationCardLogo,
+        JetButton,
+    },
+
+    props: {
+        status: String
+    },
+
+    data() {
+        return {
+            form: this.$inertia.form()
+        }
+    },
+
+    methods: {
+        submit() {
+            this.form.post(this.route('verification.send'))
         },
+    },
 
-        props: {
-            status: String
-        },
-
-        data() {
-            return {
-                form: this.$inertia.form()
-            }
-        },
-
-        methods: {
-            submit() {
-                this.form.post(this.route('verification.send'))
-            },
-        },
-
-        computed: {
-            verificationLinkSent() {
-                return this.status === 'verification-link-sent';
-            }
+    computed: {
+        verificationLinkSent() {
+            return this.status === 'verification-link-sent';
         }
     }
+}
 </script>
