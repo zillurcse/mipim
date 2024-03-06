@@ -44,16 +44,31 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
-        $path = $request->file('file')->storePublicly('public/banner');
-        $data['title'] = 'Banner';
-        $data['banner_image'] = 'https://mipim-file.s3.amazonaws.com/' . $path;
-        $banner = Banner::create($data);
+        $image = $request->file;
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Banner has been updated',
-            'data' => $banner
-        ]);
+        $extension = explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+        $replace = substr($image, 0, strpos($image, ',')+1);
+        $image = str_replace($replace, '', $image);
+        $image = str_replace(' ', '+', $image);
+        $image_name = time() . '.' . $extension;
+        $res = Storage::disk('s3')->put('public/banner/'.$image_name, base64_decode($image), 'public');
+        
+        if ($res){
+            $data['title'] = 'Banner';
+            $data['banner_image'] = 'https://mipim-file.s3.amazonaws.com/' . 'public/banner/'.$image_name;
+            $banner = Banner::create($data);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Banner has been updated',
+                'data' => $banner
+            ]);
+        }else{
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Error'
+            ]);
+        }
     }
 
     /**
