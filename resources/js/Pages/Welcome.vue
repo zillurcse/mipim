@@ -38,9 +38,9 @@
     <!--        </div>-->
     <!--    </div>-->
     <div>
-        <main>
+        <main class="container mx-auto bg-white p-0">
             <header>
-                <nav class="navbar navbar-expand-xl bg-transparent text-brand container main-nav">
+                <nav class="navbar navbar-expand-xl bg-transparent text-brand container main-nav px-4">
                     <Link class="navbar-brand text-brand" href="/">
                     <img src="https://mipim-file.s3.amazonaws.com/public/logo/gMYl3ElSYwvgWPzF73kSMk3FQCIRvuoe3P79AkrN.svg"
                         alt="" />
@@ -135,7 +135,7 @@
             <section class="text-section">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-md-5">
+                        <div class="col-md-10">
                             <div class="text-box">
                                 <h2>{{ bioItems.title }}</h2>
                                 <br>

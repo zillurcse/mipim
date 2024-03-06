@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'Zaha';
-    src: url('./assets/Font/Zaha\ Hadid\ Sans.otf') format('woff2'),
-        url('./assets/Font/Zaha\ Hadid\ Sans.ttf') format('woff');
+    src: url('../Font/Zaha\ Hadid\ Sans.otf') format('woff2'),
+        url('../Font/Zaha\ Hadid\ Sans.ttf') format('woff');
     /* Add more src lines for other font formats if needed */
 }
 
@@ -12,7 +12,8 @@
 }
 
 body {
-    font-family: "Zaha", sans-serif;
+    font-family: "Zaha", sans-serif !important;
+    background-color: #F5F5F5;
 }
 
 img {

@@ -62,7 +62,7 @@
             <div class="modal" v-if="showModal === 'banner'">
                 <div class="modal-overlay" @click="closeModal"></div>
                 <div class="modal-content">
-                    <div class="mb-6">
+                    <div class="mb-6" v-if="!isCroping && !cropImgData">
                         <label for="#" class="text-sm text-gray-600 block mb-1 font-semibold">Choose Banner</label>
 
                         <div class="flex items-center justify-center w-full">
@@ -83,9 +83,27 @@
                                         SVG, PNG, JPG or GIF (MAX. 800x400px)
                                     </p>
                                 </div>
-                                <input id="file" type="file" class="hidden" @change="handleFileChange" />
+                                <input id="file" type="file" class="hidden" @change="setImage" />
                             </label>
                         </div>
+                    </div>
+                    <div class="mb-6" v-if="isCroping">
+                        <section class="cropper-area">
+                            <vue-cropper ref="cropper" :src="bannerImage" alt="Source Image" :cropmove="cropImage"
+                                :aspectRatio="16 / 9" :initialAspectRatio="16 / 9" :autoCropArea="1" :zoomable="false">
+                            </vue-cropper>
+                            <a href="#" role="button" @click.prevent="getCropImage"
+                                class="text-white flex items-center justify-center h-12 gap-4 bg-brand hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Crop
+                            </a>
+                            <a href="#" role="button" @click.prevent="reset"
+                                class="text-white flex items-center justify-center h-12 gap-4 bg-brand hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Reset
+                            </a>
+                        </section>
+                    </div>
+                    <div class="h-64">
+                        <img :src="cropImgData" alt="" class="object-cover">
                     </div>
                     <!-- <attachment-list :tempAttachments="getTempAttachments" :attachments="getAttachments" />
                                     Submit button -->
@@ -114,23 +132,25 @@
 <script>
 import axios from 'axios';
 import VLazyImage from "v-lazy-image";
-import Vue from 'vue';
 import { Drag, Drop } from 'vue-drag-drop';
+import VueCropper from 'vue-cropperjs';
+import 'cropperjs/dist/cropper.css';
 export default {
     components: {
         VLazyImage,
         Drag, Drop,
-
+        VueCropper,
 
     },
     data() {
         return {
             is_dragging: false,
-
+            isCroping: false,
             over: false,
             drag: false,
-
-
+            imgSrc: '/assets/images/berserk.jpg',
+            cropImg: '',
+            cropImgData: null,
             items: [],
             selectedTab: "bio",
             showModal: "",
@@ -146,7 +166,92 @@ export default {
     },
 
     methods: {
+        getCropImage() {
+            this.cropImgData = this.cropImg
+            this.isCroping = false;
 
+        },
+        cropImage() {
+            // get image data for post processing, e.g. upload or setting image src
+            this.cropImg = this.$refs.cropper.getCroppedCanvas({ width: 1036, height: 350 }).toDataURL();
+
+
+            // this.$refs.cropper.getCroppedCanvas({ width: 1280, height: 720 }).toBlob((blob) => {
+            //     this.cropImg = blob
+            // });
+
+
+
+        },
+        reset() {
+            this.$refs.cropper.reset();
+        },
+        // setImage(e) {
+        //     const file = e.target.files[0];
+        //     this.isCroping = true;
+        //     if (file.type.indexOf('image/') === -1) {
+        //         alert('Please select an image file');
+        //         return;
+        //     }
+
+        //     if (typeof FileReader === 'function') {
+        //         const reader = new FileReader();
+
+        //         reader.onload = (event) => {
+        //             this.bannerImage = event.target.result;
+        //             // rebuild cropperjs with the updated source
+        //             this.$refs.cropper.replace(event.target.result);
+        //         };
+
+        //         reader.readAsDataURL(file);
+        //     } else {
+        //         alert('Sorry, FileReader API not supported');
+        //     }
+        // },
+        setImage(e) {
+            const file = e.target.files[0];
+            this.isCroping = true;
+
+            if (file.type.indexOf('image/') === -1) {
+                alert('Please select an image file');
+                return;
+            }
+
+            if (typeof FileReader === 'function') {
+                const reader = new FileReader();
+
+                reader.onload = (event) => {
+                    // Update bannerImage with the cropped result
+                    this.bannerImage = event.target.result;
+
+                    // Rebuild cropperjs with the updated source
+                    this.$refs.cropper.replace(event.target.result);
+
+                    // Create a new File object with the cropped data
+                    const croppedFile = new File([this.dataURItoBlob(event.target.result)], file.name, { type: file.type });
+
+                    // Now you can use 'croppedFile' as the cropped image file
+                    console.log(croppedFile);
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                alert('Sorry, FileReader API not supported');
+            }
+        },
+
+        // Helper function to convert data URI to Blob
+        dataURItoBlob(dataURI) {
+            const byteString = atob(dataURI.split(',')[1]);
+            const ab = new ArrayBuffer(byteString.length);
+            const ia = new Uint8Array(ab);
+
+            for (let i = 0; i < byteString.length; i++) {
+                ia[i] = byteString.charCodeAt(i);
+            }
+
+            return new Blob([ab], { type: 'image/png' }); // Adjust 'image/png' based on the image type
+        },
         handleDrop(to_index, from_index) {
             var temp = this.items[to_index];
 
@@ -209,35 +314,38 @@ export default {
         },
 
         async uploadFiles() {
-            try {
-                if (this.bannerImage === null) {
-                    this.$toasted.show("please fill up all fields", {
-                        theme: "toasted-primary",
-                        position: "top-center",
-                        duration: 5000
-                    });
-                    return false
-                }
-                // Create FormData and append all data
-                this.isLoading = true;
-                let formdata = new FormData();
-                formdata.append("file", this.bannerImage);
+            console.log(this.cropImg);
 
-                // Make POST request to upload the file and data
-                const response = await axios.post("/api/banner", formdata);
+            // try {
+            //     if (this.cropImgData === null) {
+            //         this.$toasted.show("please fill up all fields", {
+            //             theme: "toasted-primary",
+            //             position: "top-center",
+            //             duration: 5000
+            //         });
+            //         return false
+            //     }
+            //     // Create FormData and append all data
+            //     this.isLoading = true;
+            //     let formdata = new FormData();
+            //     formdata.append("file", this.cropImg);
 
-                // Handle success
-                console.log("Response:", response.data);
-                this.getBannerData();
-                this.showModal = false;
-                this.isLoading = false;
-                this.bannerImage = null;
-            } catch (error) {
-                // Handle error
-                this.isLoading = true;
+            //     // Make POST request to upload the file and data
+            //     const response = await axios.post("/api/banner", formdata);
 
-                console.error("Error:", error);
-            }
+            //     // Handle success
+            //     console.log("Response:", response.data);
+            //     this.getBannerData();
+            //     this.showModal = false;
+            //     this.isLoading = false;
+            //     this.bannerImage = null;
+            // } catch (error) {
+            //     // Handle error
+            //     this.isLoading = true;
+
+            //     console.error("Error:", error);
+            // }
+
         },
 
         deleteBannerItem(id) {
@@ -272,4 +380,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.cropper-area {
+    width: 614px;
+}
+</style>
