@@ -125,6 +125,7 @@
                                     <input id="file" type="file" class="hidden" @change="handleContentFileChange" />
                                 </label>
                             </div>
+                            <p class="text-red-500" v-if="fileTypeError">{{ fileTypeError }}</p>
 
 
                         </div>
@@ -208,7 +209,7 @@ export default {
             tempAttachments: [],
             attachments: [],
 
-
+            fileTypeError: ''
         }
     },
     async mounted() {
@@ -300,12 +301,38 @@ export default {
 
 
         handleContentFileChange(event) {
+            const file = event.target.files[0];
+            const allowedTypes = {
+                'PDF': 'application/pdf',
+                'Documents (word, ppt, excel)': ['application/msword', 'application/vnd.ms-powerpoint', 'application/vnd.ms-excel'],
+                'Images': ['image/jpeg', 'image/png', 'image/gif']
+            };
 
-            this.contentFile = event.target.files[0];
+            const selectedType = this.type;
+            const allowedType = allowedTypes[selectedType];
+
+
+
+            // Check if the selected type requires validation
+            if (selectedType !== 'Video (YouTube)' && selectedType !== 'URLs' && selectedType !== 'Social links') {
+                if (Array.isArray(allowedType) && !allowedType.includes(file.type)) {
+                    this.fileTypeError = `Only ${allowedType.join(', ')} files are allowed for ${selectedType}.`;
+                    return;
+                }
+
+                if (!Array.isArray(allowedType) && file.type !== allowedType) {
+                    this.fileTypeError = `Only ${allowedType} files are allowed for ${selectedType}.`;
+                    return;
+                }
+            }
+
+            // Reset error message if file type is valid
+            this.fileTypeError = '';
+
+            this.contentFile = file;
             console.log(this.contentFile);
-
-        },
-
+        }
+        ,
         async uploadContentFiles() {
             try {
                 if (this.title === "" || this.link === '' || this.type === "" || this.contentFile === null) {
