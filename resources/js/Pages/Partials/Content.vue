@@ -300,42 +300,6 @@ export default {
         },
 
 
-        // handleContentFileChange(event) {
-
-        //     const file = event.target.files[0];
-        //     const allowedTypes = {
-        //         'PDF': 'application/pdf',
-        //         'Documents (word, ppt, excel)': ['application/msword', 'application/vnd.ms-powerpoint', 'application/vnd.ms-excel'],
-        //         'Images': ['image/jpeg', 'image/png', 'image/gif']
-        //     };
-
-        //     const selectedType = this.type;
-        //     const allowedType = allowedTypes[selectedType];
-
-        //     if (!allowedType) {
-        //         this.fileTypeError = 'Please select a valid content type.';
-        //         return;
-        //     }
-
-        //     if (Array.isArray(allowedType) && !allowedType.includes(file.type)) {
-        //         this.fileTypeError = `Only ${allowedType.join(', ')} files are allowed for ${selectedType}.`;
-        //         return;
-        //     }
-
-        //     if (!Array.isArray(allowedType) && file.type !== allowedType) {
-        //         this.fileTypeError = `Only ${allowedType} files are allowed for ${selectedType}.`;
-        //         return;
-        //     }
-
-        //     // Reset error message if file type is valid
-        //     this.fileTypeError = '';
-
-        //     this.contentFile = event.target.files[0];
-        //     console.log(this.contentFile);
-
-
-
-        // },
         handleContentFileChange(event) {
             const file = event.target.files[0];
             const allowedTypes = {
@@ -347,10 +311,7 @@ export default {
             const selectedType = this.type;
             const allowedType = allowedTypes[selectedType];
 
-            // if (!allowedType) {
-            //     this.fileTypeError = 'Please select a valid content type.';
-            //     return;
-            // }
+
 
             // Check if the selected type requires validation
             if (selectedType !== 'Video (YouTube)' && selectedType !== 'URLs' && selectedType !== 'Social links') {
