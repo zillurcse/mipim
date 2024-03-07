@@ -90,7 +90,8 @@
                     <div class="mb-6" v-if="isCroping">
                         <section class="cropper-area">
                             <vue-cropper ref="cropper" :src="bannerImage" alt="Source Image" :cropmove="cropImage"
-                                :aspectRatio="3 / 1" :initialAspectRatio="3 / 1" :autoCropArea="1" :zoomable="false">
+                                :aspectRatio="74 / 25" :initialAspectRatio="74 / 25" :autoCropArea="1"
+                                :zoomable="false">
                             </vue-cropper>
                             <a href="#" role="button" @click.prevent="getCropImage"
                                 class="text-white flex items-center justify-center h-12 gap-4 bg-brand hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -336,7 +337,7 @@ export default {
                 // Make POST request to upload the file and data
                 const response = await axios.post("/api/banner", formdata);
                 // console.log(response.data)
-                if (response.status===200){
+                if (response.status === 200) {
                     // console.log(response.data.status)
                     // console.log(response.data)
                     this.getBannerData();

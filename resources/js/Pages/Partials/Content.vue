@@ -32,6 +32,8 @@
                                         <div class='embed-responsive h-full' v-if="item.type === 'PDF'">
                                             <embed :src="item.file" type="application/pdf" width="100%" height="100%" />
                                         </div>
+                                        <VueDocPreview :value="item.file" type="office"
+                                            v-else-if="item.type === 'Documents (word, ppt, excel)'" />
 
                                         <v-lazy-image style="border-radius: 9px 9px 0px 0px" :src="item.file" v-else
                                             class="object-cover"
@@ -52,6 +54,7 @@
                                             </div>
                                         </div>
                                     </figure>
+
                                     <h2 class="text-xl text-gray-800 font-semibold">{{ item.title }}</h2>
                                     <h3 class="text-lg text-gray-700 font-medium">{{ item.type }}</h3>
                                     <h4 class="text-base text-gray-700 font-medium">{{ item.link }}</h4>
@@ -77,9 +80,24 @@
                 <div class="modal-overlay" @click="closeModal"></div>
                 <div class="modal-content">
                     <div class="mb-6">
-                        <div class="mb-6">
+                        <label for="type"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
+                        <select id="type" v-model="type" @change="updateAcceptAttribute"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="Select Type">Select Type</option>
+                            <option value="PDF">PDF</option>
+                            <option value="Video (YouTube)">Video (YouTube)</option>
+                            <option value="Documents (word, ppt, excel)">Documents (word, ppt, excel)
+                            </option>
+                            <option value="Social links">Social links</option>
+                            <option value="URLs">URLs</option>
+                            <option value="Images">Images</option>
+
+
+                        </select>
+                        <div class="mb-6 mt-6">
                             <label for="#" class="text-sm text-gray-600 block mb-1 font-semibold">Choose
-                                Banner</label>
+                                Content</label>
 
                             <div class="flex items-center justify-center w-full">
                                 <label for="file"
@@ -91,14 +109,18 @@
                                                 stroke-width="2"
                                                 d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                                         </svg>
-                                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
+                                        <!-- <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
                                                 class="font-semibold">Click to upload</span> or drag and
                                             drop
                                         </p>
                                         <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG,
                                             JPG or
                                             GIF
-                                            (MAX. 800x400px)</p>
+                                            (MAX. 800x400px)</p> -->
+                                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
+                                                class="font-semibold">Click to upload</span> or drag and drop</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">Allowed types:
+                                            {{ acceptedTypes }}</p>
                                     </div>
                                     <input id="file" type="file" class="hidden" @change="handleContentFileChange" />
                                 </label>
@@ -106,21 +128,7 @@
 
 
                         </div>
-                        <label for="type"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
-                        <select id="type" v-model="type"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Select Type</option>
-                            <option value="PDF">PDF</option>
-                            <option value="Video (YouTube)">Video (YouTube)</option>
-                            <option value="Documents (word, ppt, excel)">Documents (word, ppt, excel)
-                            </option>
-                            <option value="Social links">Social links</option>
-                            <option value="URLs">URLs</option>
-                            <option value="Images">Images</option>
 
-
-                        </select>
 
                     </div>
                     <div class="mb-6">
@@ -165,10 +173,13 @@ import axios from 'axios';
 import VLazyImage from "v-lazy-image";
 import { Drag, Drop } from 'vue-drag-drop';
 
+import VueDocPreview from 'vue-doc-preview'
+
 export default {
     components: {
         VLazyImage,
-        Drag, Drop
+        Drag, Drop,
+        VueDocPreview
     },
     data() {
         return {
@@ -187,9 +198,10 @@ export default {
 
             title: '', // Store the title input value
             link: '', // Store the link input value
-            type: '', // Store the type input value
+            type: 'Select Type', // Store the type input value
             contentFile: null, // Store the selected file
-
+            acceptedTypes: 'Any', // Default accepted types
+            acceptedExtensions: '',
             bioTitle: '',
             bioDesc: '',
 
@@ -206,6 +218,28 @@ export default {
     },
 
     methods: {
+
+        updateAcceptAttribute() {
+            switch (this.type) {
+                case 'PDF':
+                    this.acceptedTypes = 'PDF';
+                    this.acceptedExtensions = '.pdf';
+                    break;
+                case 'Documents (word, ppt, excel)':
+                    this.acceptedTypes = 'Word, PowerPoint, Excel';
+                    this.acceptedExtensions = '.doc,.docx,.ppt,.pptx,.xls,.xlsx';
+                    break;
+                case 'Images':
+                    this.acceptedTypes = 'Image';
+                    this.acceptedExtensions = '.jpg,.jpeg,.png,.gif';
+                    break;
+                default:
+                    this.acceptedTypes = 'Any';
+                    this.acceptedExtensions = '';
+            }
+            // Set the accept attribute based on the selected type
+            document.getElementById('file').setAttribute('accept', this.acceptedExtensions);
+        },
         handleDrop(to_index, from_index) {
             var temp = this.contentItems[to_index];
 
@@ -300,7 +334,7 @@ export default {
                 // Reset all data
                 this.title = '';
                 this.link = '';
-                this.type = '';
+                this.type = 'Select Type';
                 this.contentFile = null;
                 this.isLoading = false;
                 this.$toasted.success(response.data.message, {
