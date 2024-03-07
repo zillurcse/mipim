@@ -6977,14 +6977,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -7020,7 +7012,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       bioTitle: '',
       bioDesc: '',
       tempAttachments: [],
-      attachments: []
+      attachments: [],
+      fileTypeError: ''
     };
   },
   mounted: function mounted() {
@@ -7042,12 +7035,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: {
-    getDocumentViewerUrl: function getDocumentViewerUrl(file) {
-      // Assuming 'file' contains the path or URL of the document file
-      // You might need to adjust this based on how your files are stored
-      // and how your document viewer is configured
-      return "https://docs.google.com/viewer?url=".concat(encodeURIComponent(file));
-    },
     updateAcceptAttribute: function updateAcceptAttribute() {
       switch (this.type) {
         case 'PDF':
@@ -7136,8 +7123,61 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
+    // handleContentFileChange(event) {
+    //     const file = event.target.files[0];
+    //     const allowedTypes = {
+    //         'PDF': 'application/pdf',
+    //         'Documents (word, ppt, excel)': ['application/msword', 'application/vnd.ms-powerpoint', 'application/vnd.ms-excel'],
+    //         'Images': ['image/jpeg', 'image/png', 'image/gif']
+    //     };
+    //     const selectedType = this.type;
+    //     const allowedType = allowedTypes[selectedType];
+    //     if (!allowedType) {
+    //         this.fileTypeError = 'Please select a valid content type.';
+    //         return;
+    //     }
+    //     if (Array.isArray(allowedType) && !allowedType.includes(file.type)) {
+    //         this.fileTypeError = `Only ${allowedType.join(', ')} files are allowed for ${selectedType}.`;
+    //         return;
+    //     }
+    //     if (!Array.isArray(allowedType) && file.type !== allowedType) {
+    //         this.fileTypeError = `Only ${allowedType} files are allowed for ${selectedType}.`;
+    //         return;
+    //     }
+    //     // Reset error message if file type is valid
+    //     this.fileTypeError = '';
+    //     this.contentFile = event.target.files[0];
+    //     console.log(this.contentFile);
+    // },
     handleContentFileChange: function handleContentFileChange(event) {
-      this.contentFile = event.target.files[0];
+      var file = event.target.files[0];
+      var allowedTypes = {
+        'PDF': 'application/pdf',
+        'Documents (word, ppt, excel)': ['application/msword', 'application/vnd.ms-powerpoint', 'application/vnd.ms-excel'],
+        'Images': ['image/jpeg', 'image/png', 'image/gif']
+      };
+      var selectedType = this.type;
+      var allowedType = allowedTypes[selectedType]; // if (!allowedType) {
+      //     this.fileTypeError = 'Please select a valid content type.';
+      //     return;
+      // }
+      // Check if the selected type requires validation
+
+      if (selectedType !== 'Video (YouTube)' && selectedType !== 'URLs' && selectedType !== 'Social links') {
+        if (Array.isArray(allowedType) && !allowedType.includes(file.type)) {
+          this.fileTypeError = "Only ".concat(allowedType.join(', '), " files are allowed for ").concat(selectedType, ".");
+          return;
+        }
+
+        if (!Array.isArray(allowedType) && file.type !== allowedType) {
+          this.fileTypeError = "Only ".concat(allowedType, " files are allowed for ").concat(selectedType, ".");
+          return;
+        }
+      } // Reset error message if file type is valid
+
+
+      this.fileTypeError = '';
+      this.contentFile = file;
       console.log(this.contentFile);
     },
     uploadContentFiles: function uploadContentFiles() {
@@ -47200,6 +47240,12 @@ var render = function () {
                         ),
                       ]
                     ),
+                    _vm._v(" "),
+                    _vm.fileTypeError
+                      ? _c("p", { staticClass: "text-red-500" }, [
+                          _vm._v(_vm._s(_vm.fileTypeError)),
+                        ])
+                      : _vm._e(),
                   ]),
                 ]),
                 _vm._v(" "),
