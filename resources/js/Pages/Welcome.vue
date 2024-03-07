@@ -152,25 +152,25 @@
                     <div class="row data-box-row">
 
                         <div class="col-md-4" v-for="item in contentItems" :key="item.id">
-                            <div class="data-box no-underline" v-if="item.type === 'Images'"
-                                @click="openImagePopUp(item.file)">
-                                <div class="data-box-icon">
-                                    <img :src="item.file" v-if="item.type === 'Images'" alt=""
-                                        class="object-cover rounded-lg">
-                                </div>
-                                <div class="data-box-content">
-                                    <ul>
+<!--                            <div class="data-box no-underline" v-if="item.type === 'Images'"-->
+<!--                                @click="openImagePopUp(item.file)">-->
+<!--                                <div class="data-box-icon">-->
+<!--                                    <img :src="item.file" v-if="item.type === 'Images'" alt=""-->
+<!--                                        class="object-cover rounded-lg">-->
+<!--                                </div>-->
+<!--                                <div class="data-box-content">-->
+<!--                                    <ul>-->
 
-                                        <li>{{
-                            item.title.length > 45
-                                ? item.title.substring(0, 45) + "..."
-                                : item.title.substring(0, 45)
-                        }}</li>
+<!--                                        <li>{{-->
+<!--                            item.title.length > 45-->
+<!--                                ? item.title.substring(0, 45) + "..."-->
+<!--                                : item.title.substring(0, 45)-->
+<!--                        }}</li>-->
 
-                                    </ul>
-                                </div>
-                            </div>
-                            <a :href="item.file" class="data-box no-underline" target="_blank" v-else>
+<!--                                    </ul>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                            <a :href="item.link" class="data-box no-underline" target="_blank">
                                 <div class="data-box-icon">
                                     <svg v-if="item.type === 'Social links'" width="85" height="85" viewBox="0 0 85 85"
                                         fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -241,25 +241,25 @@
 
                     </div>
                 </div>
-                <div class="modal fade" tabindex="-1" role="dialog" :class="{ 'show': modalShow }">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">File Image</h5>
-                                <button type="button" class="btn-close" @click="hideModal"></button>
-                            </div>
-                            <div class="modal-body">
-                                <img :src="popupImg" alt="" class="w-full">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" @click="hideModal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="modal fade" tabindex="-1" role="dialog" :class="{ 'show': modalShow }">-->
+<!--                    <div class="modal-dialog modal-dialog-centered" role="document">-->
+<!--                        <div class="modal-content">-->
+<!--                            <div class="modal-header">-->
+<!--                                <h5 class="modal-title">File Image</h5>-->
+<!--                                <button type="button" class="btn-close" @click="hideModal"></button>-->
+<!--                            </div>-->
+<!--                            <div class="modal-body">-->
+<!--                                <img :src="popupImg" alt="" class="w-full">-->
+<!--                            </div>-->
+<!--                            <div class="modal-footer">-->
+<!--                                <button type="button" class="btn btn-secondary" @click="hideModal">Close</button>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
             </section>
             <footer>
-                <p>© Ministry of Housing and Urban Planning, Oman. 2024 </p>
+                <p style="font-size: 12px">© Ministry of Housing and Urban Planning, Oman. 2024 </p>
             </footer>
         </main>
     </div>
