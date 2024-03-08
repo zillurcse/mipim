@@ -37,101 +37,10 @@
     <!--            </div>-->
     <!--        </div>-->
     <!--    </div>-->
-    <div>
-        <main class="container mx-auto bg-white p-0">
-            <header>
-                <nav class="navbar navbar-expand-xl bg-transparent text-brand container main-nav px-4">
-                    <Link class="navbar-brand text-brand" href="/">
-                    <img src="https://mipim-file.s3.amazonaws.com/public/logo/gMYl3ElSYwvgWPzF73kSMk3FQCIRvuoe3P79AkrN.svg"
-                        alt="" />
-                    </Link>
-                    <button class="navbar-toggler bg-transparent text-black px-3 py-2" type="button"
-                        data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="30px" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                        </svg>
-                    </button>
-                    <div class="offcanvas offcanvas-end" id="navbarOffcanvas" tabindex="-1"
-                        aria-labelledby="offcanvasNavbarLabel">
-                        <div class="offcanvas-header">
-                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="offcanvas-body">
-                            <div class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                                <ul class="navbar-nav mb-2 mb-lg-0 gap-4 text-uppercase">
-                                    <li class="nav-item">
-                                        <Link class="nav-link active" href="/" target="_self" title="">Home</Link>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#" target="_self" title="">About</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#" target="_self" title="">Contact us</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <!-- <div v-for="(item, index) in items" :key="index"
-                            :class="{ 'carousel-item': true, 'active': index === 0 }">
-                            <img :src="item.banner_image" class="d-block w-100" :alt="'Image ' + (index + 1)">
-                        </div> -->
-                        <div v-for="(item, index) in items" :key="index"
-                            :class="{ 'carousel-item': true, 'active': index === 0 }"
-                            :style="{ 'background-image': 'url(' + item.banner_image + ')' }">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true">
-                            <svg width="21" height="37" viewBox="0 0 21 37" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_15_110)">
-                                    <path
-                                        d="M6.0604 18.4297L8.31543 20.8213L21 33.6236L17.6174 37L0.704695 20.1179C-0.281881 19.1331 -0.281881 17.7262 0.704695 16.7414L17.6174 -0.140686L21 3.37643L8.31543 16.038L6.0604 18.4297Z"
-                                        fill="#F5F5F5" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_15_110">
-                                        <rect width="21" height="37" fill="white"
-                                            transform="translate(21 37) rotate(180)" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
+    <div class="container mx-auto bg-white p-0">
+        <MainLayoutVue>
 
-                        </span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true">
-                            <svg width="21" height="37" viewBox="0 0 21 37" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_15_108)">
-                                    <path
-                                        d="M14.9396 18.5703L12.6846 16.1787L0 3.37643L3.38255 0L20.2953 16.8821C21.2819 17.8669 21.2819 19.2738 20.2953 20.2586L3.38255 37.1407L0 33.6236L12.6846 20.962L14.9396 18.5703Z"
-                                        fill="#F5F5F5" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_15_108">
-                                        <rect width="21" height="37" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
 
-                        </span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-
-            </header>
             <section class="text-section">
                 <div class="container">
                     <div class="row justify-content-center">
@@ -152,24 +61,24 @@
                     <div class="row data-box-row">
 
                         <div class="col-md-4" v-for="item in contentItems" :key="item.id">
-<!--                            <div class="data-box no-underline" v-if="item.type === 'Images'"-->
-<!--                                @click="openImagePopUp(item.file)">-->
-<!--                                <div class="data-box-icon">-->
-<!--                                    <img :src="item.file" v-if="item.type === 'Images'" alt=""-->
-<!--                                        class="object-cover rounded-lg">-->
-<!--                                </div>-->
-<!--                                <div class="data-box-content">-->
-<!--                                    <ul>-->
+                            <!--                            <div class="data-box no-underline" v-if="item.type === 'Images'"-->
+                            <!--                                @click="openImagePopUp(item.file)">-->
+                            <!--                                <div class="data-box-icon">-->
+                            <!--                                    <img :src="item.file" v-if="item.type === 'Images'" alt=""-->
+                            <!--                                        class="object-cover rounded-lg">-->
+                            <!--                                </div>-->
+                            <!--                                <div class="data-box-content">-->
+                            <!--                                    <ul>-->
 
-<!--                                        <li>{{-->
-<!--                            item.title.length > 45-->
-<!--                                ? item.title.substring(0, 45) + "..."-->
-<!--                                : item.title.substring(0, 45)-->
-<!--                        }}</li>-->
+                            <!--                                        <li>{{-->
+                            <!--                            item.title.length > 45-->
+                            <!--                                ? item.title.substring(0, 45) + "..."-->
+                            <!--                                : item.title.substring(0, 45)-->
+                            <!--                        }}</li>-->
 
-<!--                                    </ul>-->
-<!--                                </div>-->
-<!--                            </div>-->
+                            <!--                                    </ul>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
                             <a :href="item.link" class="data-box no-underline" target="_blank">
                                 <div class="data-box-icon">
                                     <svg v-if="item.type === 'Social links'" width="85" height="85" viewBox="0 0 85 85"
@@ -229,9 +138,9 @@
                                     <ul>
 
                                         <li>{{
-                            item.title.length > 45
-                                ? item.title.substring(0, 45) + "..."
-                                : item.title.substring(0, 45)
+                                    item.title.length > 45
+                                        ? item.title.substring(0, 45) + "..."
+                                        : item.title.substring(0, 45)
                                             }}</li>
 
                                     </ul>
@@ -241,34 +150,33 @@
 
                     </div>
                 </div>
-<!--                <div class="modal fade" tabindex="-1" role="dialog" :class="{ 'show': modalShow }">-->
-<!--                    <div class="modal-dialog modal-dialog-centered" role="document">-->
-<!--                        <div class="modal-content">-->
-<!--                            <div class="modal-header">-->
-<!--                                <h5 class="modal-title">File Image</h5>-->
-<!--                                <button type="button" class="btn-close" @click="hideModal"></button>-->
-<!--                            </div>-->
-<!--                            <div class="modal-body">-->
-<!--                                <img :src="popupImg" alt="" class="w-full">-->
-<!--                            </div>-->
-<!--                            <div class="modal-footer">-->
-<!--                                <button type="button" class="btn btn-secondary" @click="hideModal">Close</button>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <!--                <div class="modal fade" tabindex="-1" role="dialog" :class="{ 'show': modalShow }">-->
+                <!--                    <div class="modal-dialog modal-dialog-centered" role="document">-->
+                <!--                        <div class="modal-content">-->
+                <!--                            <div class="modal-header">-->
+                <!--                                <h5 class="modal-title">File Image</h5>-->
+                <!--                                <button type="button" class="btn-close" @click="hideModal"></button>-->
+                <!--                            </div>-->
+                <!--                            <div class="modal-body">-->
+                <!--                                <img :src="popupImg" alt="" class="w-full">-->
+                <!--                            </div>-->
+                <!--                            <div class="modal-footer">-->
+                <!--                                <button type="button" class="btn btn-secondary" @click="hideModal">Close</button>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
             </section>
-            <footer>
-                <p style="font-size: 12px">© Ministry of Housing and Urban Planning, Oman. 2024 </p>
-            </footer>
-        </main>
+
+        </MainLayoutVue>
     </div>
 </template>
 
 <script>
 import { Link } from '@inertiajs/inertia-vue'
 import axios from "axios";
-
+import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink'
+import MainLayoutVue from '../Layouts/MainLayout.vue';
 export default {
     props: {
         canLogin: Boolean,
@@ -277,11 +185,12 @@ export default {
         phpVersion: String,
     },
     components: {
-        Link
+        Link,
+        JetResponsiveNavLink,
+        MainLayoutVue
     },
     data() {
         return {
-            items: [],
             contentItems: [],
             bioItems: [],
             modalShow: false,
@@ -290,7 +199,7 @@ export default {
     },
 
     async mounted() {
-        this.getBannerData();
+
         this.getContentData();
         this.getBioData()
 
@@ -319,29 +228,7 @@ export default {
 
                 })
         },
-        async getBannerData() {
-            await axios.get('/api/web/banner')
-                .then(response => {
-                    console.log();
-                    if (response.status == 200) {
-                        this.items = response.data.data.items
-                        console.log(this.items);
-                        console.log()
-                    }
 
-                })
-                .catch(error => {
-                    if (error.response.status == 422) {
-                        this.errors = error.response.data.errors;
-                    } else {
-                        // this.toastMessage('error', error, 'check', '', 'times')
-                        console.log(error);
-                    }
-                })
-                .finally(() => {
-
-                })
-        },
         async getContentData() {
             await axios.get('/api/web/content')
                 .then(response => {
