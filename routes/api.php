@@ -43,6 +43,10 @@ Route::post('/sanctum/token', function (Request $request) {
 //Route::group(['middleware'=>['auth:sanctum']], function (){
 Route::post('/image-gallery/get', [ImageController::class, 'get_gallery']);
 
+Route::get('/contact-us', [\App\Http\Controllers\ContactUsController::class, 'index']);
+Route::delete('/contact-us{id}', [\App\Http\Controllers\ContactUsController::class, 'destroy']);
+
+
 Route::get('/banner', [\App\Http\Controllers\BannerController::class, 'index']);
 Route::post('/banner', [\App\Http\Controllers\BannerController::class, 'store']);
 Route::post('/banner/update_order', [\App\Http\Controllers\BannerController::class, 'update_order']);
@@ -65,3 +69,5 @@ Route::post('/sanctum/token', [\App\Http\Controllers\BannerController::class, 't
 Route::get('/web/banner', [\App\Http\Controllers\BannerController::class, 'index']);
 Route::get('/web/content', [\App\Http\Controllers\ContentController::class, 'index']);
 Route::get('/web/bio-container', [\App\Http\Controllers\BioContainerController::class, 'index']);
+
+Route::post('/web/contact-us', [\App\Http\Controllers\ContactUsController::class, 'store']);
