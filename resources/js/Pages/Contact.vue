@@ -73,45 +73,66 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="inputFrom">
-                                            <label for="#">First Name</label>
-                                            <input type="text" name="text" />
+                                            <label for="firstName">First Name</label>
+                                            <input type="text" v-model="formData.firstName"
+                                                @input="clearError('firstName')" />
+                                            <p class="error-message">{{ errors.firstName }}</p>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inputFrom">
-                                            <label for="#">Last Name</label>
-                                            <input type="text" name="text" />
+                                            <label for="lastName">Last Name</label>
+                                            <input type="text" v-model="formData.lastName"
+                                                @input="clearError('lastName')" />
+                                            <p class="error-message">{{ errors.lastName }}</p>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="inputFrom">
-                                            <label for="#">Email</label>
-                                            <input type="email" name="email" />
+                                            <label for="email">Email</label>
+                                            <input type="email" v-model="formData.email" @input="clearError('email')" />
+                                            <p class="error-message">{{ errors.email }}</p>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inputFrom">
-                                            <label for="#">Phone withn Code</label>
-                                            <input type="text" name="text" />
+                                            <label for="phoneCode">Phone with Code</label>
+                                            <input type="text" v-model="formData.phoneCode"
+                                                @input="clearError('phoneCode')" />
+                                            <p class="error-message">{{ errors.phoneCode }}</p>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inputFrom">
-                                            <label for="#">Phone withn Code</label>
-                                            <select name="" id="">
-                                                coutry list
+                                            <label for="country">Country Code</label>
+                                            <select v-model="formData.countryCode" @change="clearError('country')">
+                                                <option value="">Select Country</option>
+
+                                                <option value="+1">United States (+1)</option>
+                                                <option value="+44">United Kingdom (+44)</option>
+                                                <option value="+1">Canada (+1)</option>
+                                                <option value="+61">Australia (+61)</option>
+                                                <option value="+49">Germany (+49)</option>
+                                                <option value="+33">France (+33)</option>
+                                                <option value="+91">India (+91)</option>
+                                                <option value="+86">China (+86)</option>
+                                                <option value="+55">Brazil (+55)</option>
+                                                <option value="+81">Japan (+81)</option>
                                             </select>
+                                            <p class="error-message">{{ errors.country }}</p>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="inputFrom">
-                                            <label for="#">Massage</label>
-                                            <textarea name="" id="" cols="30" rows="10"></textarea>
+                                            <label for="message">Message</label>
+                                            <textarea v-model="formData.message"
+                                                @input="clearError('message')"></textarea>
+                                            <p class="error-message">{{ errors.message }}</p>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="inputFrom">
-                                            <button>Send</button>
+                                            <button @click="submitForm">Send</button>
                                         </div>
                                     </div>
                                 </div>
@@ -134,7 +155,69 @@ export default {
 
         MainLayoutVue
     },
+    data() {
+        return {
+            formData: {
+                firstName: '',
+                lastName: '',
+                email: '',
+                phoneCode: '',
+                countryCode: '',
+                message: ''
+            },
+            errors: {}
+        };
+    },
+    methods: {
+        clearError(field) {
+            this.errors[field] = '';
+        },
+        submitForm() {
+            this.errors = {}; // Clear previous errors
+            const requiredFields = ['firstName', 'lastName', 'email', 'phoneCode', 'countryCode', 'message'];
+            // Regular expression for email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            requiredFields.forEach(field => {
+                if (!this.formData[field]) {
+                    this.errors[field] = `${field.charAt(0).toUpperCase() + field.slice(1)} is required.`;
+                }
+            });
+            if (this.formData.email && !emailRegex.test(this.formData.email)) {
+                this.errors.email = 'Please enter a valid email address.';
+            }
+            if (Object.keys(this.errors).length === 0) {
+                // Form is valid, submit data
+                this.submitData();
+            }
+        },
+        async submitData() {
+
+            let formData = new FormData();
+            formData.append(' first_name', this.title);
+            formData.append('  last_name', this.formData.lastName);
+            formData.append('email', this.formData.email);
+            formData.append('countryCode', this.formData.countryCode);
+            formData.append('phone_code', this.formData.phone_code);
+
+
+            try {
+                const response = await axios.post('/api/web/contact-us', formData);
+                // Handle success
+                console.log('Response:', response.data);
+                // Optionally, show a success message to the user
+            } catch (error) {
+                // Handle error
+                console.error('Error:', error);
+                // Optionally, show an error message to the user
+            }
+
+        }
+    }
 }
 </script>
 
-<style></style>
+<style>
+.error-message {
+    color: rgb(231, 21, 21);
+}
+</style>

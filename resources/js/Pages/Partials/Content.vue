@@ -100,7 +100,47 @@
                                 Content</label>
 
                             <div class="flex items-center justify-center w-full">
-                                <label for="file"
+                                <!-- <div v-if="contentPreview && type === 'URLs'"
+                                    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                    <img :src="contentPreview" alt="">
+                                </div>
+                                <div v-if="contentPreview && type === 'Video (YouTube)'"
+                                    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                    <img :src="contentPreview" alt="">
+                                </div>
+                                <div v-if="contentPreview && type === 'Social links'"
+                                    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                    <img :src="contentPreview" alt="">
+                                </div> -->
+
+                                <div v-if="contentPreview && (type === 'Images' || type === 'URLs' || type === 'Video (YouTube)' || type === 'Social links')"
+                                    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                    <img :src="contentPreview" alt="" class="w-1/2 mx-auto object-cover">
+                                </div>
+                                <div v-else-if="contentPreview && (type === 'PDF' || type === 'URLs' || type === 'Video (YouTube)' || type === 'Social links')"
+                                    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                    <div class='embed-responsive h-full'>
+                                        <embed :src="contentPreview" type="application/pdf" width="100%"
+                                            height="100%" />
+                                    </div>
+                                </div>
+                                <div v-else-if="contentPreview && (type === 'Documents (word, ppt, excel)' || type === 'URLs' || type === 'Video (YouTube)' || type === 'Social links')"
+                                    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                    <div class="flex flex-col gap-3 justify-center items-center text-gray-600">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                        </svg>
+
+                                        <p class="text-2xl text-gray-700 capitalize">document uploaded successfully</p>
+                                    </div>
+                                </div>
+
+
+
+
+                                <label for="file" v-else
                                     class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                                     <div class="flex flex-col items-center justify-center pt-5 pb-6">
                                         <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -201,6 +241,7 @@ export default {
             link: '', // Store the link input value
             type: 'Select Type', // Store the type input value
             contentFile: null, // Store the selected file
+            contentPreview: null,
             acceptedTypes: 'Any', // Default accepted types
             acceptedExtensions: '',
             bioTitle: '',
@@ -302,9 +343,16 @@ export default {
 
         handleContentFileChange(event) {
             const file = event.target.files[0];
+
+
             const allowedTypes = {
                 'PDF': 'application/pdf',
-                'Documents (word, ppt, excel)': ['application/msword', 'application/vnd.ms-powerpoint', 'application/vnd.ms-excel'],
+                'Documents (word, ppt, excel)': [
+                    'application/msword',
+                    'application/vnd.ms-powerpoint',
+                    'application/vnd.ms-excel',
+                    'application/vnd.openxmlformats-officedocument.wordprocessingml.document' // Add DOCX MIME type
+                ],
                 'Images': ['image/jpeg', 'image/png', 'image/gif']
             };
 
@@ -329,6 +377,15 @@ export default {
             // Reset error message if file type is valid
             this.fileTypeError = '';
 
+            const reader = new FileReader();
+
+            reader.onload = () => {
+                this.contentPreview = reader.result; // Set previewImage to base64 string
+            };
+
+
+
+            reader.readAsDataURL(file);
             this.contentFile = file;
             console.log(this.contentFile);
         }
@@ -363,6 +420,7 @@ export default {
                 this.link = '';
                 this.type = 'Select Type';
                 this.contentFile = null;
+                this.contentPreview = null
                 this.isLoading = false;
                 this.$toasted.success(response.data.message, {
                     theme: "toasted-primary",
