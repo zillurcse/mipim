@@ -5905,6 +5905,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -5918,9 +5937,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         email: '',
         phoneCode: '',
         countryCode: '',
-        message: ''
+        message: '',
+        is_reply: false,
+        message_reply: '',
+        status: ''
       },
-      errors: {}
+      errors: {},
+      isLoading: false
     };
   },
   methods: {
@@ -5954,41 +5977,68 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var formData, response;
+        var formData;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                _this2.isLoading = true;
+                _this2.formData.is_reply = _this2.formData.is_reply ? 1 : 0;
                 formData = new FormData();
-                formData.append(' first_name', _this2.title);
-                formData.append('  last_name', _this2.formData.lastName);
+                formData.append('first_name', _this2.formData.firstName);
+                formData.append('last_name', _this2.formData.lastName);
                 formData.append('email', _this2.formData.email);
-                formData.append('countryCode', _this2.formData.countryCode);
-                formData.append('phone_code', _this2.formData.phone_code);
-                _context.prev = 6;
-                _context.next = 9;
-                return axios.post('/api/web/contact-us', formData);
+                formData.append('phone_code', _this2.formData.countryCode + _this2.formData.phoneCode);
+                formData.append('message', _this2.formData.message);
+                formData.append('is_reply', _this2.formData.is_reply);
+                formData.append('message_reply', _this2.formData.message_reply);
+                formData.append('status', _this2.formData.status);
+                _context.prev = 11;
+                _context.next = 14;
+                return axios.post('/api/web/contact-us', formData).then(function (res) {
+                  _this2.$toasted.success(res.data.message, {
+                    theme: "toasted-primary",
+                    position: "top-center",
+                    duration: 5000
+                  });
 
-              case 9:
-                response = _context.sent;
-                // Handle success
-                console.log('Response:', response.data); // Optionally, show a success message to the user
+                  _this2.formData.firstName = '';
+                  _this2.formData.lastName = '';
+                  _this2.formData.email = '';
+                  _this2.formData.phoneCode = '';
+                  _this2.formData.countryCode = '';
+                  _this2.formData.message = '';
+                  _this2.formData.is_reply = '';
+                  _this2.formData.message_reply = '';
+                  _this2.formData.status = '';
+                  _this2.isLoading = false;
+                })["catch"](function (err) {
+                  _this2.$toasted.show(err.res.data.message, {
+                    theme: "toasted-primary",
+                    position: "top-center",
+                    duration: 5000
+                  });
+                })["finally"](function (res) {
+                  console.log(res);
+                  _this2.isLoading = false;
+                });
 
-                _context.next = 16;
+              case 14:
+                _context.next = 19;
                 break;
 
-              case 13:
-                _context.prev = 13;
-                _context.t0 = _context["catch"](6);
+              case 16:
+                _context.prev = 16;
+                _context.t0 = _context["catch"](11);
                 // Handle error
                 console.error('Error:', _context.t0); // Optionally, show an error message to the user
 
-              case 16:
+              case 19:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[6, 13]]);
+        }, _callee, null, [[11, 16]]);
       }))();
     }
   }
@@ -7623,7 +7673,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       axios__WEBPACK_IMPORTED_MODULE_4__["default"].post('/api/content/update_order', {
         contents: this.contentItems
       }).then(function (res) {
-        // Vue.toasted.show('hola billo');
         _this2.$toasted.success(res.data.message, {
           theme: "toasted-primary",
           position: "top-center",
@@ -7640,7 +7689,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       })["finally"](function (res) {
         console.log(res);
       });
-      console.log(to_index, from_index); //alert(`You dropped with data: ${JSON.stringify(data)}`);
     },
     getContentData: function getContentData() {
       var _this3 = this;
@@ -47267,9 +47315,140 @@ var render = function () {
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-12" }, [
                       _c("div", { staticClass: "inputFrom" }, [
-                        _c("button", { on: { click: _vm.submitForm } }, [
-                          _vm._v("Send"),
-                        ]),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.formData.is_reply,
+                              expression: "formData.is_reply",
+                            },
+                          ],
+                          attrs: { type: "hidden" },
+                          domProps: { value: _vm.formData.is_reply },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.formData,
+                                "is_reply",
+                                $event.target.value
+                              )
+                            },
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.formData.message_reply,
+                              expression: "formData.message_reply",
+                            },
+                          ],
+                          attrs: { type: "hidden" },
+                          domProps: { value: _vm.formData.message_reply },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.formData,
+                                "message_reply",
+                                $event.target.value
+                              )
+                            },
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.formData.status,
+                              expression: "formData.status",
+                            },
+                          ],
+                          attrs: { type: "hidden" },
+                          domProps: { value: _vm.formData.status },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.formData,
+                                "status",
+                                $event.target.value
+                              )
+                            },
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "flex items-center justify-center gap-1",
+                            on: { click: _vm.submitForm },
+                          },
+                          [
+                            _vm._v(
+                              "Send\n                                            "
+                            ),
+                            _vm.isLoading
+                              ? _c(
+                                  "svg",
+                                  {
+                                    attrs: {
+                                      version: "1.1",
+                                      id: "L9",
+                                      xmlns: "http://www.w3.org/2000/svg",
+                                      wodth: "30",
+                                      height: "30",
+                                      "xmlns:xlink":
+                                        "http://www.w3.org/1999/xlink",
+                                      x: "0px",
+                                      y: "0px",
+                                      viewBox: "0 0 100 100",
+                                      "enable-background": "new 0 0 0 0",
+                                      "xml:space": "preserve",
+                                    },
+                                  },
+                                  [
+                                    _c(
+                                      "path",
+                                      {
+                                        attrs: {
+                                          fill: "#fff",
+                                          d: "M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50",
+                                        },
+                                      },
+                                      [
+                                        _c("animateTransform", {
+                                          attrs: {
+                                            attributeName: "transform",
+                                            attributeType: "XML",
+                                            type: "rotate",
+                                            dur: "1s",
+                                            from: "0 50 50",
+                                            to: "360 50 50",
+                                            repeatCount: "indefinite",
+                                          },
+                                        }),
+                                      ],
+                                      1
+                                    ),
+                                  ]
+                                )
+                              : _vm._e(),
+                          ]
+                        ),
                       ]),
                     ]),
                   ]),
