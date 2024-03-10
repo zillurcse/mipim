@@ -291,7 +291,7 @@ export default {
 
             axios.post('/api/content/update_order', { contents: this.contentItems })
                 .then(res => {
-                    // Vue.toasted.show('hola billo');
+
                     this.$toasted.success(res.data.message, {
                         theme: "toasted-primary",
                         position: "top-center",
@@ -313,8 +313,7 @@ export default {
                     console.log(res);
 
                 })
-            console.log(to_index, from_index);
-            //alert(`You dropped with data: ${JSON.stringify(data)}`);
+
         },
         async getContentData() {
             await axios.get('/api/content')

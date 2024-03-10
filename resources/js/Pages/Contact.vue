@@ -132,7 +132,26 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="inputFrom">
-                                            <button @click="submitForm">Send</button>
+                                            <!-- <button @click="submitForm">Send</button> -->
+                                            <input type="hidden" v-model="formData.is_reply" />
+                                            <input type="hidden" v-model="formData.message_reply" />
+                                            <input type="hidden" v-model="formData.status" />
+                                            <button @click="submitForm"
+                                                class="flex items-center justify-center gap-1">Send
+                                                <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" wodth="30"
+                                                    v-if="isLoading" height="30"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                    viewBox="0 0 100 100" enable-background="new 0 0 0 0"
+                                                    xml:space="preserve">
+                                                    <path fill="#fff"
+                                                        d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                                                        <animateTransform attributeName="transform" attributeType="XML"
+                                                            type="rotate" dur="1s" from="0 50 50" to="360 50 50"
+                                                            repeatCount="indefinite" />
+                                                    </path>
+                                                </svg>
+                                            </button>
+
                                         </div>
                                     </div>
                                 </div>
@@ -163,9 +182,14 @@ export default {
                 email: '',
                 phoneCode: '',
                 countryCode: '',
-                message: ''
+                message: '',
+
+                is_reply: false,
+                message_reply: '',
+                status: ''
             },
-            errors: {}
+            errors: {},
+            isLoading: false,
         };
     },
     methods: {
@@ -191,20 +215,49 @@ export default {
             }
         },
         async submitData() {
-
+            this.isLoading = true
+            this.formData.is_reply = this.formData.is_reply ? 1 : 0;
             let formData = new FormData();
-            formData.append(' first_name', this.title);
-            formData.append('  last_name', this.formData.lastName);
+            formData.append('first_name', this.formData.firstName);
+            formData.append('last_name', this.formData.lastName);
             formData.append('email', this.formData.email);
-            formData.append('countryCode', this.formData.countryCode);
-            formData.append('phone_code', this.formData.phone_code);
+            formData.append('phone_code', this.formData.countryCode + this.formData.phoneCode);
+            formData.append('message', this.formData.message);
+            formData.append('is_reply', this.formData.is_reply);
+            formData.append('message_reply', this.formData.message_reply);
+            formData.append('status', this.formData.status);
 
 
             try {
-                const response = await axios.post('/api/web/contact-us', formData);
-                // Handle success
-                console.log('Response:', response.data);
-                // Optionally, show a success message to the user
+                await axios.post('/api/web/contact-us', formData).then(res => {
+
+                    this.$toasted.success(res.data.message, {
+                        theme: "toasted-primary",
+                        position: "top-center",
+                        duration: 5000
+                    });
+                    this.formData.firstName = '';
+                    this.formData.lastName = '';
+                    this.formData.email = '';
+                    this.formData.phoneCode = '';
+                    this.formData.countryCode = '';
+                    this.formData.message = '';
+                    this.formData.is_reply = '';
+                    this.formData.message_reply = '';
+                    this.formData.status = '';
+                    this.isLoading = false
+
+                }).catch(err => {
+                    this.$toasted.show(err.res.data.message, {
+                        theme: "toasted-primary",
+                        position: "top-center",
+                        duration: 5000
+                    });
+                }).finally(res => {
+                    console.log(res);
+                    this.isLoading = false
+                })
+
             } catch (error) {
                 // Handle error
                 console.error('Error:', error);
