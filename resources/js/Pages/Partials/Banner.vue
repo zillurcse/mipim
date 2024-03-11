@@ -182,38 +182,11 @@ export default {
             // this.cropImg = this.$refs.cropper.getCroppedCanvas({ width: 1036, height: 350 }).toDataURL();
             this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL();
 
-            // this.$refs.cropper.getCroppedCanvas({ width: 1280, height: 720 }).toBlob((blob) => {
-            //     this.cropImg = blob
-            // });
-
-
-
         },
         reset() {
             this.$refs.cropper.reset();
         },
-        // setImage(e) {
-        //     const file = e.target.files[0];
-        //     this.isCroping = true;
-        //     if (file.type.indexOf('image/') === -1) {
-        //         alert('Please select an image file');
-        //         return;
-        //     }
 
-        //     if (typeof FileReader === 'function') {
-        //         const reader = new FileReader();
-
-        //         reader.onload = (event) => {
-        //             this.bannerImage = event.target.result;
-        //             // rebuild cropperjs with the updated source
-        //             this.$refs.cropper.replace(event.target.result);
-        //         };
-
-        //         reader.readAsDataURL(file);
-        //     } else {
-        //         alert('Sorry, FileReader API not supported');
-        //     }
-        // },
         setImage(e) {
             const file = e.target.files[0];
             this.isCroping = true;
@@ -277,12 +250,12 @@ export default {
 
                 })
                 .catch(err => {
-                    // this.$toasted.show(err.response.data.message, {
-                    //     theme: "toasted-primary",
-                    //     position: "top-center",
-                    //     duration : 5000
-                    // });
-                    console.log(err);
+                    this.$toasted.show(err.response.data.message, {
+                        theme: "toasted-primary",
+                        position: "top-center",
+                        duration: 5000
+                    });
+
 
                 })
                 .finally(res => {
@@ -296,11 +269,9 @@ export default {
             await axios
                 .get("/api/banner")
                 .then((response) => {
-                    console.log();
                     if (response.status == 200) {
                         this.items = response.data.data.items;
-                        console.log(this.items);
-                        console.log();
+
                     }
                 })
                 .catch((error) => {
@@ -316,7 +287,6 @@ export default {
 
         handleFileChange(event) {
             this.bannerImage = event.target.files[0];
-            console.log(this.bannerImage);
         },
 
         async uploadFiles() {
@@ -372,7 +342,11 @@ export default {
                 .then((response) => {
                     // console.log(response.data.message);
                     this.getBannerData();
-
+                    this.$toasted.show(response.data.message, {
+                        theme: "toasted-primary",
+                        position: "top-center",
+                        duration: 5000
+                    });
                     // Assuming you want to remove the item from the frontend after successful deletion
                     // You can trigger a method to refresh the list of items or remove the deleted item from the UI
                 })

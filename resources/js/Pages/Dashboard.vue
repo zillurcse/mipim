@@ -37,6 +37,14 @@
                                         Content
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="#"
+                                        class="inline-flex items-center px-4 py-3 text-base no-underline text-gray-500 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
+                                        @click="selectedTab = 'contact'"
+                                        :class="{ 'active': selectedTab === 'contact' }">
+                                        Contact us
+                                    </a>
+                                </li>
 
                             </ul>
 
@@ -47,7 +55,7 @@
                     <Bio v-if="selectedTab === 'bio'" />
                     <Banner v-else-if="selectedTab === 'banner'" />
                     <Content v-else-if="selectedTab === 'content'" />
-
+                    <contact-us v-else-if="selectedTab === 'contact'" />
                 </div>
             </div>
         </div>
@@ -65,6 +73,7 @@ import AttachmentList from './AttachmentList.vue'
 import Banner from './Partials/Banner.vue';
 import Content from './Partials/Content.vue';
 import Bio from './Partials/Bio.vue';
+import ContactUs from './Partials/Contact-us.vue';
 
 export default {
     components: {
@@ -74,7 +83,8 @@ export default {
         AttachmentList,
         Banner,
         Content,
-        Bio
+        Bio,
+        ContactUs
     },
 
     data() {
@@ -130,11 +140,10 @@ export default {
         async getBannerData() {
             await axios.get('/api/banner')
                 .then(response => {
-                    console.log();
+
                     if (response.status == 200) {
                         this.items = response.data.data.items
-                        console.log(this.items);
-                        console.log()
+
                     }
 
                 })
@@ -157,11 +166,10 @@ export default {
                 }
             })
                 .then(response => {
-                    console.log();
+
                     if (response.status == 200) {
                         this.contentItems = response.data.data.items
-                        console.log(this.contentItems);
-                        console.log()
+
                     }
 
                 })
@@ -180,11 +188,10 @@ export default {
         async getBioData() {
             await axios.get('/api/bio-container')
                 .then(response => {
-                    console.log();
+
                     if (response.status == 200) {
                         this.bioItems = response.data.data.items
-                        console.log(this.contentItems);
-                        console.log()
+
                     }
 
                 })
@@ -203,13 +210,11 @@ export default {
         handleFileChange(event) {
 
             this.bannerImage = event.target.files[0];
-            console.log(this.bannerImage);
 
         },
         handleContentFileChange(event) {
 
             this.contentFile = event.target.files[0];
-            console.log(this.contentFile);
 
         },
         async uploadBioFiles() {
@@ -224,7 +229,6 @@ export default {
                 const response = await axios.post('/api/bio-container', formData);
 
                 // Handle success
-                console.log('Response:', response.data);
                 this.getBioData(); // Update content data
                 this.showModal = false; // Close the modal after successful upload
                 // Reset all data
@@ -255,7 +259,6 @@ export default {
                 const response = await axios.post('/api/content', formData);
 
                 // Handle success
-                console.log('Response:', response.data);
                 this.getContentData(); // Update content data
                 this.showModal = false; // Close the modal after successful upload
                 // Reset all data
@@ -284,7 +287,6 @@ export default {
                 const response = await axios.post('/api/banner', formdata)
 
                 // Handle success
-                console.log('Response:', response.data);
                 this.getBannerData()
                 this.showModal = false;
                 this.isLoading = false;
@@ -301,11 +303,9 @@ export default {
 
         },
         deleteContentItem(id) {
-            console.log(id);
             // Send a DELETE request to the backend with the item's ID
             axios.delete(`/api/content/${id}`)
                 .then(response => {
-                    console.log(response.data.message);
                     this.getContentData()
                     // Assuming you want to remove the item from the frontend after successful deletion
                     // You can trigger a method to refresh the list of items or remove the deleted item from the UI
@@ -319,7 +319,6 @@ export default {
             // Send a DELETE request to the backend with the item's ID
             axios.delete(`/api/banner/${id}`)
                 .then(response => {
-                    console.log(response.data.message);
                     this.getBannerData()
 
                     // Assuming you want to remove the item from the frontend after successful deletion

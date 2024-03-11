@@ -4857,6 +4857,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Layouts_MainLayout_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Layouts/MainLayout.vue */ "./resources/js/Layouts/MainLayout.vue");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue_select_dist_vue_select_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-select/dist/vue-select.css */ "./node_modules/vue-select/dist/vue-select.css");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -5019,22 +5022,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    MainLayoutVue: _Layouts_MainLayout_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    MainLayoutVue: _Layouts_MainLayout_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    vSelect: (vue_select__WEBPACK_IMPORTED_MODULE_2___default())
   },
   data: function data() {
     return {
@@ -5050,7 +5044,716 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         status: ''
       },
       errors: {},
-      isLoading: false
+      isLoading: false,
+      countries: [{
+        "code": "+7 840",
+        "name": "Abkhazia"
+      }, {
+        "code": "+93",
+        "name": "Afghanistan"
+      }, {
+        "code": "+355",
+        "name": "Albania"
+      }, {
+        "code": "+213",
+        "name": "Algeria"
+      }, {
+        "code": "+1 684",
+        "name": "American Samoa"
+      }, {
+        "code": "+376",
+        "name": "Andorra"
+      }, {
+        "code": "+244",
+        "name": "Angola"
+      }, {
+        "code": "+1 264",
+        "name": "Anguilla"
+      }, {
+        "code": "+1 268",
+        "name": "Antigua and Barbuda"
+      }, {
+        "code": "+54",
+        "name": "Argentina"
+      }, {
+        "code": "+374",
+        "name": "Armenia"
+      }, {
+        "code": "+297",
+        "name": "Aruba"
+      }, {
+        "code": "+247",
+        "name": "Ascension"
+      }, {
+        "code": "+61",
+        "name": "Australia"
+      }, {
+        "code": "+672",
+        "name": "Australian External Territories"
+      }, {
+        "code": "+43",
+        "name": "Austria"
+      }, {
+        "code": "+994",
+        "name": "Azerbaijan"
+      }, {
+        "code": "+1 242",
+        "name": "Bahamas"
+      }, {
+        "code": "+973",
+        "name": "Bahrain"
+      }, {
+        "code": "+880",
+        "name": "Bangladesh"
+      }, {
+        "code": "+1 246",
+        "name": "Barbados"
+      }, {
+        "code": "+1 268",
+        "name": "Barbuda"
+      }, {
+        "code": "+375",
+        "name": "Belarus"
+      }, {
+        "code": "+32",
+        "name": "Belgium"
+      }, {
+        "code": "+501",
+        "name": "Belize"
+      }, {
+        "code": "+229",
+        "name": "Benin"
+      }, {
+        "code": "+1 441",
+        "name": "Bermuda"
+      }, {
+        "code": "+975",
+        "name": "Bhutan"
+      }, {
+        "code": "+591",
+        "name": "Bolivia"
+      }, {
+        "code": "+387",
+        "name": "Bosnia and Herzegovina"
+      }, {
+        "code": "+267",
+        "name": "Botswana"
+      }, {
+        "code": "+55",
+        "name": "Brazil"
+      }, {
+        "code": "+246",
+        "name": "British Indian Ocean Territory"
+      }, {
+        "code": "+1 284",
+        "name": "British Virgin Islands"
+      }, {
+        "code": "+673",
+        "name": "Brunei"
+      }, {
+        "code": "+359",
+        "name": "Bulgaria"
+      }, {
+        "code": "+226",
+        "name": "Burkina Faso"
+      }, {
+        "code": "+257",
+        "name": "Burundi"
+      }, {
+        "code": "+855",
+        "name": "Cambodia"
+      }, {
+        "code": "+237",
+        "name": "Cameroon"
+      }, {
+        "code": "+1",
+        "name": "Canada"
+      }, {
+        "code": "+238",
+        "name": "Cape Verde"
+      }, {
+        "code": "+ 345",
+        "name": "Cayman Islands"
+      }, {
+        "code": "+236",
+        "name": "Central African Republic"
+      }, {
+        "code": "+235",
+        "name": "Chad"
+      }, {
+        "code": "+56",
+        "name": "Chile"
+      }, {
+        "code": "+86",
+        "name": "China"
+      }, {
+        "code": "+61",
+        "name": "Christmas Island"
+      }, {
+        "code": "+61",
+        "name": "Cocos-Keeling Islands"
+      }, {
+        "code": "+57",
+        "name": "Colombia"
+      }, {
+        "code": "+269",
+        "name": "Comoros"
+      }, {
+        "code": "+242",
+        "name": "Congo"
+      }, {
+        "code": "+243",
+        "name": "Congo, Dem. Rep. of (Zaire)"
+      }, {
+        "code": "+682",
+        "name": "Cook Islands"
+      }, {
+        "code": "+506",
+        "name": "Costa Rica"
+      }, {
+        "code": "+385",
+        "name": "Croatia"
+      }, {
+        "code": "+53",
+        "name": "Cuba"
+      }, {
+        "code": "+599",
+        "name": "Curacao"
+      }, {
+        "code": "+537",
+        "name": "Cyprus"
+      }, {
+        "code": "+420",
+        "name": "Czech Republic"
+      }, {
+        "code": "+45",
+        "name": "Denmark"
+      }, {
+        "code": "+246",
+        "name": "Diego Garcia"
+      }, {
+        "code": "+253",
+        "name": "Djibouti"
+      }, {
+        "code": "+1 767",
+        "name": "Dominica"
+      }, {
+        "code": "+1 809",
+        "name": "Dominican Republic"
+      }, {
+        "code": "+670",
+        "name": "East Timor"
+      }, {
+        "code": "+56",
+        "name": "Easter Island"
+      }, {
+        "code": "+593",
+        "name": "Ecuador"
+      }, {
+        "code": "+20",
+        "name": "Egypt"
+      }, {
+        "code": "+503",
+        "name": "El Salvador"
+      }, {
+        "code": "+240",
+        "name": "Equatorial Guinea"
+      }, {
+        "code": "+291",
+        "name": "Eritrea"
+      }, {
+        "code": "+372",
+        "name": "Estonia"
+      }, {
+        "code": "+251",
+        "name": "Ethiopia"
+      }, {
+        "code": "+500",
+        "name": "Falkland Islands"
+      }, {
+        "code": "+298",
+        "name": "Faroe Islands"
+      }, {
+        "code": "+679",
+        "name": "Fiji"
+      }, {
+        "code": "+358",
+        "name": "Finland"
+      }, {
+        "code": "+33",
+        "name": "France"
+      }, {
+        "code": "+596",
+        "name": "French Antilles"
+      }, {
+        "code": "+594",
+        "name": "French Guiana"
+      }, {
+        "code": "+689",
+        "name": "French Polynesia"
+      }, {
+        "code": "+241",
+        "name": "Gabon"
+      }, {
+        "code": "+220",
+        "name": "Gambia"
+      }, {
+        "code": "+995",
+        "name": "Georgia"
+      }, {
+        "code": "+49",
+        "name": "Germany"
+      }, {
+        "code": "+233",
+        "name": "Ghana"
+      }, {
+        "code": "+350",
+        "name": "Gibraltar"
+      }, {
+        "code": "+30",
+        "name": "Greece"
+      }, {
+        "code": "+299",
+        "name": "Greenland"
+      }, {
+        "code": "+1 473",
+        "name": "Grenada"
+      }, {
+        "code": "+590",
+        "name": "Guadeloupe"
+      }, {
+        "code": "+1 671",
+        "name": "Guam"
+      }, {
+        "code": "+502",
+        "name": "Guatemala"
+      }, {
+        "code": "+224",
+        "name": "Guinea"
+      }, {
+        "code": "+245",
+        "name": "Guinea-Bissau"
+      }, {
+        "code": "+595",
+        "name": "Guyana"
+      }, {
+        "code": "+509",
+        "name": "Haiti"
+      }, {
+        "code": "+504",
+        "name": "Honduras"
+      }, {
+        "code": "+852",
+        "name": "Hong Kong SAR China"
+      }, {
+        "code": "+36",
+        "name": "Hungary"
+      }, {
+        "code": "+354",
+        "name": "Iceland"
+      }, {
+        "code": "+91",
+        "name": "India"
+      }, {
+        "code": "+62",
+        "name": "Indonesia"
+      }, {
+        "code": "+98",
+        "name": "Iran"
+      }, {
+        "code": "+964",
+        "name": "Iraq"
+      }, {
+        "code": "+353",
+        "name": "Ireland"
+      }, {
+        "code": "+972",
+        "name": "Israel"
+      }, {
+        "code": "+39",
+        "name": "Italy"
+      }, {
+        "code": "+225",
+        "name": "Ivory Coast"
+      }, {
+        "code": "+1 876",
+        "name": "Jamaica"
+      }, {
+        "code": "+81",
+        "name": "Japan"
+      }, {
+        "code": "+962",
+        "name": "Jordan"
+      }, {
+        "code": "+7 7",
+        "name": "Kazakhstan"
+      }, {
+        "code": "+254",
+        "name": "Kenya"
+      }, {
+        "code": "+686",
+        "name": "Kiribati"
+      }, {
+        "code": "+965",
+        "name": "Kuwait"
+      }, {
+        "code": "+996",
+        "name": "Kyrgyzstan"
+      }, {
+        "code": "+856",
+        "name": "Laos"
+      }, {
+        "code": "+371",
+        "name": "Latvia"
+      }, {
+        "code": "+961",
+        "name": "Lebanon"
+      }, {
+        "code": "+266",
+        "name": "Lesotho"
+      }, {
+        "code": "+231",
+        "name": "Liberia"
+      }, {
+        "code": "+218",
+        "name": "Libya"
+      }, {
+        "code": "+423",
+        "name": "Liechtenstein"
+      }, {
+        "code": "+370",
+        "name": "Lithuania"
+      }, {
+        "code": "+352",
+        "name": "Luxembourg"
+      }, {
+        "code": "+853",
+        "name": "Macau SAR China"
+      }, {
+        "code": "+389",
+        "name": "Macedonia"
+      }, {
+        "code": "+261",
+        "name": "Madagascar"
+      }, {
+        "code": "+265",
+        "name": "Malawi"
+      }, {
+        "code": "+60",
+        "name": "Malaysia"
+      }, {
+        "code": "+960",
+        "name": "Maldives"
+      }, {
+        "code": "+223",
+        "name": "Mali"
+      }, {
+        "code": "+356",
+        "name": "Malta"
+      }, {
+        "code": "+692",
+        "name": "Marshall Islands"
+      }, {
+        "code": "+596",
+        "name": "Martinique"
+      }, {
+        "code": "+222",
+        "name": "Mauritania"
+      }, {
+        "code": "+230",
+        "name": "Mauritius"
+      }, {
+        "code": "+262",
+        "name": "Mayotte"
+      }, {
+        "code": "+52",
+        "name": "Mexico"
+      }, {
+        "code": "+691",
+        "name": "Micronesia"
+      }, {
+        "code": "+1 808",
+        "name": "Midway Island"
+      }, {
+        "code": "+373",
+        "name": "Moldova"
+      }, {
+        "code": "+377",
+        "name": "Monaco"
+      }, {
+        "code": "+976",
+        "name": "Mongolia"
+      }, {
+        "code": "+382",
+        "name": "Montenegro"
+      }, {
+        "code": "+1664",
+        "name": "Montserrat"
+      }, {
+        "code": "+212",
+        "name": "Morocco"
+      }, {
+        "code": "+95",
+        "name": "Myanmar"
+      }, {
+        "code": "+264",
+        "name": "Namibia"
+      }, {
+        "code": "+674",
+        "name": "Nauru"
+      }, {
+        "code": "+977",
+        "name": "Nepal"
+      }, {
+        "code": "+31",
+        "name": "Netherlands"
+      }, {
+        "code": "+599",
+        "name": "Netherlands Antilles"
+      }, {
+        "code": "+1 869",
+        "name": "Nevis"
+      }, {
+        "code": "+687",
+        "name": "New Caledonia"
+      }, {
+        "code": "+64",
+        "name": "New Zealand"
+      }, {
+        "code": "+505",
+        "name": "Nicaragua"
+      }, {
+        "code": "+227",
+        "name": "Niger"
+      }, {
+        "code": "+234",
+        "name": "Nigeria"
+      }, {
+        "code": "+683",
+        "name": "Niue"
+      }, {
+        "code": "+672",
+        "name": "Norfolk Island"
+      }, {
+        "code": "+850",
+        "name": "North Korea"
+      }, {
+        "code": "+1 670",
+        "name": "Northern Mariana Islands"
+      }, {
+        "code": "+47",
+        "name": "Norway"
+      }, {
+        "code": "+968",
+        "name": "Oman"
+      }, {
+        "code": "+92",
+        "name": "Pakistan"
+      }, {
+        "code": "+680",
+        "name": "Palau"
+      }, {
+        "code": "+970",
+        "name": "Palestinian Territory"
+      }, {
+        "code": "+507",
+        "name": "Panama"
+      }, {
+        "code": "+675",
+        "name": "Papua New Guinea"
+      }, {
+        "code": "+595",
+        "name": "Paraguay"
+      }, {
+        "code": "+51",
+        "name": "Peru"
+      }, {
+        "code": "+63",
+        "name": "Philippines"
+      }, {
+        "code": "+48",
+        "name": "Poland"
+      }, {
+        "code": "+351",
+        "name": "Portugal"
+      }, {
+        "code": "+1 787",
+        "name": "Puerto Rico"
+      }, {
+        "code": "+974",
+        "name": "Qatar"
+      }, {
+        "code": "+262",
+        "name": "Reunion"
+      }, {
+        "code": "+40",
+        "name": "Romania"
+      }, {
+        "code": "+7",
+        "name": "Russia"
+      }, {
+        "code": "+250",
+        "name": "Rwanda"
+      }, {
+        "code": "+685",
+        "name": "Samoa"
+      }, {
+        "code": "+378",
+        "name": "San Marino"
+      }, {
+        "code": "+966",
+        "name": "Saudi Arabia"
+      }, {
+        "code": "+221",
+        "name": "Senegal"
+      }, {
+        "code": "+381",
+        "name": "Serbia"
+      }, {
+        "code": "+248",
+        "name": "Seychelles"
+      }, {
+        "code": "+232",
+        "name": "Sierra Leone"
+      }, {
+        "code": "+65",
+        "name": "Singapore"
+      }, {
+        "code": "+421",
+        "name": "Slovakia"
+      }, {
+        "code": "+386",
+        "name": "Slovenia"
+      }, {
+        "code": "+677",
+        "name": "Solomon Islands"
+      }, {
+        "code": "+27",
+        "name": "South Africa"
+      }, {
+        "code": "+500",
+        "name": "South Georgia and the South Sandwich Islands"
+      }, {
+        "code": "+82",
+        "name": "South Korea"
+      }, {
+        "code": "+34",
+        "name": "Spain"
+      }, {
+        "code": "+94",
+        "name": "Sri Lanka"
+      }, {
+        "code": "+249",
+        "name": "Sudan"
+      }, {
+        "code": "+597",
+        "name": "Suriname"
+      }, {
+        "code": "+268",
+        "name": "Swaziland"
+      }, {
+        "code": "+46",
+        "name": "Sweden"
+      }, {
+        "code": "+41",
+        "name": "Switzerland"
+      }, {
+        "code": "+963",
+        "name": "Syria"
+      }, {
+        "code": "+886",
+        "name": "Taiwan"
+      }, {
+        "code": "+992",
+        "name": "Tajikistan"
+      }, {
+        "code": "+255",
+        "name": "Tanzania"
+      }, {
+        "code": "+66",
+        "name": "Thailand"
+      }, {
+        "code": "+670",
+        "name": "Timor Leste"
+      }, {
+        "code": "+228",
+        "name": "Togo"
+      }, {
+        "code": "+690",
+        "name": "Tokelau"
+      }, {
+        "code": "+676",
+        "name": "Tonga"
+      }, {
+        "code": "+1 868",
+        "name": "Trinidad and Tobago"
+      }, {
+        "code": "+216",
+        "name": "Tunisia"
+      }, {
+        "code": "+90",
+        "name": "Turkey"
+      }, {
+        "code": "+993",
+        "name": "Turkmenistan"
+      }, {
+        "code": "+1 649",
+        "name": "Turks and Caicos Islands"
+      }, {
+        "code": "+688",
+        "name": "Tuvalu"
+      }, {
+        "code": "+1 340",
+        "name": "U.S. Virgin Islands"
+      }, {
+        "code": "+256",
+        "name": "Uganda"
+      }, {
+        "code": "+380",
+        "name": "Ukraine"
+      }, {
+        "code": "+971",
+        "name": "United Arab Emirates"
+      }, {
+        "code": "+44",
+        "name": "United Kingdom"
+      }, {
+        "code": "+1",
+        "name": "United States"
+      }, {
+        "code": "+598",
+        "name": "Uruguay"
+      }, {
+        "code": "+998",
+        "name": "Uzbekistan"
+      }, {
+        "code": "+678",
+        "name": "Vanuatu"
+      }, {
+        "code": "+58",
+        "name": "Venezuela"
+      }, {
+        "code": "+84",
+        "name": "Vietnam"
+      }, {
+        "code": "+1 808",
+        "name": "Wake Island"
+      }, {
+        "code": "+681",
+        "name": "Wallis and Futuna"
+      }, {
+        "code": "+967",
+        "name": "Yemen"
+      }, {
+        "code": "+260",
+        "name": "Zambia"
+      }, {
+        "code": "+255",
+        "name": "Zanzibar"
+      }, {
+        "code": "+263",
+        "name": "Zimbabwe"
+      }]
     };
   },
   methods: {
@@ -5095,7 +5798,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 formData.append('first_name', _this2.formData.firstName);
                 formData.append('last_name', _this2.formData.lastName);
                 formData.append('email', _this2.formData.email);
-                formData.append('phone_code', _this2.formData.countryCode + _this2.formData.phoneCode);
+                formData.append('phone_code', _this2.formData.countryCode.code + _this2.formData.phoneCode);
                 formData.append('message', _this2.formData.message);
                 formData.append('is_reply', _this2.formData.is_reply);
                 formData.append('message_reply', _this2.formData.message_reply);
@@ -5175,6 +5878,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Partials_Banner_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Partials/Banner.vue */ "./resources/js/Pages/Partials/Banner.vue");
 /* harmony import */ var _Partials_Content_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Partials/Content.vue */ "./resources/js/Pages/Partials/Content.vue");
 /* harmony import */ var _Partials_Bio_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Partials/Bio.vue */ "./resources/js/Pages/Partials/Bio.vue");
+/* harmony import */ var _Partials_Contact_us_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Partials/Contact-us.vue */ "./resources/js/Pages/Partials/Contact-us.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -5239,6 +5943,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -5255,7 +5968,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     AttachmentList: _AttachmentList_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
     Banner: _Partials_Banner_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
     Content: _Partials_Content_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
-    Bio: _Partials_Bio_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
+    Bio: _Partials_Bio_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
+    ContactUs: _Partials_Contact_us_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
   },
   data: function data() {
     return {
@@ -5330,12 +6044,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context2.next = 2;
                 return axios.get('/api/banner').then(function (response) {
-                  console.log();
-
                   if (response.status == 200) {
                     _this2.items = response.data.data.items;
-                    console.log(_this2.items);
-                    console.log();
                   }
                 })["catch"](function (error) {
                   if (error.response.status == 422) {
@@ -5366,12 +6076,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios.get('/api/content', {
                   headers: {}
                 }).then(function (response) {
-                  console.log();
-
                   if (response.status == 200) {
                     _this3.contentItems = response.data.data.items;
-                    console.log(_this3.contentItems);
-                    console.log();
                   }
                 })["catch"](function (error) {
                   if (error.response.status == 422) {
@@ -5400,12 +6106,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context4.next = 2;
                 return axios.get('/api/bio-container').then(function (response) {
-                  console.log();
-
                   if (response.status == 200) {
                     _this4.bioItems = response.data.data.items;
-                    console.log(_this4.contentItems);
-                    console.log();
                   }
                 })["catch"](function (error) {
                   if (error.response.status == 422) {
@@ -5426,11 +6128,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     handleFileChange: function handleFileChange(event) {
       this.bannerImage = event.target.files[0];
-      console.log(this.bannerImage);
     },
     handleContentFileChange: function handleContentFileChange(event) {
       this.contentFile = event.target.files[0];
-      console.log(this.contentFile);
     },
     uploadBioFiles: function uploadBioFiles() {
       var _this5 = this;
@@ -5453,9 +6153,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 7:
                 response = _context5.sent;
-                // Handle success
-                console.log('Response:', response.data);
 
+                // Handle success
                 _this5.getBioData(); // Update content data
 
 
@@ -5467,22 +6166,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this5.type = '';
                 _this5.contentFile = null;
                 _this5.isLoading = false;
-                _context5.next = 22;
+                _context5.next = 21;
                 break;
 
-              case 18:
-                _context5.prev = 18;
+              case 17:
+                _context5.prev = 17;
                 _context5.t0 = _context5["catch"](0);
                 // Handle error
                 _this5.isLoading = true;
                 console.error('Error:', _context5.t0);
 
-              case 22:
+              case 21:
               case "end":
                 return _context5.stop();
             }
           }
-        }, _callee5, null, [[0, 18]]);
+        }, _callee5, null, [[0, 17]]);
       }))();
     },
     uploadContentFiles: function uploadContentFiles() {
@@ -5508,9 +6207,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 9:
                 response = _context6.sent;
-                // Handle success
-                console.log('Response:', response.data);
 
+                // Handle success
                 _this6.getContentData(); // Update content data
 
 
@@ -5522,22 +6220,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this6.type = '';
                 _this6.contentFile = null;
                 _this6.isLoading = false;
-                _context6.next = 24;
+                _context6.next = 23;
                 break;
 
-              case 20:
-                _context6.prev = 20;
+              case 19:
+                _context6.prev = 19;
                 _context6.t0 = _context6["catch"](0);
                 // Handle error
                 _this6.isLoading = true;
                 console.error('Error:', _context6.t0);
 
-              case 24:
+              case 23:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6, null, [[0, 20]]);
+        }, _callee6, null, [[0, 19]]);
       }))();
     },
     uploadFiles: function uploadFiles() {
@@ -5560,40 +6258,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 6:
                 response = _context7.sent;
-                // Handle success
-                console.log('Response:', response.data);
 
+                // Handle success
                 _this7.getBannerData();
 
                 _this7.showModal = false;
                 _this7.isLoading = false;
                 _this7.bannerImage = null;
-                _context7.next = 18;
+                _context7.next = 17;
                 break;
 
-              case 14:
-                _context7.prev = 14;
+              case 13:
+                _context7.prev = 13;
                 _context7.t0 = _context7["catch"](0);
                 // Handle error
                 _this7.isLoading = true;
                 console.error('Error:', _context7.t0);
 
-              case 18:
+              case 17:
               case "end":
                 return _context7.stop();
             }
           }
-        }, _callee7, null, [[0, 14]]);
+        }, _callee7, null, [[0, 13]]);
       }))();
     },
     deleteContentItem: function deleteContentItem(id) {
       var _this8 = this;
 
-      console.log(id); // Send a DELETE request to the backend with the item's ID
-
+      // Send a DELETE request to the backend with the item's ID
       axios["delete"]("/api/content/".concat(id)).then(function (response) {
-        console.log(response.data.message);
-
         _this8.getContentData(); // Assuming you want to remove the item from the frontend after successful deletion
         // You can trigger a method to refresh the list of items or remove the deleted item from the UI
 
@@ -5606,8 +6300,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       // Send a DELETE request to the backend with the item's ID
       axios["delete"]("/api/banner/".concat(id)).then(function (response) {
-        console.log(response.data.message);
-
         _this9.getBannerData(); // Assuming you want to remove the item from the frontend after successful deletion
         // You can trigger a method to refresh the list of items or remove the deleted item from the UI
 
@@ -5856,32 +6548,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     cropImage: function cropImage() {
       // get image data for post processing, e.g. upload or setting image src
       // this.cropImg = this.$refs.cropper.getCroppedCanvas({ width: 1036, height: 350 }).toDataURL();
-      this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL(); // this.$refs.cropper.getCroppedCanvas({ width: 1280, height: 720 }).toBlob((blob) => {
-      //     this.cropImg = blob
-      // });
+      this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL();
     },
     reset: function reset() {
       this.$refs.cropper.reset();
     },
-    // setImage(e) {
-    //     const file = e.target.files[0];
-    //     this.isCroping = true;
-    //     if (file.type.indexOf('image/') === -1) {
-    //         alert('Please select an image file');
-    //         return;
-    //     }
-    //     if (typeof FileReader === 'function') {
-    //         const reader = new FileReader();
-    //         reader.onload = (event) => {
-    //             this.bannerImage = event.target.result;
-    //             // rebuild cropperjs with the updated source
-    //             this.$refs.cropper.replace(event.target.result);
-    //         };
-    //         reader.readAsDataURL(file);
-    //     } else {
-    //         alert('Sorry, FileReader API not supported');
-    //     }
-    // },
     setImage: function setImage(e) {
       var _this2 = this;
 
@@ -5947,12 +6618,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
         _this3.getBannerData();
       })["catch"](function (err) {
-        // this.$toasted.show(err.response.data.message, {
-        //     theme: "toasted-primary",
-        //     position: "top-center",
-        //     duration : 5000
-        // });
-        console.log(err);
+        _this3.$toasted.show(err.response.data.message, {
+          theme: "toasted-primary",
+          position: "top-center",
+          duration: 5000
+        });
       })["finally"](function (res) {
         console.log(res);
       }); // console.log(to_index, from_index);
@@ -5968,12 +6638,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context2.next = 2;
                 return axios__WEBPACK_IMPORTED_MODULE_5__["default"].get("/api/banner").then(function (response) {
-                  console.log();
-
                   if (response.status == 200) {
                     _this4.items = response.data.data.items;
-                    console.log(_this4.items);
-                    console.log();
                   }
                 })["catch"](function (error) {
                   if (error.response.status == 422) {
@@ -5994,7 +6660,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     handleFileChange: function handleFileChange(event) {
       this.bannerImage = event.target.files[0];
-      console.log(this.bannerImage);
     },
     uploadFiles: function uploadFiles() {
       var _this5 = this;
@@ -6077,7 +6742,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       // Send a DELETE request to the backend with the item's ID
       axios__WEBPACK_IMPORTED_MODULE_5__["default"]["delete"]("/api/banner/".concat(id)).then(function (response) {
         // console.log(response.data.message);
-        _this6.getBannerData(); // Assuming you want to remove the item from the frontend after successful deletion
+        _this6.getBannerData();
+
+        _this6.$toasted.show(response.data.message, {
+          theme: "toasted-primary",
+          position: "top-center",
+          duration: 5000
+        }); // Assuming you want to remove the item from the frontend after successful deletion
         // You can trigger a method to refresh the list of items or remove the deleted item from the UI
 
       })["catch"](function (error) {
@@ -6280,14 +6951,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/bio-container').then(function (response) {
                   if (response.status == 200) {
                     _this2.bioItems = response.data.data.items;
-                    console.log(_this2.bioItems, 'response.data.data.items');
                   }
                 })["catch"](function (error) {
                   if (error.response.status == 422) {
                     _this2.errors = error.response.data.errors;
                   } else {
                     // this.toastMessage('error', error, 'check', '', 'times')
-                    console.log(error);
+                    console.error('Error:', error);
                   }
                 })["finally"](function () {});
 
@@ -6301,17 +6971,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     handleFileChange: function handleFileChange(event) {
       this.bannerImage = event.target.files[0];
-      console.log(this.bannerImage);
     },
     handleContentFileChange: function handleContentFileChange(event) {
       this.contentFile = event.target.files[0];
-      console.log(this.contentFile);
     },
     uploadBioFiles: function uploadBioFiles() {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var formData, response;
+        var formData;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -6342,10 +7010,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/bio-container', formData);
 
               case 10:
-                response = _context3.sent;
                 // Handle success
-                console.log('Response:', response.data);
-
                 _this3.getBioData(); // Update content data
 
 
@@ -6355,26 +7020,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this3.bioTitle = '';
                 _this3.bioDesc = '';
                 _this3.isLoading = false;
-                _context3.next = 23;
+                _context3.next = 21;
                 break;
 
-              case 19:
-                _context3.prev = 19;
+              case 17:
+                _context3.prev = 17;
                 _context3.t0 = _context3["catch"](0);
                 // Handle error
                 _this3.isLoading = true;
                 console.error('Error:', _context3.t0);
 
-              case 23:
+              case 21:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[0, 19]]);
+        }, _callee3, null, [[0, 17]]);
       }))();
     },
     updateBio: function updateBio(item) {
-      console.log(item);
       this.showModal = 'bio';
       this.isUpdate = true;
       this.bioTitle = item.title;
@@ -6389,23 +7053,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                console.log(id);
-                _context4.prev = 1;
+                _context4.prev = 0;
                 _this4.isLoading = true; // let formData = new FormData();
                 // formData.append('title', this.bioTitle);
                 // formData.append('description', this.bioDesc);
                 // Make POST request to upload the file and data
 
-                _context4.next = 5;
+                _context4.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_1__["default"].post("/api/bio-container/".concat(id), {
                   id: id
                 });
 
-              case 5:
+              case 4:
                 response = _context4.sent;
-                // Handle success
-                console.log('Response:', response.data);
 
+                // Handle success
                 _this4.getBioData(); // Update content data
 
 
@@ -6416,23 +7078,243 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this4.bioDesc = '';
                 _this4.isLoading = false;
                 _this4.isUpdate = false;
-                _context4.next = 19;
+                _context4.next = 16;
                 break;
 
-              case 15:
-                _context4.prev = 15;
-                _context4.t0 = _context4["catch"](1);
+              case 13:
+                _context4.prev = 13;
+                _context4.t0 = _context4["catch"](0);
                 // Handle error
                 _this4.isLoading = true;
-                console.error('Error:', _context4.t0);
 
-              case 19:
+              case 16:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, null, [[1, 15]]);
+        }, _callee4, null, [[0, 13]]);
       }))();
+    },
+    clickTool: function clickTool(id) {
+      if (this.isOpenTool == id) {
+        this.isOpenTool = -1;
+      } else {
+        this.isOpenTool = id;
+      }
+    },
+    closeModal: function closeModal() {
+      this.showModal = false;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Partials/Contact-us.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Partials/Contact-us.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      contactInfos: [],
+      selectedTab: "contact",
+      showModal: "",
+      isLoading: false,
+      isOpenTool: null,
+      isUpdate: false
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _this.getContactInfo();
+
+            case 1:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  },
+  methods: {
+    getContactInfo: function getContactInfo() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1__["default"].get("/api/contact-us").then(function (response) {
+                  if (response.status == 200) {
+                    _this2.contactInfos = response.data.data.items;
+                  }
+                })["catch"](function (error) {
+                  console.error(error);
+                })["finally"](function () {});
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    deleteContactInfo: function deleteContactInfo(id) {
+      var _this3 = this;
+
+      // Send a DELETE request to the backend with the item's ID
+      axios__WEBPACK_IMPORTED_MODULE_1__["default"]["delete"]("/api/contact-us/".concat(id)).then(function (response) {
+        _this3.$toasted.success(response.data.message, {
+          theme: "toasted-primary",
+          position: "top-center",
+          duration: 5000
+        });
+
+        _this3.getContactInfo();
+      })["catch"](function (error) {
+        console.error(error); // Handle error if needed
+      });
     },
     clickTool: function clickTool(id) {
       if (this.isOpenTool == id) {
@@ -6679,13 +7561,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -6721,6 +7596,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       acceptedExtensions: '',
       bioTitle: '',
       bioDesc: '',
+      uploading: false,
+      progress: 0,
       tempAttachments: [],
       attachments: [],
       fileTypeError: ''
@@ -6807,12 +7684,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context2.next = 2;
                 return axios__WEBPACK_IMPORTED_MODULE_4__["default"].get('/api/content').then(function (response) {
-                  console.log();
-
                   if (response.status == 200) {
                     _this3.contentItems = response.data.data.items;
-                    console.log(_this3.contentItems);
-                    console.log();
                   }
                 })["catch"](function (error) {
                   if (error.response.status == 422) {
@@ -6858,15 +7731,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
       this.fileTypeError = '';
+      this.uploading = true;
       var reader = new FileReader();
 
       reader.onload = function () {
-        _this4.contentPreview = reader.result; // Set previewImage to base64 string
+        var interval = setInterval(function () {
+          _this4.progress += 5; // Increment progress by 5%
+
+          if (_this4.progress >= 100) {
+            clearInterval(interval);
+            _this4.contentPreview = reader.result;
+            _this4.uploading = false;
+          }
+        }, 500); // Set previewImage to base64 string
       };
 
       reader.readAsDataURL(file);
       this.contentFile = file;
-      console.log(this.contentFile);
     },
     uploadContentFiles: function uploadContentFiles() {
       var _this5 = this;
@@ -6955,11 +7836,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     deleteContentItem: function deleteContentItem(id) {
       var _this6 = this;
 
-      console.log(id); // Send a DELETE request to the backend with the item's ID
-
+      // Send a DELETE request to the backend with the item's ID
       axios__WEBPACK_IMPORTED_MODULE_4__["default"]["delete"]("/api/content/".concat(id)).then(function (response) {
-        console.log(response.data.message);
-
         _this6.getContentData(); // Assuming you want to remove the item from the frontend after successful deletion
         // You can trigger a method to refresh the list of items or remove the deleted item from the UI
 
@@ -8289,7 +9167,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios__WEBPACK_IMPORTED_MODULE_4__["default"].get('/api/bio-container').then(function (response) {
                   if (response.status == 200) {
                     _this2.bioItems = response.data.data.items;
-                    console.log(_this2.bioItems, 'response.data.data.items');
                   }
                 })["catch"](function (error) {
                   if (error.response.status == 422) {
@@ -8318,12 +9195,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context3.next = 2;
                 return axios__WEBPACK_IMPORTED_MODULE_4__["default"].get('/api/web/content').then(function (response) {
-                  console.log();
-
                   if (response.status == 200) {
                     _this3.contentItems = response.data.data.items;
-                    console.log(_this3.contentItems);
-                    console.log();
                   }
                 })["catch"](function (error) {
                   if (error.response.status == 422) {
@@ -13782,6 +14655,30 @@ ___CSS_LOADER_EXPORT___.push([module.id, "/*!\n * Cropper.js v1.6.1\n * https://
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-select/dist/vue-select.css":
+/*!*************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-select/dist/vue-select.css ***!
+  \*************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ":root{--vs-colors--lightest:rgba(60,60,60,0.26);--vs-colors--light:rgba(60,60,60,0.5);--vs-colors--dark:#333;--vs-colors--darkest:rgba(0,0,0,0.15);--vs-search-input-color:inherit;--vs-search-input-bg:#fff;--vs-search-input-placeholder-color:inherit;--vs-font-size:1rem;--vs-line-height:1.4;--vs-state-disabled-bg:#f8f8f8;--vs-state-disabled-color:var(--vs-colors--light);--vs-state-disabled-controls-color:var(--vs-colors--light);--vs-state-disabled-cursor:not-allowed;--vs-border-color:var(--vs-colors--lightest);--vs-border-width:1px;--vs-border-style:solid;--vs-border-radius:4px;--vs-actions-padding:4px 6px 0 3px;--vs-controls-color:var(--vs-colors--light);--vs-controls-size:1;--vs-controls--deselect-text-shadow:0 1px 0 #fff;--vs-selected-bg:#f0f0f0;--vs-selected-color:var(--vs-colors--dark);--vs-selected-border-color:var(--vs-border-color);--vs-selected-border-style:var(--vs-border-style);--vs-selected-border-width:var(--vs-border-width);--vs-dropdown-bg:#fff;--vs-dropdown-color:inherit;--vs-dropdown-z-index:1000;--vs-dropdown-min-width:160px;--vs-dropdown-max-height:350px;--vs-dropdown-box-shadow:0px 3px 6px 0px var(--vs-colors--darkest);--vs-dropdown-option-bg:#000;--vs-dropdown-option-color:var(--vs-dropdown-color);--vs-dropdown-option-padding:3px 20px;--vs-dropdown-option--active-bg:#5897fb;--vs-dropdown-option--active-color:#fff;--vs-dropdown-option--deselect-bg:#fb5858;--vs-dropdown-option--deselect-color:#fff;--vs-transition-timing-function:cubic-bezier(1,-0.115,0.975,0.855);--vs-transition-duration:150ms}.v-select{font-family:inherit;position:relative}.v-select,.v-select *{box-sizing:border-box}:root{--vs-transition-timing-function:cubic-bezier(1,0.5,0.8,1);--vs-transition-duration:0.15s}@-webkit-keyframes vSelectSpinner{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}@keyframes vSelectSpinner{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}.vs__fade-enter-active,.vs__fade-leave-active{pointer-events:none;transition:opacity var(--vs-transition-duration) var(--vs-transition-timing-function)}.vs__fade-enter,.vs__fade-leave-to{opacity:0}:root{--vs-disabled-bg:var(--vs-state-disabled-bg);--vs-disabled-color:var(--vs-state-disabled-color);--vs-disabled-cursor:var(--vs-state-disabled-cursor)}.vs--disabled .vs__clear,.vs--disabled .vs__dropdown-toggle,.vs--disabled .vs__open-indicator,.vs--disabled .vs__search,.vs--disabled .vs__selected{background-color:var(--vs-disabled-bg);cursor:var(--vs-disabled-cursor)}.v-select[dir=rtl] .vs__actions{padding:0 3px 0 6px}.v-select[dir=rtl] .vs__clear{margin-left:6px;margin-right:0}.v-select[dir=rtl] .vs__deselect{margin-left:0;margin-right:2px}.v-select[dir=rtl] .vs__dropdown-menu{text-align:right}.vs__dropdown-toggle{-webkit-appearance:none;-moz-appearance:none;appearance:none;background:var(--vs-search-input-bg);border:var(--vs-border-width) var(--vs-border-style) var(--vs-border-color);border-radius:var(--vs-border-radius);display:flex;padding:0 0 4px;white-space:normal}.vs__selected-options{display:flex;flex-basis:100%;flex-grow:1;flex-wrap:wrap;padding:0 2px;position:relative}.vs__actions{align-items:center;display:flex;padding:var(--vs-actions-padding)}.vs--searchable .vs__dropdown-toggle{cursor:text}.vs--unsearchable .vs__dropdown-toggle{cursor:pointer}.vs--open .vs__dropdown-toggle{border-bottom-color:transparent;border-bottom-left-radius:0;border-bottom-right-radius:0}.vs__open-indicator{fill:var(--vs-controls-color);transform:scale(var(--vs-controls-size));transition:transform var(--vs-transition-duration) var(--vs-transition-timing-function);transition-timing-function:var(--vs-transition-timing-function)}.vs--open .vs__open-indicator{transform:rotate(180deg) scale(var(--vs-controls-size))}.vs--loading .vs__open-indicator{opacity:0}.vs__clear{fill:var(--vs-controls-color);background-color:transparent;border:0;cursor:pointer;margin-right:8px;padding:0}.vs__dropdown-menu{background:var(--vs-dropdown-bg);border:var(--vs-border-width) var(--vs-border-style) var(--vs-border-color);border-radius:0 0 var(--vs-border-radius) var(--vs-border-radius);border-top-style:none;box-shadow:var(--vs-dropdown-box-shadow);box-sizing:border-box;color:var(--vs-dropdown-color);display:block;left:0;list-style:none;margin:0;max-height:var(--vs-dropdown-max-height);min-width:var(--vs-dropdown-min-width);overflow-y:auto;padding:5px 0;position:absolute;text-align:left;top:calc(100% - var(--vs-border-width));width:100%;z-index:var(--vs-dropdown-z-index)}.vs__no-options{text-align:center}.vs__dropdown-option{clear:both;color:var(--vs-dropdown-option-color);cursor:pointer;display:block;line-height:1.42857143;padding:var(--vs-dropdown-option-padding);white-space:nowrap}.vs__dropdown-option--highlight{background:var(--vs-dropdown-option--active-bg);color:var(--vs-dropdown-option--active-color)}.vs__dropdown-option--deselect{background:var(--vs-dropdown-option--deselect-bg);color:var(--vs-dropdown-option--deselect-color)}.vs__dropdown-option--disabled{background:var(--vs-state-disabled-bg);color:var(--vs-state-disabled-color);cursor:var(--vs-state-disabled-cursor)}.vs__selected{align-items:center;background-color:var(--vs-selected-bg);border:var(--vs-selected-border-width) var(--vs-selected-border-style) var(--vs-selected-border-color);border-radius:var(--vs-border-radius);color:var(--vs-selected-color);display:flex;line-height:var(--vs-line-height);margin:4px 2px 0;padding:0 .25em;z-index:0}.vs__deselect{fill:var(--vs-controls-color);-webkit-appearance:none;-moz-appearance:none;appearance:none;background:none;border:0;cursor:pointer;display:inline-flex;margin-left:4px;padding:0;text-shadow:var(--vs-controls--deselect-text-shadow)}.vs--single .vs__selected{background-color:transparent;border-color:transparent}.vs--single.vs--loading .vs__selected,.vs--single.vs--open .vs__selected{opacity:.4;position:absolute}.vs--single.vs--searching .vs__selected{display:none}.vs__search::-webkit-search-cancel-button{display:none}.vs__search::-ms-clear,.vs__search::-webkit-search-decoration,.vs__search::-webkit-search-results-button,.vs__search::-webkit-search-results-decoration{display:none}.vs__search,.vs__search:focus{-webkit-appearance:none;-moz-appearance:none;appearance:none;background:none;border:1px solid transparent;border-left:none;box-shadow:none;color:var(--vs-search-input-color);flex-grow:1;font-size:var(--vs-font-size);line-height:var(--vs-line-height);margin:4px 0 0;max-width:100%;outline:none;padding:0 7px;width:0;z-index:1}.vs__search::-moz-placeholder{color:var(--vs-search-input-placeholder-color)}.vs__search:-ms-input-placeholder{color:var(--vs-search-input-placeholder-color)}.vs__search::placeholder{color:var(--vs-search-input-placeholder-color)}.vs--unsearchable .vs__search{opacity:1}.vs--unsearchable:not(.vs--disabled) .vs__search{cursor:pointer}.vs--single.vs--searching:not(.vs--open):not(.vs--loading) .vs__search{opacity:.2}.vs__spinner{align-self:center;-webkit-animation:vSelectSpinner 1.1s linear infinite;animation:vSelectSpinner 1.1s linear infinite;border:.9em solid hsla(0,0%,39%,.1);border-left-color:rgba(60,60,60,.45);font-size:5px;opacity:0;overflow:hidden;text-indent:-9999em;transform:translateZ(0) scale(var(--vs-controls--spinner-size,var(--vs-controls-size)));transition:opacity .1s}.vs__spinner,.vs__spinner:after{border-radius:50%;height:5em;transform:scale(var(--vs-controls--spinner-size,var(--vs-controls-size)));width:5em}.vs--loading .vs__spinner{opacity:1}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue2-dropzone/dist/vue2Dropzone.min.css":
 /*!**********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue2-dropzone/dist/vue2Dropzone.min.css ***!
@@ -13847,7 +14744,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.error-message {\n    color: rgb(231, 21, 21);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.error-message {\n    color: rgb(231, 21, 21);\n}\n#country {\n    display: block;\n    font-size: 18px;\n    font-weight: 700;\n    line-height: 33px;\n    color: #9a5626;\n    margin-bottom: 5px;\n}\n.v-select,\n.v-select {\n    height: 54px;\n}\n.vs--searchable .vs__dropdown-toggle {\n    height: 100%;\n    border: 1px solid #9a5626;\n    background-color: transparent;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -36898,6 +37795,36 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
 
 /***/ }),
 
+/***/ "./node_modules/vue-select/dist/vue-select.css":
+/*!*****************************************************!*\
+  !*** ./node_modules/vue-select/dist/vue-select.css ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_vue_select_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./vue-select.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-select/dist/vue-select.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_vue_select_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_vue_select_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/vue2-dropzone/dist/vue2Dropzone.min.css":
 /*!**************************************************************!*\
   !*** ./node_modules/vue2-dropzone/dist/vue2Dropzone.min.css ***!
@@ -39504,6 +40431,45 @@ component.options.__file = "resources/js/Pages/Partials/Bio.vue"
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Partials/Contact-us.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/Pages/Partials/Contact-us.vue ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Contact_us_vue_vue_type_template_id_5050ac8f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Contact-us.vue?vue&type=template&id=5050ac8f& */ "./resources/js/Pages/Partials/Contact-us.vue?vue&type=template&id=5050ac8f&");
+/* harmony import */ var _Contact_us_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Contact-us.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Partials/Contact-us.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Contact_us_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Contact_us_vue_vue_type_template_id_5050ac8f___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Contact_us_vue_vue_type_template_id_5050ac8f___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Pages/Partials/Contact-us.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Partials/Content.vue":
 /*!*************************************************!*\
   !*** ./resources/js/Pages/Partials/Content.vue ***!
@@ -40545,6 +41511,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Partials/Contact-us.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/Pages/Partials/Contact-us.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Contact_us_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Contact-us.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Partials/Contact-us.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Contact_us_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Partials/Content.vue?vue&type=script&lang=js&":
 /*!**************************************************************************!*\
   !*** ./resources/js/Pages/Partials/Content.vue?vue&type=script&lang=js& ***!
@@ -41543,6 +42525,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Bio_vue_vue_type_template_id_17961914___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Bio_vue_vue_type_template_id_17961914___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Bio.vue?vue&type=template&id=17961914& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Partials/Bio.vue?vue&type=template&id=17961914&");
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Partials/Contact-us.vue?vue&type=template&id=5050ac8f&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/Pages/Partials/Contact-us.vue?vue&type=template&id=5050ac8f& ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Contact_us_vue_vue_type_template_id_5050ac8f___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Contact_us_vue_vue_type_template_id_5050ac8f___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Contact_us_vue_vue_type_template_id_5050ac8f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Contact-us.vue?vue&type=template&id=5050ac8f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Partials/Contact-us.vue?vue&type=template&id=5050ac8f&");
 
 
 /***/ }),
@@ -47177,99 +48176,33 @@ var render = function () {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-6" }, [
-                      _c("div", { staticClass: "inputFrom" }, [
-                        _c("label", { attrs: { for: "country" } }, [
-                          _vm._v("Country Code"),
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.formData.countryCode,
-                                expression: "formData.countryCode",
+                      _c(
+                        "div",
+                        {},
+                        [
+                          _c(
+                            "label",
+                            { attrs: { for: "country", id: "country" } },
+                            [_vm._v("Country Code")]
+                          ),
+                          _vm._v(" "),
+                          _c("v-select", {
+                            attrs: { options: _vm.countries, label: "name" },
+                            model: {
+                              value: _vm.formData.countryCode,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.formData, "countryCode", $$v)
                               },
-                            ],
-                            on: {
-                              change: [
-                                function ($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function (o) {
-                                      return o.selected
-                                    })
-                                    .map(function (o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.$set(
-                                    _vm.formData,
-                                    "countryCode",
-                                    $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  )
-                                },
-                                function ($event) {
-                                  return _vm.clearError("country")
-                                },
-                              ],
+                              expression: "formData.countryCode",
                             },
-                          },
-                          [
-                            _c("option", { attrs: { value: "" } }, [
-                              _vm._v("Select Country"),
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "+1" } }, [
-                              _vm._v("United States (+1)"),
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "+44" } }, [
-                              _vm._v("United Kingdom (+44)"),
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "+1" } }, [
-                              _vm._v("Canada (+1)"),
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "+61" } }, [
-                              _vm._v("Australia (+61)"),
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "+49" } }, [
-                              _vm._v("Germany (+49)"),
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "+33" } }, [
-                              _vm._v("France (+33)"),
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "+91" } }, [
-                              _vm._v("India (+91)"),
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "+86" } }, [
-                              _vm._v("China (+86)"),
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "+55" } }, [
-                              _vm._v("Brazil (+55)"),
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "+81" } }, [
-                              _vm._v("Japan (+81)"),
-                            ]),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "error-message" }, [
-                          _vm._v(_vm._s(_vm.errors.country)),
-                        ]),
-                      ]),
+                          }),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "error-message" }, [
+                            _vm._v(_vm._s(_vm.errors.country)),
+                          ]),
+                        ],
+                        1
+                      ),
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-12" }, [
@@ -47287,6 +48220,7 @@ var render = function () {
                               expression: "formData.message",
                             },
                           ],
+                          attrs: { rows: "8", cols: "4" },
                           domProps: { value: _vm.formData.message },
                           on: {
                             input: [
@@ -47589,6 +48523,28 @@ var render = function () {
                           ]
                         ),
                       ]),
+                      _vm._v(" "),
+                      _c("li", [
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "inline-flex items-center px-4 py-3 text-base no-underline text-gray-500 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white",
+                            class: { active: _vm.selectedTab === "contact" },
+                            attrs: { href: "#" },
+                            on: {
+                              click: function ($event) {
+                                _vm.selectedTab = "contact"
+                              },
+                            },
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    Contact us\n                                "
+                            ),
+                          ]
+                        ),
+                      ]),
                     ]
                   ),
                 ]),
@@ -47600,6 +48556,8 @@ var render = function () {
                 ? _c("Banner")
                 : _vm.selectedTab === "content"
                 ? _c("Content")
+                : _vm.selectedTab === "contact"
+                ? _c("contact-us")
                 : _vm._e(),
             ],
             1
@@ -48564,6 +49522,440 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Partials/Contact-us.vue?vue&type=template&id=5050ac8f&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Partials/Contact-us.vue?vue&type=template&id=5050ac8f& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass:
+        "bg-white overflow-hidden shadow-xl px-4 py-4 w-3/4 sm:rounded-lg",
+    },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "my-4" }, [
+        _c("div", { staticClass: " " }, [
+          _vm.contactInfos.length > 0
+            ? _c(
+                "div",
+                { staticClass: "row" },
+                _vm._l(_vm.contactInfos, function (item) {
+                  return _c(
+                    "div",
+                    { key: item.id, staticClass: "col-md-6 mb-3" },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "p-3 border rounded-lg relative" },
+                        [
+                          _c("p", { staticClass: "text-base text-gray-700" }, [
+                            _vm._v(
+                              "\n                            Name: " +
+                                _vm._s(item.first_name) +
+                                " " +
+                                _vm._s(item.last_name) +
+                                "\n                        "
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "text-base text-gray-700" }, [
+                            _vm._v("Email: " + _vm._s(item.email)),
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "text-base text-gray-700" }, [
+                            _vm._v(
+                              "\n                            Phone Code: " +
+                                _vm._s(item.phone_code) +
+                                "\n                        "
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "text-base text-gray-700" }, [
+                            _vm._v(
+                              "\n                            Message:\n                            " +
+                                _vm._s(
+                                  item.message.length > 45
+                                    ? item.message.substring(0, 140) + "..."
+                                    : item.message.substring(0, 140)
+                                ) +
+                                "\n                        "
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "absolute top-2 right-2 text-gray-400 cursor-pointer",
+                              on: {
+                                click: function ($event) {
+                                  return _vm.clickTool(item.id)
+                                },
+                              },
+                            },
+                            [
+                              _c(
+                                "svg",
+                                {
+                                  staticClass: "w-6 h-6",
+                                  attrs: {
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    fill: "none",
+                                    viewBox: "0 0 24 24",
+                                    "stroke-width": "1.5",
+                                    stroke: "currentColor",
+                                  },
+                                },
+                                [
+                                  _c("path", {
+                                    attrs: {
+                                      "stroke-linecap": "round",
+                                      "stroke-linejoin": "round",
+                                      d: "M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z",
+                                    },
+                                  }),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _vm.isOpenTool === item.id
+                                ? _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "w-40 absolute right-0 rounded-md bg-white border text-gray-700",
+                                    },
+                                    [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass:
+                                            "cursor-pointer w-full hover:text-red-700 py-2",
+                                          on: {
+                                            click: function ($event) {
+                                              return _vm.deleteContactInfo(
+                                                item.id
+                                              )
+                                            },
+                                          },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                    Delete Data\n                                "
+                                          ),
+                                        ]
+                                      ),
+                                    ]
+                                  )
+                                : _vm._e(),
+                            ]
+                          ),
+                        ]
+                      ),
+                    ]
+                  )
+                }),
+                0
+              )
+            : _c("div", [
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "flex flex-col justify-center gap-2 items-center py-4 text-gray-500",
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "w-14",
+                          attrs: {
+                            xmlns: "http://www.w3.org/2000/svg",
+                            fill: "none",
+                            viewBox: "0 0 24 24",
+                            "stroke-width": "1.5",
+                            stroke: "currentColor",
+                          },
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              "stroke-linecap": "round",
+                              "stroke-linejoin": "round",
+                              d: "m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9",
+                            },
+                          }),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "h2",
+                        { staticClass: "text-2xl text-gray-500 font-medium" },
+                        [_vm._v("No Data Found")]
+                      ),
+                    ]
+                  ),
+                ]),
+              ]),
+        ]),
+        _vm._v(" "),
+        _vm.showModal === "contact"
+          ? _c("div", { staticClass: "modal" }, [
+              _c("div", {
+                staticClass: "modal-overlay",
+                on: { click: _vm.closeModal },
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "mb-6" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass:
+                        "block mb-2 text-sm font-medium text-gray-900 dark:text-white",
+                      attrs: { for: "title" },
+                    },
+                    [_vm._v("Title")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.bioTitle,
+                        expression: "bioTitle",
+                      },
+                    ],
+                    staticClass:
+                      "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                    attrs: {
+                      type: "title",
+                      id: "title",
+                      placeholder: "Enter Title",
+                      required: "",
+                    },
+                    domProps: { value: _vm.bioTitle },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.bioTitle = $event.target.value
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mb-6" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass:
+                        "block mb-2 text-sm font-medium text-gray-900 dark:text-white",
+                      attrs: { for: "message" },
+                    },
+                    [_vm._v("Your\n                        message")]
+                  ),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.bioDesc,
+                        expression: "bioDesc",
+                      },
+                    ],
+                    staticClass:
+                      "block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                    attrs: {
+                      id: "message",
+                      rows: "4",
+                      placeholder: "Write your thoughts here...",
+                    },
+                    domProps: { value: _vm.bioDesc },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.bioDesc = $event.target.value
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", {}, [
+                  !_vm.isUpdate
+                    ? _c(
+                        "button",
+                        {
+                          staticClass:
+                            "text-white flex items-center justify-center gap-4 bg-brand hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 h-12 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+                          attrs: { type: "button" },
+                          on: { click: _vm.uploadBioFiles },
+                        },
+                        [
+                          _vm._v(
+                            "\n                        Submit\n                        "
+                          ),
+                          _vm.isLoading
+                            ? _c(
+                                "svg",
+                                {
+                                  attrs: {
+                                    version: "1.1",
+                                    id: "L9",
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    wodth: "30",
+                                    height: "30",
+                                    "xmlns:xlink":
+                                      "http://www.w3.org/1999/xlink",
+                                    x: "0px",
+                                    y: "0px",
+                                    viewBox: "0 0 100 100",
+                                    "enable-background": "new 0 0 0 0",
+                                    "xml:space": "preserve",
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "path",
+                                    {
+                                      attrs: {
+                                        fill: "#fff",
+                                        d: "M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50",
+                                      },
+                                    },
+                                    [
+                                      _c("animateTransform", {
+                                        attrs: {
+                                          attributeName: "transform",
+                                          attributeType: "XML",
+                                          type: "rotate",
+                                          dur: "1s",
+                                          from: "0 50 50",
+                                          to: "360 50 50",
+                                          repeatCount: "indefinite",
+                                        },
+                                      }),
+                                    ],
+                                    1
+                                  ),
+                                ]
+                              )
+                            : _vm._e(),
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isUpdate
+                    ? _c(
+                        "button",
+                        {
+                          staticClass:
+                            "text-white flex items-center justify-center gap-4 bg-brand hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 h-12 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.updateBioFiles(_vm.item.id)
+                            },
+                          },
+                        },
+                        [
+                          _vm._v(
+                            "\n                        Update\n                        "
+                          ),
+                          _vm.isLoading
+                            ? _c(
+                                "svg",
+                                {
+                                  attrs: {
+                                    version: "1.1",
+                                    id: "L9",
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    wodth: "30",
+                                    height: "30",
+                                    "xmlns:xlink":
+                                      "http://www.w3.org/1999/xlink",
+                                    x: "0px",
+                                    y: "0px",
+                                    viewBox: "0 0 100 100",
+                                    "enable-background": "new 0 0 0 0",
+                                    "xml:space": "preserve",
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "path",
+                                    {
+                                      attrs: {
+                                        fill: "#fff",
+                                        d: "M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50",
+                                      },
+                                    },
+                                    [
+                                      _c("animateTransform", {
+                                        attrs: {
+                                          attributeName: "transform",
+                                          attributeType: "XML",
+                                          type: "rotate",
+                                          dur: "1s",
+                                          from: "0 50 50",
+                                          to: "360 50 50",
+                                          repeatCount: "indefinite",
+                                        },
+                                      }),
+                                    ],
+                                    1
+                                  ),
+                                ]
+                              )
+                            : _vm._e(),
+                        ]
+                      )
+                    : _vm._e(),
+                ]),
+              ]),
+            ])
+          : _vm._e(),
+      ]),
+    ]
+  )
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex justify-between items-center" }, [
+      _c("h1", { staticClass: "text-xl text-gray-800 font-bold" }, [
+        _vm._v("Contact Info"),
+      ]),
+    ])
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Partials/Content.vue?vue&type=template&id=5194d605&":
 /*!***********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Partials/Content.vue?vue&type=template&id=5194d605& ***!
@@ -48995,6 +50387,19 @@ var render = function () {
                         staticClass: "flex items-center justify-center w-full",
                       },
                       [
+                        _vm.uploading
+                          ? _c("div", [
+                              _c("p", [_vm._v("Uploading...")]),
+                              _vm._v(" "),
+                              _c("progress", {
+                                attrs: { max: "100" },
+                                domProps: { value: _vm.progress },
+                              }),
+                              _vm._v(" "),
+                              _c("p", [_vm._v(_vm._s(_vm.progress) + "%")]),
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
                         _vm.contentPreview &&
                         (_vm.type === "Images" ||
                           _vm.type === "URLs" ||
@@ -51559,6 +52964,17 @@ function normalizeComponent (
   }
 }
 
+
+/***/ }),
+
+/***/ "./node_modules/vue-select/dist/vue-select.js":
+/*!****************************************************!*\
+  !*** ./node_modules/vue-select/dist/vue-select.js ***!
+  \****************************************************/
+/***/ (function(module) {
+
+!function(e,t){ true?module.exports=t():0}("undefined"!=typeof self?self:this,(function(){return(()=>{var e={646:e=>{e.exports=function(e){if(Array.isArray(e)){for(var t=0,n=new Array(e.length);t<e.length;t++)n[t]=e[t];return n}}},713:e=>{e.exports=function(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}},860:e=>{e.exports=function(e){if(Symbol.iterator in Object(e)||"[object Arguments]"===Object.prototype.toString.call(e))return Array.from(e)}},206:e=>{e.exports=function(){throw new TypeError("Invalid attempt to spread non-iterable instance")}},319:(e,t,n)=>{var o=n(646),i=n(860),s=n(206);e.exports=function(e){return o(e)||i(e)||s()}},8:e=>{function t(n){return"function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?e.exports=t=function(e){return typeof e}:e.exports=t=function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},t(n)}e.exports=t}},t={};function n(o){var i=t[o];if(void 0!==i)return i.exports;var s=t[o]={exports:{}};return e[o](s,s.exports,n),s.exports}n.n=e=>{var t=e&&e.__esModule?()=>e.default:()=>e;return n.d(t,{a:t}),t},n.d=(e,t)=>{for(var o in t)n.o(t,o)&&!n.o(e,o)&&Object.defineProperty(e,o,{enumerable:!0,get:t[o]})},n.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t),n.r=e=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})};var o={};return(()=>{"use strict";n.r(o),n.d(o,{VueSelect:()=>m,default:()=>O,mixins:()=>_});var e=n(319),t=n.n(e),i=n(8),s=n.n(i),r=n(713),a=n.n(r);const l={props:{autoscroll:{type:Boolean,default:!0}},watch:{typeAheadPointer:function(){this.autoscroll&&this.maybeAdjustScroll()},open:function(e){var t=this;this.autoscroll&&e&&this.$nextTick((function(){return t.maybeAdjustScroll()}))}},methods:{maybeAdjustScroll:function(){var e,t=(null===(e=this.$refs.dropdownMenu)||void 0===e?void 0:e.children[this.typeAheadPointer])||!1;if(t){var n=this.getDropdownViewport(),o=t.getBoundingClientRect(),i=o.top,s=o.bottom,r=o.height;if(i<n.top)return this.$refs.dropdownMenu.scrollTop=t.offsetTop;if(s>n.bottom)return this.$refs.dropdownMenu.scrollTop=t.offsetTop-(n.height-r)}},getDropdownViewport:function(){return this.$refs.dropdownMenu?this.$refs.dropdownMenu.getBoundingClientRect():{height:0,top:0,bottom:0}}}},c={data:function(){return{typeAheadPointer:-1}},watch:{filteredOptions:function(){for(var e=0;e<this.filteredOptions.length;e++)if(this.selectable(this.filteredOptions[e])){this.typeAheadPointer=e;break}},open:function(e){e&&this.typeAheadToLastSelected()},selectedValue:function(){this.open&&this.typeAheadToLastSelected()}},methods:{typeAheadUp:function(){for(var e=this.typeAheadPointer-1;e>=0;e--)if(this.selectable(this.filteredOptions[e])){this.typeAheadPointer=e;break}},typeAheadDown:function(){for(var e=this.typeAheadPointer+1;e<this.filteredOptions.length;e++)if(this.selectable(this.filteredOptions[e])){this.typeAheadPointer=e;break}},typeAheadSelect:function(){var e=this.filteredOptions[this.typeAheadPointer];e&&this.selectable(e)&&this.select(e)},typeAheadToLastSelected:function(){var e=0!==this.selectedValue.length?this.filteredOptions.indexOf(this.selectedValue[this.selectedValue.length-1]):-1;-1!==e&&(this.typeAheadPointer=e)}}},u={props:{loading:{type:Boolean,default:!1}},data:function(){return{mutableLoading:!1}},watch:{search:function(){this.$emit("search",this.search,this.toggleLoading)},loading:function(e){this.mutableLoading=e}},methods:{toggleLoading:function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:null;return this.mutableLoading=null==e?!this.mutableLoading:e}}};function p(e,t,n,o,i,s,r,a){var l,c="function"==typeof e?e.options:e;if(t&&(c.render=t,c.staticRenderFns=n,c._compiled=!0),o&&(c.functional=!0),s&&(c._scopeId="data-v-"+s),r?(l=function(e){(e=e||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext)||"undefined"==typeof __VUE_SSR_CONTEXT__||(e=__VUE_SSR_CONTEXT__),i&&i.call(this,e),e&&e._registeredComponents&&e._registeredComponents.add(r)},c._ssrRegister=l):i&&(l=a?function(){i.call(this,(c.functional?this.parent:this).$root.$options.shadowRoot)}:i),l)if(c.functional){c._injectStyles=l;var u=c.render;c.render=function(e,t){return l.call(t),u(e,t)}}else{var p=c.beforeCreate;c.beforeCreate=p?[].concat(p,l):[l]}return{exports:e,options:c}}const h={Deselect:p({},(function(){var e=this.$createElement,t=this._self._c||e;return t("svg",{attrs:{xmlns:"http://www.w3.org/2000/svg",width:"10",height:"10"}},[t("path",{attrs:{d:"M6.895455 5l2.842897-2.842898c.348864-.348863.348864-.914488 0-1.263636L9.106534.261648c-.348864-.348864-.914489-.348864-1.263636 0L5 3.104545 2.157102.261648c-.348863-.348864-.914488-.348864-1.263636 0L.261648.893466c-.348864.348864-.348864.914489 0 1.263636L3.104545 5 .261648 7.842898c-.348864.348863-.348864.914488 0 1.263636l.631818.631818c.348864.348864.914773.348864 1.263636 0L5 6.895455l2.842898 2.842897c.348863.348864.914772.348864 1.263636 0l.631818-.631818c.348864-.348864.348864-.914489 0-1.263636L6.895455 5z"}})])}),[],!1,null,null,null).exports,OpenIndicator:p({},(function(){var e=this.$createElement,t=this._self._c||e;return t("svg",{attrs:{xmlns:"http://www.w3.org/2000/svg",width:"14",height:"10"}},[t("path",{attrs:{d:"M9.211364 7.59931l4.48338-4.867229c.407008-.441854.407008-1.158247 0-1.60046l-.73712-.80023c-.407008-.441854-1.066904-.441854-1.474243 0L7 5.198617 2.51662.33139c-.407008-.441853-1.066904-.441853-1.474243 0l-.737121.80023c-.407008.441854-.407008 1.158248 0 1.600461l4.48338 4.867228L7 10l2.211364-2.40069z"}})])}),[],!1,null,null,null).exports},d={inserted:function(e,t,n){var o=n.context;if(o.appendToBody){var i=o.$refs.toggle.getBoundingClientRect(),s=i.height,r=i.top,a=i.left,l=i.width,c=window.scrollX||window.pageXOffset,u=window.scrollY||window.pageYOffset;e.unbindPosition=o.calculatePosition(e,o,{width:l+"px",left:c+a+"px",top:u+r+s+"px"}),document.body.appendChild(e)}},unbind:function(e,t,n){n.context.appendToBody&&(e.unbindPosition&&"function"==typeof e.unbindPosition&&e.unbindPosition(),e.parentNode&&e.parentNode.removeChild(e))}};const f=function(e){var t={};return Object.keys(e).sort().forEach((function(n){t[n]=e[n]})),JSON.stringify(t)};var y=0;const g=function(){return++y};function b(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var o=Object.getOwnPropertySymbols(e);t&&(o=o.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,o)}return n}function v(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?b(Object(n),!0).forEach((function(t){a()(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):b(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}const m=p({components:v({},h),directives:{appendToBody:d},mixins:[l,c,u],props:{value:{},components:{type:Object,default:function(){return{}}},options:{type:Array,default:function(){return[]}},disabled:{type:Boolean,default:!1},clearable:{type:Boolean,default:!0},deselectFromDropdown:{type:Boolean,default:!1},searchable:{type:Boolean,default:!0},multiple:{type:Boolean,default:!1},placeholder:{type:String,default:""},transition:{type:String,default:"vs__fade"},clearSearchOnSelect:{type:Boolean,default:!0},closeOnSelect:{type:Boolean,default:!0},label:{type:String,default:"label"},autocomplete:{type:String,default:"off"},reduce:{type:Function,default:function(e){return e}},selectable:{type:Function,default:function(e){return!0}},getOptionLabel:{type:Function,default:function(e){return"object"===s()(e)?e.hasOwnProperty(this.label)?e[this.label]:console.warn('[vue-select warn]: Label key "option.'.concat(this.label,'" does not')+" exist in options object ".concat(JSON.stringify(e),".\n")+"https://vue-select.org/api/props.html#getoptionlabel"):e}},getOptionKey:{type:Function,default:function(e){if("object"!==s()(e))return e;try{return e.hasOwnProperty("id")?e.id:f(e)}catch(t){return console.warn("[vue-select warn]: Could not stringify this option to generate unique key. Please provide'getOptionKey' prop to return a unique key for each option.\nhttps://vue-select.org/api/props.html#getoptionkey",e,t)}}},onTab:{type:Function,default:function(){this.selectOnTab&&!this.isComposing&&this.typeAheadSelect()}},taggable:{type:Boolean,default:!1},tabindex:{type:Number,default:null},pushTags:{type:Boolean,default:!1},filterable:{type:Boolean,default:!0},filterBy:{type:Function,default:function(e,t,n){return(t||"").toLocaleLowerCase().indexOf(n.toLocaleLowerCase())>-1}},filter:{type:Function,default:function(e,t){var n=this;return e.filter((function(e){var o=n.getOptionLabel(e);return"number"==typeof o&&(o=o.toString()),n.filterBy(e,o,t)}))}},createOption:{type:Function,default:function(e){return"object"===s()(this.optionList[0])?a()({},this.label,e):e}},resetOnOptionsChange:{default:!1,validator:function(e){return["function","boolean"].includes(s()(e))}},clearSearchOnBlur:{type:Function,default:function(e){var t=e.clearSearchOnSelect,n=e.multiple;return t&&!n}},noDrop:{type:Boolean,default:!1},inputId:{type:String},dir:{type:String,default:"auto"},selectOnTab:{type:Boolean,default:!1},selectOnKeyCodes:{type:Array,default:function(){return[13]}},searchInputQuerySelector:{type:String,default:"[type=search]"},mapKeydown:{type:Function,default:function(e,t){return e}},appendToBody:{type:Boolean,default:!1},calculatePosition:{type:Function,default:function(e,t,n){var o=n.width,i=n.top,s=n.left;e.style.top=i,e.style.left=s,e.style.width=o}},dropdownShouldOpen:{type:Function,default:function(e){var t=e.noDrop,n=e.open,o=e.mutableLoading;return!t&&(n&&!o)}},uid:{type:[String,Number],default:function(){return g()}}},data:function(){return{search:"",open:!1,isComposing:!1,pushedTags:[],_value:[]}},computed:{isTrackingValues:function(){return void 0===this.value||this.$options.propsData.hasOwnProperty("reduce")},selectedValue:function(){var e=this.value;return this.isTrackingValues&&(e=this.$data._value),null!=e&&""!==e?[].concat(e):[]},optionList:function(){return this.options.concat(this.pushTags?this.pushedTags:[])},searchEl:function(){return this.$scopedSlots.search?this.$refs.selectedOptions.querySelector(this.searchInputQuerySelector):this.$refs.search},scope:function(){var e=this,t={search:this.search,loading:this.loading,searching:this.searching,filteredOptions:this.filteredOptions};return{search:{attributes:v({disabled:this.disabled,placeholder:this.searchPlaceholder,tabindex:this.tabindex,readonly:!this.searchable,id:this.inputId,"aria-autocomplete":"list","aria-labelledby":"vs".concat(this.uid,"__combobox"),"aria-controls":"vs".concat(this.uid,"__listbox"),ref:"search",type:"search",autocomplete:this.autocomplete,value:this.search},this.dropdownOpen&&this.filteredOptions[this.typeAheadPointer]?{"aria-activedescendant":"vs".concat(this.uid,"__option-").concat(this.typeAheadPointer)}:{}),events:{compositionstart:function(){return e.isComposing=!0},compositionend:function(){return e.isComposing=!1},keydown:this.onSearchKeyDown,keypress:this.onSearchKeyPress,blur:this.onSearchBlur,focus:this.onSearchFocus,input:function(t){return e.search=t.target.value}}},spinner:{loading:this.mutableLoading},noOptions:{search:this.search,loading:this.mutableLoading,searching:this.searching},openIndicator:{attributes:{ref:"openIndicator",role:"presentation",class:"vs__open-indicator"}},listHeader:t,listFooter:t,header:v({},t,{deselect:this.deselect}),footer:v({},t,{deselect:this.deselect})}},childComponents:function(){return v({},h,{},this.components)},stateClasses:function(){return{"vs--open":this.dropdownOpen,"vs--single":!this.multiple,"vs--multiple":this.multiple,"vs--searching":this.searching&&!this.noDrop,"vs--searchable":this.searchable&&!this.noDrop,"vs--unsearchable":!this.searchable,"vs--loading":this.mutableLoading,"vs--disabled":this.disabled}},searching:function(){return!!this.search},dropdownOpen:function(){return this.dropdownShouldOpen(this)},searchPlaceholder:function(){return this.isValueEmpty&&this.placeholder?this.placeholder:void 0},filteredOptions:function(){var e=[].concat(this.optionList);if(!this.filterable&&!this.taggable)return e;var t=this.search.length?this.filter(e,this.search,this):e;if(this.taggable&&this.search.length){var n=this.createOption(this.search);this.optionExists(n)||t.unshift(n)}return t},isValueEmpty:function(){return 0===this.selectedValue.length},showClearButton:function(){return!this.multiple&&this.clearable&&!this.open&&!this.isValueEmpty}},watch:{options:function(e,t){var n=this;!this.taggable&&("function"==typeof n.resetOnOptionsChange?n.resetOnOptionsChange(e,t,n.selectedValue):n.resetOnOptionsChange)&&this.clearSelection(),this.value&&this.isTrackingValues&&this.setInternalValueFromOptions(this.value)},value:{immediate:!0,handler:function(e){this.isTrackingValues&&this.setInternalValueFromOptions(e)}},multiple:function(){this.clearSelection()},open:function(e){this.$emit(e?"open":"close")},search:function(e){e.length&&(this.open=!0)}},created:function(){this.mutableLoading=this.loading,this.$on("option:created",this.pushTag)},methods:{setInternalValueFromOptions:function(e){var t=this;Array.isArray(e)?this.$data._value=e.map((function(e){return t.findOptionFromReducedValue(e)})):this.$data._value=this.findOptionFromReducedValue(e)},select:function(e){this.$emit("option:selecting",e),this.isOptionSelected(e)?this.deselectFromDropdown&&(this.clearable||this.multiple&&this.selectedValue.length>1)&&this.deselect(e):(this.taggable&&!this.optionExists(e)&&this.$emit("option:created",e),this.multiple&&(e=this.selectedValue.concat(e)),this.updateValue(e),this.$emit("option:selected",e)),this.onAfterSelect(e)},deselect:function(e){var t=this;this.$emit("option:deselecting",e),this.updateValue(this.selectedValue.filter((function(n){return!t.optionComparator(n,e)}))),this.$emit("option:deselected",e)},clearSelection:function(){this.updateValue(this.multiple?[]:null)},onAfterSelect:function(e){var t=this;this.closeOnSelect&&(this.open=!this.open),this.clearSearchOnSelect&&(this.search=""),this.noDrop&&this.multiple&&this.$nextTick((function(){return t.$refs.search.focus()}))},updateValue:function(e){var t=this;void 0===this.value&&(this.$data._value=e),null!==e&&(e=Array.isArray(e)?e.map((function(e){return t.reduce(e)})):this.reduce(e)),this.$emit("input",e)},toggleDropdown:function(e){var n=e.target!==this.searchEl;n&&e.preventDefault();var o=[].concat(t()(this.$refs.deselectButtons||[]),t()([this.$refs.clearButton]||0));void 0===this.searchEl||o.filter(Boolean).some((function(t){return t.contains(e.target)||t===e.target}))?e.preventDefault():this.open&&n?this.searchEl.blur():this.disabled||(this.open=!0,this.searchEl.focus())},isOptionSelected:function(e){var t=this;return this.selectedValue.some((function(n){return t.optionComparator(n,e)}))},isOptionDeselectable:function(e){return this.isOptionSelected(e)&&this.deselectFromDropdown},optionComparator:function(e,t){return this.getOptionKey(e)===this.getOptionKey(t)},findOptionFromReducedValue:function(e){var n=this,o=[].concat(t()(this.options),t()(this.pushedTags)).filter((function(t){return JSON.stringify(n.reduce(t))===JSON.stringify(e)}));return 1===o.length?o[0]:o.find((function(e){return n.optionComparator(e,n.$data._value)}))||e},closeSearchOptions:function(){this.open=!1,this.$emit("search:blur")},maybeDeleteValue:function(){if(!this.searchEl.value.length&&this.selectedValue&&this.selectedValue.length&&this.clearable){var e=null;this.multiple&&(e=t()(this.selectedValue.slice(0,this.selectedValue.length-1))),this.updateValue(e)}},optionExists:function(e){var t=this;return this.optionList.some((function(n){return t.optionComparator(n,e)}))},normalizeOptionForSlot:function(e){return"object"===s()(e)?e:a()({},this.label,e)},pushTag:function(e){this.pushedTags.push(e)},onEscape:function(){this.search.length?this.search="":this.open=!1},onSearchBlur:function(){if(!this.mousedown||this.searching){var e=this.clearSearchOnSelect,t=this.multiple;return this.clearSearchOnBlur({clearSearchOnSelect:e,multiple:t})&&(this.search=""),void this.closeSearchOptions()}this.mousedown=!1,0!==this.search.length||0!==this.options.length||this.closeSearchOptions()},onSearchFocus:function(){this.open=!0,this.$emit("search:focus")},onMousedown:function(){this.mousedown=!0},onMouseUp:function(){this.mousedown=!1},onSearchKeyDown:function(e){var t=this,n=function(e){return e.preventDefault(),!t.isComposing&&t.typeAheadSelect()},o={8:function(e){return t.maybeDeleteValue()},9:function(e){return t.onTab()},27:function(e){return t.onEscape()},38:function(e){if(e.preventDefault(),t.open)return t.typeAheadUp();t.open=!0},40:function(e){if(e.preventDefault(),t.open)return t.typeAheadDown();t.open=!0}};this.selectOnKeyCodes.forEach((function(e){return o[e]=n}));var i=this.mapKeydown(o,this);if("function"==typeof i[e.keyCode])return i[e.keyCode](e)},onSearchKeyPress:function(e){this.open||32!==e.keyCode||(e.preventDefault(),this.open=!0)}}},(function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("div",{staticClass:"v-select",class:e.stateClasses,attrs:{dir:e.dir}},[e._t("header",null,null,e.scope.header),e._v(" "),n("div",{ref:"toggle",staticClass:"vs__dropdown-toggle",attrs:{id:"vs"+e.uid+"__combobox",role:"combobox","aria-expanded":e.dropdownOpen.toString(),"aria-owns":"vs"+e.uid+"__listbox","aria-label":"Search for option"},on:{mousedown:function(t){return e.toggleDropdown(t)}}},[n("div",{ref:"selectedOptions",staticClass:"vs__selected-options"},[e._l(e.selectedValue,(function(t){return e._t("selected-option-container",[n("span",{key:e.getOptionKey(t),staticClass:"vs__selected"},[e._t("selected-option",[e._v("\n            "+e._s(e.getOptionLabel(t))+"\n          ")],null,e.normalizeOptionForSlot(t)),e._v(" "),e.multiple?n("button",{ref:"deselectButtons",refInFor:!0,staticClass:"vs__deselect",attrs:{disabled:e.disabled,type:"button",title:"Deselect "+e.getOptionLabel(t),"aria-label":"Deselect "+e.getOptionLabel(t)},on:{click:function(n){return e.deselect(t)}}},[n(e.childComponents.Deselect,{tag:"component"})],1):e._e()],2)],{option:e.normalizeOptionForSlot(t),deselect:e.deselect,multiple:e.multiple,disabled:e.disabled})})),e._v(" "),e._t("search",[n("input",e._g(e._b({staticClass:"vs__search"},"input",e.scope.search.attributes,!1),e.scope.search.events))],null,e.scope.search)],2),e._v(" "),n("div",{ref:"actions",staticClass:"vs__actions"},[n("button",{directives:[{name:"show",rawName:"v-show",value:e.showClearButton,expression:"showClearButton"}],ref:"clearButton",staticClass:"vs__clear",attrs:{disabled:e.disabled,type:"button",title:"Clear Selected","aria-label":"Clear Selected"},on:{click:e.clearSelection}},[n(e.childComponents.Deselect,{tag:"component"})],1),e._v(" "),e._t("open-indicator",[e.noDrop?e._e():n(e.childComponents.OpenIndicator,e._b({tag:"component"},"component",e.scope.openIndicator.attributes,!1))],null,e.scope.openIndicator),e._v(" "),e._t("spinner",[n("div",{directives:[{name:"show",rawName:"v-show",value:e.mutableLoading,expression:"mutableLoading"}],staticClass:"vs__spinner"},[e._v("Loading...")])],null,e.scope.spinner)],2)]),e._v(" "),n("transition",{attrs:{name:e.transition}},[e.dropdownOpen?n("ul",{directives:[{name:"append-to-body",rawName:"v-append-to-body"}],key:"vs"+e.uid+"__listbox",ref:"dropdownMenu",staticClass:"vs__dropdown-menu",attrs:{id:"vs"+e.uid+"__listbox",role:"listbox",tabindex:"-1"},on:{mousedown:function(t){return t.preventDefault(),e.onMousedown(t)},mouseup:e.onMouseUp}},[e._t("list-header",null,null,e.scope.listHeader),e._v(" "),e._l(e.filteredOptions,(function(t,o){return n("li",{key:e.getOptionKey(t),staticClass:"vs__dropdown-option",class:{"vs__dropdown-option--deselect":e.isOptionDeselectable(t)&&o===e.typeAheadPointer,"vs__dropdown-option--selected":e.isOptionSelected(t),"vs__dropdown-option--highlight":o===e.typeAheadPointer,"vs__dropdown-option--disabled":!e.selectable(t)},attrs:{id:"vs"+e.uid+"__option-"+o,role:"option","aria-selected":o===e.typeAheadPointer||null},on:{mouseover:function(n){e.selectable(t)&&(e.typeAheadPointer=o)},click:function(n){n.preventDefault(),n.stopPropagation(),e.selectable(t)&&e.select(t)}}},[e._t("option",[e._v("\n          "+e._s(e.getOptionLabel(t))+"\n        ")],null,e.normalizeOptionForSlot(t))],2)})),e._v(" "),0===e.filteredOptions.length?n("li",{staticClass:"vs__no-options"},[e._t("no-options",[e._v("\n          Sorry, no matching options.\n        ")],null,e.scope.noOptions)],2):e._e(),e._v(" "),e._t("list-footer",null,null,e.scope.listFooter)],2):n("ul",{staticStyle:{display:"none",visibility:"hidden"},attrs:{id:"vs"+e.uid+"__listbox",role:"listbox"}})]),e._v(" "),e._t("footer",null,null,e.scope.footer)],2)}),[],!1,null,null,null).exports,_={ajax:u,pointer:c,pointerScroll:l},O=m})(),o})()}));
+//# sourceMappingURL=vue-select.js.map
 
 /***/ }),
 
@@ -63665,6 +65081,8 @@ var map = {
 	"./Partials/Banner.vue": "./resources/js/Pages/Partials/Banner.vue",
 	"./Partials/Bio": "./resources/js/Pages/Partials/Bio.vue",
 	"./Partials/Bio.vue": "./resources/js/Pages/Partials/Bio.vue",
+	"./Partials/Contact-us": "./resources/js/Pages/Partials/Contact-us.vue",
+	"./Partials/Contact-us.vue": "./resources/js/Pages/Partials/Contact-us.vue",
 	"./Partials/Content": "./resources/js/Pages/Partials/Content.vue",
 	"./Partials/Content.vue": "./resources/js/Pages/Partials/Content.vue",
 	"./Partials/ImageChooser": "./resources/js/Pages/Partials/ImageChooser.vue",
