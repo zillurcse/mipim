@@ -100,19 +100,12 @@
                                 Content</label>
 
                             <div class="flex items-center justify-center w-full">
-                                <!-- <div v-if="contentPreview && type === 'URLs'"
-                                    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                    <img :src="contentPreview" alt="">
-                                </div>
-                                <div v-if="contentPreview && type === 'Video (YouTube)'"
-                                    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                    <img :src="contentPreview" alt="">
-                                </div>
-                                <div v-if="contentPreview && type === 'Social links'"
-                                    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                    <img :src="contentPreview" alt="">
-                                </div> -->
 
+                                <div v-if="uploading">
+                                    <p>Uploading...</p>
+                                    <progress :value="progress" max="100"></progress>
+                                    <p>{{ progress }}%</p>
+                                </div>
                                 <div v-if="contentPreview && (type === 'Images' || type === 'URLs' || type === 'Video (YouTube)' || type === 'Social links')"
                                     class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                                     <img :src="contentPreview" alt="" class="w-1/2 mx-auto object-cover">
@@ -247,6 +240,9 @@ export default {
             bioTitle: '',
             bioDesc: '',
 
+            uploading: false,
+            progress: 0,
+
             tempAttachments: [],
             attachments: [],
 
@@ -318,11 +314,8 @@ export default {
         async getContentData() {
             await axios.get('/api/content')
                 .then(response => {
-                    console.log();
                     if (response.status == 200) {
                         this.contentItems = response.data.data.items
-                        console.log(this.contentItems);
-                        console.log()
                     }
 
                 })
@@ -375,18 +368,27 @@ export default {
 
             // Reset error message if file type is valid
             this.fileTypeError = '';
-
+            this.uploading = true;
             const reader = new FileReader();
 
             reader.onload = () => {
-                this.contentPreview = reader.result; // Set previewImage to base64 string
+
+                const interval = setInterval(() => {
+                    this.progress += 5; // Increment progress by 5%
+                    if (this.progress >= 100) {
+                        clearInterval(interval);
+                        this.contentPreview = reader.result;
+                        this.uploading = false;
+                    }
+                }, 500);
+                // Set previewImage to base64 string
             };
+
 
 
 
             reader.readAsDataURL(file);
             this.contentFile = file;
-            console.log(this.contentFile);
         }
         ,
         async uploadContentFiles() {
@@ -440,11 +442,10 @@ export default {
         },
 
         deleteContentItem(id) {
-            console.log(id);
+
             // Send a DELETE request to the backend with the item's ID
             axios.delete(`/api/content/${id}`)
                 .then(response => {
-                    console.log(response.data.message);
                     this.getContentData()
                     // Assuming you want to remove the item from the frontend after successful deletion
                     // You can trigger a method to refresh the list of items or remove the deleted item from the UI

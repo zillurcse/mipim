@@ -146,7 +146,7 @@
                                     item.title.length > 45
                                         ? item.title.substring(0, 45) + "..."
                                         : item.title.substring(0, 45)
-                                }}</li>
+                                            }}</li>
 
                                     </ul>
                                 </div>
@@ -216,7 +216,6 @@ export default {
 
                     if (response.status == 200) {
                         this.bioItems = response.data.data.items
-                        console.log(this.bioItems, 'response.data.data.items');
 
                     }
 
@@ -237,11 +236,8 @@ export default {
         async getContentData() {
             await axios.get('/api/web/content')
                 .then(response => {
-                    console.log();
                     if (response.status == 200) {
                         this.contentItems = response.data.data.items
-                        console.log(this.contentItems);
-                        console.log()
                     }
 
                 })

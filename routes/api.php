@@ -44,7 +44,7 @@ Route::post('/sanctum/token', function (Request $request) {
 Route::post('/image-gallery/get', [ImageController::class, 'get_gallery']);
 
 Route::get('/contact-us', [\App\Http\Controllers\ContactUsController::class, 'index']);
-Route::delete('/contact-us{id}', [\App\Http\Controllers\ContactUsController::class, 'destroy']);
+Route::delete('/contact-us/{id}', [\App\Http\Controllers\ContactUsController::class, 'destroy']);
 
 
 Route::get('/banner', [\App\Http\Controllers\BannerController::class, 'index']);
