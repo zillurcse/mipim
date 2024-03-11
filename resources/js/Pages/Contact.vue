@@ -96,7 +96,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inputFrom">
-                                            <label for="phoneCode">Phone with Code</label>
+                                            <label for="phoneCode">Phone without code</label>
                                             <input type="text" v-model="formData.phoneCode"
                                                 @input="clearError('phoneCode')" />
                                             <p class="error-message">{{ errors.phoneCode }}</p>
@@ -104,7 +104,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="">
-                                            <label for="country" id="country">Country Code</label>
+                                            <label for="country" id="country">Country code</label>
                                             <v-select v-model="formData.countryCode" :options="countries"
                                                 label="name"></v-select>
                                             <p class="error-message">{{ errors.country }}</p>

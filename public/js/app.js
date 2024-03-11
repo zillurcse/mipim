@@ -48136,7 +48136,7 @@ var render = function () {
                     _c("div", { staticClass: "col-md-6" }, [
                       _c("div", { staticClass: "inputFrom" }, [
                         _c("label", { attrs: { for: "phoneCode" } }, [
-                          _vm._v("Phone with Code"),
+                          _vm._v("Phone without code"),
                         ]),
                         _vm._v(" "),
                         _c("input", {
@@ -48183,7 +48183,7 @@ var render = function () {
                           _c(
                             "label",
                             { attrs: { for: "country", id: "country" } },
-                            [_vm._v("Country Code")]
+                            [_vm._v("Country code")]
                           ),
                           _vm._v(" "),
                           _c("v-select", {
