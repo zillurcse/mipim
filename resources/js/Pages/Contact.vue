@@ -107,7 +107,7 @@
                                             <label for="country" id="country">Country Code</label>
                                             <v-select v-model="formData.countryCode" :options="countries"
                                                 label="name"></v-select>
-                                            <p class="error-message">{{ errors.country }}</p>
+                                            <p class="error-message">{{ errors.countryCode }}</p>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -1141,6 +1141,7 @@ export default {
             requiredFields.forEach(field => {
                 if (!this.formData[field]) {
                     this.errors[field] = `${field.charAt(0).toUpperCase() + field.slice(1)} is required.`;
+
                 }
             });
             if (this.formData.email && !emailRegex.test(this.formData.email)) {
