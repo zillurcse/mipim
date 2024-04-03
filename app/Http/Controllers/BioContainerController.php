@@ -15,7 +15,7 @@ class BioContainerController extends Controller
     public function index()
     {
         $data = BioContainer::first();
-        if ($data){
+        if ($data) {
             $data['items'] = BioContainer::first();
 
             return response()->json([
@@ -23,7 +23,7 @@ class BioContainerController extends Controller
                 'message' => 'Data fetch',
                 'data' => $data
             ]);
-        }else{
+        } else {
             $data_ = BioContainer::create([
                 'title' => 'OMAN: ENDLESS HORIZONS',
                 'description' => "Welcome to the Oman at MIPIM page! Dive into a world where tradition meets innovation, and discover the vast array of projects Oman has to offer. From groundbreaking real estate developments to sustainable ventures, we're showcasing Oman's commitment to growth and prosperity. Explore our projects and learn how Oman is shaping the future of investment and development. Join us on this journey to unlock opportunities in one of the most dynamic markets in the Middle East.",
@@ -35,7 +35,6 @@ class BioContainerController extends Controller
                 'data' => $data_
             ]);
         }
-
     }
 
     /**
@@ -101,6 +100,7 @@ class BioContainerController extends Controller
     public function update(Request $request, $id)
     {
         $bioContainer = BioContainer::find($id);
+        dd($request->all());
         $bioContainer = $bioContainer->update($request->all());
 
         return response()->json([

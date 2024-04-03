@@ -229,12 +229,13 @@ export default {
             try {
 
                 this.isLoading = true;
-                // let formData = new FormData();
-                // formData.append('title', this.bioTitle);
-                // formData.append('description', this.bioDesc);
-
+                //                 let formData = new FormData();
+                //                 formData.append('title', this.bioTitle);
+                //                 formData.append('description', this.bioDesc);
+                // console.log(formData);
                 // Make POST request to upload the file and data
-                const response = await axios.post(`/api/bio-container/${id}`, { id });
+                console.log(this.bioTitle, this.bioDesc);
+                const response = await axios.post(`/api/bio-container/${id}`, this.bioTitle, this.bioDesc);
 
                 // Handle success
 
