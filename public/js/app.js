@@ -3671,8 +3671,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                   if (response.status == 200) {
                     _this2.items = response.data.data.items;
-                    console.log(_this2.items);
-                    console.log();
                   }
                 })["catch"](function (error) {
                   if (error.response.status == 422) {
@@ -7054,17 +7052,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context4.prev = _context4.next) {
               case 0:
                 _context4.prev = 0;
-                _this4.isLoading = true; // let formData = new FormData();
-                // formData.append('title', this.bioTitle);
-                // formData.append('description', this.bioDesc);
+                _this4.isLoading = true; //                 let formData = new FormData();
+                //                 formData.append('title', this.bioTitle);
+                //                 formData.append('description', this.bioDesc);
+                // console.log(formData);
                 // Make POST request to upload the file and data
 
-                _context4.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_1__["default"].post("/api/bio-container/".concat(id), {
-                  id: id
-                });
+                console.log(_this4.bioTitle, _this4.bioDesc);
+                _context4.next = 5;
+                return axios__WEBPACK_IMPORTED_MODULE_1__["default"].post("/api/bio-container/".concat(id), _this4.bioTitle, _this4.bioDesc);
 
-              case 4:
+              case 5:
                 response = _context4.sent;
 
                 // Handle success
@@ -7078,21 +7076,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this4.bioDesc = '';
                 _this4.isLoading = false;
                 _this4.isUpdate = false;
-                _context4.next = 16;
+                _context4.next = 17;
                 break;
 
-              case 13:
-                _context4.prev = 13;
+              case 14:
+                _context4.prev = 14;
                 _context4.t0 = _context4["catch"](0);
                 // Handle error
                 _this4.isLoading = true;
 
-              case 16:
+              case 17:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, null, [[0, 13]]);
+        }, _callee4, null, [[0, 14]]);
       }))();
     },
     clickTool: function clickTool(id) {
@@ -48198,7 +48196,7 @@ var render = function () {
                           }),
                           _vm._v(" "),
                           _c("p", { staticClass: "error-message" }, [
-                            _vm._v(_vm._s(_vm.errors.country)),
+                            _vm._v(_vm._s(_vm.errors.countryCode)),
                           ]),
                         ],
                         1

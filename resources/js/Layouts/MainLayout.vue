@@ -132,8 +132,7 @@ export default {
                     console.log();
                     if (response.status == 200) {
                         this.items = response.data.data.items
-                        console.log(this.items);
-                        console.log()
+
                     }
 
                 })
