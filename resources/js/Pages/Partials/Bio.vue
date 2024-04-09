@@ -225,36 +225,31 @@ export default {
         },
 
         async updateBioFiles(id) {
-
             try {
-
                 this.isLoading = true;
-                //                 let formData = new FormData();
-                //                 formData.append('title', this.bioTitle);
-                //                 formData.append('description', this.bioDesc);
-                // console.log(formData);
-                // Make POST request to upload the file and data
-                console.log(this.bioTitle, this.bioDesc);
-                const response = await axios.post(`/api/bio-container/${id}`, this.bioTitle, this.bioDesc);
+
+                const formData = new FormData();
+                formData.append('title', this.bioTitle);
+                formData.append('description', this.bioDesc);
+
+                const response = await axios.post(`/api/bio-container/${id}`, formData);
 
                 // Handle success
-
                 this.getBioData(); // Update content data
                 this.showModal = false; // Close the modal after successful upload
                 // Reset all data
                 this.bioTitle = '';
                 this.bioDesc = '';
                 this.isLoading = false;
-                this.isUpdate = false
-
-
+                this.isUpdate = false;
             } catch (error) {
                 // Handle error
-                this.isLoading = true;
-
-
+                console.error("Error:", error);
+                this.isLoading = false;
+                // Add specific error handling as needed
             }
         },
+
         clickTool(id) {
             if (this.isOpenTool == id) {
                 this.isOpenTool = -1

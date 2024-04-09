@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BioContainer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BioContainerController extends Controller
 {
@@ -99,8 +100,8 @@ class BioContainerController extends Controller
      */
     public function update(Request $request, $id)
     {
+//        if (Auth::user())
         $bioContainer = BioContainer::find($id);
-        dd($request->all());
         $bioContainer = $bioContainer->update($request->all());
 
         return response()->json([

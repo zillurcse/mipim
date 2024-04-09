@@ -42,6 +42,8 @@ class ContentController extends Controller
     public function store(Request $request)
     {
         $data['title'] = $request->title;
+        $data['details'] = $request->details;
+        $data['date'] = $request->date;
         $data['type'] = $request->type;
         $data['link'] = $request->link;
         $path = $request->file('file')->storePublicly('public/content');
