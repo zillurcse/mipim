@@ -92,6 +92,8 @@
                             <option value="Social links">Social links</option>
                             <option value="URLs">URLs</option>
                             <option value="Images">Images</option>
+                            <option value="Speaker">Speaker</option>
+
 
 
                         </select>
@@ -106,7 +108,7 @@
                                     <progress :value="progress" max="100"></progress>
                                     <p>{{ progress }}%</p>
                                 </div>
-                                <div v-if="contentPreview && (type === 'Images' || type === 'URLs' || type === 'Video (YouTube)' || type === 'Social links')"
+                                <div v-if="contentPreview && (type === 'Images' || type === 'Speaker' || type === 'URLs' || type === 'Video (YouTube)' || type === 'Social links')"
                                     class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                                     <img :src="contentPreview" alt="" class="w-1/2 mx-auto object-cover">
                                 </div>
@@ -172,12 +174,29 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Enter Title" required />
                     </div>
+                    <div class="mb-6" v-if="type === 'Speaker'">
+                        <label for="title"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
+                        <input type="date" id="title" v-model="date"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Enter Date" required />
+                    </div>
                     <div class="mb-6">
                         <label for="Link"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Link</label>
                         <input type="Link" id="Link" v-model="link"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Enter link" required />
+                    </div>
+                    <div class="mb-6" v-if="type === 'Speaker'">
+
+                        <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Description
+                        </label>
+                        <textarea id="message" rows="4" v-model="details"
+                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Write your description here..."></textarea>
+
                     </div>
 
                     <div class="">
@@ -239,6 +258,8 @@ export default {
             acceptedExtensions: '',
             bioTitle: '',
             bioDesc: '',
+            details: '',
+            date: null,
 
             uploading: false,
             progress: 0,
@@ -268,6 +289,10 @@ export default {
                     this.acceptedExtensions = '.doc,.docx,.ppt,.pptx,.xls,.xlsx';
                     break;
                 case 'Images':
+                    this.acceptedTypes = 'Image';
+                    this.acceptedExtensions = '.jpg,.jpeg,.png,.gif';
+                    break;
+                case 'Speaker':
                     this.acceptedTypes = 'Image';
                     this.acceptedExtensions = '.jpg,.jpeg,.png,.gif';
                     break;
@@ -345,7 +370,9 @@ export default {
                     'application/vnd.ms-excel',
                     'application/vnd.openxmlformats-officedocument.wordprocessingml.document' // Add DOCX MIME type
                 ],
-                'Images': ['image/jpeg', 'image/png', 'image/gif']
+                'Images': ['image/jpeg', 'image/png', 'image/gif'],
+                'Speaker': ['image/jpeg', 'image/png', 'image/gif'],
+
             };
 
             const selectedType = this.type;
@@ -393,7 +420,7 @@ export default {
         ,
         async uploadContentFiles() {
             try {
-                if (this.title === "" || this.link === '' || this.type === "" || this.contentFile === null) {
+                if (this.title === "" || this.link === '' || this.type === "" || this.date === "" || this.details === "" || this.contentFile === null) {
                     this.$toasted.show("please fill up all fields", {
                         theme: "toasted-primary",
                         position: "top-center",
@@ -407,6 +434,8 @@ export default {
                 formData.append('title', this.title);
                 formData.append('link', this.link);
                 formData.append('type', this.type);
+                formData.append('date', this.date);
+                formData.append('details', this.details);
                 formData.append('file', this.contentFile);
 
                 // Make POST request to upload the file and data
@@ -419,6 +448,8 @@ export default {
                 // Reset all data
                 this.title = '';
                 this.link = '';
+                this.date = '';
+                this.details = '';
                 this.type = 'Select Type';
                 this.contentFile = null;
                 this.contentPreview = null

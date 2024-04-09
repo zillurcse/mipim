@@ -8452,6 +8452,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -8487,6 +8506,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       acceptedExtensions: '',
       bioTitle: '',
       bioDesc: '',
+      details: '',
+      date: null,
       uploading: false,
       progress: 0,
       tempAttachments: [],
@@ -8526,6 +8547,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           break;
 
         case 'Images':
+          this.acceptedTypes = 'Image';
+          this.acceptedExtensions = '.jpg,.jpeg,.png,.gif';
+          break;
+
+        case 'Speaker':
           this.acceptedTypes = 'Image';
           this.acceptedExtensions = '.jpg,.jpeg,.png,.gif';
           break;
@@ -8603,7 +8629,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         'PDF': 'application/pdf',
         'Documents (word, ppt, excel)': ['application/msword', 'application/vnd.ms-powerpoint', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' // Add DOCX MIME type
         ],
-        'Images': ['image/jpeg', 'image/png', 'image/gif']
+        'Images': ['image/jpeg', 'image/png', 'image/gif'],
+        'Speaker': ['image/jpeg', 'image/png', 'image/gif']
       };
       var selectedType = this.type;
       var allowedType = allowedTypes[selectedType]; // Check if the selected type requires validation
@@ -8651,7 +8678,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context3.prev = 0;
 
-                if (!(_this5.title === "" || _this5.link === '' || _this5.type === "" || _this5.contentFile === null)) {
+                if (!(_this5.title === "" || _this5.link === '' || _this5.type === "" || _this5.date === "" || _this5.details === "" || _this5.contentFile === null)) {
                   _context3.next = 4;
                   break;
                 }
@@ -8671,12 +8698,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 formData.append('title', _this5.title);
                 formData.append('link', _this5.link);
                 formData.append('type', _this5.type);
+                formData.append('date', _this5.date);
+                formData.append('details', _this5.details);
                 formData.append('file', _this5.contentFile); // Make POST request to upload the file and data
 
-                _context3.next = 12;
+                _context3.next = 14;
                 return axios__WEBPACK_IMPORTED_MODULE_4__["default"].post('/api/content', formData);
 
-              case 12:
+              case 14:
                 response = _context3.sent;
 
                 // Handle success
@@ -8688,6 +8717,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this5.title = '';
                 _this5.link = '';
+                _this5.date = '';
+                _this5.details = '';
                 _this5.type = 'Select Type';
                 _this5.contentFile = null;
                 _this5.contentPreview = null;
@@ -8699,11 +8730,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   duration: 5000
                 });
 
-                _context3.next = 29;
+                _context3.next = 33;
                 break;
 
-              case 24:
-                _context3.prev = 24;
+              case 28:
+                _context3.prev = 28;
                 _context3.t0 = _context3["catch"](0);
                 // Handle error
                 _this5.isLoading = true;
@@ -8716,12 +8747,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 console.error('Error:', _context3.t0);
 
-              case 29:
+              case 33:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[0, 24]]);
+        }, _callee3, null, [[0, 28]]);
       }))();
     },
     deleteContentItem: function deleteContentItem(id) {
@@ -50365,6 +50396,10 @@ var render = function () {
                       _c("option", { attrs: { value: "Images" } }, [
                         _vm._v("Images"),
                       ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Speaker" } }, [
+                        _vm._v("Speaker"),
+                      ]),
                     ]
                   ),
                   _vm._v(" "),
@@ -50400,6 +50435,7 @@ var render = function () {
                         _vm._v(" "),
                         _vm.contentPreview &&
                         (_vm.type === "Images" ||
+                          _vm.type === "Speaker" ||
                           _vm.type === "URLs" ||
                           _vm.type === "Video (YouTube)" ||
                           _vm.type === "Social links")
@@ -50614,6 +50650,48 @@ var render = function () {
                   }),
                 ]),
                 _vm._v(" "),
+                _vm.type === "Speaker"
+                  ? _c("div", { staticClass: "mb-6" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass:
+                            "block mb-2 text-sm font-medium text-gray-900 dark:text-white",
+                          attrs: { for: "title" },
+                        },
+                        [_vm._v("Date")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.date,
+                            expression: "date",
+                          },
+                        ],
+                        staticClass:
+                          "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                        attrs: {
+                          type: "date",
+                          id: "title",
+                          placeholder: "Enter Date",
+                          required: "",
+                        },
+                        domProps: { value: _vm.date },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.date = $event.target.value
+                          },
+                        },
+                      }),
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
                 _c("div", { staticClass: "mb-6" }, [
                   _c(
                     "label",
@@ -50653,6 +50731,51 @@ var render = function () {
                     },
                   }),
                 ]),
+                _vm._v(" "),
+                _vm.type === "Speaker"
+                  ? _c("div", { staticClass: "mb-6" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass:
+                            "block mb-2 text-sm font-medium text-gray-900 dark:text-white",
+                          attrs: { for: "message" },
+                        },
+                        [
+                          _vm._v(
+                            "\n                        Description\n                    "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.details,
+                            expression: "details",
+                          },
+                        ],
+                        staticClass:
+                          "block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                        attrs: {
+                          id: "message",
+                          rows: "4",
+                          placeholder: "Write your description here...",
+                        },
+                        domProps: { value: _vm.details },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.details = $event.target.value
+                          },
+                        },
+                      }),
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
                 _c("div", {}, [
                   _c(
