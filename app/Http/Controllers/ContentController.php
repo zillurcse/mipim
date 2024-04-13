@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Content;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ContentController extends Controller
 {
@@ -45,7 +46,7 @@ class ContentController extends Controller
         $data['details'] = $request->details;
         $data['date'] = $request->date;
         $data['type'] = $request->type;
-        $data['link'] = $request->link;
+        $data['position'] = $request->position;
         $path = $request->file('file')->storePublicly('public/content');
         $data['file'] = 'https://mipim-file.s3.amazonaws.com/' . $path;
         $Content = Content::create($data);
@@ -88,8 +89,36 @@ class ContentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Find the record you want to update
+        $content = Content::findOrFail($id);
+
+        // Update the record with the new data
+        $content->title = $request->title;
+        $content->details = $request->details;
+        $content->date = $request->date;
+        $content->type = $request->type;
+        $content->position = $request->position;
+
+        // Check if a new file is provided
+        if ($request->hasFile('file')) {
+            // Delete the old file if it exists
+            Storage::delete($content->file);
+
+            // Store the new file
+            $path = $request->file('file')->storePublicly('public/content');
+            $content->file = 'https://mipim-file.s3.amazonaws.com/' . $path;
+        }
+
+        // Save the changes to the database
+        $content->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Content has been updated',
+            'data' => $content
+        ]);
     }
+
     public function update_order(Request $request)
     {
         $contents = $request->get('contents');

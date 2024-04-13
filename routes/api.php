@@ -55,6 +55,7 @@ Route::delete('/banner/{id}', [\App\Http\Controllers\BannerController::class, 'd
 
 Route::get('/content', [\App\Http\Controllers\ContentController::class, 'index']);
 Route::post('/content', [\App\Http\Controllers\ContentController::class, 'store']);
+Route::post('/content/{id}', [\App\Http\Controllers\ContentController::class, 'update']);
 Route::post('/content/update_order', [\App\Http\Controllers\ContentController::class, 'update_order']);
 
 
