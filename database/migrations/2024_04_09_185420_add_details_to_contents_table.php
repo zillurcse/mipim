@@ -15,6 +15,7 @@ class AddDetailsToContentsTable extends Migration
     {
         Schema::table('contents', function (Blueprint $table) {
             $table->longText('details')->nullable();
+            $table->string('position')->nullable();
             $table->date('date')->nullable();
         });
     }
@@ -28,7 +29,8 @@ class AddDetailsToContentsTable extends Migration
     {
         Schema::table('contents', function (Blueprint $table) {
             $table->dropColumn('details');
-            $table->dropColumn('dates');
+            $table->dropColumn('position');
+            $table->dropColumn('date');
         });
     }
 }
