@@ -51,7 +51,12 @@
                                                     @click="deleteContentItem(item.id)">
                                                     Delete Content
                                                 </button>
+                                                <button class="cursor-pointer hover:text-red-700"
+                                                    @click="UpdateContent(item)">
+                                                    Update Content
+                                                </button>
                                             </div>
+
                                         </div>
                                     </figure>
 
@@ -181,12 +186,19 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Enter Date" required />
                     </div>
-                    <div class="mb-6">
+                    <div class="mb-6" v-if="type !== 'Speaker'">
                         <label for="Link"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Link</label>
                         <input type="Link" id="Link" v-model="link"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Enter link" required />
+                    </div>
+                    <div class="mb-6" v-if="type === 'Speaker'">
+                        <label for="position"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Position</label>
+                        <input type="position" id="position" v-model="position"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Enter position" required />
                     </div>
                     <div class="mb-6" v-if="type === 'Speaker'">
 
@@ -200,9 +212,22 @@
                     </div>
 
                     <div class="">
-                        <button type="button" @click="uploadContentFiles"
+                        <button type="button" @click="uploadContentFiles" v-if="!isUpdate"
                             class="text-white flex items-center justify-center gap-4  bg-brand hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 h-12  text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Submit
+                            <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" wodth="30" v-if="isLoading"
+                                height="30" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                                <path fill="#fff"
+                                    d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                                    <animateTransform attributeName="transform" attributeType="XML" type="rotate"
+                                        dur="1s" from="0 50 50" to="360 50 50" repeatCount="indefinite" />
+                                </path>
+                            </svg>
+                        </button>
+                        <button type="button" @click="updateContentFiles()" v-if="isUpdate"
+                            class="text-white flex items-center justify-center gap-4  bg-brand hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 h-12  text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Update
                             <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" wodth="30" v-if="isLoading"
                                 height="30" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                 viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
@@ -237,7 +262,7 @@ export default {
     data() {
         return {
             is_dragging: false,
-
+            isUpdate: false,
             over: false,
             drag: false,
 
@@ -260,6 +285,8 @@ export default {
             bioDesc: '',
             details: '',
             date: null,
+            position: '',
+            updatedId: null,
 
             uploading: false,
             progress: 0,
@@ -420,7 +447,16 @@ export default {
         ,
         async uploadContentFiles() {
             try {
-                if (this.title === "" || this.link === '' || this.type === "" || this.date === "" || this.details === "" || this.contentFile === null) {
+                if (this.type === "Speaker") {
+                    if (this.title === "" || this.date === "" || this.details === "" || this.contentFile === null || this.position === "") {
+                        this.$toasted.show("please fill up all fields", {
+                            theme: "toasted-primary",
+                            position: "top-center",
+                            duration: 5000
+                        });
+                        return false
+                    }
+                } else if (this.title === "" || this.link === '' || this.type === "" || this.contentFile === null) {
                     this.$toasted.show("please fill up all fields", {
                         theme: "toasted-primary",
                         position: "top-center",
@@ -436,6 +472,8 @@ export default {
                 formData.append('type', this.type);
                 formData.append('date', this.date);
                 formData.append('details', this.details);
+                formData.append('position', this.position);
+
                 formData.append('file', this.contentFile);
 
                 // Make POST request to upload the file and data
@@ -450,6 +488,8 @@ export default {
                 this.link = '';
                 this.date = '';
                 this.details = '';
+                this.position = '';
+
                 this.type = 'Select Type';
                 this.contentFile = null;
                 this.contentPreview = null
@@ -486,8 +526,82 @@ export default {
                     // Handle error if needed
                 });
         },
+        UpdateContent(item) {
+            this.updatedId = item.id
+            this.showModal = 'pdf';
+            this.isUpdate = true
+            this.title = item.title;
+            this.link = item.link;
+            this.date = item.date;
+            this.details = item.details;
+            this.position = item.position;
+            this.type = item.type;
+            this.contentFile = item.file;
+            this.contentPreview = item.file
+
+        },
+        async updateContentFiles() {
+            try {
+                this.isLoading = true;
+                let formData = new FormData();
 
 
+                if (this.title) {
+                    formData.append('title', this.title);
+                }
+
+                if (this.link) {
+                    formData.append('link', this.link);
+                }
+
+                if (this.type) {
+                    formData.append('type', this.type);
+                }
+
+                if (this.date) {
+                    formData.append('date', this.date);
+                }
+
+                if (this.details) {
+                    formData.append('details', this.details);
+                }
+
+                if (this.position) {
+                    formData.append('position', this.position);
+                }
+
+                if (this.contentFile) {
+                    formData.append('file', this.contentFile);
+                }
+
+                const response = await axios.post(`/api/content/${this.updatedId}`, formData);
+
+                // Handle success
+                this.getContentData(); // Update content data
+                this.showModal = false; // Close the modal after successful upload
+                // Reset all data
+                this.title = '';
+                this.link = '';
+                this.date = '';
+                this.details = '';
+                this.position = '';
+
+                this.type = 'Select Type';
+                this.contentFile = null;
+                this.contentPreview = null
+                this.isLoading = false;
+                this.$toasted.success(response.data.message, {
+                    theme: "toasted-primary",
+                    position: "top-center",
+                    duration: 5000
+                });
+            } catch (error) {
+                // Handle error
+                console.error("Error:", error);
+                this.isLoading = false;
+                // Add specific error handling as needed
+            }
+        },
         clickTool(id) {
             if (this.isOpenTool == id) {
                 this.isOpenTool = -1

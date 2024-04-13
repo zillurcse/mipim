@@ -8469,6 +8469,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -8483,6 +8508,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       is_dragging: false,
+      isUpdate: false,
       over: false,
       drag: false,
       contentItems: [],
@@ -8506,6 +8532,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       bioDesc: '',
       details: '',
       date: null,
+      position: '',
+      updatedId: null,
       uploading: false,
       progress: 0,
       tempAttachments: [],
@@ -8676,8 +8704,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context3.prev = 0;
 
-                if (!(_this5.title === "" || _this5.link === '' || _this5.type === "" || _this5.date === "" || _this5.details === "" || _this5.contentFile === null)) {
-                  _context3.next = 4;
+                if (!(_this5.type === "Speaker")) {
+                  _context3.next = 7;
+                  break;
+                }
+
+                if (!(_this5.title === "" || _this5.date === "" || _this5.details === "" || _this5.contentFile === null || _this5.position === "")) {
+                  _context3.next = 5;
                   break;
                 }
 
@@ -8689,7 +8722,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 return _context3.abrupt("return", false);
 
-              case 4:
+              case 5:
+                _context3.next = 10;
+                break;
+
+              case 7:
+                if (!(_this5.title === "" || _this5.link === '' || _this5.type === "" || _this5.contentFile === null)) {
+                  _context3.next = 10;
+                  break;
+                }
+
+                _this5.$toasted.show("please fill up all fields", {
+                  theme: "toasted-primary",
+                  position: "top-center",
+                  duration: 5000
+                });
+
+                return _context3.abrupt("return", false);
+
+              case 10:
                 // Create FormData and append all data
                 _this5.isLoading = true;
                 formData = new FormData();
@@ -8698,12 +8749,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 formData.append('type', _this5.type);
                 formData.append('date', _this5.date);
                 formData.append('details', _this5.details);
+                formData.append('position', _this5.position);
                 formData.append('file', _this5.contentFile); // Make POST request to upload the file and data
 
-                _context3.next = 14;
+                _context3.next = 21;
                 return axios__WEBPACK_IMPORTED_MODULE_4__["default"].post('/api/content', formData);
 
-              case 14:
+              case 21:
                 response = _context3.sent;
 
                 // Handle success
@@ -8717,6 +8769,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this5.link = '';
                 _this5.date = '';
                 _this5.details = '';
+                _this5.position = '';
                 _this5.type = 'Select Type';
                 _this5.contentFile = null;
                 _this5.contentPreview = null;
@@ -8728,11 +8781,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   duration: 5000
                 });
 
-                _context3.next = 33;
+                _context3.next = 41;
                 break;
 
-              case 28:
-                _context3.prev = 28;
+              case 36:
+                _context3.prev = 36;
                 _context3.t0 = _context3["catch"](0);
                 // Handle error
                 _this5.isLoading = true;
@@ -8745,12 +8798,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 console.error('Error:', _context3.t0);
 
-              case 33:
+              case 41:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[0, 28]]);
+        }, _callee3, null, [[0, 36]]);
       }))();
     },
     deleteContentItem: function deleteContentItem(id) {
@@ -8764,6 +8817,107 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       })["catch"](function (error) {
         console.error('Error deleting resource:', error); // Handle error if needed
       });
+    },
+    UpdateContent: function UpdateContent(item) {
+      this.updatedId = item.id;
+      this.showModal = 'pdf';
+      this.isUpdate = true;
+      this.title = item.title;
+      this.link = item.link;
+      this.date = item.date;
+      this.details = item.details;
+      this.position = item.position;
+      this.type = item.type;
+      this.contentFile = item.file;
+      this.contentPreview = item.file;
+    },
+    updateContentFiles: function updateContentFiles() {
+      var _this7 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var formData, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                _this7.isLoading = true;
+                formData = new FormData();
+
+                if (_this7.title) {
+                  formData.append('title', _this7.title);
+                }
+
+                if (_this7.link) {
+                  formData.append('link', _this7.link);
+                }
+
+                if (_this7.type) {
+                  formData.append('type', _this7.type);
+                }
+
+                if (_this7.date) {
+                  formData.append('date', _this7.date);
+                }
+
+                if (_this7.details) {
+                  formData.append('details', _this7.details);
+                }
+
+                if (_this7.position) {
+                  formData.append('position', _this7.position);
+                }
+
+                if (_this7.contentFile) {
+                  formData.append('file', _this7.contentFile);
+                }
+
+                _context4.next = 12;
+                return axios__WEBPACK_IMPORTED_MODULE_4__["default"].post("/api/content/".concat(_this7.updatedId), formData);
+
+              case 12:
+                response = _context4.sent;
+
+                // Handle success
+                _this7.getContentData(); // Update content data
+
+
+                _this7.showModal = false; // Close the modal after successful upload
+                // Reset all data
+
+                _this7.title = '';
+                _this7.link = '';
+                _this7.date = '';
+                _this7.details = '';
+                _this7.position = '';
+                _this7.type = 'Select Type';
+                _this7.contentFile = null;
+                _this7.contentPreview = null;
+                _this7.isLoading = false;
+
+                _this7.$toasted.success(response.data.message, {
+                  theme: "toasted-primary",
+                  position: "top-center",
+                  duration: 5000
+                });
+
+                _context4.next = 31;
+                break;
+
+              case 27:
+                _context4.prev = 27;
+                _context4.t0 = _context4["catch"](0);
+                // Handle error
+                console.error("Error:", _context4.t0);
+                _this7.isLoading = false; // Add specific error handling as needed
+
+              case 31:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[0, 27]]);
+      }))();
     },
     clickTool: function clickTool(id) {
       if (this.isOpenTool == id) {
@@ -50217,6 +50371,28 @@ var render = function () {
                                                       ),
                                                     ]
                                                   ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "button",
+                                                    {
+                                                      staticClass:
+                                                        "cursor-pointer hover:text-red-700",
+                                                      on: {
+                                                        click: function (
+                                                          $event
+                                                        ) {
+                                                          return _vm.UpdateContent(
+                                                            item
+                                                          )
+                                                        },
+                                                      },
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                                                Update Content\n                                            "
+                                                      ),
+                                                    ]
+                                                  ),
                                                 ]
                                               )
                                             : _vm._e(),
@@ -50690,45 +50866,89 @@ var render = function () {
                     ])
                   : _vm._e(),
                 _vm._v(" "),
-                _c("div", { staticClass: "mb-6" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass:
-                        "block mb-2 text-sm font-medium text-gray-900 dark:text-white",
-                      attrs: { for: "Link" },
-                    },
-                    [_vm._v("Link")]
-                  ),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.link,
-                        expression: "link",
-                      },
-                    ],
-                    staticClass:
-                      "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
-                    attrs: {
-                      type: "Link",
-                      id: "Link",
-                      placeholder: "Enter link",
-                      required: "",
-                    },
-                    domProps: { value: _vm.link },
-                    on: {
-                      input: function ($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.link = $event.target.value
-                      },
-                    },
-                  }),
-                ]),
+                _vm.type !== "Speaker"
+                  ? _c("div", { staticClass: "mb-6" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass:
+                            "block mb-2 text-sm font-medium text-gray-900 dark:text-white",
+                          attrs: { for: "Link" },
+                        },
+                        [_vm._v("Link")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.link,
+                            expression: "link",
+                          },
+                        ],
+                        staticClass:
+                          "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                        attrs: {
+                          type: "Link",
+                          id: "Link",
+                          placeholder: "Enter link",
+                          required: "",
+                        },
+                        domProps: { value: _vm.link },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.link = $event.target.value
+                          },
+                        },
+                      }),
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.type === "Speaker"
+                  ? _c("div", { staticClass: "mb-6" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass:
+                            "block mb-2 text-sm font-medium text-gray-900 dark:text-white",
+                          attrs: { for: "position" },
+                        },
+                        [_vm._v("Position")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.position,
+                            expression: "position",
+                          },
+                        ],
+                        staticClass:
+                          "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                        attrs: {
+                          type: "position",
+                          id: "position",
+                          placeholder: "Enter position",
+                          required: "",
+                        },
+                        domProps: { value: _vm.position },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.position = $event.target.value
+                          },
+                        },
+                      }),
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
                 _vm.type === "Speaker"
                   ? _c("div", { staticClass: "mb-6" }, [
@@ -50776,65 +50996,135 @@ var render = function () {
                   : _vm._e(),
                 _vm._v(" "),
                 _c("div", {}, [
-                  _c(
-                    "button",
-                    {
-                      staticClass:
-                        "text-white flex items-center justify-center gap-4  bg-brand hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 h-12  text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
-                      attrs: { type: "button" },
-                      on: { click: _vm.uploadContentFiles },
-                    },
-                    [
-                      _vm._v(
-                        "\n                        Submit\n                        "
-                      ),
-                      _vm.isLoading
-                        ? _c(
-                            "svg",
-                            {
-                              attrs: {
-                                version: "1.1",
-                                id: "L9",
-                                xmlns: "http://www.w3.org/2000/svg",
-                                wodth: "30",
-                                height: "30",
-                                "xmlns:xlink": "http://www.w3.org/1999/xlink",
-                                x: "0px",
-                                y: "0px",
-                                viewBox: "0 0 100 100",
-                                "enable-background": "new 0 0 0 0",
-                                "xml:space": "preserve",
-                              },
-                            },
-                            [
-                              _c(
-                                "path",
+                  !_vm.isUpdate
+                    ? _c(
+                        "button",
+                        {
+                          staticClass:
+                            "text-white flex items-center justify-center gap-4  bg-brand hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 h-12  text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+                          attrs: { type: "button" },
+                          on: { click: _vm.uploadContentFiles },
+                        },
+                        [
+                          _vm._v(
+                            "\n                        Submit\n                        "
+                          ),
+                          _vm.isLoading
+                            ? _c(
+                                "svg",
                                 {
                                   attrs: {
-                                    fill: "#fff",
-                                    d: "M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50",
+                                    version: "1.1",
+                                    id: "L9",
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    wodth: "30",
+                                    height: "30",
+                                    "xmlns:xlink":
+                                      "http://www.w3.org/1999/xlink",
+                                    x: "0px",
+                                    y: "0px",
+                                    viewBox: "0 0 100 100",
+                                    "enable-background": "new 0 0 0 0",
+                                    "xml:space": "preserve",
                                   },
                                 },
                                 [
-                                  _c("animateTransform", {
-                                    attrs: {
-                                      attributeName: "transform",
-                                      attributeType: "XML",
-                                      type: "rotate",
-                                      dur: "1s",
-                                      from: "0 50 50",
-                                      to: "360 50 50",
-                                      repeatCount: "indefinite",
+                                  _c(
+                                    "path",
+                                    {
+                                      attrs: {
+                                        fill: "#fff",
+                                        d: "M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50",
+                                      },
                                     },
-                                  }),
-                                ],
-                                1
-                              ),
-                            ]
-                          )
-                        : _vm._e(),
-                    ]
-                  ),
+                                    [
+                                      _c("animateTransform", {
+                                        attrs: {
+                                          attributeName: "transform",
+                                          attributeType: "XML",
+                                          type: "rotate",
+                                          dur: "1s",
+                                          from: "0 50 50",
+                                          to: "360 50 50",
+                                          repeatCount: "indefinite",
+                                        },
+                                      }),
+                                    ],
+                                    1
+                                  ),
+                                ]
+                              )
+                            : _vm._e(),
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isUpdate
+                    ? _c(
+                        "button",
+                        {
+                          staticClass:
+                            "text-white flex items-center justify-center gap-4  bg-brand hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 h-12  text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.updateContentFiles()
+                            },
+                          },
+                        },
+                        [
+                          _vm._v(
+                            "\n                        Update\n                        "
+                          ),
+                          _vm.isLoading
+                            ? _c(
+                                "svg",
+                                {
+                                  attrs: {
+                                    version: "1.1",
+                                    id: "L9",
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    wodth: "30",
+                                    height: "30",
+                                    "xmlns:xlink":
+                                      "http://www.w3.org/1999/xlink",
+                                    x: "0px",
+                                    y: "0px",
+                                    viewBox: "0 0 100 100",
+                                    "enable-background": "new 0 0 0 0",
+                                    "xml:space": "preserve",
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "path",
+                                    {
+                                      attrs: {
+                                        fill: "#fff",
+                                        d: "M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50",
+                                      },
+                                    },
+                                    [
+                                      _c("animateTransform", {
+                                        attrs: {
+                                          attributeName: "transform",
+                                          attributeType: "XML",
+                                          type: "rotate",
+                                          dur: "1s",
+                                          from: "0 50 50",
+                                          to: "360 50 50",
+                                          repeatCount: "indefinite",
+                                        },
+                                      }),
+                                    ],
+                                    1
+                                  ),
+                                ]
+                              )
+                            : _vm._e(),
+                        ]
+                      )
+                    : _vm._e(),
                 ]),
               ]),
             ])
