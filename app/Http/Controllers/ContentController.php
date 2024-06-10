@@ -42,11 +42,21 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
-        $data['title'] = $request->title;
-        $data['details'] = $request->details;
-        $data['date'] = $request->date;
-        $data['type'] = $request->type;
-        $data['position'] = $request->position;
+        $rules = [
+            'title' => 'required|string|max:255',
+            'type' => 'required|string|max:255',
+            'details' => 'nullable|string',
+            'position' => 'nullable|integer',
+        ];
+
+        // Validate the request
+        $validatedData = $request->validate($rules);
+
+        $data['title'] = $validatedData['title'];
+        $data['details'] = $validatedData['details'];
+//        $data['date'] = $validatedData->date;
+        $data['type'] = $validatedData['type'];
+        $data['position'] = $validatedData['position'];
         $path = $request->file('file')->storePublicly('public/content');
         $data['file'] = 'https://mipim-file.s3.amazonaws.com/' . $path;
         $Content = Content::create($data);
