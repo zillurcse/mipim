@@ -2,7 +2,7 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                MIPIM - Dashboard
+                MIPIM - Dashboard 
             </h2>
         </template>
 
@@ -133,11 +133,28 @@ export default {
     async mounted() {
         this.getBannerData()
         this.getContentData()
-
     },
 
     methods: {
         async getBannerData() {
+            
+            // this.$inertia.get('/api/banner', {}, {
+            //     preserveState: true, // Optional, preserves the state of the page (useful for partial reloads)
+            //     onSuccess: (response) => {
+            //         // if (response.status == 200) {
+            //             // console.log('zillur', response);
+            //             // this.items = response.props.data.items;
+            //         // }
+            //     },
+            //     onError: (errors) => {
+            //         if (errors.status == 422) {
+            //             this.errors = errors.data.errors;
+            //         } else {
+            //             console.log(errors);
+            //         }
+            //     }
+            // });
+
             await axios.get('/api/banner')
                 .then(response => {
 
@@ -158,7 +175,10 @@ export default {
                 .finally(() => {
 
                 })
+      
         },
+
+       
         async getContentData() {
             await axios.get('/api/content', {
                 headers: {
