@@ -9,14 +9,10 @@
                     stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                 </svg>
-
             </div>
         </div>
-
         <div class="my-4">
-
-
-            <div class=" ">
+            <div class="">
                 <div v-if="contentItems.length > 0" class="row">
                     <div class="col-md-6 mb-3" v-for="(item, index) in contentItems" :key="item.id">
                         <drop :tag="'span'" @dragover="over = true" @dragleave="over = false"
@@ -25,7 +21,7 @@
                             <drag class="cursor-pointer" :transfer-data="index" @dragstart="is_dragging = true"
                                 @dragend="is_dragging = false">
 
-                                <div class="p-4 border rounded-md bg-gray-100"
+                                <div class="p-4 border rounded-md bg-gray-100" @click="updateOrder"
                                     :class="[is_dragging ? 'is_dragging' : '']">
 
                                     <figure class="rounded-md overflow-hidden h-60 relative">
@@ -336,10 +332,10 @@ export default {
             this.contentItems[to_index] = this.contentItems[from_index];
             this.contentItems[from_index] = temp;
             this.over = false;
-
+            console.log(temp, this.contentItems);
             axios.post('/api/content/update_order', { contents: this.contentItems })
                 .then(res => {
-
+                    console.log(res);
                     this.$toasted.success(res.data.message, {
                         theme: "toasted-primary",
                         position: "top-center",
@@ -383,7 +379,32 @@ export default {
 
                 })
         },
+        updateOrder() {
+            axios.post('/api/content/update_order', { contents: this.contentItems })
+                .then(res => {
+                    console.log(res);
+                    this.$toasted.success(res.data.message, {
+                        theme: "toasted-primary",
+                        position: "top-center",
+                        duration: 5000
+                    });
+                    this.getContentData()
 
+                })
+                .catch(err => {
+                    this.$toasted.show(err.response.data.message, {
+                        theme: "toasted-primary",
+                        position: "top-center",
+                        duration: 5000
+                    });
+
+
+                })
+                .finally(res => {
+                    console.log(res);
+
+                })
+        },
 
         handleContentFileChange(event) {
             const file = event.target.files[0];
