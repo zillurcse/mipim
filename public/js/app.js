@@ -50471,7 +50471,7 @@ var render = function () {
                                     "h4",
                                     {
                                       staticClass:
-                                        "text-base text-gray-700 font-medium",
+                                        "text-base text-gray-700 font-medium break-words",
                                     },
                                     [_vm._v(_vm._s(item.link))]
                                   ),
