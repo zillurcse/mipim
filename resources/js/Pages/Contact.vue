@@ -46,7 +46,7 @@
                                                 d="M17.6405 1.09036C17.2857 1.27209 14.1012 3.53935 11.994 4.90231L15.5506 8.90463C15.6372 8.99116 15.6761 9.09501 15.6285 9.14693C15.5766 9.19453 15.4641 9.16856 15.3732 9.08636L11.107 5.48643C10.4623 5.90181 10.008 6.18738 9.93009 6.23064C9.59692 6.39939 9.36327 6.42102 9.04309 6.42102C8.7229 6.42102 8.48925 6.39939 8.15608 6.23064C8.07387 6.18738 7.62388 5.90181 6.97918 5.48643L2.71293 9.08636C2.62639 9.17289 2.50956 9.19885 2.45764 9.14693C2.40572 9.09934 2.44466 8.99116 2.5312 8.90463L6.08353 4.90231C3.97636 3.53935 0.757196 1.27209 0.402396 1.09036C0.0216341 0.895657 0 1.12498 0 1.30238C0 1.47978 0 10.1724 0 10.1724C0 10.5748 0.592776 11.0767 1.01681 11.0767H9.04309H17.0694C17.4934 11.0767 17.9996 10.5705 17.9996 10.1724C17.9996 10.1724 17.9996 1.47545 17.9996 1.30238C17.9996 1.12065 18.0256 0.895657 17.6405 1.09036Z"
                                                 fill="#996B4B" />
                                         </svg>
-                                        <span> nvest@housing.gov.om </span>
+                                        <span>invest@housing.gov.om</span>
                                     </li>
                                     <li>
                                         <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
@@ -75,14 +75,14 @@
                                         <div class="inputFrom">
                                             <label for="firstName">First Name</label>
                                             <input type="text" v-model="formData.firstName"
-                                                @input="clearError('firstName')" />
+                                                placeholder="Enter first name" @input="clearError('firstName')" />
                                             <p class="error-message">{{ errors.firstName }}</p>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inputFrom">
                                             <label for="lastName">Last Name</label>
-                                            <input type="text" v-model="formData.lastName"
+                                            <input type="text" v-model="formData.lastName" placeholder="Enter last name"
                                                 @input="clearError('lastName')" />
                                             <p class="error-message">{{ errors.lastName }}</p>
                                         </div>
@@ -90,15 +90,16 @@
                                     <div class="col-md-12">
                                         <div class="inputFrom">
                                             <label for="email">Email</label>
-                                            <input type="email" v-model="formData.email" @input="clearError('email')" />
+                                            <input type="email" v-model="formData.email" @input="clearError('email')"
+                                                placeholder="Enter email address" />
                                             <p class="error-message">{{ errors.email }}</p>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inputFrom">
-                                            <label for="phoneCode">Phone without code</label>
+                                            <label for="phoneCode">Phone </label>
                                             <input type="text" v-model="formData.phoneCode"
-                                                @input="clearError('phoneCode')" />
+                                                placeholder="Enter phone number" @input="clearError('phoneCode')" />
                                             <p class="error-message">{{ errors.phoneCode }}</p>
                                         </div>
                                     </div>
@@ -106,15 +107,15 @@
                                         <div class="">
                                             <label for="country" id="country">Country code</label>
                                             <v-select v-model="formData.countryCode" :options="countries"
-                                                label="name"></v-select>
+                                                placeholder="Country code" label="name"></v-select>
                                             <p class="error-message">{{ errors.countryCode }}</p>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="inputFrom">
                                             <label for="message">Message</label>
-                                            <textarea v-model="formData.message" rows="8" cols="4"
-                                                @input="clearError('message')"></textarea>
+                                            <textarea v-model="formData.message" rows="8" cols="4" class="p-2"
+                                                placeholder="Write  message" @input="clearError('message')"></textarea>
                                             <p class="error-message">{{ errors.message }}</p>
                                         </div>
                                     </div>
