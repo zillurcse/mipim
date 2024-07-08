@@ -58,7 +58,7 @@
 
                                     <h2 class="text-xl text-gray-800 font-semibold">{{ item.title }}</h2>
                                     <h3 class="text-lg text-gray-700 font-medium">{{ item.type }}</h3>
-                                    <h4 class="text-base text-gray-700 font-medium">{{ item.link }}</h4>
+                                    <h4 class="text-base text-gray-700 font-medium break-words">{{ item.link }}</h4>
                                 </div>
                             </drag>
                         </drop>
