@@ -14,7 +14,7 @@
         <div class="my-4">
             <div class="">
                 <div v-if="contentItems.length > 0" class="row">
-                    <div class="col-md-6 mb-3" v-for="(item, index) in contentItems" :key="item.id">
+                    <div class="col-md-4 mb-3" v-for="(item, index) in contentItems" :key="item.id">
                         <drop :tag="'span'" @dragover="over = true" @dragleave="over = false"
                             @drop="handleDrop(index, ...arguments)">
 

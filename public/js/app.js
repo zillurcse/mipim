@@ -5913,6 +5913,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -8490,10 +8491,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -8650,7 +8647,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    click: function click() {
+    updateOrder: function updateOrder() {
       var _this4 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_4__["default"].post('/api/content/update_order', {
@@ -48154,7 +48151,7 @@ var render = function () {
                         ]
                       ),
                       _vm._v(" "),
-                      _c("span", [_vm._v(" nvest@housing.gov.om ")]),
+                      _c("span", [_vm._v("invest@housing.gov.om")]),
                     ]),
                     _vm._v(" "),
                     _c("li", [
@@ -48231,7 +48228,10 @@ var render = function () {
                               expression: "formData.firstName",
                             },
                           ],
-                          attrs: { type: "text" },
+                          attrs: {
+                            type: "text",
+                            placeholder: "Enter first name",
+                          },
                           domProps: { value: _vm.formData.firstName },
                           on: {
                             input: [
@@ -48273,7 +48273,10 @@ var render = function () {
                               expression: "formData.lastName",
                             },
                           ],
-                          attrs: { type: "text" },
+                          attrs: {
+                            type: "text",
+                            placeholder: "Enter last name",
+                          },
                           domProps: { value: _vm.formData.lastName },
                           on: {
                             input: [
@@ -48315,7 +48318,10 @@ var render = function () {
                               expression: "formData.email",
                             },
                           ],
-                          attrs: { type: "email" },
+                          attrs: {
+                            type: "email",
+                            placeholder: "Enter email address",
+                          },
                           domProps: { value: _vm.formData.email },
                           on: {
                             input: [
@@ -48345,7 +48351,7 @@ var render = function () {
                     _c("div", { staticClass: "col-md-6" }, [
                       _c("div", { staticClass: "inputFrom" }, [
                         _c("label", { attrs: { for: "phoneCode" } }, [
-                          _vm._v("Phone without code"),
+                          _vm._v("Phone "),
                         ]),
                         _vm._v(" "),
                         _c("input", {
@@ -48357,7 +48363,10 @@ var render = function () {
                               expression: "formData.phoneCode",
                             },
                           ],
-                          attrs: { type: "text" },
+                          attrs: {
+                            type: "text",
+                            placeholder: "Enter phone number",
+                          },
                           domProps: { value: _vm.formData.phoneCode },
                           on: {
                             input: [
@@ -48396,7 +48405,11 @@ var render = function () {
                           ),
                           _vm._v(" "),
                           _c("v-select", {
-                            attrs: { options: _vm.countries, label: "name" },
+                            attrs: {
+                              options: _vm.countries,
+                              placeholder: "Country code",
+                              label: "name",
+                            },
                             model: {
                               value: _vm.formData.countryCode,
                               callback: function ($$v) {
@@ -48429,7 +48442,12 @@ var render = function () {
                               expression: "formData.message",
                             },
                           ],
-                          attrs: { rows: "8", cols: "4" },
+                          staticClass: "p-2",
+                          attrs: {
+                            rows: "8",
+                            cols: "4",
+                            placeholder: "Write  message",
+                          },
                           domProps: { value: _vm.formData.message },
                           on: {
                             input: [
@@ -50232,7 +50250,7 @@ var render = function () {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "my-4" }, [
-        _c("div", { staticClass: " " }, [
+        _c("div", {}, [
           _vm.contentItems.length > 0
             ? _c(
                 "div",
@@ -50240,7 +50258,7 @@ var render = function () {
                 _vm._l(_vm.contentItems, function (item, index) {
                   return _c(
                     "div",
-                    { key: item.id, staticClass: "col-md-6 mb-3" },
+                    { key: item.id, staticClass: "col-md-4 mb-3" },
                     [
                       _c(
                         "drop",
@@ -50286,7 +50304,7 @@ var render = function () {
                                   staticClass:
                                     "p-4 border rounded-md bg-gray-100",
                                   class: [_vm.is_dragging ? "is_dragging" : ""],
-                                  on: { click: _vm.click },
+                                  on: { click: _vm.updateOrder },
                                 },
                                 [
                                   _c(
