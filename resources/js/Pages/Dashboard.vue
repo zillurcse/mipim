@@ -32,7 +32,8 @@
                                 <li>
                                     <a href="#"
                                         class="inline-flex items-center px-4 py-3 text-base no-underline text-gray-500 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
-                                        @click="selectedTab = 'categories'" :class="{ 'active': selectedTab === 'categories' }">
+                                        @click="selectedTab = 'categories'"
+                                        :class="{ 'active': selectedTab === 'categories' }">
                                         Categories
                                     </a>
                                 </li>
@@ -61,7 +62,7 @@
                     </div>
                     <Bio v-if="selectedTab === 'bio'" />
                     <Banner v-else-if="selectedTab === 'banner'" />
-                    <Content v-else-if="selectedTab === 'categories'" />
+                    <Categories v-else-if="selectedTab === 'categories'" />
                     <Content v-else-if="selectedTab === 'content'" />
                     <contact-us v-else-if="selectedTab === 'contact'" />
                 </div>
@@ -82,6 +83,7 @@ import Banner from './Partials/Banner.vue';
 import Content from './Partials/Content.vue';
 import Bio from './Partials/Bio.vue';
 import ContactUs from './Partials/Contact-us.vue';
+import Categories from './Partials/Categories.vue';
 
 export default {
     components: {
@@ -92,7 +94,8 @@ export default {
         Banner,
         Content,
         Bio,
-        ContactUs
+        ContactUs,
+        Categories
     },
 
     data() {

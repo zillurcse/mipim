@@ -35,6 +35,9 @@
                                 <li class="nav-item">
                                     <Link class="nav-link " href="/contact" target="_self" title="">Contact us</Link>
                                 </li>
+                                <li class="nav-item">
+                                    <Link class="nav-link " href="/categorie" target="_self" title=""> Categorie</Link>
+                                </li>
                             </ul>
                         </div>
                     </div>

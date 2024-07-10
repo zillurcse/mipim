@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Hash;
 */
 
 Route::get('/', function () {
-    return Hash::make('Badar@2024');
+    // return Hash::make('Badar@2024');
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -31,6 +31,9 @@ Route::get('/about', function () {
 
 Route::get('/contact', function () {
     return Inertia::render('Contact');
+});
+Route::get('/categorie', function () {
+    return Inertia::render('Categorie-page');
 });
 
 
