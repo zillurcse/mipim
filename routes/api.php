@@ -40,7 +40,7 @@ Route::post('/sanctum/token', function (Request $request) {
     return $user->createToken($request->device_name)->plainTextToken;
 });
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::group(['middleware' => ['api']], function () {
     Route::post('/image-gallery/get', [ImageController::class, 'get_gallery']);
 
     Route::get('/contact-us', [\App\Http\Controllers\ContactUsController::class, 'index']);
@@ -57,6 +57,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/content', [\App\Http\Controllers\ContentController::class, 'store']);
     Route::post('/content/{id}', [\App\Http\Controllers\ContentController::class, 'update']);
     Route::post('/content/update_order', [\App\Http\Controllers\ContentController::class, 'update_order']);
+
+    Route::get('/categories', [\App\Http\Controllers\CategoriesController::class, 'index']);
+    Route::post('/categories', [\App\Http\Controllers\CategoriesController::class, 'store']);
+    Route::post('/categories/{id}', [\App\Http\Controllers\CategoriesController::class, 'update']);
+    Route::post('/categories/update_order', [\App\Http\Controllers\CategoriesController::class, 'update_order']);
 
 
     Route::delete('/content/{id}', [\App\Http\Controllers\ContentController::class, 'destroy']);

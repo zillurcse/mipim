@@ -204,9 +204,8 @@ export default {
     },
 
     async mounted() {
-
-        this.getContentData();
-        this.getBioData()
+        await this.getContentData();
+        await this.getBioData()
 
     },
     methods: {

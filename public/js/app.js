@@ -5366,9 +5366,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         "code": "+353",
         "name": "Ireland"
       }, {
-        "code": "+972",
-        "name": "Israel"
-      }, {
         "code": "+39",
         "name": "Italy"
       }, {
@@ -5950,6 +5947,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -6020,11 +6025,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _this.getBannerData();
-
-              _this.getContentData();
+              _context.next = 2;
+              return _this.getBannerData();
 
             case 2:
+              _context.next = 4;
+              return _this.getContentData();
+
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -6953,6 +6961,339 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
                 })["catch"](function (error) {
                   if (error.response.status == 422) {
+                    _this2.errors = error.response.data.errors;
+                  } else {
+                    // this.toastMessage('error', error, 'check', '', 'times')
+                    console.error('Error:', error);
+                  }
+                })["finally"](function () {});
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    handleFileChange: function handleFileChange(event) {
+      this.bannerImage = event.target.files[0];
+    },
+    handleContentFileChange: function handleContentFileChange(event) {
+      this.contentFile = event.target.files[0];
+    },
+    uploadBioFiles: function uploadBioFiles() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var formData;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+
+                if (!(_this3.bioTitle === "" || _this3.bioDesc === '')) {
+                  _context3.next = 4;
+                  break;
+                }
+
+                _this3.$toasted.show("please fill up all fields", {
+                  theme: "toasted-primary",
+                  position: "top-center",
+                  duration: 5000
+                });
+
+                return _context3.abrupt("return", false);
+
+              case 4:
+                // Create FormData and append all data
+                _this3.isLoading = true;
+                formData = new FormData();
+                formData.append('title', _this3.bioTitle);
+                formData.append('description', _this3.bioDesc); // Make POST request to upload the file and data
+
+                _context3.next = 10;
+                return axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/bio-container', formData);
+
+              case 10:
+                // Handle success
+                _this3.getBioData(); // Update content data
+
+
+                _this3.showModal = false; // Close the modal after successful upload
+                // Reset all data
+
+                _this3.bioTitle = '';
+                _this3.bioDesc = '';
+                _this3.isLoading = false;
+                _context3.next = 21;
+                break;
+
+              case 17:
+                _context3.prev = 17;
+                _context3.t0 = _context3["catch"](0);
+                // Handle error
+                _this3.isLoading = true;
+                console.error('Error:', _context3.t0);
+
+              case 21:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[0, 17]]);
+      }))();
+    },
+    updateBio: function updateBio(item) {
+      this.showModal = 'bio';
+      this.isUpdate = true;
+      this.bioTitle = item.title;
+      this.bioDesc = item.description;
+    },
+    updateBioFiles: function updateBioFiles(id) {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var formData, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                _this4.isLoading = true;
+                formData = new FormData();
+                formData.append('title', _this4.bioTitle);
+                formData.append('description', _this4.bioDesc);
+                _context4.next = 7;
+                return axios__WEBPACK_IMPORTED_MODULE_1__["default"].post("/api/bio-container/".concat(id), formData);
+
+              case 7:
+                response = _context4.sent;
+
+                // Handle success
+                _this4.getBioData(); // Update content data
+
+
+                _this4.showModal = false; // Close the modal after successful upload
+                // Reset all data
+
+                _this4.bioTitle = '';
+                _this4.bioDesc = '';
+                _this4.isLoading = false;
+                _this4.isUpdate = false;
+                _context4.next = 20;
+                break;
+
+              case 16:
+                _context4.prev = 16;
+                _context4.t0 = _context4["catch"](0);
+                // Handle error
+                console.error("Error:", _context4.t0);
+                _this4.isLoading = false; // Add specific error handling as needed
+
+              case 20:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[0, 16]]);
+      }))();
+    },
+    clickTool: function clickTool(id) {
+      if (this.isOpenTool == id) {
+        this.isOpenTool = -1;
+      } else {
+        this.isOpenTool = id;
+      }
+    },
+    closeModal: function closeModal() {
+      this.showModal = false;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Partials/Categories.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Partials/Categories.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      categories: [],
+      selectedTab: 'categories',
+      showModal: '',
+      isLoading: false,
+      isOpenTool: null,
+      isUpdate: false,
+      bioTitle: '',
+      bioDesc: '',
+      tempAttachments: [],
+      attachments: []
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _this.getCategoriesData();
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  },
+  methods: {
+    getCategoriesData: function getCategoriesData() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/categories').then(function (response) {
+                  if (response.status === 200) {
+                    _this2.categories = response.data.data.items;
+                  }
+                })["catch"](function (error) {
+                  if (error.response.status === 422) {
                     _this2.errors = error.response.data.errors;
                   } else {
                     // this.toastMessage('error', error, 'check', '', 'times')
@@ -9348,11 +9689,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _this.getContentData();
-
-              _this.getBioData();
+              _context.next = 2;
+              return _this.getContentData();
 
             case 2:
+              _context.next = 4;
+              return _this.getBioData();
+
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -40637,6 +40981,45 @@ component.options.__file = "resources/js/Pages/Partials/Bio.vue"
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Partials/Categories.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/Pages/Partials/Categories.vue ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Categories_vue_vue_type_template_id_3c84da80___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Categories.vue?vue&type=template&id=3c84da80& */ "./resources/js/Pages/Partials/Categories.vue?vue&type=template&id=3c84da80&");
+/* harmony import */ var _Categories_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Categories.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Partials/Categories.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Categories_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Categories_vue_vue_type_template_id_3c84da80___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Categories_vue_vue_type_template_id_3c84da80___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Pages/Partials/Categories.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Partials/Contact-us.vue":
 /*!****************************************************!*\
   !*** ./resources/js/Pages/Partials/Contact-us.vue ***!
@@ -41717,6 +42100,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Partials/Categories.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/Pages/Partials/Categories.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Categories_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Categories.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Partials/Categories.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Categories_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Partials/Contact-us.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************!*\
   !*** ./resources/js/Pages/Partials/Contact-us.vue?vue&type=script&lang=js& ***!
@@ -42731,6 +43130,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Bio_vue_vue_type_template_id_17961914___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Bio_vue_vue_type_template_id_17961914___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Bio.vue?vue&type=template&id=17961914& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Partials/Bio.vue?vue&type=template&id=17961914&");
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Partials/Categories.vue?vue&type=template&id=3c84da80&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/Pages/Partials/Categories.vue?vue&type=template&id=3c84da80& ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Categories_vue_vue_type_template_id_3c84da80___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Categories_vue_vue_type_template_id_3c84da80___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Categories_vue_vue_type_template_id_3c84da80___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Categories.vue?vue&type=template&id=3c84da80& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Partials/Categories.vue?vue&type=template&id=3c84da80&");
 
 
 /***/ }),
@@ -48660,7 +49076,7 @@ var render = function () {
                   staticClass:
                     "font-semibold text-xl text-gray-800 leading-tight",
                 },
-                [_vm._v("\n            MIPIM - Dashboard \n        ")]
+                [_vm._v("\n            MIPIM - Dashboard\n        ")]
               ),
             ]
           },
@@ -48735,6 +49151,28 @@ var render = function () {
                           {
                             staticClass:
                               "inline-flex items-center px-4 py-3 text-base no-underline text-gray-500 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white",
+                            class: { active: _vm.selectedTab === "categories" },
+                            attrs: { href: "#" },
+                            on: {
+                              click: function ($event) {
+                                _vm.selectedTab = "categories"
+                              },
+                            },
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    Categories\n                                "
+                            ),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("li", [
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "inline-flex items-center px-4 py-3 text-base no-underline text-gray-500 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white",
                             class: { active: _vm.selectedTab === "content" },
                             attrs: { href: "#" },
                             on: {
@@ -48781,6 +49219,8 @@ var render = function () {
                 ? _c("Bio")
                 : _vm.selectedTab === "banner"
                 ? _c("Banner")
+                : _vm.selectedTab === "categories"
+                ? _c("Content")
                 : _vm.selectedTab === "content"
                 ? _c("Content")
                 : _vm.selectedTab === "contact"
@@ -49743,6 +50183,405 @@ var render = function () {
   )
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Partials/Categories.vue?vue&type=template&id=3c84da80&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Partials/Categories.vue?vue&type=template&id=3c84da80& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass:
+        "bg-white overflow-hidden shadow-xl px-4 py-4 w-3/4   sm:rounded-lg",
+    },
+    [
+      _c("div", { staticClass: "flex justify-between items-center " }, [
+        _c("h1", { staticClass: "text-xl text-gray-800  font-bold " }, [
+          _vm._v("Add Bio"),
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "w-10 h-10 flex items-center justify-center rounded-full  bg-brand text-white cursor-pointer ",
+            on: {
+              click: function ($event) {
+                _vm.showModal = "bio"
+              },
+            },
+          },
+          [
+            _c(
+              "svg",
+              {
+                staticClass: "w-6 h-6",
+                attrs: {
+                  xmlns: "http://www.w3.org/2000/svg",
+                  fill: "none",
+                  viewBox: "0 0 24 24",
+                  "stroke-width": "1.5",
+                  stroke: "currentColor",
+                },
+              },
+              [
+                _c("path", {
+                  attrs: {
+                    "stroke-linecap": "round",
+                    "stroke-linejoin": "round",
+                    d: "M12 4.5v15m7.5-7.5h-15",
+                  },
+                }),
+              ]
+            ),
+          ]
+        ),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "my-4" }, [
+        _c("div", { staticClass: " " }, [
+          _vm.categories
+            ? _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-6 mb-3" }, [
+                  _c("div", { staticClass: "p-3 border rounded-lg relative" }, [
+                    _c("h2", { staticClass: "text-2xl text-gray-800 mb-2" }, [
+                      _vm._v(_vm._s(_vm.categories.name)),
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "absolute top-2 right-2 text-gray-400 cursor-pointer",
+                        on: {
+                          click: function ($event) {
+                            return _vm.clickTool(_vm.categories.id)
+                          },
+                        },
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "w-6 h-6",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              fill: "none",
+                              viewBox: "0 0 24 24",
+                              "stroke-width": "1.5",
+                              stroke: "currentColor",
+                            },
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                "stroke-linecap": "round",
+                                "stroke-linejoin": "round",
+                                d: "M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z",
+                              },
+                            }),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm.isOpenTool === _vm.categories.id
+                          ? _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "w-40 p-3 absolute  right-0 rounded-md bg-white text-gray-700 ",
+                              },
+                              [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "cursor-pointer hover:text-red-700",
+                                    on: {
+                                      click: function ($event) {
+                                        return _vm.updateBio(_vm.categories)
+                                      },
+                                    },
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                    Update categories\n                                "
+                                    ),
+                                  ]
+                                ),
+                              ]
+                            )
+                          : _vm._e(),
+                      ]
+                    ),
+                  ]),
+                ]),
+              ])
+            : _c("div", [
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "flex flex-col justify-center gap-2 items-center py-4 text-gray-500  ",
+                    },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "w-14",
+                          attrs: {
+                            xmlns: "http://www.w3.org/2000/svg",
+                            fill: "none",
+                            viewBox: "0 0 24 24",
+                            "stroke-width": "1.5",
+                            stroke: "currentColor",
+                          },
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              "stroke-linecap": "round",
+                              "stroke-linejoin": "round",
+                              d: "m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9",
+                            },
+                          }),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "h2",
+                        { staticClass: "text-2xl text-gray-500 font-medium" },
+                        [_vm._v("No Data Found")]
+                      ),
+                    ]
+                  ),
+                ]),
+              ]),
+        ]),
+        _vm._v(" "),
+        _vm.showModal === "categories"
+          ? _c("div", { staticClass: "modal" }, [
+              _c("div", {
+                staticClass: "modal-overlay",
+                on: { click: _vm.closeModal },
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "mb-6" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass:
+                        "block mb-2 text-sm font-medium text-gray-900 dark:text-white",
+                      attrs: { for: "title" },
+                    },
+                    [_vm._v("Title")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.categories,
+                        expression: "categories",
+                      },
+                    ],
+                    staticClass:
+                      "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                    attrs: {
+                      type: "title",
+                      id: "title",
+                      placeholder: "Enter Title",
+                      required: "",
+                    },
+                    domProps: { value: _vm.categories },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.categories = $event.target.value
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", {}, [
+                  !_vm.isUpdate
+                    ? _c(
+                        "button",
+                        {
+                          staticClass:
+                            "text-white flex items-center justify-center gap-4  bg-brand hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 h-12  text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+                          attrs: { type: "button" },
+                          on: { click: _vm.uploadBioFiles },
+                        },
+                        [
+                          _vm._v(
+                            "\n                        Submit\n                        "
+                          ),
+                          _vm.isLoading
+                            ? _c(
+                                "svg",
+                                {
+                                  attrs: {
+                                    version: "1.1",
+                                    id: "L9",
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    wodth: "30",
+                                    height: "30",
+                                    "xmlns:xlink":
+                                      "http://www.w3.org/1999/xlink",
+                                    x: "0px",
+                                    y: "0px",
+                                    viewBox: "0 0 100 100",
+                                    "enable-background": "new 0 0 0 0",
+                                    "xml:space": "preserve",
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "path",
+                                    {
+                                      attrs: {
+                                        fill: "#fff",
+                                        d: "M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50",
+                                      },
+                                    },
+                                    [
+                                      _c("animateTransform", {
+                                        attrs: {
+                                          attributeName: "transform",
+                                          attributeType: "XML",
+                                          type: "rotate",
+                                          dur: "1s",
+                                          from: "0 50 50",
+                                          to: "360 50 50",
+                                          repeatCount: "indefinite",
+                                        },
+                                      }),
+                                    ],
+                                    1
+                                  ),
+                                ]
+                              )
+                            : _vm._e(),
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isUpdate
+                    ? _c(
+                        "button",
+                        {
+                          staticClass:
+                            "text-white flex items-center justify-center gap-4  bg-brand hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 h-12  text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.updateBioFiles(_vm.bioItems.id)
+                            },
+                          },
+                        },
+                        [
+                          _vm._v(
+                            "\n                        Update\n                        "
+                          ),
+                          _vm.isLoading
+                            ? _c(
+                                "svg",
+                                {
+                                  attrs: {
+                                    version: "1.1",
+                                    id: "L9",
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    wodth: "30",
+                                    height: "30",
+                                    "xmlns:xlink":
+                                      "http://www.w3.org/1999/xlink",
+                                    x: "0px",
+                                    y: "0px",
+                                    viewBox: "0 0 100 100",
+                                    "enable-background": "new 0 0 0 0",
+                                    "xml:space": "preserve",
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "path",
+                                    {
+                                      attrs: {
+                                        fill: "#fff",
+                                        d: "M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50",
+                                      },
+                                    },
+                                    [
+                                      _c("animateTransform", {
+                                        attrs: {
+                                          attributeName: "transform",
+                                          attributeType: "XML",
+                                          type: "rotate",
+                                          dur: "1s",
+                                          from: "0 50 50",
+                                          to: "360 50 50",
+                                          repeatCount: "indefinite",
+                                        },
+                                      }),
+                                    ],
+                                    1
+                                  ),
+                                ]
+                              )
+                            : _vm._e(),
+                        ]
+                      )
+                    : _vm._e(),
+                ]),
+              ]),
+            ])
+          : _vm._e(),
+      ]),
+    ]
+  )
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-6" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            "block mb-2 text-sm font-medium text-gray-900 dark:text-white",
+          attrs: { for: "message" },
+        },
+        [_vm._v("Your\n                        message")]
+      ),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -65537,6 +66376,8 @@ var map = {
 	"./Partials/Banner.vue": "./resources/js/Pages/Partials/Banner.vue",
 	"./Partials/Bio": "./resources/js/Pages/Partials/Bio.vue",
 	"./Partials/Bio.vue": "./resources/js/Pages/Partials/Bio.vue",
+	"./Partials/Categories": "./resources/js/Pages/Partials/Categories.vue",
+	"./Partials/Categories.vue": "./resources/js/Pages/Partials/Categories.vue",
 	"./Partials/Contact-us": "./resources/js/Pages/Partials/Contact-us.vue",
 	"./Partials/Contact-us.vue": "./resources/js/Pages/Partials/Contact-us.vue",
 	"./Partials/Content": "./resources/js/Pages/Partials/Content.vue",
