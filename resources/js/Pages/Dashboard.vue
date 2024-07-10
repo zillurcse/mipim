@@ -2,7 +2,7 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                MIPIM - Dashboard 
+                MIPIM - Dashboard
             </h2>
         </template>
 
@@ -32,6 +32,13 @@
                                 <li>
                                     <a href="#"
                                         class="inline-flex items-center px-4 py-3 text-base no-underline text-gray-500 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
+                                        @click="selectedTab = 'categories'" :class="{ 'active': selectedTab === 'categories' }">
+                                        Categories
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#"
+                                        class="inline-flex items-center px-4 py-3 text-base no-underline text-gray-500 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
                                         @click="selectedTab = 'content'"
                                         :class="{ 'active': selectedTab === 'content' }">
                                         Content
@@ -54,6 +61,7 @@
                     </div>
                     <Bio v-if="selectedTab === 'bio'" />
                     <Banner v-else-if="selectedTab === 'banner'" />
+                    <Content v-else-if="selectedTab === 'categories'" />
                     <Content v-else-if="selectedTab === 'content'" />
                     <contact-us v-else-if="selectedTab === 'contact'" />
                 </div>
@@ -131,13 +139,13 @@ export default {
         }
     },
     async mounted() {
-        this.getBannerData()
-        this.getContentData()
+        await this.getBannerData()
+        await this.getContentData()
     },
 
     methods: {
         async getBannerData() {
-            
+
             // this.$inertia.get('/api/banner', {}, {
             //     preserveState: true, // Optional, preserves the state of the page (useful for partial reloads)
             //     onSuccess: (response) => {
@@ -175,10 +183,10 @@ export default {
                 .finally(() => {
 
                 })
-      
+
         },
 
-       
+
         async getContentData() {
             await axios.get('/api/content', {
                 headers: {

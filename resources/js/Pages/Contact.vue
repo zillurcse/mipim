@@ -612,10 +612,6 @@ export default {
                     "name": "Ireland"
                 },
                 {
-                    "code": "+972",
-                    "name": "Israel"
-                },
-                {
                     "code": "+39",
                     "name": "Italy"
                 },
