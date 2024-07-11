@@ -205,7 +205,7 @@ export default {
 
     async mounted() {
         await this.getContentData();
-        await this.getBioData()
+        await this.getBioData();
 
     },
     methods: {
@@ -213,14 +213,14 @@ export default {
             await axios.get('/api/bio-container')
                 .then(response => {
 
-                    if (response.status == 200) {
+                    if (response.status === 200) {
                         this.bioItems = response.data.data.items
 
                     }
 
                 })
                 .catch(error => {
-                    if (error.response.status == 422) {
+                    if (error.response.status === 422) {
                         this.errors = error.response.data.errors;
                     } else {
                         // this.toastMessage('error', error, 'check', '', 'times')

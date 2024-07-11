@@ -75,5 +75,6 @@ Route::post('/sanctum/token', [\App\Http\Controllers\BannerController::class, 't
 Route::get('/web/banner', [\App\Http\Controllers\BannerController::class, 'index']);
 Route::get('/web/content', [\App\Http\Controllers\ContentController::class, 'index']);
 Route::get('/web/bio-container', [\App\Http\Controllers\BioContainerController::class, 'index']);
+Route::get('/web/category', [\App\Http\Controllers\CategoriesController::class, 'index']);
 
 Route::post('/web/contact-us', [\App\Http\Controllers\ContactUsController::class, 'store']);
