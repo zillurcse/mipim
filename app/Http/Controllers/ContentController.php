@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Content;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ContentController extends Controller
 {
@@ -15,7 +16,7 @@ class ContentController extends Controller
      */
     public function index()
     {
-        $data['items'] = Content::orderBy('order', 'asc')->get();
+        $data['items'] = Content::with('category')->orderBy('order', 'asc')->get();
 
         return response()->json([
             'status' => 'success',
@@ -43,30 +44,49 @@ class ContentController extends Controller
     public function store(Request $request)
     {
         $rules = [
+            'category_id' => 'required',
             'title' => 'required|string|max:255',
             'type' => 'required|string|max:255',
             'details' => 'nullable|string',
             'position' => 'nullable|integer',
+            'file' => 'nullable|file', // Ensure the file is actually a file
         ];
 
         // Validate the request
         $validatedData = $request->validate($rules);
 
+        $data = $validatedData;
+        $data['category_id'] = $validatedData['category_id'];
         $data['title'] = $validatedData['title'];
-        $data['details'] = $validatedData['details'];
-//        $data['date'] = $validatedData->date;
-        $data['type'] = $validatedData['type'];
-        $data['position'] = $validatedData['position'];
-        $path = $request->file('file')->storePublicly('public/content');
-        $data['file'] = 'https://mipim-file.s3.amazonaws.com/' . $path;
-        $Content = Content::create($data);
+
+        // Generate a unique slug
+        $slug = Str::slug($data['title']);
+        $originalSlug = $slug;
+        $counter = 1;
+
+        while (Content::where('slug', $slug)->exists()) {
+            $slug = $originalSlug . '-' . $counter;
+            $counter++;
+        }
+
+        $data['slug'] = $slug;
+
+        // Handle file upload if it exists
+        if ($request->hasFile('file')) {
+            $path = $request->file('file')->storePublicly('public/content');
+            $data['file'] = 'https://mipim-file.s3.amazonaws.com/' . $path;
+        }
+
+        // Create the content
+        $content = Content::create($data);
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Content has been updated',
-            'data' => $Content
+            'message' => 'Content has been created',
+            'data' => $content
         ]);
     }
+
 
     /**
      * Display the specified resource.

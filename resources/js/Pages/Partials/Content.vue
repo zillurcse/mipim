@@ -82,6 +82,13 @@
                 <div class="modal-content">
                     <div class="mb-6">
                         <label for="type"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                        <select id="category" v-model="category_id"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="0">Select category</option>
+                            <option v-for="category in categoriesItems" :value="category.id">{{ category.name }}</option>
+                        </select>
+                        <label for="type"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
                         <select id="type" v-model="type" @change="updateAcceptAttribute"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -263,6 +270,7 @@ export default {
             drag: false,
 
             contentItems: [],
+            categoriesItems: [],
             selectedTab: 'bio',
             showModal: '',
 
@@ -270,6 +278,7 @@ export default {
             isLoading: false,
             isOpenTool: null,
 
+            category_id: '0', // Store the title input value
             title: '', // Store the title input value
             link: '', // Store the link input value
             type: 'Select Type', // Store the type input value
@@ -294,8 +303,8 @@ export default {
         }
     },
     async mounted() {
-
-        this.getContentData()
+        await this.getContentData()
+        await this.getCategoriesData()
 
     },
 
@@ -369,6 +378,26 @@ export default {
                 })
                 .catch(error => {
                     if (error.response.status == 422) {
+                        this.errors = error.response.data.errors;
+                    } else {
+                        // this.toastMessage('error', error, 'check', '', 'times')
+                        console.log(error);
+                    }
+                })
+                .finally(() => {
+
+                })
+        },
+        async getCategoriesData() {
+            await axios.get('/api/categories')
+                .then(response => {
+                    if (response.status === 200) {
+                        this.categoriesItems = response.data.data.items
+                    }
+
+                })
+                .catch(error => {
+                    if (error.response.status === 422) {
                         this.errors = error.response.data.errors;
                     } else {
                         // this.toastMessage('error', error, 'check', '', 'times')
@@ -489,6 +518,7 @@ export default {
                 this.isLoading = true;
                 let formData = new FormData();
                 formData.append('title', this.title);
+                formData.append('category_id', this.category_id);
                 formData.append('link', this.link);
                 formData.append('type', this.type);
                 formData.append('date', this.date);
