@@ -50,6 +50,7 @@ class ContentController extends Controller
             'details' => 'nullable|string',
             'position' => 'nullable|integer',
             'file' => 'nullable|file', // Ensure the file is actually a file
+            'social_links' => 'required|json',
         ];
 
         // Validate the request
@@ -58,6 +59,8 @@ class ContentController extends Controller
         $data = $validatedData;
         $data['category_id'] = $validatedData['category_id'];
         $data['title'] = $validatedData['title'];
+        $data['social_links'] = $validatedData['social_links'];
+
 
         // Generate a unique slug
         $slug = Str::slug($data['title']);
