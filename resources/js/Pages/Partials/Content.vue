@@ -81,13 +81,24 @@
                 <div class="modal-overlay" @click="closeModal"></div>
                 <div class="modal-content">
                     <div class="mb-6">
+                        <label for="title"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
+                        <input type="text" id="title" v-model="title"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Enter Title" required />
+                    </div>
+                    <div class="mb-6">
                         <label for="type"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
                         <select id="category" v-model="category_id"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="0">Select category</option>
-                            <option v-for="category in categoriesItems" :value="category.id">{{ category.name }}</option>
+                            <option v-for="category in categoriesItems" :value="category.id">{{ category.name }}
+                            </option>
                         </select>
+
+                    </div>
+                    <div class="mb-6">
                         <label for="type"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
                         <select id="type" v-model="type" @change="updateAcceptAttribute"
@@ -105,54 +116,54 @@
 
 
                         </select>
-                        <div class="mb-6 mt-6">
-                            <label for="#" class="text-sm text-gray-600 block mb-1 font-semibold">Choose
-                                Content</label>
+                    </div>
+                    <div class="mb-6 mt-6">
+                        <label for="#" class="text-sm text-gray-600 block mb-1 font-semibold">Choose
+                            Content</label>
 
-                            <div class="flex items-center justify-center w-full">
+                        <div class="flex items-center justify-center w-full">
 
-                                <div v-if="uploading">
-                                    <p>Uploading...</p>
-                                    <progress :value="progress" max="100"></progress>
-                                    <p>{{ progress }}%</p>
+                            <div v-if="uploading">
+                                <p>Uploading...</p>
+                                <progress :value="progress" max="100"></progress>
+                                <p>{{ progress }}%</p>
+                            </div>
+                            <div v-if="contentPreview && (type === 'Images' || type === 'Speaker' || type === 'URLs' || type === 'Video (YouTube)' || type === 'Social links')"
+                                class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                <img :src="contentPreview" alt="" class="w-1/2 mx-auto object-cover">
+                            </div>
+                            <div v-else-if="contentPreview && (type === 'PDF' || type === 'URLs' || type === 'Video (YouTube)' || type === 'Social links')"
+                                class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                <div class='embed-responsive h-full'>
+                                    <embed :src="contentPreview" type="application/pdf" width="100%" height="100%" />
                                 </div>
-                                <div v-if="contentPreview && (type === 'Images' || type === 'Speaker' || type === 'URLs' || type === 'Video (YouTube)' || type === 'Social links')"
-                                    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                    <img :src="contentPreview" alt="" class="w-1/2 mx-auto object-cover">
+                            </div>
+                            <div v-else-if="contentPreview && (type === 'Documents (word, ppt, excel)' || type === 'URLs' || type === 'Video (YouTube)' || type === 'Social links')"
+                                class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                <div class="flex flex-col gap-3 justify-center items-center text-gray-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                    </svg>
+
+                                    <p class="text-2xl text-gray-700 capitalize">document uploaded successfully</p>
                                 </div>
-                                <div v-else-if="contentPreview && (type === 'PDF' || type === 'URLs' || type === 'Video (YouTube)' || type === 'Social links')"
-                                    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                    <div class='embed-responsive h-full'>
-                                        <embed :src="contentPreview" type="application/pdf" width="100%"
-                                            height="100%" />
-                                    </div>
-                                </div>
-                                <div v-else-if="contentPreview && (type === 'Documents (word, ppt, excel)' || type === 'URLs' || type === 'Video (YouTube)' || type === 'Social links')"
-                                    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                    <div class="flex flex-col gap-3 justify-center items-center text-gray-600">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                                        </svg>
-
-                                        <p class="text-2xl text-gray-700 capitalize">document uploaded successfully</p>
-                                    </div>
-                                </div>
+                            </div>
 
 
 
 
-                                <label for="file" v-else
-                                    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                        </svg>
-                                        <!-- <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
+                            <label for="file" v-else
+                                class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                    <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                    </svg>
+                                    <!-- <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
                                                 class="font-semibold">Click to upload</span> or drag and
                                             drop
                                         </p>
@@ -160,28 +171,19 @@
                                             JPG or
                                             GIF
                                             (MAX. 800x400px)</p> -->
-                                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
-                                                class="font-semibold">Click to upload</span> or drag and drop</p>
-                                        <p class="text-xs text-gray-500 dark:text-gray-400">Allowed types:
-                                            {{ acceptedTypes }}</p>
-                                    </div>
-                                    <input id="file" type="file" class="hidden" @change="handleContentFileChange" />
-                                </label>
-                            </div>
-                            <p class="text-red-500" v-if="fileTypeError">{{ fileTypeError }}</p>
-
-
+                                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
+                                            class="font-semibold">Click to upload</span> or drag and drop</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">Allowed types:
+                                        {{ acceptedTypes }}</p>
+                                </div>
+                                <input id="file" type="file" class="hidden" @change="handleContentFileChange" />
+                            </label>
                         </div>
+                        <p class="text-red-500" v-if="fileTypeError">{{ fileTypeError }}</p>
 
 
                     </div>
-                    <div class="mb-6">
-                        <label for="title"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-                        <input type="title" id="title" v-model="title"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Enter Title" required />
-                    </div>
+
                     <div class="mb-6" v-if="type === 'Speaker'">
                         <label for="title"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
@@ -213,8 +215,35 @@
                             placeholder="Write your description here..."></textarea>
 
                     </div>
-
-                    <div class="">
+                    <div class="mb-6">
+                        <label for="facebook"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Facebook</label>
+                        <input type="text" id="facebook" v-model="facebook"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Enter facebook link" required />
+                    </div>
+                    <div class="mb-6">
+                        <label for="twitter"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Twitter</label>
+                        <input type="text" id="twitter" v-model="twitter"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Enter twitter link" required />
+                    </div>
+                    <div class="mb-6">
+                        <label for="linkedin"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Linkedin</label>
+                        <input type="text" id="linkedin" v-model="linkedin"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Enter linkedin link" required />
+                    </div>
+                    <div class="mb-6">
+                        <label for="instagram"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Instagram</label>
+                        <input type="text" id="instagram" v-model="instagram"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Enter instagram link" required />
+                    </div>
+                    <div class="mb-6">
                         <button type="button" @click="uploadContentFiles" v-if="!isUpdate"
                             class="text-white flex items-center justify-center gap-4  bg-brand hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 h-12  text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Submit
@@ -242,6 +271,8 @@
                             </svg>
                         </button>
                     </div>
+
+
                 </div>
 
             </div>
@@ -291,6 +322,10 @@ export default {
             details: '',
             date: null,
             position: '',
+            facebook: '',
+            twitter: '',
+            linkedin: '',
+            instagram: '',
             updatedId: null,
 
             uploading: false,
@@ -514,6 +549,12 @@ export default {
                     });
                     return false
                 }
+                const socialLinks = {
+                    facebook: this.facebook,
+                    twitter: this.twitter,
+                    linkedin: this.linkedin,
+                    instagram: this.instagram,
+                };
                 // Create FormData and append all data
                 this.isLoading = true;
                 let formData = new FormData();
@@ -524,9 +565,8 @@ export default {
                 formData.append('date', this.date);
                 formData.append('details', this.details);
                 formData.append('position', this.position);
-
                 formData.append('file', this.contentFile);
-
+                formData.append('social_links', JSON.stringify(socialLinks));
                 // Make POST request to upload the file and data
                 const response = await axios.post('/api/content', formData);
 
