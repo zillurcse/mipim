@@ -35,6 +35,9 @@ Route::get('/contact', function () {
 Route::get('/categorie', function () {
     return Inertia::render('Categorie-page');
 });
+Route::get('/project/{slug}', function () {
+    return Inertia::render('Project');
+});
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
