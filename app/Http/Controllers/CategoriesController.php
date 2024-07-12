@@ -122,7 +122,7 @@ class CategoriesController extends Controller
 
     public function update_order(Request $request)
     {
-        $contents = $request->get('contents');
+        $contents = $request->get('categories');
 
         foreach ($contents as $index => $content) {
             $sp = Category::find($content['id']);
