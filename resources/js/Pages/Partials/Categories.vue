@@ -16,34 +16,39 @@
         <div class="my-4">
 
             <div class=" ">
-                <div v-if="categoriesData" class="row">
-                    <div class="col-md-6 mb-3" v-for="categorie in categoriesData " :key="categorie.id">
-                        <div class="p-3 border rounded-lg relative">
-                            <h2 class="text-2xl text-gray-800 mb-2">{{ categorie.name }}</h2>
+                <div v-if="categoriesData.length > 0" class="row">
+                    <div class="col-md-6 mb-3" v-for="(categorie, index) in categoriesData " :key="categorie.id">
+                        <drop :tag="'span'" @dragover="over = true" @dragleave="over = false"
+                            @drop="handleDrop(index, ...arguments)">
 
-                            <div class="absolute top-2 right-2 text-gray-400 cursor-pointer"
-                                @click="clickTool(categorie.id)">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                                </svg>
-                                <div class="w-40 p-3 absolute  right-0 rounded-md bg-white text-gray-700 "
-                                    v-if="isOpenTool === categorie.id">
-                                    <button class="cursor-pointer hover:text-red-700"
-                                        @click="openCategories(categorie)">
-                                        Update categories
-                                    </button>
+                            <drag class="cursor-pointer h-full" :transfer-data="index" @dragstart="is_dragging = true"
+                                @dragend="is_dragging = false">
+                                <div class="p-3 border rounded-lg relative h-full">
+                                    <h2 class="text-2xl text-gray-800 mb-2">{{ categorie.name }}</h2>
+
+                                    <div class="absolute top-2 right-2 text-gray-400 cursor-pointer"
+                                        @click="clickTool(categorie.id)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                                        </svg>
+                                        <div class="w-52  z-10  absolute  right-0 rounded-md bg-white  text-gray-700 shadow-sm"
+                                            v-if="isOpenTool === categorie.id">
+                                            <button class="cursor-pointer hover:text-red-700 p-2 border-b w-full"
+                                                @click="openCategories(categorie)">
+                                                Update categories
+                                            </button>
+                                            <button class="cursor-pointer hover:text-red-700 p-2 w-full"
+                                                @click="deleteCategoryItem(categorie.id)">
+                                                Delete categories
+                                            </button>
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <div class="w-40 p-3 absolute  right-0 rounded-md bg-white text-gray-700 "
-                                    v-if="isOpenTool === categorie.id">
-                                    <button class="cursor-pointer hover:text-red-700"
-                                        @click="deleteCategoryItem(categorie.id)">
-                                        Delete categories
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                            </drag>
+                        </drop>
                     </div>
                 </div>
                 <div v-else>
@@ -116,8 +121,12 @@
 
 <script>
 import axios from 'axios';
+import { Drag, Drop } from 'vue-drag-drop';
 
 export default {
+    components: {
+        Drag, Drop,
+    },
     data() {
         return {
 
@@ -130,7 +139,9 @@ export default {
             isLoading: false,
             isOpenTool: null,
             isUpdate: false,
-
+            is_dragging: false,
+            over: false,
+            drag: false,
 
 
             tempAttachments: [],
@@ -268,6 +279,39 @@ export default {
                 this.isLoading = false;
                 // Add specific error handling as needed
             }
+        },
+        handleDrop(to_index, from_index) {
+            var temp = this.categoriesData[to_index];
+
+            this.categoriesData[to_index] = this.categoriesData[from_index];
+            this.categoriesData[from_index] = temp;
+            this.over = false;
+            console.log(temp, this.categoriesData);
+            axios.post('/api/categories/update_order', { categories: this.categoriesData })
+                .then(res => {
+                    console.log(res);
+                    this.$toasted.success(res.data.message, {
+                        theme: "toasted-primary",
+                        position: "top-center",
+                        duration: 5000
+                    });
+                    this.getCategoriesData()
+
+                })
+                .catch(err => {
+                    this.$toasted.show(err.response.data.message, {
+                        theme: "toasted-primary",
+                        position: "top-center",
+                        duration: 5000
+                    });
+
+
+                })
+                .finally(res => {
+                    console.log(res);
+
+                })
+
         },
 
         clickTool(id) {
