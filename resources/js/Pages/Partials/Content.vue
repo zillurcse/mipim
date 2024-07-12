@@ -28,12 +28,14 @@
                                         <div class='embed-responsive h-full' v-if="item.type === 'PDF'">
                                             <embed :src="item.file" type="application/pdf" width="100%" height="100%" />
                                         </div>
+
                                         <VueDocPreview :value="item.file" type="office"
                                             v-else-if="item.type === 'Documents (word, ppt, excel)'" />
 
                                         <v-lazy-image style="border-radius: 9px 9px 0px 0px" :src="item.file" v-else
                                             class="object-cover"
                                             src-placeholder="https://d30komtae77sjh.cloudfront.net/assets/svgs/loading-image.svg" />
+
                                         <div class="absolute top-2 right-2 text-gray-400 cursor-pointer"
                                             @click="clickTool(item.id)">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -59,6 +61,7 @@
                                     <h2 class="text-xl text-gray-800 font-semibold">{{ item.title }}</h2>
                                     <h3 class="text-lg text-gray-700 font-medium">{{ item.type }}</h3>
                                     <h4 class="text-base text-gray-700 font-medium break-words">{{ item.link }}</h4>
+                                    <div v-html="item.details"></div>
                                 </div>
                             </drag>
                         </drop>
@@ -88,12 +91,10 @@
                             placeholder="Enter Title" required />
                     </div>
                     <div class="mb-6">
-                        <quill-editor v-model="content"
-                                      ref="myQuillEditor"
-                                      :options="editorOption"
-                                      @blur="onEditorBlur($event)"
-                                      @focus="onEditorFocus($event)"
-                                      @ready="onEditorReady($event)">
+                        <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Description
+                        </label>
+                        <quill-editor v-model="details" ref="myQuillEditor" :options="editor_options">
                         </quill-editor>
                     </div>
                     <div class="mb-6">
@@ -102,7 +103,8 @@
                         <select id="category" v-model="category_id"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="0">Select category</option>
-                            <option v-for="category in categoriesItems" :value="category.id">{{ category.name }}
+                            <option v-for="category in categoriesItems" :value="category.id" :key="category.id">
+                                {{ category.name }}
                             </option>
                         </select>
 
@@ -121,9 +123,6 @@
                             <option value="URLs">URLs</option>
                             <option value="Images">Images</option>
                             <option value="Speaker">Speaker</option>
-
-
-
                         </select>
                     </div>
                     <div class="mb-6 mt-6">
@@ -214,7 +213,7 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Enter position" required />
                     </div>
-                    <div class="mb-6" v-if="type === 'Speaker'">
+                    <!-- <div class="mb-6" v-if="type === 'Speaker'">
 
                         <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Description
@@ -223,7 +222,7 @@
                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Write your description here..."></textarea>
 
-                    </div>
+                    </div> -->
                     <div class="mb-6">
                         <label for="facebook"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Facebook</label>
@@ -306,6 +305,22 @@ export default {
     },
     data() {
         return {
+            editor_options: {
+                modules: {
+                    'toolbar': [
+                        [{ 'size': [] }],
+                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{ 'color': [] }, { 'background': [] }],
+                        [{ 'script': 'super' }, { 'script': 'sub' }],
+                        [{ 'header': '1' }, { 'header': '2' }, 'blockquote', 'code-block'],
+                        [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+                        [{ 'direction': 'rtl' }, { 'align': [] }],
+                        ['link', 'image', 'formula'],
+                        ['clean']
+                    ],
+                },
+            },
             is_dragging: false,
             isUpdate: false,
             over: false,
@@ -387,10 +402,10 @@ export default {
             this.contentItems[to_index] = this.contentItems[from_index];
             this.contentItems[from_index] = temp;
             this.over = false;
-            console.log(temp, this.contentItems);
+
             axios.post('/api/content/update/order', { contents: this.contentItems })
                 .then(res => {
-                    console.log(res);
+
                     this.$toasted.success(res.data.message, {
                         theme: "toasted-primary",
                         position: "top-center",
@@ -721,6 +736,10 @@ export default {
 </script>
 
 <style>
+.ql-container.ql-snow {
+    min-height: 200px;
+}
+
 .is_dragging {
     overflow: hidden;
     border: 1px dotted #9A5626 !important;
