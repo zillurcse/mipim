@@ -143,9 +143,9 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         try {
-            $content = Category::find($id);
+            $category = Category::find($id);
 
-            $content->delete();
+            $category->delete();
 
             return response()->json(['message' => 'Category deleted successfully'], 200);
         } catch (\Exception $e) {

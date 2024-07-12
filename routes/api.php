@@ -56,15 +56,14 @@ Route::group(['middleware' => ['api']], function () {
     Route::get('/content', [\App\Http\Controllers\ContentController::class, 'index']);
     Route::post('/content', [\App\Http\Controllers\ContentController::class, 'store']);
     Route::post('/content/{id}', [\App\Http\Controllers\ContentController::class, 'update']);
-    Route::post('/content/update_order', [\App\Http\Controllers\ContentController::class, 'update_order']);
+    Route::post('/content/update/order', [\App\Http\Controllers\ContentController::class, 'update_order']);
+    Route::delete('/content/{id}', [\App\Http\Controllers\ContentController::class, 'destroy']);
 
     Route::get('/categories', [\App\Http\Controllers\CategoriesController::class, 'index']);
     Route::post('/categories', [\App\Http\Controllers\CategoriesController::class, 'store']);
     Route::post('/categories/{id}', [\App\Http\Controllers\CategoriesController::class, 'update']);
     Route::post('/categories/update_order', [\App\Http\Controllers\CategoriesController::class, 'update_order']);
-
-
-    Route::delete('/content/{id}', [\App\Http\Controllers\ContentController::class, 'destroy']);
+    Route::delete('/categories/{id}', [\App\Http\Controllers\CategoriesController::class, 'destroy']);
 
     Route::get('/bio-container', [\App\Http\Controllers\BioContainerController::class, 'index']);
     Route::post('/bio-container', [\App\Http\Controllers\BioContainerController::class, 'store']);

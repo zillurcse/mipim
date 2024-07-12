@@ -88,6 +88,15 @@
                             placeholder="Enter Title" required />
                     </div>
                     <div class="mb-6">
+                        <quill-editor v-model="content"
+                                      ref="myQuillEditor"
+                                      :options="editorOption"
+                                      @blur="onEditorBlur($event)"
+                                      @focus="onEditorFocus($event)"
+                                      @ready="onEditorReady($event)">
+                        </quill-editor>
+                    </div>
+                    <div class="mb-6">
                         <label for="type"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
                         <select id="category" v-model="category_id"
@@ -286,12 +295,14 @@ import VLazyImage from "v-lazy-image";
 import { Drag, Drop } from 'vue-drag-drop';
 
 import VueDocPreview from 'vue-doc-preview'
+import { quillEditor } from 'vue-quill-editor'
 
 export default {
     components: {
         VLazyImage,
         Drag, Drop,
-        VueDocPreview
+        VueDocPreview,
+        quillEditor
     },
     data() {
         return {
@@ -377,7 +388,7 @@ export default {
             this.contentItems[from_index] = temp;
             this.over = false;
             console.log(temp, this.contentItems);
-            axios.post('/api/content/update_order', { contents: this.contentItems })
+            axios.post('/api/content/update/order', { contents: this.contentItems })
                 .then(res => {
                     console.log(res);
                     this.$toasted.success(res.data.message, {
@@ -444,9 +455,9 @@ export default {
                 })
         },
         updateOrder() {
-            axios.post('/api/content/update_order', { contents: this.contentItems })
+            axios.post('/api/content/update/order', { contents: this.contentItems })
                 .then(res => {
-                    console.log(res);
+
                     this.$toasted.success(res.data.message, {
                         theme: "toasted-primary",
                         position: "top-center",

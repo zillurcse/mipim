@@ -198,6 +198,7 @@ export default {
         return {
             contentItems: [],
             bioItems: [],
+            categoryItems: [],
             modalShow: false,
             popupImg: null
         };
@@ -206,6 +207,7 @@ export default {
     async mounted() {
         await this.getContentData();
         await this.getBioData();
+        await this.getCategoryData();
 
     },
     methods: {
@@ -215,6 +217,28 @@ export default {
 
                     if (response.status === 200) {
                         this.bioItems = response.data.data.items
+
+                    }
+
+                })
+                .catch(error => {
+                    if (error.response.status === 422) {
+                        this.errors = error.response.data.errors;
+                    } else {
+                        // this.toastMessage('error', error, 'check', '', 'times')
+                        console.log(error);
+                    }
+                })
+                .finally(() => {
+
+                })
+        },
+        async getCategoryData() {
+            await axios.get('/api/web/category')
+                .then(response => {
+
+                    if (response.status === 200) {
+                        this.categoryItems = response.data.data.items
 
                     }
 

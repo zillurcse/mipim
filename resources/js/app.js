@@ -2,6 +2,11 @@ require('./bootstrap');
 
 // Import modules...
 import Vue from 'vue';
+import VueQuillEditor from 'vue-quill-editor'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+
 import {
     App as InertiaApp,
     plugin as InertiaPlugin
@@ -9,6 +14,7 @@ import {
 import PortalVue from 'portal-vue';
 import Toasted from 'vue-toasted';
 Vue.use(Toasted)
+Vue.use(VueQuillEditor, /* { default global options } */)
 Vue.mixin({
     methods: {
         route

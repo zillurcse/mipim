@@ -35,6 +35,13 @@
                                         Update categories
                                     </button>
                                 </div>
+                                <div class="w-40 p-3 absolute  right-0 rounded-md bg-white text-gray-700 "
+                                    v-if="isOpenTool === categorie.id">
+                                    <button class="cursor-pointer hover:text-red-700"
+                                        @click="deleteCategoryItem(categorie.id)">
+                                        Delete categories
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -213,6 +220,28 @@ export default {
             this.isUpdate = true
             this.categories = item.name;
 
+        },
+
+
+        deleteCategoryItem(id) {
+            // Send a DELETE request to the backend with the item's ID
+            axios
+                .delete(`/api/categories/${id}`)
+                .then((response) => {
+                    // console.log(response.data.message);
+                    this.getCategoriesData();
+                    this.$toasted.show(response.data.message, {
+                        theme: "toasted-primary",
+                        position: "top-center",
+                        duration: 5000
+                    });
+                    // Assuming you want to remove the item from the frontend after successful deletion
+                    // You can trigger a method to refresh the list of items or remove the deleted item from the UI
+                })
+                .catch((error) => {
+                    console.error("Error deleting resource:", error);
+                    // Handle error if needed
+                });
         },
 
         async updateCategories(id) {
