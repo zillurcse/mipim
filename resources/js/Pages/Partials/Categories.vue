@@ -286,7 +286,7 @@ export default {
             this.categoriesData[to_index] = this.categoriesData[from_index];
             this.categoriesData[from_index] = temp;
             this.over = false;
-            console.log(temp, this.categoriesData);
+
             axios.post('/api/categories/update/order', { categories: this.categoriesData })
                 .then(res => {
                     console.log(res);
