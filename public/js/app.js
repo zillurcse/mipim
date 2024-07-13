@@ -58780,7 +58780,7 @@ var render = function () {
                                 attrs: {
                                   href: "/",
                                   target: "_self",
-                                  title: "",
+                                  title: "Home",
                                 },
                               },
                               [_vm._v("Home")]
@@ -58800,7 +58800,7 @@ var render = function () {
                                 attrs: {
                                   href: "/about",
                                   target: "_self",
-                                  title: "",
+                                  title: "About",
                                 },
                               },
                               [_vm._v("About")]
@@ -58820,7 +58820,7 @@ var render = function () {
                                 attrs: {
                                   href: "/contact",
                                   target: "_self",
-                                  title: "",
+                                  title: "Contact us",
                                 },
                               },
                               [_vm._v("Contact us")]
@@ -58840,10 +58840,10 @@ var render = function () {
                                 attrs: {
                                   href: "/categorie",
                                   target: "_self",
-                                  title: "",
+                                  title: "Projects",
                                 },
                               },
-                              [_vm._v(" Categorie")]
+                              [_vm._v("Projects")]
                             ),
                           ],
                           1

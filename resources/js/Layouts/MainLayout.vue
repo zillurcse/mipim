@@ -27,16 +27,16 @@
                         <div class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             <ul class="navbar-nav mb-2 mb-lg-0 gap-4 text-uppercase">
                                 <li class="nav-item">
-                                    <Link class="nav-link active" href="/" target="_self" title="">Home</Link>
+                                    <Link class="nav-link active" href="/" target="_self" title="Home">Home</Link>
                                 </li>
                                 <li class="nav-item">
-                                    <Link class="nav-link " href="/about" target="_self" title="">About</Link>
+                                    <Link class="nav-link " href="/about" target="_self" title="About">About</Link>
                                 </li>
                                 <li class="nav-item">
-                                    <Link class="nav-link " href="/contact" target="_self" title="">Contact us</Link>
+                                    <Link class="nav-link " href="/contact" target="_self" title="Contact us">Contact us</Link>
                                 </li>
                                 <li class="nav-item">
-                                    <Link class="nav-link " href="/categorie" target="_self" title=""> Categorie</Link>
+                                    <Link class="nav-link " href="/categorie" target="_self" title="Projects">Projects</Link>
                                 </li>
                             </ul>
                         </div>

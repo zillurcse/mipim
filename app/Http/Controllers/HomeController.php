@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\BioContainer;
 use App\Models\Content;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class HomeController extends Controller
