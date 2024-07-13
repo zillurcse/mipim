@@ -297,6 +297,7 @@ import VueDocPreview from 'vue-doc-preview'
 import { quillEditor } from 'vue-quill-editor'
 
 export default {
+    // props:['content'],
     components: {
         VLazyImage,
         Drag, Drop,
@@ -366,6 +367,8 @@ export default {
     async mounted() {
         await this.getContentData()
         await this.getCategoriesData()
+
+
 
     },
 

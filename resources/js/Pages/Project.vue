@@ -136,6 +136,9 @@ import axios from "axios";
 
 export default {
     name: "Project",
+    props: {
+        content: Object,
+    },
     components: {
         MainLayoutVue
     },
@@ -144,9 +147,7 @@ export default {
             categoryItems: [],
         }
     },
-    async mounted() {
-        await this.getCategoryData();
-
+    mounted() {
     },
 
     methods: {

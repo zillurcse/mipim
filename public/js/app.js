@@ -3511,15 +3511,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue */ "./node_modules/@inertiajs/inertia-vue/dist/index.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var _inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia-vue */ "./node_modules/@inertiajs/inertia-vue/dist/index.js");
 //
 //
 //
@@ -3633,66 +3625,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    bannerItems: Object
+  },
   components: {
-    Link: _inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_1__.Link
+    Link: _inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_0__.Link
   },
   data: function data() {
-    return {
-      items: []
-    };
+    return {};
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _this.getBannerData();
-
-            case 1:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }))();
-  },
-  methods: {
-    getBannerData: function getBannerData() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return axios.get('/api/web/banner').then(function (response) {
-                  console.log();
-
-                  if (response.status == 200) {
-                    _this2.items = response.data.data.items;
-                  }
-                })["catch"](function (error) {
-                  if (error.response.status == 422) {
-                    _this2.errors = error.response.data.errors;
-                  } else {
-                    // this.toastMessage('error', error, 'check', '', 'times')
-                    console.log(error);
-                  }
-                })["finally"](function () {});
-
-              case 2:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
-    }
-  }
+  mounted: function mounted() {},
+  methods: {}
 });
 
 /***/ }),
@@ -8287,6 +8230,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  // props:['content'],
   components: {
     VLazyImage: (v_lazy_image__WEBPACK_IMPORTED_MODULE_1___default()),
     Drag: vue_drag_drop__WEBPACK_IMPORTED_MODULE_2__.Drag,
@@ -9996,6 +9940,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Project",
+  props: {
+    content: Object
+  },
   components: {
     MainLayoutVue: _Layouts_MainLayout_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
@@ -10004,42 +9951,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       categoryItems: []
     };
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return _this.getCategoryData();
-
-            case 2:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }))();
-  },
+  mounted: function mounted() {},
   methods: {
     getCategoryData: function getCategoryData() {
-      var _this2 = this;
+      var _this = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context.prev = _context.next) {
               case 0:
-                _context2.next = 2;
+                _context.next = 2;
                 return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/web/category').then(function (response) {
                   if (response.status === 200) {
-                    _this2.categoryItems = response.data.data.items;
+                    _this.categoryItems = response.data.data.items;
                   }
                 })["catch"](function (error) {
                   if (error.response.status === 422) {
-                    _this2.errors = error.response.data.errors;
+                    _this.errors = error.response.data.errors;
                   } else {
                     // this.toastMessage('error', error, 'check', '', 'times')
                     console.log(error);
@@ -10048,10 +9977,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
               case "end":
-                return _context2.stop();
+                return _context.stop();
             }
           }
-        }, _callee2);
+        }, _callee);
       }))();
     }
   }
@@ -10307,7 +10236,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     canLogin: Boolean,
     canRegister: Boolean,
     laravelVersion: String,
-    phpVersion: String
+    phpVersion: String,
+    bioItems: Object,
+    contentItems: Object,
+    bannerItems: Object
   },
   components: {
     Link: _inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_1__.Link,
@@ -10316,8 +10248,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      contentItems: [],
-      bioItems: [],
       categoryItems: [],
       modalShow: false,
       popupImg: null
@@ -10332,17 +10262,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _this.getContentData();
-
-            case 2:
-              _context.next = 4;
-              return _this.getBioData();
-
-            case 4:
-              _context.next = 6;
               return _this.getCategoryData();
 
-            case 6:
+            case 2:
             case "end":
               return _context.stop();
           }
@@ -10351,7 +10273,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: {
-    getBioData: function getBioData() {
+    getCategoryData: function getCategoryData() {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
@@ -10360,9 +10282,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_4__["default"].get('/api/bio-container').then(function (response) {
+                return axios__WEBPACK_IMPORTED_MODULE_4__["default"].get('/api/web/category').then(function (response) {
                   if (response.status === 200) {
-                    _this2.bioItems = response.data.data.items;
+                    _this2.categoryItems = response.data.data.items;
                   }
                 })["catch"](function (error) {
                   if (error.response.status === 422) {
@@ -10379,66 +10301,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee2);
-      }))();
-    },
-    getCategoryData: function getCategoryData() {
-      var _this3 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _context3.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_4__["default"].get('/api/web/category').then(function (response) {
-                  if (response.status === 200) {
-                    _this3.categoryItems = response.data.data.items;
-                  }
-                })["catch"](function (error) {
-                  if (error.response.status === 422) {
-                    _this3.errors = error.response.data.errors;
-                  } else {
-                    // this.toastMessage('error', error, 'check', '', 'times')
-                    console.log(error);
-                  }
-                })["finally"](function () {});
-
-              case 2:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3);
-      }))();
-    },
-    getContentData: function getContentData() {
-      var _this4 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                _context4.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_4__["default"].get('/api/web/content').then(function (response) {
-                  if (response.status == 200) {
-                    _this4.contentItems = response.data.data.items;
-                  }
-                })["catch"](function (error) {
-                  if (error.response.status == 422) {
-                    _this4.errors = error.response.data.errors;
-                  } else {
-                    // this.toastMessage('error', error, 'check', '', 'times')
-                    console.log(error);
-                  }
-                })["finally"](function () {});
-
-              case 2:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4);
       }))();
     },
     openImagePopUp: function openImagePopUp(img) {
@@ -59108,18 +58970,22 @@ var render = function () {
           attrs: { id: "carouselExampleControls", "data-bs-ride": "carousel" },
         },
         [
-          _c(
-            "div",
-            { staticClass: "carousel-inner" },
-            _vm._l(_vm.items, function (item, index) {
-              return _c("div", {
-                key: index,
-                class: { "carousel-item": true, active: index === 0 },
-                style: { "background-image": "url(" + item.banner_image + ")" },
-              })
-            }),
-            0
-          ),
+          _vm.bannerItems
+            ? _c(
+                "div",
+                { staticClass: "carousel-inner" },
+                _vm._l(_vm.bannerItems, function (item, index) {
+                  return _c("div", {
+                    key: index,
+                    class: { "carousel-item": true, active: index === 0 },
+                    style: {
+                      "background-image": "url(" + item.banner_image + ")",
+                    },
+                  })
+                }),
+                0
+              )
+            : _vm._e(),
           _vm._v(" "),
           _c(
             "button",
@@ -59275,7 +59141,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("footer", [
-      _c("p", [
+      _c("p", { staticClass: "text-xs" }, [
         _vm._v("© Ministry of Housing and Urban Planning, Oman. 2024 "),
       ]),
     ])
@@ -67529,7 +67395,7 @@ var render = function () {
     "div",
     { staticClass: "container mx-auto bg-white p-0" },
     [
-      _c("MainLayoutVue", [
+      _c("MainLayoutVue", { attrs: { bannerItems: _vm.bannerItems } }, [
         _c("section", { staticClass: "text-section" }, [
           _c("div", { staticClass: "container" }, [
             _c("div", { staticClass: "row justify-content-center" }, [

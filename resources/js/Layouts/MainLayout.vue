@@ -44,12 +44,12 @@
                 </div>
             </nav>
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
+                <div class="carousel-inner" v-if="bannerItems">
                     <!-- <div v-for="(item, index) in items" :key="index"
                             :class="{ 'carousel-item': true, 'active': index === 0 }">
                             <img :src="item.banner_image" class="d-block w-100" :alt="'Image ' + (index + 1)">
                         </div> -->
-                    <div v-for="(item, index) in items" :key="index"
+                    <div v-for="(item, index) in bannerItems" :key="index"
                         :class="{ 'carousel-item': true, 'active': index === 0 }"
                         :style="{ 'background-image': 'url(' + item.banner_image + ')' }">
                     </div>
@@ -103,7 +103,7 @@
 
         <!-- Footer content -->
         <footer>
-            <p>© Ministry of Housing and Urban Planning, Oman. 2024 </p>
+            <p class="text-xs">© Ministry of Housing and Urban Planning, Oman. 2024 </p>
         </footer>
 
     </div>
@@ -113,44 +113,21 @@
 import { Link } from '@inertiajs/inertia-vue'
 
 export default {
+    props: {
+        bannerItems: Object
+    },
     components: {
         Link,
-
     },
     data() {
         return {
-            items: [],
-
         }
     },
-    async mounted() {
-        this.getBannerData();
-
+    mounted() {
 
     },
     methods: {
-        async getBannerData() {
-            await axios.get('/api/web/banner')
-                .then(response => {
-                    console.log();
-                    if (response.status == 200) {
-                        this.items = response.data.data.items
 
-                    }
-
-                })
-                .catch(error => {
-                    if (error.response.status == 422) {
-                        this.errors = error.response.data.errors;
-                    } else {
-                        // this.toastMessage('error', error, 'check', '', 'times')
-                        console.log(error);
-                    }
-                })
-                .finally(() => {
-
-                })
-        },
     }
 }
 </script>

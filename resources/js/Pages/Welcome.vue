@@ -38,7 +38,7 @@
     <!--        </div>-->
     <!--    </div>-->
     <div class="container mx-auto bg-white p-0">
-        <MainLayoutVue>
+        <MainLayoutVue :bannerItems="bannerItems">
 
 
             <section class="text-section">
@@ -188,6 +188,9 @@ export default {
         canRegister: Boolean,
         laravelVersion: String,
         phpVersion: String,
+        bioItems: Object,
+        contentItems: Object,
+        bannerItems: Object
     },
     components: {
         Link,
@@ -196,8 +199,6 @@ export default {
     },
     data() {
         return {
-            contentItems: [],
-            bioItems: [],
             categoryItems: [],
             modalShow: false,
             popupImg: null
@@ -205,34 +206,10 @@ export default {
     },
 
     async mounted() {
-        await this.getContentData();
-        await this.getBioData();
         await this.getCategoryData();
 
     },
     methods: {
-        async getBioData() {
-            await axios.get('/api/bio-container')
-                .then(response => {
-
-                    if (response.status === 200) {
-                        this.bioItems = response.data.data.items
-
-                    }
-
-                })
-                .catch(error => {
-                    if (error.response.status === 422) {
-                        this.errors = error.response.data.errors;
-                    } else {
-                        // this.toastMessage('error', error, 'check', '', 'times')
-                        console.log(error);
-                    }
-                })
-                .finally(() => {
-
-                })
-        },
         async getCategoryData() {
             await axios.get('/api/web/category')
                 .then(response => {
@@ -256,26 +233,6 @@ export default {
                 })
         },
 
-        async getContentData() {
-            await axios.get('/api/web/content')
-                .then(response => {
-                    if (response.status == 200) {
-                        this.contentItems = response.data.data.items
-                    }
-
-                })
-                .catch(error => {
-                    if (error.response.status == 422) {
-                        this.errors = error.response.data.errors;
-                    } else {
-                        // this.toastMessage('error', error, 'check', '', 'times')
-                        console.log(error);
-                    }
-                })
-                .finally(() => {
-
-                })
-        },
         openImagePopUp(img) {
             this.modalShow = true;
             this.popupImg = img

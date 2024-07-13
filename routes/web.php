@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -15,29 +16,11 @@ use Illuminate\Support\Facades\Hash;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    // return Hash::make('Badar@2024');
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-Route::get('/about', function () {
-    return Inertia::render('About');
-});
-
-Route::get('/contact', function () {
-    return Inertia::render('Contact');
-});
-Route::get('/categorie', function () {
-    return Inertia::render('Categorie-page');
-});
-Route::get('/project/{slug}', function () {
-    return Inertia::render('Project');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('/categorie', [HomeController::class, 'categorie'])->name('categorie');
+Route::get('/project/{slug}', [HomeController::class, 'slugByPage']);
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
