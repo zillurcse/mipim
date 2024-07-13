@@ -1,13 +1,13 @@
 <template>
     <div class="container mx-auto bg-white p-0">
-        <MainLayoutVue>
+        <MainLayoutVue :bannerItems="bannerItems">
             <section class="about-section">
                 <div class="container">
                     <div>
                         <ul class="section-link">
                             <li>Home</li>
                             <li>/</li>
-                            <li class="active">Categorie</li>
+                            <li class="active">{{ content.slug }}</li>
                         </ul>
                     </div>
                     <div class="row">
@@ -138,41 +138,21 @@ export default {
     name: "Project",
     props: {
         content: Object,
+        bannerItems: Array,
     },
     components: {
         MainLayoutVue
     },
     data(){
         return{
-            categoryItems: [],
+            // categoryItems: [],
         }
     },
     mounted() {
     },
 
     methods: {
-        async getCategoryData() {
-            await axios.get('/api/web/category')
-                .then(response => {
 
-                    if (response.status === 200) {
-                        this.categoryItems = response.data.data.items
-
-                    }
-
-                })
-                .catch(error => {
-                    if (error.response.status === 422) {
-                        this.errors = error.response.data.errors;
-                    } else {
-                        // this.toastMessage('error', error, 'check', '', 'times')
-                        console.log(error);
-                    }
-                })
-                .finally(() => {
-
-                })
-        },
     }
 }
 </script>

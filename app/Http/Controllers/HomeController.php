@@ -15,6 +15,9 @@ class HomeController extends Controller
     {
         $bioItems = BioContainer::first();
         $contentItems = Content::with('category')->orderBy('order', 'asc')->get();
+        foreach ($contentItems as $item) {
+            $item->created = $item->created_at->format('d F, Y');
+        }
         $bannerItems = Banner::orderBy('order', 'asc')->get();
 
         return Inertia::render('Welcome', [
@@ -40,13 +43,15 @@ class HomeController extends Controller
     public function slugByPage($slug)
     {
         $data = Content::where('slug', $slug)->firstOrFail();
+        $bannerItems = Banner::orderBy('order', 'asc')->get();
 
         if (!$data){
             return abort(404);
         }
 
         return Inertia::render('Project', [
-            'content' => $data
+            'content' => $data,
+            'bannerItems' => $bannerItems
         ]);
     }
 }

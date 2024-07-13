@@ -114,7 +114,7 @@ import { Link } from '@inertiajs/inertia-vue'
 
 export default {
     props: {
-        bannerItems: Object
+        bannerItems: Array
     },
     components: {
         Link,
