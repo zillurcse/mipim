@@ -20,19 +20,17 @@
             </section>
             <div class="py-10">
                 <div class="container  data-box-row">
-                    <carousel :autoplay="true" :nav="true" :margin="20" :autoHeight="true"
+                    <carousel :autoplay="false" :nav="true" :margin="20" :autoHeight="true"
                         :responsive="{ 0: { items: 1, nav: true }, 600: { items: 2, nav: true }, 1000: { items: 3, nav: true } }">
 
-                        <div v-for="(  content, index  ) in  contentItems " :key="index" class="">
+                        <div v-for="(  content, index  ) in  contentItems " :key="index" class="h-100 ">
                             <Link :href="'project/' + content.slug" class="styles-item">
                             <div class="styles-image">
                                 <img :src="content.file" alt="Banner" />
                             </div>
                             <div class="styles-data">
                                 <div class="styles-auto">
-                                    <div class="styles-date">
-                                        <span>{{ content.created }}</span>
-                                    </div>
+
                                     <div class="styles-title" v-if="content.category">{{ content.category.name
                                         }}
                                     </div>
@@ -162,7 +160,16 @@ export default {
 </script>
 
 <style>
+.owl-item {
+    height: 470px;
+}
+
+.owl-theme .owl-dots {
+    margin-top: 20px;
+}
+
 .show {
+
     display: block;
 }
 
@@ -187,9 +194,9 @@ export default {
 }
 
 .styles-item {
-    box-shadow: 4px 4px 14px -10px rgba(0, 0, 0, 0.05);
+
     display: block;
-    border: 1px solid transparent;
+    background-color: #9A5626;
     text-decoration: none;
     height: 100%;
 }
@@ -198,6 +205,7 @@ export default {
     position: relative;
     width: 100%;
     height: 260px;
+    background-color: #fff;
 }
 
 .styles-image img {
@@ -257,7 +265,7 @@ export default {
     transition: color 0.3s ease-in-out;
     position: relative;
     font-size: 16px;
-    color: #9A5626;
+    color: #fff;
 }
 
 .global-arrow-button-image img {
