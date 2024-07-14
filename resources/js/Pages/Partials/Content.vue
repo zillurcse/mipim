@@ -61,7 +61,9 @@
                                     <h2 class="text-xl text-gray-800 font-semibold">{{ item.title }}</h2>
                                     <h3 class="text-lg text-gray-700 font-medium">{{ item.type }}</h3>
                                     <h4 class="text-base text-gray-700 font-medium break-words">{{ item.link }}</h4>
-                                    <div v-html="item.details"></div>
+                                    <div v-html="item.details" class="overflow-hidden"
+                                        style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;">
+                                    </div>
                                 </div>
                             </drag>
                         </drop>
@@ -213,16 +215,24 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Enter position" required />
                     </div>
-                    <!-- <div class="mb-6" v-if="type === 'Speaker'">
+                    <div class="mb-6">
 
                         <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Description
                         </label>
-                        <textarea id="message" rows="4" v-model="details"
-                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Write your description here..."></textarea>
 
-                    </div> -->
+                        <div class="">
+
+                            <VueFileAgent ref="vueFileAgent" :theme="'list'" :multiple="true" :deletable="true"
+                                :meta="true" :accept="'.doc,.docx,.ppt,.pdf'" :maxSize="'5MB'" :maxFiles="1"
+                                :helpText="'Only doc, ppt and pdf file allowed, Maximum : 5MB'"
+                                :errorText="{ type: 'Invalid file type. Only doc, ppt and pdf file allowed', size: 'Files should not exceed 5MB in size', }"
+                                @select="filesSelected($event)" @beforedelete="onBeforeDelete($event)"
+                                @delete="fileDeleted($event)" v-model="fileRecords"></VueFileAgent>
+                        </div>
+
+
+                    </div>
                     <div class="mb-6">
                         <label for="facebook"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Facebook</label>
@@ -361,7 +371,12 @@ export default {
             tempAttachments: [],
             attachments: [],
 
-            fileTypeError: ''
+            fileTypeError: '',
+            fileRecords: [],
+            fileRecord: [],
+            fileRecordsForUpload: [],
+            uploadUrl: '/api/upload/form_file',
+            uploadHeaders: { 'X-Test-Header': 'vue-file-agent' },
         }
     },
     async mounted() {
@@ -631,7 +646,43 @@ export default {
                 console.error('Error:', error);
             }
         },
+        uploadFiles() {
+            // Using the default uploader. You may use another uploader instead.
+            this.$refs.vueFileAgent.upload(this.uploadUrl, this.uploadHeaders, this.fileRecordsForUpload);
+            this.fileRecordsForUpload = [];
+        },
+        deleteUploadedFile(fileRecord) {
+            // Using the default uploader. You may use another uploader instead.
+            this.$refs.vueFileAgent.deleteUpload(this.uploadUrl, this.uploadHeaders, fileRecord);
+        },
+        filesSelected(fileRecordsNewlySelected) {
+            console.log(fileRecordsNewlySelected);
+            var validFileRecords = fileRecordsNewlySelected.filter((fileRecord) => !fileRecord.error);
+            this.fileRecordsForUpload = this.fileRecordsForUpload.concat(validFileRecords);
+        },
+        onBeforeDelete(fileRecord) {
+            console.log('deleted sucsessfully');
 
+            var i = this.fileRecordsForUpload.indexOf(fileRecord);
+            if (i !== -1) {
+                // queued file, not yet uploaded. Just remove from the arrays
+                this.fileRecordsForUpload.splice(i, 1);
+                var k = this.fileRecords.indexOf(fileRecord);
+                if (k !== -1) this.fileRecords.splice(k, 1);
+            } else {
+                if (confirm('Are you sure you want to delete?')) {
+                    this.$refs.vueFileAgent.deleteFileRecord(fileRecord); // will trigger 'delete' event
+                }
+            }
+        },
+        fileDeleted(fileRecord) {
+            var i = this.fileRecordsForUpload.indexOf(fileRecord);
+            if (i !== -1) {
+                this.fileRecordsForUpload.splice(i, 1);
+            } else {
+                this.deleteUploadedFile(fileRecord);
+            }
+        },
         deleteContentItem(id) {
 
             // Send a DELETE request to the backend with the item's ID
@@ -746,5 +797,18 @@ export default {
 .is_dragging {
     overflow: hidden;
     border: 1px dotted #9A5626 !important;
+}
+
+.vue-file-agent .file-input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 10;
+    cursor: pointer;
 }
 </style>

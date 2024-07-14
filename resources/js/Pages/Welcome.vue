@@ -20,48 +20,50 @@
             </section>
             <div class="py-10">
                 <div class="container  data-box-row">
-                    <carousel :autoplay="true" :nav="false">
-                        <div v-for="(content, index) in contentItems" :key="index">
-                            <Link :href="'project/'+content.slug" class="styles_item__yc34S">
-                                <div class="styles_image__ioRlD">
-                                    <img :src="content.file"
-                                         alt="Banner" />
-                                </div>
-                                <div class="styles_data__p2rYX">
-                                    <div class="styles_auto__1qfe4">
-                                        <div class="styles_date___IRmP">
-                                            <span>{{ content.created}}</span>
-                                        </div>
-                                        <div class="styles_title__mDgkM" v-if="content.category">{{ content.category.name }}</div>
-                                        <div class="styles_title__mDgkM" v-else>No category</div>
-                                        <div>
-                                            <div class="styles_description__fbukA">
-                                                Riyadh, Saudi Arabia – 31 May 2024 – New Murabba Development
-                                                Company, owned by the Public Investment Fund, recently
-                                                hosted the anticipated New Murabba Partnership forum at the
-                                                Intercontinental Durrat Al Riyadh on May 28-29. This
-                                                landmark event convened a diverse group of vendors and
-                                                partners to explore the vast opportunities within this
-                                                groundbreaking destination, set to become the most
-                                                transformative downtown in Riyadh.
-                                            </div>
+                    <carousel :autoplay="true" :nav="true" :margin="20" :autoHeight="true"
+                        :responsive="{ 0: { items: 1, nav: true }, 600: { items: 2, nav: true }, 1000: { items: 3, nav: true } }">
+
+                        <div v-for="(  content, index  ) in  contentItems " :key="index" class="">
+                            <Link :href="'project/' + content.slug" class="styles-item">
+                            <div class="styles-image">
+                                <img :src="content.file" alt="Banner" />
+                            </div>
+                            <div class="styles-data">
+                                <div class="styles-auto">
+                                    <div class="styles-date">
+                                        <span>{{ content.created }}</span>
+                                    </div>
+                                    <div class="styles-title" v-if="content.category">{{ content.category.name
+                                        }}
+                                    </div>
+                                    <div class="styles-title" v-else>No category</div>
+                                    <div>
+                                        <div class="styles-description" v-html="truncateContent(content.details)">
+
                                         </div>
                                     </div>
-                                    <div class="styles_btn-bottom__LKLzJ">
-                                        <div class="styles_btn-wrap__aQjN0">
-                                            <div
-                                                class="global-arrow-button arrow-direction-right d-flex gap-2 align-items-center">
+                                </div>
+                                <div class="styles-btn-bottom">
+                                    <div class="styles_btn-wrap__aQjN0">
+                                        <div
+                                            class="global-arrow-button arrow-direction-right d-flex gap-2 align-items-center">
                                             <span class="global-arrow-button-text">
                                                 Find out more
                                             </span>
-                                                <span class="global-arrow-button-image">
+                                            <span class="global-arrow-button-image">
                                                 <img src="https://newmurabba.com/-/jssmedia/Project/Murabba/murabba-site//images/ico_6x12_angle_right.svg"
-                                                     alt="image" loading="lazy" class="w-5" />
+                                                    alt="image" loading="lazy" class="w-5" />
                                             </span>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
+                                <template slot="prev"><span class="prev">prev</span></template>
+
+
+
+                                <template slot="next"><span class="next">next</span></template>
+                            </div>
                             </Link>
                         </div>
                     </carousel>
@@ -82,7 +84,8 @@ export default {
     computed: {
         project() {
             return project
-        }
+        },
+
     },
     props: {
         canLogin: Boolean,
@@ -111,6 +114,22 @@ export default {
         await this.getCategoryData();
     },
     methods: {
+        stripHtml(html) {
+            let tmp = document.createElement("DIV");
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || "";
+        },
+        truncateContent(details) {
+            const text = this.stripHtml(details);
+            const words = text.split(' ');
+            if (words.length > 100) {
+                let sliceData = words.slice(0, 100).join(' ') + '...';
+                console.log(sliceData);
+                return sliceData;
+
+            }
+            return details;
+        },
         async getCategoryData() {
             await axios
                 .get("/api/web/category")
@@ -142,7 +161,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .show {
     display: block;
 }
@@ -161,20 +180,27 @@ export default {
     max-width: 700px;
 }
 
-.styles_item__yc34S {
+.carousel-item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.styles-item {
     box-shadow: 4px 4px 14px -10px rgba(0, 0, 0, 0.05);
     display: block;
     border: 1px solid transparent;
     text-decoration: none;
+    height: 100%;
 }
 
-.styles_item__yc34S .styles_image__ioRlD {
+.styles-image {
     position: relative;
     width: 100%;
     height: 260px;
 }
 
-.styles_item__yc34S .styles_image__ioRlD img {
+.styles-image img {
     position: relative;
     display: block;
     width: 100%;
@@ -183,7 +209,7 @@ export default {
     object-position: center;
 }
 
-.styles_item__yc34S .styles_data__p2rYX {
+.styles-data {
     padding: 24px;
     /* height: 274px; */
     position: relative;
@@ -191,22 +217,22 @@ export default {
     background: #111;
 }
 
-.styles_latestNews__xmi_D .styles_auto__1qfe4 {
+.styles-auto {
     position: relative;
 }
 
-.styles_item__yc34S .styles_data__p2rYX .styles_date___IRmP {
+.styles-date {
     position: relative;
     font-family: 12px;
-    color: #f7f3eb;
+    color: #9A5626;
     margin-bottom: 6px;
 }
 
-.styles_item__yc34S .styles_data__p2rYX .styles_title__mDgkM {
+.styles-title {
     position: relative;
     font-size: 20px;
     font-weight: 600;
-    color: #fff;
+    color: #9A5626;
     margin-bottom: 10px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -214,10 +240,10 @@ export default {
     overflow: hidden;
 }
 
-.styles_item__yc34S .styles_data__p2rYX .styles_description__fbukA {
+.styles-description {
     position: relative;
     font-size: 16px;
-    color: #fff;
+    color: #9A5626;
     width: 100%;
     height: auto;
     display: -webkit-box;
@@ -231,10 +257,59 @@ export default {
     transition: color 0.3s ease-in-out;
     position: relative;
     font-size: 16px;
-    color: #fff;
+    color: #9A5626;
 }
 
 .global-arrow-button-image img {
     width: 16px !important;
+}
+
+.owl-nav {
+    position: absolute;
+    right: 0;
+    margin: 0;
+    bottom: -8px;
+}
+
+.owl-prev,
+.owl-next {
+    position: relative;
+    width: 30px;
+    /* Adjust according to the size of the icon */
+    height: 30px;
+    /* Adjust according to the size of the icon */
+    text-indent: -9999px;
+    /* Hide the text */
+    overflow: hidden;
+    /* Ensure the text is not visible */
+    display: inline-block;
+    background-color: transparent !important;
+    /* Adjust display as needed */
+}
+
+.owl-prev {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="%23000" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12c0 6.627 5.373 12 12 12 6.627 0 12-5.373 12-12C24 5.373 18.627 0 12 0zm0 21.6c-5.293 0-9.6-4.307-9.6-9.6 0-5.293 4.307-9.6 9.6-9.6 5.293 0 9.6 4.307 9.6 9.6 0 5.293-4.307 9.6-9.6 9.6z"/><path d="M17.657 11.293l-4-4a1 1 0 0 0-1.414 1.414L14.586 11H7a1 1 0 0 0 0 2h7.586l-2.343 2.293a1 1 0 1 0 1.414 1.414l4-4a1 1 0 0 0 0-1.414z"/></svg>') !important;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.owl-next {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="%23000" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12c0 6.627 5.373 12 12 12 6.627 0 12-5.373 12-12C24 5.373 18.627 0 12 0zm0 21.6c-5.293 0-9.6-4.307-9.6-9.6 0-5.293 4.307-9.6 9.6-9.6 5.293 0 9.6 4.307 9.6 9.6 0 5.293-4.307 9.6-9.6 9.6z"/><path d="M8.343 11.293l4-4a1 1 0 1 1 1.414 1.414L9.414 11H17a1 1 0 0 1 0 2H9.414l2.343 2.293a1 1 0 0 1-1.414 1.414l-4-4a1 1 0 0 1 0-1.414z"/></svg>') !important;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+@media (max-width: 450px) {
+    .owl-nav {
+        bottom: -42px;
+        transform: translateX(-50%);
+        left: 50%;
+    }
+
+    .owl-carousel .owl-stage-outer {
+        margin-bottom: 20px;
+    }
 }
 </style>
