@@ -1,29 +1,31 @@
-require('./bootstrap');
+require("./bootstrap");
 
 // Import modules...
-import Vue from 'vue';
-import VueQuillEditor from 'vue-quill-editor'
-import 'quill/dist/quill.core.css'
-import 'quill/dist/quill.snow.css'
-import 'quill/dist/quill.bubble.css'
-
+import Vue from "vue";
+import VueQuillEditor from "vue-quill-editor";
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.snow.css";
+import "quill/dist/quill.bubble.css";
+import VueFileAgent from "vue-file-agent";
+import VueFileAgentStyles from "vue-file-agent/dist/vue-file-agent.css";
 import {
     App as InertiaApp,
-    plugin as InertiaPlugin
-} from '@inertiajs/inertia-vue';
-import PortalVue from 'portal-vue';
-import Toasted from 'vue-toasted';
-Vue.use(Toasted)
-Vue.use(VueQuillEditor, /* { default global options } */)
+    plugin as InertiaPlugin,
+} from "@inertiajs/inertia-vue";
+import PortalVue from "portal-vue";
+import Toasted from "vue-toasted";
+Vue.use(Toasted);
+Vue.use(VueQuillEditor /* { default global options } */);
+Vue.use(VueFileAgent);
 Vue.mixin({
     methods: {
-        route
-    }
+        route,
+    },
 });
 Vue.use(InertiaPlugin);
 Vue.use(PortalVue);
 
-const app = document.getElementById('app');
+const app = document.getElementById("app");
 
 new Vue({
     render: (h) =>

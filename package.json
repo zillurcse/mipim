@@ -33,6 +33,7 @@
         "vue-cropperjs": "^4.0.0",
         "vue-doc-preview": "^0.3.2",
         "vue-drag-drop": "^1.1.4",
+        "vue-file-agent": "^1.7.3",
         "vue-owl-carousel": "^2.0.3",
         "vue-quill-editor": "^3.0.6",
         "vue-select": "^3.20.2",
