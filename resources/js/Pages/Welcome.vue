@@ -214,7 +214,7 @@ export default {
     /* height: 274px; */
     position: relative;
 
-    background: #111;
+    background: #9A5626;
 }
 
 .styles-auto {
@@ -224,7 +224,7 @@ export default {
 .styles-date {
     position: relative;
     font-family: 12px;
-    color: #9A5626;
+    color: #fff;
     margin-bottom: 6px;
 }
 
@@ -232,7 +232,7 @@ export default {
     position: relative;
     font-size: 20px;
     font-weight: 600;
-    color: #9A5626;
+    color: #fff;
     margin-bottom: 10px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -243,7 +243,7 @@ export default {
 .styles-description {
     position: relative;
     font-size: 16px;
-    color: #9A5626;
+    color: #fff;
     width: 100%;
     height: auto;
     display: -webkit-box;

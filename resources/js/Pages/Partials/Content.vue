@@ -218,13 +218,13 @@
                     <div class="mb-6">
 
                         <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                            Description
+                            Boucher
                         </label>
 
                         <div class="">
 
                             <VueFileAgent ref="vueFileAgent" :theme="'list'" :multiple="true" :deletable="true"
-                                :meta="true" :accept="'.doc,.docx,.ppt,.pdf'" :maxSize="'5MB'" :maxFiles="1"
+                                :meta="true" :accept="'.doc,.docx,.ppt,.pdf'" :maxSize="'5MB'" :maxFiles="5"
                                 :helpText="'Only doc, ppt and pdf file allowed, Maximum : 5MB'"
                                 :errorText="{ type: 'Invalid file type. Only doc, ppt and pdf file allowed', size: 'Files should not exceed 5MB in size', }"
                                 @select="filesSelected($event)" @beforedelete="onBeforeDelete($event)"
@@ -374,6 +374,7 @@ export default {
             fileTypeError: '',
             fileRecords: [],
             fileRecord: [],
+            brochure: '',
             fileRecordsForUpload: [],
             uploadUrl: '/api/upload/form_file',
             uploadHeaders: { 'X-Test-Header': 'vue-file-agent' },
@@ -576,6 +577,7 @@ export default {
         ,
         async uploadContentFiles() {
             try {
+                this.brochure = this.fileRecordsForUpload
                 if (this.type === "Speaker") {
                     if (this.title === "" || this.date === "" || this.details === "" || this.contentFile === null || this.position === "") {
                         this.$toasted.show("please fill up all fields", {
@@ -610,6 +612,7 @@ export default {
                 formData.append('details', this.details);
                 formData.append('position', this.position);
                 formData.append('file', this.contentFile);
+                formData.append('brochure', this.brochure);
                 formData.append('social_links', JSON.stringify(socialLinks));
                 // Make POST request to upload the file and data
                 const response = await axios.post('/api/content', formData);

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContentController;
 use App\Http\Controllers\ImageController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -53,11 +54,11 @@ Route::group(['middleware' => ['api']], function () {
 
     Route::delete('/banner/{id}', [\App\Http\Controllers\BannerController::class, 'destroy']);
 
-    Route::get('/content', [\App\Http\Controllers\ContentController::class, 'index']);
-    Route::post('/content', [\App\Http\Controllers\ContentController::class, 'store']);
-    Route::post('/content/{id}', [\App\Http\Controllers\ContentController::class, 'update']);
-    Route::post('/content/update/order', [\App\Http\Controllers\ContentController::class, 'update_order']);
-    Route::delete('/content/{id}', [\App\Http\Controllers\ContentController::class, 'destroy']);
+    Route::get('/content', [ContentController::class, 'index']);
+    Route::post('/content', [ContentController::class, 'store']);
+    Route::post('/content/{id}', [ContentController::class, 'update']);
+    Route::post('/content/update/order', [ContentController::class, 'update_order']);
+    Route::delete('/content/{id}', [ContentController::class, 'destroy']);
 
     Route::get('/categories', [\App\Http\Controllers\CategoriesController::class, 'index']);
     Route::post('/categories', [\App\Http\Controllers\CategoriesController::class, 'store']);
@@ -68,6 +69,10 @@ Route::group(['middleware' => ['api']], function () {
     Route::get('/bio-container', [\App\Http\Controllers\BioContainerController::class, 'index']);
     Route::post('/bio-container', [\App\Http\Controllers\BioContainerController::class, 'store']);
     Route::post('/bio-container/{id}', [\App\Http\Controllers\BioContainerController::class, 'update']);
+
+
+    Route::post('/upload/form_file',[ContentController::class,'upload_file']);
+    Route::post('/upload/form_file/delete',[ContentController::class,'delete_file']);
 });
 
 Route::post('/sanctum/token', [\App\Http\Controllers\BannerController::class, 'token']);

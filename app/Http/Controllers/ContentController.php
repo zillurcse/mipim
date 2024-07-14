@@ -34,6 +34,22 @@ class ContentController extends Controller
     {
         //
     }
+    public function upload_file(Request $request)
+    {
+        if ($request->hasFile('file')) {
+            $path = $request->file('file')->storePublicly('public/content');
+            return 'https://mipim-file.s3.amazonaws.com/' . $path;
+        } else{
+            return 'none';
+        }
+    }
+    public function delete_file(Request $request)
+    {
+        Storage::disk('s3')->delete($request->get('file'));
+
+        return true;
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -43,6 +59,7 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->brochure);
         $rules = [
             'category_id' => 'required',
             'title' => 'required|string|max:255',
@@ -50,11 +67,13 @@ class ContentController extends Controller
             'details' => 'nullable|string',
             'position' => 'nullable|integer',
             'file' => 'nullable|file', // Ensure the file is actually a file
+            'boucher' => 'nullable|boucher', // Ensure the file is actually a file
             'social_links' => 'required|json',
         ];
 
         // Validate the request
         $validatedData = $request->validate($rules);
+
 
         $data = $validatedData;
         $data['category_id'] = $validatedData['category_id'];
@@ -82,6 +101,19 @@ class ContentController extends Controller
 
         // Create the content
         $content = Content::create($data);
+
+        if ($request->file('brochure') != null){
+            $files = $request->file('brochure');
+            foreach ($files as $file){
+                $doc = new ExhibitorDocument();
+                $doc->file = $file['file']->store('exhibitor-brochure-file-'.$event->id, config('infinity.file_system_driver'));
+//                dd($doc->file);
+                $doc->event()->associate($event);
+                $doc->exhibitor()->associate($exhibitor);
+                $doc->save();
+                //array_push($docs, $doc);
+            }
+        }
 
         return response()->json([
             'status' => 'success',
