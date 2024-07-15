@@ -9932,6 +9932,11 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     MainLayoutVue: _Layouts_MainLayout_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
+  computed: {
+    contactInfo: function contactInfo() {
+      return JSON.parse(this.content.get_in_touch);
+    }
+  },
   data: function data() {
     return {// categoryItems: [],
     };
@@ -70223,7 +70228,9 @@ var render = function () {
                           ),
                         ]),
                         _vm._v(" "),
-                        _c("span", [_vm._v("0101010")]),
+                        _c("span", [
+                          _vm._v(" " + _vm._s(_vm.contactInfo.phone) + " "),
+                        ]),
                       ]
                     ),
                     _vm._v(" "),
@@ -70257,7 +70264,7 @@ var render = function () {
                           ),
                         ]),
                         _vm._v(" "),
-                        _c("span", [_vm._v("info@ahibank.com")]),
+                        _c("span", [_vm._v(_vm._s(_vm.contactInfo.email))]),
                       ]
                     ),
                   ]),

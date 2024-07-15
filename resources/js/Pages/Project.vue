@@ -32,7 +32,7 @@
                                                     clip-rule="evenodd" />
                                             </svg>
                                         </div>
-                                        <span>0101010</span>
+                                        <span> {{ contactInfo.phone }} </span>
                                     </div>
                                     <div class="d-flex gap-2 align-items-center ">
                                         <div class="icon">
@@ -44,7 +44,7 @@
                                             </svg>
 
                                         </div>
-                                        <span>info@ahibank.com</span>
+                                        <span>{{ contactInfo.email }}</span>
                                     </div>
                                 </div>
                                 <div class="boucher-box">
@@ -134,6 +134,11 @@ export default {
     },
     components: {
         MainLayoutVue
+    },
+    computed: {
+        contactInfo() {
+            return JSON.parse(this.content.get_in_touch);
+        }
     },
     data() {
         return {
