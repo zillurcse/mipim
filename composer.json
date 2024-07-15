@@ -17,7 +17,8 @@
         "laravel/vapor-core": "^2.37",
         "league/flysystem-aws-s3-v3": "^1.0",
         "spatie/laravel-medialibrary": "^9.12",
-        "tightenco/ziggy": "^1.0"
+        "tightenco/ziggy": "^1.0",
+        "ext-json": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

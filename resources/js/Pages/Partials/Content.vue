@@ -224,7 +224,7 @@
                         <div class="">
 
                             <VueFileAgent ref="vueFileAgent" :theme="'list'" :multiple="true" :deletable="true"
-                                :meta="true" :accept="'.doc,.docx,.ppt,.pdf'" :maxSize="'5MB'" :maxFiles="5"
+                                :meta="true" :accept="'.doc,.docx,.ppt,.pdf'" :maxSize="'5MB'" :maxFiles="1"
                                 :helpText="'Only doc, ppt and pdf file allowed, Maximum : 5MB'"
                                 :errorText="{ type: 'Invalid file type. Only doc, ppt and pdf file allowed', size: 'Files should not exceed 5MB in size', }"
                                 @select="filesSelected($event)" @beforedelete="onBeforeDelete($event)"
@@ -374,7 +374,7 @@ export default {
             fileTypeError: '',
             fileRecords: [],
             fileRecord: [],
-            brochure: '',
+            boucher_files: [],
             fileRecordsForUpload: [],
             uploadUrl: '/api/upload/form_file',
             uploadHeaders: { 'X-Test-Header': 'vue-file-agent' },
@@ -576,8 +576,11 @@ export default {
         }
         ,
         async uploadContentFiles() {
+            // await this.fileRecordsForUpload.forEach(record => {
+            //     this.boucher_files.push(record.file);
+            // });
             try {
-                this.brochure = this.fileRecordsForUpload
+                this.boucher_files = this.fileRecordsForUpload[0].file
                 if (this.type === "Speaker") {
                     if (this.title === "" || this.date === "" || this.details === "" || this.contentFile === null || this.position === "") {
                         this.$toasted.show("please fill up all fields", {
@@ -601,6 +604,7 @@ export default {
                     linkedin: this.linkedin,
                     instagram: this.instagram,
                 };
+
                 // Create FormData and append all data
                 this.isLoading = true;
                 let formData = new FormData();
@@ -612,7 +616,7 @@ export default {
                 formData.append('details', this.details);
                 formData.append('position', this.position);
                 formData.append('file', this.contentFile);
-                formData.append('brochure', this.brochure);
+                formData.append('boucher_files', this.boucher_files);
                 formData.append('social_links', JSON.stringify(socialLinks));
                 // Make POST request to upload the file and data
                 const response = await axios.post('/api/content', formData);
