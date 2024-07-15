@@ -16,10 +16,11 @@ use Illuminate\Support\Facades\Hash;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
-Route::get('/categorie', [HomeController::class, 'categorie'])->name('categorie');
+Route::get('/categories', [HomeController::class, 'categories'])->name('categories');
 Route::get('/project/{slug}', [HomeController::class, 'slugByPage']);
 
 

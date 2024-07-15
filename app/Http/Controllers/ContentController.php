@@ -39,7 +39,7 @@ class ContentController extends Controller
         if ($request->hasFile('file')) {
             $path = $request->file('file')->storePublicly('public/content');
             return 'https://mipim-file.s3.amazonaws.com/' . $path;
-        } else{
+        } else {
             return 'none';
         }
     }
@@ -69,6 +69,8 @@ class ContentController extends Controller
             'file' => 'nullable|file', // Ensure the file is actually a file
             'boucher_files' => 'nullable', // Ensure the file is actually a file
             'social_links' => 'required|json',
+            'get_in_touch' => 'required|json',
+
         ];
 
         // Validate the request
@@ -79,6 +81,8 @@ class ContentController extends Controller
         $data['category_id'] = $validatedData['category_id'];
         $data['title'] = $validatedData['title'];
         $data['social_links'] = $validatedData['social_links'];
+        $data['get_in_touch'] = $validatedData['get_in_touch'];
+
 
 
         // Generate a unique slug
@@ -108,18 +112,18 @@ class ContentController extends Controller
         // Create the content
         $content = Content::create($data);
 
-//        if ($request->file('boucher_files') != null){
-//            $files = $request->file('boucher_files');
-//            foreach ($files as $file){
-//                $doc = new ExhibitorDocument();
-//                $doc->file = $file['file']->store('exhibitor-brochure-file-'.$event->id, config('infinity.file_system_driver'));
-////                dd($doc->file);
-//                $doc->event()->associate($event);
-//                $doc->exhibitor()->associate($exhibitor);
-//                $doc->save();
-//                //array_push($docs, $doc);
-//            }
-//        }
+        //        if ($request->file('boucher_files') != null){
+        //            $files = $request->file('boucher_files');
+        //            foreach ($files as $file){
+        //                $doc = new ExhibitorDocument();
+        //                $doc->file = $file['file']->store('exhibitor-brochure-file-'.$event->id, config('infinity.file_system_driver'));
+        ////                dd($doc->file);
+        //                $doc->event()->associate($event);
+        //                $doc->exhibitor()->associate($exhibitor);
+        //                $doc->save();
+        //                //array_push($docs, $doc);
+        //            }
+        //        }
 
         return response()->json([
             'status' => 'success',

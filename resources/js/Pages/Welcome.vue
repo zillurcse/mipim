@@ -24,7 +24,7 @@
                         :responsive="{ 0: { items: 1, nav: true }, 600: { items: 2, nav: true }, 1000: { items: 3, nav: true } }">
 
                         <div v-for="(  content, index  ) in  contentItems " :key="index" class="h-100 ">
-                            <Link :href="'project/' + content.slug" class="styles-item">
+                            <Link :href="'project/' + content.slug" class="styles-item relative">
                             <div class="styles-image">
                                 <img :src="content.file" alt="Banner" />
                             </div>
@@ -43,16 +43,7 @@
                                 </div>
                                 <div class="styles-btn-bottom">
                                     <div class="styles_btn-wrap__aQjN0">
-                                        <div
-                                            class="global-arrow-button arrow-direction-right d-flex gap-2 align-items-center">
-                                            <span class="global-arrow-button-text">
-                                                Find out more
-                                            </span>
-                                            <span class="global-arrow-button-image">
-                                                <img src="https://newmurabba.com/-/jssmedia/Project/Murabba/murabba-site//images/ico_6x12_angle_right.svg"
-                                                    alt="image" loading="lazy" class="w-5" />
-                                            </span>
-                                        </div>
+
                                     </div>
                                 </div>
 
@@ -61,6 +52,15 @@
 
 
                                 <template slot="next"><span class="next">next</span></template>
+                            </div>
+                            <div class="global-arrow-button arrow-direction-right d-flex gap-2 align-items-center">
+                                <span class="global-arrow-button-text">
+                                    Find out more
+                                </span>
+                                <span class="global-arrow-button-image">
+                                    <img src="https://newmurabba.com/-/jssmedia/Project/Murabba/murabba-site//images/ico_6x12_angle_right.svg"
+                                        alt="image" loading="lazy" class="w-5" />
+                                </span>
                             </div>
                             </Link>
                         </div>
@@ -259,6 +259,12 @@ export default {
     -webkit-box-orient: vertical;
     overflow: hidden;
     margin-bottom: 24px;
+}
+
+.global-arrow-button {
+    position: absolute;
+    bottom: 30px;
+    left: 28px;
 }
 
 .global-arrow-button-text {

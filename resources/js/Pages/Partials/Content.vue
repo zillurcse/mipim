@@ -224,7 +224,7 @@
                         <div class="">
 
                             <VueFileAgent ref="vueFileAgent" :theme="'list'" :multiple="true" :deletable="true"
-                                :meta="true" :accept="'.doc,.docx,.ppt,.pdf'" :maxSize="'5MB'" :maxFiles="1"
+                                :meta="true" :accept="'.doc,.docx,.ppt,.pdf'" :maxSize="'5MB'" :maxFiles="5"
                                 :helpText="'Only doc, ppt and pdf file allowed, Maximum : 5MB'"
                                 :errorText="{ type: 'Invalid file type. Only doc, ppt and pdf file allowed', size: 'Files should not exceed 5MB in size', }"
                                 @select="filesSelected($event)" @beforedelete="onBeforeDelete($event)"
@@ -232,6 +232,20 @@
                         </div>
 
 
+                    </div>
+                    <div class="mb-6">
+                        <label for="email"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                        <input type="text" id="email" v-model="email"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Enter email address" required />
+                    </div>
+                    <div class="mb-6">
+                        <label for="phone"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone</label>
+                        <input type="text" id="phone" v-model="phone"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Enter phone number" required />
                     </div>
                     <div class="mb-6">
                         <label for="facebook"
@@ -364,6 +378,8 @@ export default {
             linkedin: '',
             instagram: '',
             updatedId: null,
+            email: '',
+            phone: '',
 
             uploading: false,
             progress: 0,
@@ -375,6 +391,11 @@ export default {
             fileRecords: [],
             fileRecord: [],
             boucher_files: [],
+            boucher_files1: [],
+            boucher_files2: [],
+            boucher_files3: [],
+            boucher_files4: [],
+
             fileRecordsForUpload: [],
             uploadUrl: '/api/upload/form_file',
             uploadHeaders: { 'X-Test-Header': 'vue-file-agent' },
@@ -580,31 +601,41 @@ export default {
             //     this.boucher_files.push(record.file);
             // });
             try {
-                this.boucher_files = this.fileRecordsForUpload[0].file
+                // Assign files if they exist
+                this.boucher_files = this.fileRecordsForUpload[0]?.file;
+                this.boucher_files1 = this.fileRecordsForUpload[1]?.file;
+                this.boucher_files2 = this.fileRecordsForUpload[2]?.file;
+                this.boucher_files3 = this.fileRecordsForUpload[3]?.file;
+                this.boucher_files4 = this.fileRecordsForUpload[4]?.file;
+
                 if (this.type === "Speaker") {
                     if (this.title === "" || this.date === "" || this.details === "" || this.contentFile === null || this.position === "") {
-                        this.$toasted.show("please fill up all fields", {
+                        this.$toasted.show("Please fill up all fields", {
                             theme: "toasted-primary",
                             position: "top-center",
                             duration: 5000
                         });
-                        return false
+                        return false;
                     }
                 } else if (this.title === "" || this.link === '' || this.type === "" || this.contentFile === null) {
-                    this.$toasted.show("please fill up all fields", {
+                    this.$toasted.show("Please fill up all fields", {
                         theme: "toasted-primary",
                         position: "top-center",
                         duration: 5000
                     });
-                    return false
+                    return false;
                 }
+
                 const socialLinks = {
                     facebook: this.facebook,
                     twitter: this.twitter,
                     linkedin: this.linkedin,
                     instagram: this.instagram,
                 };
-
+                const getInTuch = {
+                    email: this.email,
+                    phone: this.phone
+                }
                 // Create FormData and append all data
                 this.isLoading = true;
                 let formData = new FormData();
@@ -616,26 +647,37 @@ export default {
                 formData.append('details', this.details);
                 formData.append('position', this.position);
                 formData.append('file', this.contentFile);
-                formData.append('boucher_files', this.boucher_files);
+
+                // Conditionally append each boucher file if it exists
+                if (this.boucher_files) formData.append('boucher_files', this.boucher_files);
+                if (this.boucher_files1) formData.append('boucher_files1', this.boucher_files1);
+                if (this.boucher_files2) formData.append('boucher_files2', this.boucher_files2);
+                if (this.boucher_files3) formData.append('boucher_files3', this.boucher_files3);
+                if (this.boucher_files4) formData.append('boucher_files4', this.boucher_files4);
+
                 formData.append('social_links', JSON.stringify(socialLinks));
+                formData.append('get_in_touch', JSON.stringify(getInTuch));
+
+
                 // Make POST request to upload the file and data
                 const response = await axios.post('/api/content', formData);
 
                 // Handle success
-
                 this.getContentData(); // Update content data
                 this.showModal = false; // Close the modal after successful upload
+
                 // Reset all data
                 this.title = '';
                 this.link = '';
                 this.date = '';
                 this.details = '';
                 this.position = '';
-
+                this.category_id = '0'
                 this.type = 'Select Type';
                 this.contentFile = null;
-                this.contentPreview = null
+                this.contentPreview = null;
                 this.isLoading = false;
+
                 this.$toasted.success(response.data.message, {
                     theme: "toasted-primary",
                     position: "top-center",
@@ -644,7 +686,7 @@ export default {
 
             } catch (error) {
                 // Handle error
-                this.isLoading = true;
+                this.isLoading = false;
                 this.$toasted.show(error.response.data.message, {
                     theme: "toasted-primary",
                     position: "top-center",
@@ -652,6 +694,7 @@ export default {
                 });
                 console.error('Error:', error);
             }
+
         },
         uploadFiles() {
             // Using the default uploader. You may use another uploader instead.

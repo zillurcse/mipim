@@ -35,16 +35,16 @@ class HomeController extends Controller
     {
         return Inertia::render('Contact');
     }
-    public function categorie()
+    public function categories()
     {
-        return Inertia::render('Categorie-page');
+        return Inertia::render('Categories');
     }
     public function slugByPage($slug)
     {
         $data = Content::where('slug', $slug)->firstOrFail();
         $bannerItems = Banner::orderBy('order', 'asc')->get();
 
-        if (!$data){
+        if (!$data) {
             return abort(404);
         }
 
