@@ -45,6 +45,10 @@ class HomeController extends Controller
     public function slugByPage($slug)
     {
         $data = Content::where('slug', $slug)->firstOrFail();
+        $data->get_in_touch = json_decode($data->get_in_touch, true);
+        $data->boucher_files = json_decode($data->boucher_files, true);
+
+
         $bannerItems = Banner::orderBy('order', 'asc')->get();
 
         if (!$data) {

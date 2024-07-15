@@ -37,8 +37,8 @@
                                     </Link>
                                 </li>
                                 <li class="nav-item">
-                                    <Link class="nav-link " href="/categories" target="_self" title="categorie">
-                                    Categories</Link>
+                                    <Link class="nav-link " href="/projects" target="_self" title="categorie">
+                                    Projects</Link>
                                 </li>
                             </ul>
                         </div>

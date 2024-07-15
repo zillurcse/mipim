@@ -32,7 +32,7 @@
                                                     clip-rule="evenodd" />
                                             </svg>
                                         </div>
-                                        <span> {{ contactInfo.phone }} </span>
+                                        <span v-if="content.get_in_touch.phone"> {{ content.get_in_touch.phone }} </span>
                                     </div>
                                     <div class="d-flex gap-2 align-items-center ">
                                         <div class="icon">
@@ -44,13 +44,13 @@
                                             </svg>
 
                                         </div>
-                                        <span>{{ contactInfo.email }}</span>
+                                        <span v-if="content.get_in_touch.email">{{ content.get_in_touch.email }}</span>
                                     </div>
                                 </div>
                                 <div class="boucher-box">
-                                    <h3>Boucher <span>(1)</span></h3>
+                                    <h3>Boucher <span>({{ content.boucher_files.length }})</span></h3>
 
-                                    <div class="d-flex justify-between align-items-center py-3">
+                                    <div class="d-flex justify-between align-items-center py-3" v-for="(item, key) in content.boucher_files" :key="key">
                                         <div class="d-flex align-items-center gap-3">
                                             <svg width="18" height="23" viewBox="0 0 18 23" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -70,7 +70,7 @@
                                             </svg>
 
                                             <div class="d-flex flex-col boucher-text">
-                                                <p>ROCHURE-FILE-26/972.PDF</p>
+                                                <p>{{ content.title }} Boucher {{key+1}}</p>
                                                 <span>PDF FILE</span>
                                             </div>
                                         </div>

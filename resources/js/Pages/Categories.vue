@@ -7,10 +7,9 @@
                         <ul class="section-link">
                             <li>Home</li>
                             <li>/</li>
-                            <li class="active">Categories</li>
+                            <li class="active">Projects</li>
                         </ul>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4">Categorie list:</h3>
 
                     <div v-if="categoryItems.data.length > 0" class="row">
 

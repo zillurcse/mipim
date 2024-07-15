@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Hash;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
-Route::get('/categories', [HomeController::class, 'categories'])->name('categories');
+Route::get('/projects', [HomeController::class, 'categories'])->name('categories');
 Route::get('/project/{slug}', [HomeController::class, 'slugByPage']);
 
 
