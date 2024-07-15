@@ -16,7 +16,8 @@
 
                         <div class="col-md-4 mb-3" v-for="(category, key) in categoryItems.data" :key="key">
 
-                            <div @click="categoryByContent(category.id)" class="px-3 py-3 shadow-sm border rounded-lg relative h-full flex items-center gap-2">
+                            <div @click="categoryByContent(category.id)"
+                                class="px-3 py-3 shadow-sm border rounded-lg relative h-full flex items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="#9A5626" class="w-5 flex-shrink-0">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -34,53 +35,55 @@
                 </div>
             </section>
             <br>
+
             <div class="py-10" v-if="categoryByContentData">
                 <div class="container  data-box-row">
-                    <carousel :autoplay="false" :nav="true" :margin="20" :autoHeight="true"
-                              :responsive="{ 0: { items: 1, nav: true }, 600: { items: 2, nav: true }, 1000: { items: 3, nav: true } }">
 
-                        <div v-for="(content, index) in categoryByContentData.data" :key="index" class="h-100 ">
+                    <div class="row">
+                        <div v-for="(content, index) in categoryByContentData.data" :key="index" class="col-md-4 mb-4 ">
                             <Link :href="'project/' + content.slug" class="styles-item relative">
-                                <div class="styles-image">
-                                    <img :src="content.file" alt="Banner" />
-                                </div>
-                                <div class="styles-data">
-                                    <div class="styles-auto">
+                            <div class="styles-image">
+                                <img :src="content.file" alt="Banner" />
+                            </div>
+                            <div class="styles-data">
+                                <div class="styles-auto">
 
-                                        <div class="styles-title" v-if="content.category">{{ content.category.name
-                                            }}
-                                        </div>
-                                        <div class="styles-title" v-else>No category</div>
-                                        <div>
-                                            <div class="styles-description" v-html="truncateContent(content.details)">
-
-                                            </div>
-                                        </div>
+                                    <div class="styles-title" v-if="content.category">{{ content.category.name
+                                        }}
                                     </div>
-                                    <div class="styles-btn-bottom">
-                                        <div class="styles_btn-wrap__aQjN0">
+                                    <div class="styles-title" v-else>No category</div>
+                                    <div>
+                                        <div class="styles-description" v-html="truncateContent(content.details)">
 
                                         </div>
                                     </div>
-
-                                    <template slot="prev"><span class="prev">prev</span></template>
-
-
-
-                                    <template slot="next"><span class="next">next</span></template>
                                 </div>
-                                <div class="global-arrow-button arrow-direction-right d-flex gap-2 align-items-center">
+                                <div class="styles-btn-bottom">
+                                    <div class="styles_btn-wrap__aQjN0">
+
+                                    </div>
+                                </div>
+
+                                <template slot="prev"><span class="prev">prev</span></template>
+
+
+
+                                <template slot="next"><span class="next">next</span></template>
+                            </div>
+                            <div class="global-arrow-button arrow-direction-right d-flex gap-2 align-items-center">
                                 <span class="global-arrow-button-text">
                                     Find out more
                                 </span>
-                                    <span class="global-arrow-button-image">
+                                <span class="global-arrow-button-image">
                                     <img src="https://newmurabba.com/-/jssmedia/Project/Murabba/murabba-site//images/ico_6x12_angle_right.svg"
-                                         alt="image" loading="lazy" class="w-5" />
+                                        alt="image" loading="lazy" class="w-5" />
                                 </span>
-                                </div>
+                            </div>
                             </Link>
                         </div>
-                    </carousel>
+                    </div>
+
+
                 </div>
             </div>
         </MainLayoutVue>
@@ -90,6 +93,8 @@
 </template>
 
 <script>
+import { Link } from "@inertiajs/inertia-vue";
+
 
 import MainLayoutVue from '../Layouts/MainLayout.vue';
 import axios from "axios";
@@ -97,12 +102,13 @@ import carousel from "vue-owl-carousel";
 
 export default {
     name: "Category",
-    props:{
+    props: {
         categoryItems: Object
     },
     components: {
         MainLayoutVue,
-        carousel
+        carousel,
+        Link
     },
     data() {
         return {
@@ -130,8 +136,8 @@ export default {
             }
             return details;
         },
-        async categoryByContent(id){
-            await axios.get('/api/category-by-content/'+id)
+        async categoryByContent(id) {
+            await axios.get('/api/category-by-content/' + id)
                 .then(response => {
 
                     if (response.status === 200) {
@@ -173,5 +179,97 @@ export default {
 
 .about-section h3 {
     color: #9A5626;
+}
+
+
+.carousel-item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.styles-item {
+
+    display: block;
+    background-color: #9A5626;
+    text-decoration: none;
+    height: 100%;
+}
+
+.styles-image {
+    position: relative;
+    width: 100%;
+    height: 260px;
+    background-color: #fff;
+}
+
+.styles-image img {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.styles-data {
+    padding: 24px;
+    /* height: 274px; */
+    position: relative;
+
+    background: #9A5626;
+}
+
+.styles-auto {
+    position: relative;
+}
+
+.styles-date {
+    position: relative;
+    font-family: 12px;
+    color: #fff;
+    margin-bottom: 6px;
+}
+
+.styles-title {
+    position: relative;
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.styles-description {
+    position: relative;
+    font-size: 16px;
+    color: #fff;
+    width: 100%;
+    height: auto;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.global-arrow-button {
+    position: absolute;
+    bottom: 30px;
+    left: 28px;
+}
+
+.global-arrow-button-text {
+    transition: color 0.3s ease-in-out;
+    position: relative;
+    font-size: 16px;
+    color: #fff;
+}
+
+.global-arrow-button-image img {
+    width: 16px !important;
 }
 </style>
