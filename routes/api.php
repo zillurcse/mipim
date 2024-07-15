@@ -63,6 +63,7 @@ Route::group(['middleware' => ['api']], function () {
     Route::get('/categories', [\App\Http\Controllers\CategoriesController::class, 'index']);
     Route::post('/categories', [\App\Http\Controllers\CategoriesController::class, 'store']);
     Route::post('/categories/{id}', [\App\Http\Controllers\CategoriesController::class, 'update']);
+    Route::get('/category-by-content/{id}', [\App\Http\Controllers\CategoriesController::class, 'categoryByContent']);
     Route::post('/categories/update/order', [\App\Http\Controllers\CategoriesController::class, 'update_order']);
     Route::delete('/categories/{id}', [\App\Http\Controllers\CategoriesController::class, 'destroy']);
 

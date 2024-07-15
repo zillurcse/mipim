@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\BioContainer;
+use App\Models\Category;
 use App\Models\Content;
 use Inertia\Inertia;
 
@@ -37,7 +38,9 @@ class HomeController extends Controller
     }
     public function categories()
     {
-        return Inertia::render('Categories');
+        $data = Category::paginate(10);
+
+        return Inertia::render('Categories', ['categoryItems' => $data]);
     }
     public function slugByPage($slug)
     {

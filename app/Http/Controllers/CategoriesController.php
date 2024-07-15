@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Content;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -117,6 +118,15 @@ class CategoriesController extends Controller
             'status' => 'success',
             'message' => 'Category has been updated',
             'data' => $category
+        ]);
+    }
+
+    public function categoryByContent($id)
+    {
+        $contendRelatedToCat = Content::with('category')->where('category_id', $id)->paginate(5);
+        return response()->json([
+            'status' => 'success',
+            'data' => $contendRelatedToCat
         ]);
     }
 

@@ -4803,7 +4803,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Layouts_MainLayout_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Layouts/MainLayout.vue */ "./resources/js/Layouts/MainLayout.vue");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var vue_owl_carousel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-owl-carousel */ "./node_modules/vue-owl-carousel/dist/vue-owl-carousel.js");
+/* harmony import */ var vue_owl_carousel__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_owl_carousel__WEBPACK_IMPORTED_MODULE_2__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -4845,30 +4847,85 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Category",
+  props: {
+    categoryItems: Object
+  },
   components: {
-    MainLayoutVue: _Layouts_MainLayout_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    MainLayoutVue: _Layouts_MainLayout_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    carousel: (vue_owl_carousel__WEBPACK_IMPORTED_MODULE_2___default())
   },
   data: function data() {
     return {
-      categoryItems: []
+      categoryByContentData: []
     };
   },
   mounted: function mounted() {
-    var _this = this;
-
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return _this.getCategoryData();
-
-            case 2:
             case "end":
               return _context.stop();
           }
@@ -4877,8 +4934,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: {
-    getCategoryData: function getCategoryData() {
-      var _this2 = this;
+    stripHtml: function stripHtml(html) {
+      var tmp = document.createElement("DIV");
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || "";
+    },
+    truncateContent: function truncateContent(details) {
+      var text = this.stripHtml(details);
+      var words = text.split(' ');
+
+      if (words.length > 100) {
+        var sliceData = words.slice(0, 100).join(' ') + '...';
+        console.log(sliceData);
+        return sliceData;
+      }
+
+      return details;
+    },
+    categoryByContent: function categoryByContent(id) {
+      var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
@@ -4886,16 +4960,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/web/category').then(function (response) {
+                return axios__WEBPACK_IMPORTED_MODULE_3__["default"].get('/api/category-by-content/' + id).then(function (response) {
                   if (response.status === 200) {
-                    _this2.categoryItems = response.data.data.items;
+                    _this.categoryByContentData = response.data.data;
                   }
                 })["catch"](function (error) {
                   if (error.response.status === 422) {
-                    _this2.errors = error.response.data.errors;
+                    _this.errors = error.response.data.errors;
                   } else {
                     // this.toastMessage('error', error, 'check', '', 'times')
-                    console.log(error);
+                    console.error('Error:', error);
                   }
                 })["finally"](function () {});
 
@@ -4906,6 +4980,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee2);
       }))();
+    },
+    prevPage: function prevPage() {
+      if (this.categoryItems.prev_page_url) {
+        this.$inertia.visit(this.categoryItems.prev_page_url);
+      }
+    },
+    nextPage: function nextPage() {
+      if (this.categoryItems.next_page_url) {
+        this.$inertia.visit(this.categoryItems.next_page_url);
+      }
     }
   }
 });
@@ -64247,63 +64331,247 @@ var render = function () {
               _vm._v("Categorie list:"),
             ]),
             _vm._v(" "),
-            _vm.categoryItems.length > 0
+            _vm.categoryItems.data.length > 0
               ? _c(
                   "div",
                   { staticClass: "row" },
-                  _vm._l(_vm.categoryItems, function (categorie) {
-                    return _c(
-                      "div",
-                      { key: categorie.id, staticClass: "col-md-4 mb-3" },
-                      [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "px-3 py-3 shadow-sm border rounded-lg relative h-full flex items-center gap-2",
-                          },
-                          [
-                            _c(
-                              "svg",
-                              {
-                                staticClass: "w-5 flex-shrink-0",
-                                attrs: {
-                                  xmlns: "http://www.w3.org/2000/svg",
-                                  fill: "none",
-                                  viewBox: "0 0 24 24",
-                                  "stroke-width": "1.5",
-                                  stroke: "#9A5626",
+                  [
+                    _vm._l(_vm.categoryItems.data, function (category, key) {
+                      return _c(
+                        "div",
+                        { key: key, staticClass: "col-md-4 mb-3" },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "px-3 py-3 shadow-sm border rounded-lg relative h-full flex items-center gap-2",
+                              on: {
+                                click: function ($event) {
+                                  return _vm.categoryByContent(category.id)
                                 },
                               },
-                              [
-                                _c("path", {
+                            },
+                            [
+                              _c(
+                                "svg",
+                                {
+                                  staticClass: "w-5 flex-shrink-0",
                                   attrs: {
-                                    "stroke-linecap": "round",
-                                    "stroke-linejoin": "round",
-                                    d: "m8.25 4.5 7.5 7.5-7.5 7.5",
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    fill: "none",
+                                    viewBox: "0 0 24 24",
+                                    "stroke-width": "1.5",
+                                    stroke: "#9A5626",
                                   },
-                                }),
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "h2",
-                              {
-                                staticClass:
-                                  "text-base text-gray-800 font-medium ",
-                              },
-                              [_vm._v(_vm._s(categorie.name))]
-                            ),
-                          ]
-                        ),
-                      ]
-                    )
-                  }),
-                  0
+                                },
+                                [
+                                  _c("path", {
+                                    attrs: {
+                                      "stroke-linecap": "round",
+                                      "stroke-linejoin": "round",
+                                      d: "m8.25 4.5 7.5 7.5-7.5 7.5",
+                                    },
+                                  }),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "h2",
+                                {
+                                  staticClass:
+                                    "text-base text-gray-800 font-medium ",
+                                },
+                                [_vm._v(_vm._s(category.name))]
+                              ),
+                            ]
+                          ),
+                        ]
+                      )
+                    }),
+                    _vm._v(" "),
+                    _c("div", [
+                      _c(
+                        "button",
+                        {
+                          attrs: { disabled: !_vm.categoryItems.prev_page_url },
+                          on: { click: _vm.prevPage },
+                        },
+                        [_vm._v("Previous")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          attrs: { disabled: !_vm.categoryItems.next_page_url },
+                          on: { click: _vm.nextPage },
+                        },
+                        [_vm._v("Next")]
+                      ),
+                    ]),
+                  ],
+                  2
                 )
               : _vm._e(),
           ]),
         ]),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _vm.categoryByContentData
+          ? _c("div", { staticClass: "py-10" }, [
+              _c(
+                "div",
+                { staticClass: "container  data-box-row" },
+                [
+                  _c(
+                    "carousel",
+                    {
+                      attrs: {
+                        autoplay: false,
+                        nav: true,
+                        margin: 20,
+                        autoHeight: true,
+                        responsive: {
+                          0: { items: 1, nav: true },
+                          600: { items: 2, nav: true },
+                          1000: { items: 3, nav: true },
+                        },
+                      },
+                    },
+                    _vm._l(
+                      _vm.categoryByContentData.data,
+                      function (content, index) {
+                        return _c(
+                          "div",
+                          { key: index, staticClass: "h-100 " },
+                          [
+                            _c(
+                              "Link",
+                              {
+                                staticClass: "styles-item relative",
+                                attrs: { href: "project/" + content.slug },
+                              },
+                              [
+                                _c("div", { staticClass: "styles-image" }, [
+                                  _c("img", {
+                                    attrs: { src: content.file, alt: "Banner" },
+                                  }),
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "styles-data" },
+                                  [
+                                    _c("div", { staticClass: "styles-auto" }, [
+                                      content.category
+                                        ? _c(
+                                            "div",
+                                            { staticClass: "styles-title" },
+                                            [
+                                              _vm._v(
+                                                _vm._s(content.category.name) +
+                                                  "\n                                    "
+                                              ),
+                                            ]
+                                          )
+                                        : _c(
+                                            "div",
+                                            { staticClass: "styles-title" },
+                                            [_vm._v("No category")]
+                                          ),
+                                      _vm._v(" "),
+                                      _c("div", [
+                                        _c("div", {
+                                          staticClass: "styles-description",
+                                          domProps: {
+                                            innerHTML: _vm._s(
+                                              _vm.truncateContent(
+                                                content.details
+                                              )
+                                            ),
+                                          },
+                                        }),
+                                      ]),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "styles-btn-bottom" },
+                                      [
+                                        _c("div", {
+                                          staticClass: "styles_btn-wrap__aQjN0",
+                                        }),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("template", { slot: "prev" }, [
+                                      _c("span", { staticClass: "prev" }, [
+                                        _vm._v("prev"),
+                                      ]),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("template", { slot: "next" }, [
+                                      _c("span", { staticClass: "next" }, [
+                                        _vm._v("next"),
+                                      ]),
+                                    ]),
+                                  ],
+                                  2
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "global-arrow-button arrow-direction-right d-flex gap-2 align-items-center",
+                                  },
+                                  [
+                                    _c(
+                                      "span",
+                                      {
+                                        staticClass: "global-arrow-button-text",
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                Find out more\n                            "
+                                        ),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "global-arrow-button-image",
+                                      },
+                                      [
+                                        _c("img", {
+                                          staticClass: "w-5",
+                                          attrs: {
+                                            src: "https://newmurabba.com/-/jssmedia/Project/Murabba/murabba-site//images/ico_6x12_angle_right.svg",
+                                            alt: "image",
+                                            loading: "lazy",
+                                          },
+                                        }),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                              ]
+                            ),
+                          ],
+                          1
+                        )
+                      }
+                    ),
+                    0
+                  ),
+                ],
+                1
+              ),
+            ])
+          : _vm._e(),
       ]),
     ],
     1

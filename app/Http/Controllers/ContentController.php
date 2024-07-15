@@ -59,7 +59,6 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
-
         $rules = [
             'category_id' => 'required',
             'title' => 'required|string|max:255',
@@ -76,14 +75,11 @@ class ContentController extends Controller
         // Validate the request
         $validatedData = $request->validate($rules);
 
-
         $data = $validatedData;
         $data['category_id'] = $validatedData['category_id'];
         $data['title'] = $validatedData['title'];
         $data['social_links'] = $validatedData['social_links'];
         $data['get_in_touch'] = $validatedData['get_in_touch'];
-
-
 
         // Generate a unique slug
         $slug = Str::slug($data['title']);
@@ -104,26 +100,22 @@ class ContentController extends Controller
         }
         // Handle file upload if it exists
         if ($request->hasFile('boucher_files')) {
-            $boucher_files_path = $request->file('boucher_files')->storePublicly('public/content');
-            $full_path = 'https://mipim-file.s3.amazonaws.com/' . $boucher_files_path;
-            $data['boucher_files'] = json_encode($full_path);
+            $fileKeys = ['boucher_files', 'boucher_files1', 'boucher_files2', 'boucher_files3', 'boucher_files4'];
+            $boucherFiles = [];
+
+            foreach ($fileKeys as $key) {
+                if ($request->hasFile($key)) {
+                    $boucherFilesPath = $request->file($key)->storePublicly('public/content');
+                    $fullPath = 'https://mipim-file.s3.amazonaws.com/' . $boucherFilesPath;
+                    $boucherFiles[] = $fullPath;
+                }
+            }
+
+            // Prepare the data for database insertion
+            $data['boucher_files'] = json_encode($boucherFiles, true);
         }
 
-        // Create the content
         $content = Content::create($data);
-
-        //        if ($request->file('boucher_files') != null){
-        //            $files = $request->file('boucher_files');
-        //            foreach ($files as $file){
-        //                $doc = new ExhibitorDocument();
-        //                $doc->file = $file['file']->store('exhibitor-brochure-file-'.$event->id, config('infinity.file_system_driver'));
-        ////                dd($doc->file);
-        //                $doc->event()->associate($event);
-        //                $doc->exhibitor()->associate($exhibitor);
-        //                $doc->save();
-        //                //array_push($docs, $doc);
-        //            }
-        //        }
 
         return response()->json([
             'status' => 'success',
@@ -164,28 +156,70 @@ class ContentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Find the record you want to update
+        $rules = [
+            'category_id' => 'required',
+            'title' => 'required|string|max:255',
+            'type' => 'required|string|max:255',
+            'details' => 'nullable|string',
+            'position' => 'nullable|integer',
+            'file' => 'nullable|file', // Ensure the file is actually a file
+            'boucher_files' => 'nullable', // Ensure the file is actually a file
+            'social_links' => 'required|json',
+            'get_in_touch' => 'required|json',
+        ];
+
+        // Validate the request
+        $validatedData = $request->validate($rules);
+
+        // Find the existing content
         $content = Content::findOrFail($id);
 
-        // Update the record with the new data
-        $content->title = $request->title;
-        $content->details = $request->details;
-        $content->date = $request->date;
-        $content->type = $request->type;
-        $content->position = $request->position;
+        // Update the data array
+        $data = $validatedData;
+        $data['category_id'] = $validatedData['category_id'];
+        $data['title'] = $validatedData['title'];
+        $data['social_links'] = $validatedData['social_links'];
+        $data['get_in_touch'] = $validatedData['get_in_touch'];
 
-        // Check if a new file is provided
-        if ($request->hasFile('file')) {
-            // Delete the old file if it exists
-            Storage::delete($content->file);
+        // Generate a unique slug if the title has changed
+        if ($content->title !== $data['title']) {
+            $slug = Str::slug($data['title']);
+            $originalSlug = $slug;
+            $counter = 1;
 
-            // Store the new file
-            $path = $request->file('file')->storePublicly('public/content');
-            $content->file = 'https://mipim-file.s3.amazonaws.com/' . $path;
+            while (Content::where('slug', $slug)->exists() && $slug !== $content->slug) {
+                $slug = $originalSlug . '-' . $counter;
+                $counter++;
+            }
+
+            $data['slug'] = $slug;
         }
 
-        // Save the changes to the database
-        $content->save();
+        // Handle file upload if it exists
+        if ($request->hasFile('file')) {
+            $path = $request->file('file')->storePublicly('public/content');
+            $data['file'] = 'https://mipim-file.s3.amazonaws.com/' . $path;
+        }
+
+        // Handle boucher_files upload if it exists
+        $fileKeys = ['boucher_files', 'boucher_files1', 'boucher_files2', 'boucher_files3', 'boucher_files4'];
+        $boucherFiles = [];
+
+        foreach ($fileKeys as $key) {
+            if ($request->hasFile($key)) {
+                $boucherFilesPath = $request->file($key)->storePublicly('public/content');
+                $fullPath = 'https://mipim-file.s3.amazonaws.com/' . $boucherFilesPath;
+                $boucherFiles[] = $fullPath;
+            }
+        }
+
+        if (!empty($boucherFiles)) {
+            // Prepare the data for database insertion
+            $data['boucher_files'] = json_encode($boucherFiles, true);
+        }
+
+        // Update the content in the database
+        $content->update($data);
 
         return response()->json([
             'status' => 'success',
@@ -193,6 +227,7 @@ class ContentController extends Controller
             'data' => $content
         ]);
     }
+
 
     public function update_order(Request $request)
     {
