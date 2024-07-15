@@ -4907,6 +4907,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -4940,6 +4944,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: {
+    toggleActive: function toggleActive(categoryId) {
+      this.activeCategory = this.activeCategory === categoryId ? null : categoryId;
+      this.categoryByContent(categoryId);
+    },
+    isActive: function isActive(categoryId) {
+      return this.activeCategory === categoryId;
+    },
     stripHtml: function stripHtml(html) {
       var tmp = document.createElement("DIV");
       tmp.innerHTML = html;
@@ -15917,7 +15928,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.about-section[data-v-61c9de85] {\n    padding: 50px 35px;\n}\n.about-section h3[data-v-61c9de85] {\n    color: #9A5626;\n}\n.carousel-item[data-v-61c9de85] {\n    display: flex;\n    flex-direction: column;\n    height: 100%;\n}\n.styles-item[data-v-61c9de85] {\n\n    display: block;\n    background-color: #9A5626;\n    text-decoration: none;\n    height: 100%;\n}\n.styles-image[data-v-61c9de85] {\n    position: relative;\n    width: 100%;\n    height: 260px;\n    background-color: #fff;\n}\n.styles-image img[data-v-61c9de85] {\n    position: relative;\n    display: block;\n    width: 100%;\n    height: 100%;\n    -o-object-fit: cover;\n       object-fit: cover;\n    -o-object-position: center;\n       object-position: center;\n}\n.styles-data[data-v-61c9de85] {\n    padding: 24px;\n    /* height: 274px; */\n    position: relative;\n\n    background: #9A5626;\n}\n.styles-auto[data-v-61c9de85] {\n    position: relative;\n}\n.styles-date[data-v-61c9de85] {\n    position: relative;\n    font-family: 12px;\n    color: #fff;\n    margin-bottom: 6px;\n}\n.styles-title[data-v-61c9de85] {\n    position: relative;\n    font-size: 20px;\n    font-weight: 600;\n    color: #fff;\n    margin-bottom: 10px;\n    display: -webkit-box;\n    -webkit-line-clamp: 2;\n    -webkit-box-orient: vertical;\n    overflow: hidden;\n}\n.styles-description[data-v-61c9de85] {\n    position: relative;\n    font-size: 16px;\n    color: #fff;\n    width: 100%;\n    height: auto;\n    display: -webkit-box;\n    -webkit-line-clamp: 3;\n    -webkit-box-orient: vertical;\n    overflow: hidden;\n    margin-bottom: 24px;\n}\n.global-arrow-button[data-v-61c9de85] {\n    position: absolute;\n    bottom: 30px;\n    left: 28px;\n}\n.global-arrow-button-text[data-v-61c9de85] {\n    transition: color 0.3s ease-in-out;\n    position: relative;\n    font-size: 16px;\n    color: #fff;\n}\n.global-arrow-button-image img[data-v-61c9de85] {\n    width: 16px !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.about-section[data-v-61c9de85] {\n    padding: 50px 35px;\n}\n.active-btn[data-v-61c9de85] {\n    background: #9A5626;\n}\n.active-btn h2[data-v-61c9de85] {\n    color: #fff;\n}\n.active-btn svg[data-v-61c9de85] {\n    stroke: #fff;\n}\n.about-section h3[data-v-61c9de85] {\n    color: #9A5626;\n}\n.carousel-item[data-v-61c9de85] {\n    display: flex;\n    flex-direction: column;\n    height: 100%;\n}\n.styles-item[data-v-61c9de85] {\n\n    display: block;\n    background-color: #9A5626;\n    text-decoration: none;\n    height: 100%;\n}\n.styles-image[data-v-61c9de85] {\n    position: relative;\n    width: 100%;\n    height: 260px;\n    background-color: #fff;\n}\n.styles-image img[data-v-61c9de85] {\n    position: relative;\n    display: block;\n    width: 100%;\n    height: 100%;\n    -o-object-fit: cover;\n       object-fit: cover;\n    -o-object-position: center;\n       object-position: center;\n}\n.styles-data[data-v-61c9de85] {\n    padding: 24px;\n    /* height: 274px; */\n    position: relative;\n\n    background: #9A5626;\n}\n.styles-auto[data-v-61c9de85] {\n    position: relative;\n}\n.styles-date[data-v-61c9de85] {\n    position: relative;\n    font-family: 12px;\n    color: #fff;\n    margin-bottom: 6px;\n}\n.styles-title[data-v-61c9de85] {\n    position: relative;\n    font-size: 20px;\n    font-weight: 600;\n    color: #fff;\n    margin-bottom: 10px;\n    display: -webkit-box;\n    -webkit-line-clamp: 2;\n    -webkit-box-orient: vertical;\n    overflow: hidden;\n}\n.styles-description[data-v-61c9de85] {\n    position: relative;\n    font-size: 16px;\n    color: #fff;\n    width: 100%;\n    height: auto;\n    display: -webkit-box;\n    -webkit-line-clamp: 3;\n    -webkit-box-orient: vertical;\n    overflow: hidden;\n    margin-bottom: 24px;\n}\n.global-arrow-button[data-v-61c9de85] {\n    position: absolute;\n    bottom: 30px;\n    left: 28px;\n}\n.global-arrow-button-text[data-v-61c9de85] {\n    transition: color 0.3s ease-in-out;\n    position: relative;\n    font-size: 16px;\n    color: #fff;\n}\n.global-arrow-button-image img[data-v-61c9de85] {\n    width: 16px !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -64352,9 +64363,12 @@ var render = function () {
                             {
                               staticClass:
                                 "px-3 py-3 shadow-sm border rounded-lg relative h-full flex items-center gap-2",
+                              class: {
+                                "active-btn": _vm.isActive(category.id),
+                              },
                               on: {
                                 click: function ($event) {
-                                  return _vm.categoryByContent(category.id)
+                                  return _vm.toggleActive(category.id)
                                 },
                               },
                             },
@@ -64555,7 +64569,9 @@ var render = function () {
                 ),
               ]),
             ])
-          : _vm._e(),
+          : _c("p", { staticClass: "p-2" }, [
+              _vm._v("\n            No data found\n        "),
+            ]),
       ]),
     ],
     1

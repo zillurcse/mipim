@@ -16,8 +16,9 @@
 
                         <div class="col-md-4 mb-3" v-for="(category, key) in categoryItems.data" :key="key">
 
-                            <div @click="categoryByContent(category.id)"
-                                class="px-3 py-3 shadow-sm border rounded-lg relative h-full flex items-center gap-2">
+                            <div @click="toggleActive(category.id)"
+                                class="px-3 py-3 shadow-sm border rounded-lg relative h-full flex items-center gap-2"
+                                :class="{ 'active-btn': isActive(category.id) }">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="#9A5626" class="w-5 flex-shrink-0">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -86,6 +87,9 @@
 
                 </div>
             </div>
+            <p v-else class="p-2">
+                No data found
+            </p>
         </MainLayoutVue>
     </div>
 
@@ -120,6 +124,13 @@ export default {
     },
 
     methods: {
+        toggleActive(categoryId) {
+            this.activeCategory = this.activeCategory === categoryId ? null : categoryId;
+            this.categoryByContent(categoryId);
+        },
+        isActive(categoryId) {
+            return this.activeCategory === categoryId;
+        },
         stripHtml(html) {
             let tmp = document.createElement("DIV");
             tmp.innerHTML = html;
@@ -175,6 +186,19 @@ export default {
 <style scoped>
 .about-section {
     padding: 50px 35px;
+}
+
+.active-btn {
+    background: #9A5626;
+}
+
+.active-btn h2 {
+    color: #fff;
+
+}
+
+.active-btn svg {
+    stroke: #fff;
 }
 
 .about-section h3 {
