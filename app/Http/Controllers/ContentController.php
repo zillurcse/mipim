@@ -95,8 +95,12 @@ class ContentController extends Controller
 
         // Handle file upload if it exists
         if ($request->hasFile('file')) {
-            $path = $request->file('file')->storePublicly('public/content');
-            $data['file'] = 'https://mipim-file.s3.amazonaws.com/' . $path;
+
+            $fileName = $request->file('file')->getClientOriginalName();
+            $filePath = $request->file('file')->storePublicly('public/content');
+
+            $data['file'] = 'https://mipim-file.s3.amazonaws.com/' . $filePath;
+            $data['original_file_name'] = $fileName;
         }
         // Handle file upload if it exists
         if ($request->hasFile('boucher_files')) {
@@ -105,15 +109,20 @@ class ContentController extends Controller
 
             foreach ($fileKeys as $key) {
                 if ($request->hasFile($key)) {
-                    $boucherFilesPath = $request->file($key)->storePublicly('public/content');
+                    $file = $request->file($key);
+                    $fileName = $file->getClientOriginalName();
+                    $boucherFilesPath = $file->storePublicly('public/content');
                     $fullPath = 'https://mipim-file.s3.amazonaws.com/' . $boucherFilesPath;
-                    $boucherFiles[] = $fullPath;
+                    $boucherFiles[$fileName] = $fullPath;
                 }
             }
+
 
             // Prepare the data for database insertion
             $data['boucher_files'] = json_encode($boucherFiles, true);
         }
+
+        $data['order'] = Content::max('order') + 1;
 
         $content = Content::create($data);
 
