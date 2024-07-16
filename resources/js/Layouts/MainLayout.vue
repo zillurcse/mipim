@@ -5,23 +5,24 @@
         <header>
             <nav class="navbar navbar-expand-xl bg-transparent text-brand container main-nav px-4">
                 <Link class="navbar-brand text-brand" href="/">
-                <img src="https://mipim-file.s3.amazonaws.com/public/logo/gMYl3ElSYwvgWPzF73kSMk3FQCIRvuoe3P79AkrN.svg"
-                    alt="" />
+                    <img
+                        src="https://mipim-file.s3.amazonaws.com/public/logo/gMYl3ElSYwvgWPzF73kSMk3FQCIRvuoe3P79AkrN.svg"
+                        alt=""/>
                 </Link>
                 <button class="navbar-toggler bg-transparent text-black px-3 py-2" type="button"
-                    data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                        data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas"
+                        aria-expanded="false" aria-label="Toggle navigation">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="30px" viewBox="0 0 24 24"
-                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
                     </svg>
                 </button>
                 <div class="offcanvas offcanvas-end" id="navbarOffcanvas" tabindex="-1"
-                    aria-labelledby="offcanvasNavbarLabel">
+                     aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
                         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                            aria-label="Close"></button>
+                                aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
                         <div class="navbar-nav justify-content-end flex-grow-1 pe-3">
@@ -38,13 +39,13 @@
                                 </li> -->
                                 <li class="nav-item dropdown">
                                     <Link class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                    Projects
+                                          data-bs-toggle="dropdown" aria-expanded="false">
+                                        Projects
                                     </Link>
                                     <ul class="dropdown-menu dropdown-menu-scrollable" aria-labelledby="navbarDropdown">
                                         <li v-for="(  content, index  ) in  contentItems " :key="index">
-                                            <Link class="dropdown-item" :href="'project/' + content.slug">
-                                            {{ content.title.substring(0, 20) }}
+                                            <Link class="dropdown-item" :href="slugByRoute(content.slug)">
+                                                {{ content.title.substring(0, 20) }}
                                             </Link>
                                         </li>
 
@@ -66,23 +67,23 @@
                             <img :src="item.banner_image" class="d-block w-100" :alt="'Image ' + (index + 1)">
                         </div> -->
                     <div v-for="(item, index) in bannerItems" :key="index"
-                        :class="{ 'carousel-item': true, 'active': index === 0 }"
-                        :style="{ 'background-image': 'url(' + item.banner_image + ')' }">
+                         :class="{ 'carousel-item': true, 'active': index === 0 }"
+                         :style="{ 'background-image': 'url(' + item.banner_image + ')' }">
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                    data-bs-slide="prev">
+                        data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true">
                         <svg width="21" height="37" viewBox="0 0 21 37" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_15_110)">
                                 <path
                                     d="M6.0604 18.4297L8.31543 20.8213L21 33.6236L17.6174 37L0.704695 20.1179C-0.281881 19.1331 -0.281881 17.7262 0.704695 16.7414L17.6174 -0.140686L21 3.37643L8.31543 16.038L6.0604 18.4297Z"
-                                    fill="#F5F5F5" />
+                                    fill="#F5F5F5"/>
                             </g>
                             <defs>
                                 <clipPath id="clip0_15_110">
                                     <rect width="21" height="37" fill="white"
-                                        transform="translate(21 37) rotate(180)" />
+                                          transform="translate(21 37) rotate(180)"/>
                                 </clipPath>
                             </defs>
                         </svg>
@@ -91,17 +92,17 @@
                     <span class="visually-hidden">Previous</span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                    data-bs-slide="next">
+                        data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true">
                         <svg width="21" height="37" viewBox="0 0 21 37" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_15_108)">
                                 <path
                                     d="M14.9396 18.5703L12.6846 16.1787L0 3.37643L3.38255 0L20.2953 16.8821C21.2819 17.8669 21.2819 19.2738 20.2953 20.2586L3.38255 37.1407L0 33.6236L12.6846 20.962L14.9396 18.5703Z"
-                                    fill="#F5F5F5" />
+                                    fill="#F5F5F5"/>
                             </g>
                             <defs>
                                 <clipPath id="clip0_15_108">
-                                    <rect width="21" height="37" fill="white" />
+                                    <rect width="21" height="37" fill="white"/>
                                 </clipPath>
                             </defs>
                         </svg>
@@ -126,7 +127,7 @@
 </template>
 
 <script>
-import { Link } from '@inertiajs/inertia-vue'
+import {Link} from '@inertiajs/inertia-vue'
 
 export default {
     props: {
@@ -137,14 +138,15 @@ export default {
         Link,
     },
     data() {
-        return {
-        }
+        return {}
     },
     mounted() {
 
     },
     methods: {
-
+        slugByRoute(slug) {
+            return this.$inertia.page.component === 'Welcome' ? '/project/' + slug : slug
+        }
     }
 }
 </script>
