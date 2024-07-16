@@ -127,7 +127,7 @@ export default {
             const words = text.split(' ');
             if (words.length > 100) {
                 let sliceData = words.slice(0, 100).join(' ') + '...';
-                console.log(sliceData);
+
                 return sliceData;
 
             }
@@ -227,7 +227,7 @@ export default {
 
 .styles-data {
     padding: 24px;
-    height: 208px;
+    height: 230px;
     position: relative;
     background: #9A5626;
     transition: all .3s ease-in;

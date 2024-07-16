@@ -4984,7 +4984,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       if (words.length > 100) {
         var sliceData = words.slice(0, 100).join(' ') + '...';
-        console.log(sliceData);
         return sliceData;
       }
 
@@ -8524,31 +8523,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3);
       }))();
     },
-    updateOrder: function updateOrder() {
-      var _this5 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_5__["default"].post('/api/content/update/order', {
-        contents: this.contentItems
-      }).then(function (res) {
-        _this5.$toasted.success(res.data.message, {
-          theme: "toasted-primary",
-          position: "top-center",
-          duration: 5000
-        });
-
-        _this5.getContentData();
-      })["catch"](function (err) {
-        _this5.$toasted.show(err.response.data.message, {
-          theme: "toasted-primary",
-          position: "top-center",
-          duration: 5000
-        });
-      })["finally"](function (res) {
-        console.log(res);
-      });
-    },
+    // updateOrder() {
+    //     axios.post('/api/content/update/order', { contents: this.contentItems })
+    //         .then(res => {
+    //             this.$toasted.success(res.data.message, {
+    //                 theme: "toasted-primary",
+    //                 position: "top-center",
+    //                 duration: 5000
+    //             });
+    //             this.getContentData()
+    //         })
+    //         .catch(err => {
+    //             this.$toasted.show(err.response.data.message, {
+    //                 theme: "toasted-primary",
+    //                 position: "top-center",
+    //                 duration: 5000
+    //             });
+    //         })
+    //         .finally(res => {
+    //             console.log(res);
+    //         })
+    // },
     handleContentFileChange: function handleContentFileChange(event) {
-      var _this6 = this;
+      var _this5 = this;
 
       var file = event.target.files[0];
       var allowedTypes = {
@@ -8580,12 +8577,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       reader.onload = function () {
         var interval = setInterval(function () {
-          _this6.progress += 5; // Increment progress by 5%
+          _this5.progress += 5; // Increment progress by 5%
 
-          if (_this6.progress >= 100) {
+          if (_this5.progress >= 100) {
             clearInterval(interval);
-            _this6.contentPreview = reader.result;
-            _this6.uploading = false;
+            _this5.contentPreview = reader.result;
+            _this5.uploading = false;
           }
         }, 500); // Set previewImage to base64 string
       };
@@ -8594,10 +8591,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.contentFile = file;
     },
     uploadContentFiles: function uploadContentFiles() {
-      var _this7 = this;
+      var _this6 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        var _this7$fileRecordsFor, _this7$fileRecordsFor2, _this7$fileRecordsFor3, _this7$fileRecordsFor4, _this7$fileRecordsFor5, socialLinks, getInTuch, formData, response;
+        var _this6$fileRecordsFor, _this6$fileRecordsFor2, _this6$fileRecordsFor3, _this6$fileRecordsFor4, _this6$fileRecordsFor5, socialLinks, getInTuch, formData, response;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
@@ -8605,23 +8602,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context4.prev = 0;
                 // Assign files if they exist
-                _this7.boucher_files = (_this7$fileRecordsFor = _this7.fileRecordsForUpload[0]) === null || _this7$fileRecordsFor === void 0 ? void 0 : _this7$fileRecordsFor.file;
-                _this7.boucher_files1 = (_this7$fileRecordsFor2 = _this7.fileRecordsForUpload[1]) === null || _this7$fileRecordsFor2 === void 0 ? void 0 : _this7$fileRecordsFor2.file;
-                _this7.boucher_files2 = (_this7$fileRecordsFor3 = _this7.fileRecordsForUpload[2]) === null || _this7$fileRecordsFor3 === void 0 ? void 0 : _this7$fileRecordsFor3.file;
-                _this7.boucher_files3 = (_this7$fileRecordsFor4 = _this7.fileRecordsForUpload[3]) === null || _this7$fileRecordsFor4 === void 0 ? void 0 : _this7$fileRecordsFor4.file;
-                _this7.boucher_files4 = (_this7$fileRecordsFor5 = _this7.fileRecordsForUpload[4]) === null || _this7$fileRecordsFor5 === void 0 ? void 0 : _this7$fileRecordsFor5.file;
+                _this6.boucher_files = (_this6$fileRecordsFor = _this6.fileRecordsForUpload[0]) === null || _this6$fileRecordsFor === void 0 ? void 0 : _this6$fileRecordsFor.file;
+                _this6.boucher_files1 = (_this6$fileRecordsFor2 = _this6.fileRecordsForUpload[1]) === null || _this6$fileRecordsFor2 === void 0 ? void 0 : _this6$fileRecordsFor2.file;
+                _this6.boucher_files2 = (_this6$fileRecordsFor3 = _this6.fileRecordsForUpload[2]) === null || _this6$fileRecordsFor3 === void 0 ? void 0 : _this6$fileRecordsFor3.file;
+                _this6.boucher_files3 = (_this6$fileRecordsFor4 = _this6.fileRecordsForUpload[3]) === null || _this6$fileRecordsFor4 === void 0 ? void 0 : _this6$fileRecordsFor4.file;
+                _this6.boucher_files4 = (_this6$fileRecordsFor5 = _this6.fileRecordsForUpload[4]) === null || _this6$fileRecordsFor5 === void 0 ? void 0 : _this6$fileRecordsFor5.file;
 
-                if (!(_this7.type === "Speaker")) {
+                if (!(_this6.type === "Speaker")) {
                   _context4.next = 12;
                   break;
                 }
 
-                if (!(_this7.title === "" || _this7.date === "" || _this7.details === "" || _this7.contentFile === null || _this7.position === "")) {
+                if (!(_this6.title === "" || _this6.date === "" || _this6.details === "" || _this6.contentFile === null || _this6.position === "")) {
                   _context4.next = 10;
                   break;
                 }
 
-                _this7.$toasted.show("Please fill up all fields", {
+                _this6.$toasted.show("Please fill up all fields", {
                   theme: "toasted-primary",
                   position: "top-center",
                   duration: 5000
@@ -8634,12 +8631,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 break;
 
               case 12:
-                if (!(_this7.title === "" || _this7.link === '' || _this7.type === "" || _this7.contentFile === null)) {
+                if (!(_this6.title === "" || _this6.link === '' || _this6.type === "" || _this6.contentFile === null)) {
                   _context4.next = 15;
                   break;
                 }
 
-                _this7.$toasted.show("Please fill up all fields", {
+                _this6.$toasted.show("Please fill up all fields", {
                   theme: "toasted-primary",
                   position: "top-center",
                   duration: 5000
@@ -8649,32 +8646,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 15:
                 socialLinks = {
-                  facebook: _this7.facebook,
-                  twitter: _this7.twitter,
-                  linkedin: _this7.linkedin,
-                  instagram: _this7.instagram
+                  facebook: _this6.facebook,
+                  twitter: _this6.twitter,
+                  linkedin: _this6.linkedin,
+                  instagram: _this6.instagram
                 };
                 getInTuch = {
-                  email: _this7.email,
-                  phone: _this7.phone
+                  email: _this6.email,
+                  phone: _this6.phone
                 }; // Create FormData and append all data
 
-                _this7.isLoading = true;
+                _this6.isLoading = true;
                 formData = new FormData();
-                formData.append('title', _this7.title);
-                formData.append('category_id', _this7.category_id);
-                formData.append('link', _this7.link);
-                formData.append('type', _this7.type);
-                formData.append('date', _this7.date);
-                formData.append('details', _this7.details);
-                formData.append('position', _this7.position);
-                formData.append('file', _this7.contentFile); // Conditionally append each boucher file if it exists
+                formData.append('title', _this6.title);
+                formData.append('category_id', _this6.category_id);
+                formData.append('link', _this6.link);
+                formData.append('type', _this6.type);
+                formData.append('date', _this6.date);
+                formData.append('details', _this6.details);
+                formData.append('position', _this6.position);
+                formData.append('file', _this6.contentFile); // Conditionally append each boucher file if it exists
 
-                if (_this7.boucher_files) formData.append('boucher_files', _this7.boucher_files);
-                if (_this7.boucher_files1) formData.append('boucher_files1', _this7.boucher_files1);
-                if (_this7.boucher_files2) formData.append('boucher_files2', _this7.boucher_files2);
-                if (_this7.boucher_files3) formData.append('boucher_files3', _this7.boucher_files3);
-                if (_this7.boucher_files4) formData.append('boucher_files4', _this7.boucher_files4);
+                if (_this6.boucher_files) formData.append('boucher_files', _this6.boucher_files);
+                if (_this6.boucher_files1) formData.append('boucher_files1', _this6.boucher_files1);
+                if (_this6.boucher_files2) formData.append('boucher_files2', _this6.boucher_files2);
+                if (_this6.boucher_files3) formData.append('boucher_files3', _this6.boucher_files3);
+                if (_this6.boucher_files4) formData.append('boucher_files4', _this6.boucher_files4);
                 formData.append('social_links', JSON.stringify(socialLinks));
                 formData.append('get_in_touch', JSON.stringify(getInTuch)); // Make POST request to upload the file and data
 
@@ -8685,24 +8682,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context4.sent;
 
                 // Handle success
-                _this7.getContentData(); // Update content data
+                _this6.getContentData(); // Update content data
 
 
-                _this7.showModal = false; // Close the modal after successful upload
+                _this6.showModal = false; // Close the modal after successful upload
                 // Reset all data
 
-                _this7.title = '';
-                _this7.link = '';
-                _this7.date = '';
-                _this7.details = '';
-                _this7.position = '';
-                _this7.category_id = '0';
-                _this7.type = 'Select Type';
-                _this7.contentFile = null;
-                _this7.contentPreview = null;
-                _this7.isLoading = false;
+                _this6.title = '';
+                _this6.link = '';
+                _this6.date = '';
+                _this6.details = '';
+                _this6.position = '';
+                _this6.category_id = '0';
+                _this6.type = 'Select Type';
+                _this6.contentFile = null;
+                _this6.contentPreview = null;
+                _this6.isLoading = false;
 
-                _this7.$toasted.success(response.data.message, {
+                _this6.$toasted.success(response.data.message, {
                   theme: "toasted-primary",
                   position: "top-center",
                   duration: 5000
@@ -8715,9 +8712,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context4.prev = 52;
                 _context4.t0 = _context4["catch"](0);
                 // Handle error
-                _this7.isLoading = false;
+                _this6.isLoading = false;
 
-                _this7.$toasted.show(_context4.t0.response.data.message, {
+                _this6.$toasted.show(_context4.t0.response.data.message, {
                   theme: "toasted-primary",
                   position: "top-center",
                   duration: 5000
@@ -8743,14 +8740,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.$refs.vueFileAgent.deleteUpload(this.uploadUrl, this.uploadHeaders, fileRecord);
     },
     filesSelected: function filesSelected(fileRecordsNewlySelected) {
-      console.log(fileRecordsNewlySelected);
       var validFileRecords = fileRecordsNewlySelected.filter(function (fileRecord) {
         return !fileRecord.error;
       });
       this.fileRecordsForUpload = this.fileRecordsForUpload.concat(validFileRecords);
     },
     onBeforeDelete: function onBeforeDelete(fileRecord) {
-      console.log('deleted sucsessfully');
       var i = this.fileRecordsForUpload.indexOf(fileRecord);
 
       if (i !== -1) {
@@ -8774,11 +8769,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     deleteContentItem: function deleteContentItem(id) {
-      var _this8 = this;
+      var _this7 = this;
 
       // Send a DELETE request to the backend with the item's ID
       axios__WEBPACK_IMPORTED_MODULE_5__["default"]["delete"]("/api/content/".concat(id)).then(function (response) {
-        _this8.getContentData(); // Assuming you want to remove the item from the frontend after successful deletion
+        _this7.getContentData(); // Assuming you want to remove the item from the frontend after successful deletion
         // You can trigger a method to refresh the list of items or remove the deleted item from the UI
 
       })["catch"](function (error) {
@@ -8786,7 +8781,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     UpdateContent: function UpdateContent(item) {
-      console.log(item.social_links, item.social_links.facebook);
       this.updatedId = item.id;
       this.showModal = 'pdf';
       this.isUpdate = true;
@@ -8807,7 +8801,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.fileRecords = item.social_links.fileRecords;
     },
     updateContentFiles: function updateContentFiles() {
-      var _this9 = this;
+      var _this8 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
         var formData, response;
@@ -8816,61 +8810,61 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context5.prev = _context5.next) {
               case 0:
                 _context5.prev = 0;
-                _this9.isLoading = true;
+                _this8.isLoading = true;
                 formData = new FormData();
 
-                if (_this9.title) {
-                  formData.append('title', _this9.title);
+                if (_this8.title) {
+                  formData.append('title', _this8.title);
                 }
 
-                if (_this9.link) {
-                  formData.append('link', _this9.link);
+                if (_this8.link) {
+                  formData.append('link', _this8.link);
                 }
 
-                if (_this9.type) {
-                  formData.append('type', _this9.type);
+                if (_this8.type) {
+                  formData.append('type', _this8.type);
                 }
 
-                if (_this9.date) {
-                  formData.append('date', _this9.date);
+                if (_this8.date) {
+                  formData.append('date', _this8.date);
                 }
 
-                if (_this9.details) {
-                  formData.append('details', _this9.details);
+                if (_this8.details) {
+                  formData.append('details', _this8.details);
                 }
 
-                if (_this9.position) {
-                  formData.append('position', _this9.position);
+                if (_this8.position) {
+                  formData.append('position', _this8.position);
                 }
 
-                if (_this9.contentFile) {
-                  formData.append('file', _this9.contentFile);
+                if (_this8.contentFile) {
+                  formData.append('file', _this8.contentFile);
                 }
 
                 _context5.next = 12;
-                return axios__WEBPACK_IMPORTED_MODULE_5__["default"].post("/api/content/".concat(_this9.updatedId), formData);
+                return axios__WEBPACK_IMPORTED_MODULE_5__["default"].post("/api/content/".concat(_this8.updatedId), formData);
 
               case 12:
                 response = _context5.sent;
 
                 // Handle success
-                _this9.getContentData(); // Update content data
+                _this8.getContentData(); // Update content data
 
 
-                _this9.showModal = false; // Close the modal after successful upload
+                _this8.showModal = false; // Close the modal after successful upload
                 // Reset all data
 
-                _this9.title = '';
-                _this9.link = '';
-                _this9.date = '';
-                _this9.details = '';
-                _this9.position = '';
-                _this9.type = 'Select Type';
-                _this9.contentFile = null;
-                _this9.contentPreview = null;
-                _this9.isLoading = false;
+                _this8.title = '';
+                _this8.link = '';
+                _this8.date = '';
+                _this8.details = '';
+                _this8.position = '';
+                _this8.type = 'Select Type';
+                _this8.contentFile = null;
+                _this8.contentPreview = null;
+                _this8.isLoading = false;
 
-                _this9.$toasted.success(response.data.message, {
+                _this8.$toasted.success(response.data.message, {
                   theme: "toasted-primary",
                   position: "top-center",
                   duration: 5000
@@ -8884,7 +8878,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context5.t0 = _context5["catch"](0);
                 // Handle error
                 console.error("Error:", _context5.t0);
-                _this9.isLoading = false; // Add specific error handling as needed
+                _this8.isLoading = false; // Add specific error handling as needed
 
               case 31:
               case "end":
@@ -10303,7 +10297,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       if (words.length > 100) {
         var sliceData = words.slice(0, 100).join(' ') + '...';
-        console.log(sliceData);
         return sliceData;
       }
 
@@ -16150,7 +16143,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.owl-item {\r\n    height: 470px;\n}\n.owl-theme .owl-dots {\r\n    margin-top: 20px;\n}\n.show {\r\n\r\n    display: block;\n}\n.modal {\r\n    background-color: rgba(0, 0, 0, 0.432);\n}\n.modal-body img {\r\n    max-height: 500px;\r\n    -o-object-position: center;\r\n       object-position: center;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.modal-dialog {\r\n    max-width: 700px;\n}\n.carousel-item {\r\n    display: flex;\r\n    flex-direction: column;\r\n    height: 100%;\n}\n.styles-item {\r\n    display: block;\r\n    background-color: #9A5626;\r\n    text-decoration: none;\r\n    height: 100%;\r\n    transition: all .3s ease-in;\r\n    overflow: hidden;\n}\n.styles-image {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 260px;\r\n    background-color: #fff;\n}\n.styles-image img {\r\n    position: relative;\r\n    display: block;\r\n    width: 100%;\r\n    height: 100%;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\r\n    -o-object-position: center;\r\n       object-position: center;\r\n    transition: all .3s ease-in;\n}\n.styles-data {\r\n    padding: 24px;\r\n    height: 208px;\r\n    position: relative;\r\n    background: #9A5626;\r\n    transition: all .3s ease-in;\n}\n.styles-auto {\r\n    position: relative;\n}\n.styles-date {\r\n    position: relative;\r\n    font-family: 12px;\r\n    color: #fff;\r\n    margin-bottom: 6px;\r\n    transition: all .3s ease-in;\n}\n.styles-title {\r\n    position: relative;\r\n    font-size: 20px;\r\n    font-weight: 600;\r\n    color: #fff;\r\n    margin-bottom: 10px;\r\n    display: -webkit-box;\r\n    -webkit-line-clamp: 2;\r\n    -webkit-box-orient: vertical;\r\n    overflow: hidden;\r\n    transition: all .3s ease-in;\n}\n.styles-description {\r\n    position: relative;\r\n    font-size: 16px;\r\n    color: #fff;\r\n    width: 100%;\r\n    height: auto;\r\n    display: -webkit-box;\r\n    -webkit-line-clamp: 3;\r\n    -webkit-box-orient: vertical;\r\n    overflow: hidden;\r\n    margin-bottom: 24px;\r\n    transition: all .3s ease-in;\n}\n.global-arrow-button {\r\n    position: absolute;\r\n    bottom: 24px;\r\n    left: 28px;\n}\n.global-arrow-button-text {\r\n    transition: color 0.3s ease-in-out;\r\n    position: relative;\r\n    font-size: 16px;\r\n    color: #fff;\n}\n.global-arrow-button-image {\r\n    color: #fff;\n}\n.styles-item:hover {\r\n    background: #111;\n}\n.styles-item:hover .styles-data {\r\n    background: #111;\n}\n.styles-item:hover .styles-image img {\r\n    transform: scale(1.03);\n}\n.owl-nav {\r\n    position: absolute;\r\n    right: 0;\r\n    margin: 0;\r\n    bottom: -8px;\n}\n.owl-prev,\r\n.owl-next {\r\n    position: relative;\r\n    width: 30px;\r\n    /* Adjust according to the size of the icon */\r\n    height: 30px;\r\n    /* Adjust according to the size of the icon */\r\n    text-indent: -9999px;\r\n    /* Hide the text */\r\n    overflow: hidden;\r\n    /* Ensure the text is not visible */\r\n    display: inline-block;\r\n    background-color: transparent !important;\r\n    /* Adjust display as needed */\n}\n.owl-prev {\r\n    background-image: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"%23000\" viewBox=\"0 0 24 24\"><path d=\"M12 0C5.373 0 0 5.373 0 12c0 6.627 5.373 12 12 12 6.627 0 12-5.373 12-12C24 5.373 18.627 0 12 0zm0 21.6c-5.293 0-9.6-4.307-9.6-9.6 0-5.293 4.307-9.6 9.6-9.6 5.293 0 9.6 4.307 9.6 9.6 0 5.293-4.307 9.6-9.6 9.6z\"/><path d=\"M17.657 11.293l-4-4a1 1 0 0 0-1.414 1.414L14.586 11H7a1 1 0 0 0 0 2h7.586l-2.343 2.293a1 1 0 1 0 1.414 1.414l4-4a1 1 0 0 0 0-1.414z\"/></svg>') !important;\r\n    background-size: contain;\r\n    background-repeat: no-repeat;\r\n    background-position: center;\n}\n.owl-next {\r\n    background-image: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"%23000\" viewBox=\"0 0 24 24\"><path d=\"M12 0C5.373 0 0 5.373 0 12c0 6.627 5.373 12 12 12 6.627 0 12-5.373 12-12C24 5.373 18.627 0 12 0zm0 21.6c-5.293 0-9.6-4.307-9.6-9.6 0-5.293 4.307-9.6 9.6-9.6 5.293 0 9.6 4.307 9.6 9.6 0 5.293-4.307 9.6-9.6 9.6z\"/><path d=\"M8.343 11.293l4-4a1 1 0 1 1 1.414 1.414L9.414 11H17a1 1 0 0 1 0 2H9.414l2.343 2.293a1 1 0 0 1-1.414 1.414l-4-4a1 1 0 0 1 0-1.414z\"/></svg>') !important;\r\n    background-size: contain;\r\n    background-repeat: no-repeat;\r\n    background-position: center;\n}\n@media (max-width: 450px) {\n.owl-nav {\r\n        bottom: -42px;\r\n        transform: translateX(-50%);\r\n        left: 50%;\n}\n.owl-carousel .owl-stage-outer {\r\n        margin-bottom: 20px;\n}\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.owl-item {\r\n    height: 470px;\n}\n.owl-theme .owl-dots {\r\n    margin-top: 20px;\n}\n.show {\r\n\r\n    display: block;\n}\n.modal {\r\n    background-color: rgba(0, 0, 0, 0.432);\n}\n.modal-body img {\r\n    max-height: 500px;\r\n    -o-object-position: center;\r\n       object-position: center;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.modal-dialog {\r\n    max-width: 700px;\n}\n.carousel-item {\r\n    display: flex;\r\n    flex-direction: column;\r\n    height: 100%;\n}\n.styles-item {\r\n    display: block;\r\n    background-color: #9A5626;\r\n    text-decoration: none;\r\n    height: 100%;\r\n    transition: all .3s ease-in;\r\n    overflow: hidden;\n}\n.styles-image {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 260px;\r\n    background-color: #fff;\n}\n.styles-image img {\r\n    position: relative;\r\n    display: block;\r\n    width: 100%;\r\n    height: 100%;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\r\n    -o-object-position: center;\r\n       object-position: center;\r\n    transition: all .3s ease-in;\n}\n.styles-data {\r\n    padding: 24px;\r\n    height: 230px;\r\n    position: relative;\r\n    background: #9A5626;\r\n    transition: all .3s ease-in;\n}\n.styles-auto {\r\n    position: relative;\n}\n.styles-date {\r\n    position: relative;\r\n    font-family: 12px;\r\n    color: #fff;\r\n    margin-bottom: 6px;\r\n    transition: all .3s ease-in;\n}\n.styles-title {\r\n    position: relative;\r\n    font-size: 20px;\r\n    font-weight: 600;\r\n    color: #fff;\r\n    margin-bottom: 10px;\r\n    display: -webkit-box;\r\n    -webkit-line-clamp: 2;\r\n    -webkit-box-orient: vertical;\r\n    overflow: hidden;\r\n    transition: all .3s ease-in;\n}\n.styles-description {\r\n    position: relative;\r\n    font-size: 16px;\r\n    color: #fff;\r\n    width: 100%;\r\n    height: auto;\r\n    display: -webkit-box;\r\n    -webkit-line-clamp: 3;\r\n    -webkit-box-orient: vertical;\r\n    overflow: hidden;\r\n    margin-bottom: 24px;\r\n    transition: all .3s ease-in;\n}\n.global-arrow-button {\r\n    position: absolute;\r\n    bottom: 24px;\r\n    left: 28px;\n}\n.global-arrow-button-text {\r\n    transition: color 0.3s ease-in-out;\r\n    position: relative;\r\n    font-size: 16px;\r\n    color: #fff;\n}\n.global-arrow-button-image {\r\n    color: #fff;\n}\n.styles-item:hover {\r\n    background: #111;\n}\n.styles-item:hover .styles-data {\r\n    background: #111;\n}\n.styles-item:hover .styles-image img {\r\n    transform: scale(1.03);\n}\n.owl-nav {\r\n    position: absolute;\r\n    right: 0;\r\n    margin: 0;\r\n    bottom: -8px;\n}\n.owl-prev,\r\n.owl-next {\r\n    position: relative;\r\n    width: 30px;\r\n    /* Adjust according to the size of the icon */\r\n    height: 30px;\r\n    /* Adjust according to the size of the icon */\r\n    text-indent: -9999px;\r\n    /* Hide the text */\r\n    overflow: hidden;\r\n    /* Ensure the text is not visible */\r\n    display: inline-block;\r\n    background-color: transparent !important;\r\n    /* Adjust display as needed */\n}\n.owl-prev {\r\n    background-image: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"%23000\" viewBox=\"0 0 24 24\"><path d=\"M12 0C5.373 0 0 5.373 0 12c0 6.627 5.373 12 12 12 6.627 0 12-5.373 12-12C24 5.373 18.627 0 12 0zm0 21.6c-5.293 0-9.6-4.307-9.6-9.6 0-5.293 4.307-9.6 9.6-9.6 5.293 0 9.6 4.307 9.6 9.6 0 5.293-4.307 9.6-9.6 9.6z\"/><path d=\"M17.657 11.293l-4-4a1 1 0 0 0-1.414 1.414L14.586 11H7a1 1 0 0 0 0 2h7.586l-2.343 2.293a1 1 0 1 0 1.414 1.414l4-4a1 1 0 0 0 0-1.414z\"/></svg>') !important;\r\n    background-size: contain;\r\n    background-repeat: no-repeat;\r\n    background-position: center;\n}\n.owl-next {\r\n    background-image: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"%23000\" viewBox=\"0 0 24 24\"><path d=\"M12 0C5.373 0 0 5.373 0 12c0 6.627 5.373 12 12 12 6.627 0 12-5.373 12-12C24 5.373 18.627 0 12 0zm0 21.6c-5.293 0-9.6-4.307-9.6-9.6 0-5.293 4.307-9.6 9.6-9.6 5.293 0 9.6 4.307 9.6 9.6 0 5.293-4.307 9.6-9.6 9.6z\"/><path d=\"M8.343 11.293l4-4a1 1 0 1 1 1.414 1.414L9.414 11H17a1 1 0 0 1 0 2H9.414l2.343 2.293a1 1 0 0 1-1.414 1.414l-4-4a1 1 0 0 1 0-1.414z\"/></svg>') !important;\r\n    background-size: contain;\r\n    background-repeat: no-repeat;\r\n    background-position: center;\n}\n@media (max-width: 450px) {\n.owl-nav {\r\n        bottom: -42px;\r\n        transform: translateX(-50%);\r\n        left: 50%;\n}\n.owl-carousel .owl-stage-outer {\r\n        margin-bottom: 20px;\n}\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -67416,7 +67409,7 @@ var render = function () {
     [
       _c("div", { staticClass: "flex justify-between items-center " }, [
         _c("h1", { staticClass: "text-xl text-gray-800  font-bold " }, [
-          _vm._v("Add Content"),
+          _vm._v("All Content"),
         ]),
         _vm._v(" "),
         _c(
@@ -67474,7 +67467,7 @@ var render = function () {
                           attrs: { tag: "span" },
                           on: {
                             dragover: function ($event) {
-                              _vm.over = true
+                              _vm.over = false
                             },
                             dragleave: function ($event) {
                               _vm.over = false
@@ -67512,7 +67505,6 @@ var render = function () {
                                   staticClass:
                                     "p-4 border rounded-md bg-gray-100",
                                   class: [_vm.is_dragging ? "is_dragging" : ""],
-                                  on: { click: _vm.updateOrder },
                                 },
                                 [
                                   _c(

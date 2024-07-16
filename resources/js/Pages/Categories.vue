@@ -140,7 +140,7 @@ export default {
             const words = text.split(' ');
             if (words.length > 100) {
                 let sliceData = words.slice(0, 100).join(' ') + '...';
-                console.log(sliceData);
+
                 return sliceData;
 
             }
