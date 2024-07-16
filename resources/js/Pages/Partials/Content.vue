@@ -1,7 +1,7 @@
 <template>
     <div class="bg-white overflow-hidden shadow-xl px-4 py-4 w-3/4   sm:rounded-lg">
         <div class="flex justify-between items-center ">
-            <h1 class="text-xl text-gray-800  font-bold ">Add Content</h1>
+            <h1 class="text-xl text-gray-800  font-bold ">All Content</h1>
 
             <div class="w-10 h-10 flex items-center justify-center rounded-full  bg-brand text-white cursor-pointer "
                 @click="showModal = 'pdf'">
@@ -15,13 +15,13 @@
             <div class="">
                 <div v-if="contentItems.length > 0" class="row">
                     <div class="col-md-4 mb-3" v-for="(item, index) in contentItems" :key="item.id">
-                        <drop :tag="'span'" @dragover="over = true" @dragleave="over = false"
+                        <drop :tag="'span'" @dragover="over = false" @dragleave="over = false"
                             @drop="handleDrop(index, ...arguments)">
 
                             <drag class="cursor-pointer" :transfer-data="index" @dragstart="is_dragging = true"
                                 @dragend="is_dragging = false">
 
-                                <div class="p-4 border rounded-md bg-gray-100" @click="updateOrder"
+                                <div class="p-4 border rounded-md bg-gray-100"
                                     :class="[is_dragging ? 'is_dragging' : '']">
 
                                     <figure class="rounded-md overflow-hidden h-60 relative">
@@ -437,6 +437,7 @@ export default {
             document.getElementById('file').setAttribute('accept', this.acceptedExtensions);
         },
         handleDrop(to_index, from_index) {
+
             var temp = this.contentItems[to_index];
 
             this.contentItems[to_index] = this.contentItems[from_index];
@@ -509,32 +510,33 @@ export default {
 
                 })
         },
-        updateOrder() {
-            axios.post('/api/content/update/order', { contents: this.contentItems })
-                .then(res => {
+        // updateOrder() {
 
-                    this.$toasted.success(res.data.message, {
-                        theme: "toasted-primary",
-                        position: "top-center",
-                        duration: 5000
-                    });
-                    this.getContentData()
+        //     axios.post('/api/content/update/order', { contents: this.contentItems })
+        //         .then(res => {
 
-                })
-                .catch(err => {
-                    this.$toasted.show(err.response.data.message, {
-                        theme: "toasted-primary",
-                        position: "top-center",
-                        duration: 5000
-                    });
+        //             this.$toasted.success(res.data.message, {
+        //                 theme: "toasted-primary",
+        //                 position: "top-center",
+        //                 duration: 5000
+        //             });
+        //             this.getContentData()
+
+        //         })
+        //         .catch(err => {
+        //             this.$toasted.show(err.response.data.message, {
+        //                 theme: "toasted-primary",
+        //                 position: "top-center",
+        //                 duration: 5000
+        //             });
 
 
-                })
-                .finally(res => {
-                    console.log(res);
+        //         })
+        //         .finally(res => {
+        //             console.log(res);
 
-                })
-        },
+        //         })
+        // },
 
         handleContentFileChange(event) {
             const file = event.target.files[0];
@@ -706,12 +708,12 @@ export default {
             this.$refs.vueFileAgent.deleteUpload(this.uploadUrl, this.uploadHeaders, fileRecord);
         },
         filesSelected(fileRecordsNewlySelected) {
-            console.log(fileRecordsNewlySelected);
+
             var validFileRecords = fileRecordsNewlySelected.filter((fileRecord) => !fileRecord.error);
             this.fileRecordsForUpload = this.fileRecordsForUpload.concat(validFileRecords);
         },
         onBeforeDelete(fileRecord) {
-            console.log('deleted sucsessfully');
+
 
             var i = this.fileRecordsForUpload.indexOf(fileRecord);
             if (i !== -1) {
@@ -748,7 +750,7 @@ export default {
                 });
         },
         UpdateContent(item) {
-            console.log(item.social_links, item.social_links.facebook);
+
 
             this.updatedId = item.id
             this.showModal = 'pdf';
