@@ -678,6 +678,14 @@ export default {
                 this.type = 'Select Type';
                 this.contentFile = null;
                 this.contentPreview = null;
+                this.facebook = '';
+                this.twitter = '';
+                this.linkedin = '';
+                this.instagram = '';
+                this.phone = '';
+                this.email = '';
+
+                this.fileRecords = []
                 this.isLoading = false;
 
                 this.$toasted.success(response.data.message, {
