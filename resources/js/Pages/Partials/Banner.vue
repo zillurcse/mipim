@@ -12,8 +12,8 @@
         </div>
         <div class="my-4">
             <div class="">
-                <div v-if="items.length > 0" class="row">
-                    <div class="col-md-6 mb-3" v-for="(item, index) in items" :key="item.id">
+                <div v-if="bannerItems.length > 0" class="row">
+                    <div class="col-md-6 mb-3" v-for="(item, index) in bannerItems" :key="item.id">
                         <drop :tag="'span'" @dragover="over = true" @dragleave="over = false"
                             @drop="handleDrop(index, ...arguments)">
 
@@ -143,6 +143,9 @@ export default {
         VueCropper,
 
     },
+    props:{
+        bannerItems: Array
+    },
     data() {
         return {
             is_dragging: false,
@@ -162,11 +165,9 @@ export default {
             attachments: [],
         };
     },
-    async mounted() {
-        this.getBannerData();
+    mounted() {
     },
     updated() {
-        // this.cropImage()
     },
     methods: {
 
@@ -177,9 +178,6 @@ export default {
             this.isCroping = false;
         },
         cropImage() {
-
-            // get image data for post processing, e.g. upload or setting image src
-            // this.cropImg = this.$refs.cropper.getCroppedCanvas({ width: 1036, height: 350 }).toDataURL();
             this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL();
 
         },
@@ -246,7 +244,6 @@ export default {
                         position: "top-center",
                         duration: 5000
                     });
-                    this.getBannerData()
 
                 })
                 .catch(err => {
@@ -265,25 +262,25 @@ export default {
             // console.log(to_index, from_index);
             //alert(`You dropped with data: ${JSON.stringify(data)}`);
         },
-        async getBannerData() {
-            await axios
-                .get("/api/banner")
-                .then((response) => {
-                    if (response.status == 200) {
-                        this.items = response.data.data.items;
-
-                    }
-                })
-                .catch((error) => {
-                    if (error.response.status == 422) {
-                        this.errors = error.response.data.errors;
-                    } else {
-                        // this.toastMessage('error', error, 'check', '', 'times')
-                        console.log(error);
-                    }
-                })
-                .finally(() => { });
-        },
+        // async getBannerData() {
+        //     await axios
+        //         .get("/api/banner")
+        //         .then((response) => {
+        //             if (response.status == 200) {
+        //                 this.items = response.data.data.items;
+        //
+        //             }
+        //         })
+        //         .catch((error) => {
+        //             if (error.response.status == 422) {
+        //                 this.errors = error.response.data.errors;
+        //             } else {
+        //                 // this.toastMessage('error', error, 'check', '', 'times')
+        //                 console.log(error);
+        //             }
+        //         })
+        //         .finally(() => { });
+        // },
 
         handleFileChange(event) {
             this.bannerImage = event.target.files[0];
@@ -310,7 +307,8 @@ export default {
                 if (response.status === 200) {
                     // console.log(response.data.status)
                     // console.log(response.data)
-                    this.getBannerData();
+                    // this.getBannerData();
+                    this.bannerItems.push(response.data.data)
                     this.showModal = false;
                     this.isLoading = false;
                     this.bannerImage = null;

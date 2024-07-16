@@ -5,8 +5,8 @@
         </div>
         <div class="my-4">
             <div class=" ">
-                <div v-if="contactInfos.length > 0" class="row">
-                    <div class="col-md-6 mb-3" v-for="item in contactInfos" :key="item.id">
+                <div v-if="contactUs.length > 0" class="row">
+                    <div class="col-md-6 mb-3" v-for="item in contactUs" :key="item.id">
                         <div class="p-3 border rounded-lg relative">
                             <p class="text-base text-gray-700">
                                 Name: {{ item.first_name }} {{ item.last_name }}
@@ -116,9 +116,10 @@
 import axios from "axios";
 
 export default {
+    props:['contactUs'],
     data() {
         return {
-            contactInfos: [],
+            // contactInfos: [],
             selectedTab: "contact",
             showModal: "",
 
@@ -127,24 +128,24 @@ export default {
             isUpdate: false,
         };
     },
-    async mounted() {
-        this.getContactInfo();
+    mounted() {
+        // this.getContactInfo();
     },
 
     methods: {
-        async getContactInfo() {
-            await axios
-                .get("/api/contact-us")
-                .then((response) => {
-                    if (response.status == 200) {
-                        this.contactInfos = response.data.data.items;
-                    }
-                })
-                .catch((error) => {
-                    console.error(error);
-                })
-                .finally(() => { });
-        },
+        // async getContactInfo() {
+        //     await axios
+        //         .get("/api/contact-us")
+        //         .then((response) => {
+        //             if (response.status == 200) {
+        //                 this.contactInfos = response.data.data.items;
+        //             }
+        //         })
+        //         .catch((error) => {
+        //             console.error(error);
+        //         })
+        //         .finally(() => { });
+        // },
 
         deleteContactInfo(id) {
             // Send a DELETE request to the backend with the item's ID

@@ -60,11 +60,11 @@
 
 
                     </div>
-                    <Bio v-if="selectedTab === 'bio'" />
-                    <Banner v-else-if="selectedTab === 'banner'" />
-                    <Categories v-else-if="selectedTab === 'categories'" />
-                    <Content v-else-if="selectedTab === 'content'" />
-                    <contact-us v-else-if="selectedTab === 'contact'" />
+                    <Bio v-if="selectedTab === 'bio'" :bioItems="bioItems"/>
+                    <Banner v-else-if="selectedTab === 'banner'" :bannerItems="bannerItems" />
+                    <Categories v-else-if="selectedTab === 'categories'" :categoriesData="categories" />
+                    <Content v-else-if="selectedTab === 'content'" :contentItems="contentItems" :categoriesItems="categories" />
+                    <contact-us v-else-if="selectedTab === 'contact'" :contactUs="contactUs" />
                 </div>
             </div>
         </div>
@@ -98,11 +98,18 @@ export default {
         Categories
     },
 
+    props:{
+        bioItems: Object,
+        bannerItems: Array,
+        contentItems: Array,
+        categories: Array,
+        contactUs: Array,
+    },
     data() {
         return {
-            items: [],
-            contentItems: [],
-            bioItems: [],
+            // items: [],
+            // contentItems: [],
+            // bioItems: [],
             selectedTab: 'bio',
             showModal: '',
             bannerImage: null,
@@ -138,106 +145,14 @@ export default {
                 }
             },
             dataURL: null
-
         }
     },
-    async mounted() {
-        await this.getBannerData()
-        await this.getContentData()
+    mounted() {
+        // await this.getBannerData()
+        // await this.getContentData()
     },
 
     methods: {
-        async getBannerData() {
-
-            // this.$inertia.get('/api/banner', {}, {
-            //     preserveState: true, // Optional, preserves the state of the page (useful for partial reloads)
-            //     onSuccess: (response) => {
-            //         // if (response.status == 200) {
-            //             // console.log('zillur', response);
-            //             // this.items = response.props.data.items;
-            //         // }
-            //     },
-            //     onError: (errors) => {
-            //         if (errors.status == 422) {
-            //             this.errors = errors.data.errors;
-            //         } else {
-            //             console.log(errors);
-            //         }
-            //     }
-            // });
-
-            await axios.get('/api/banner')
-                .then(response => {
-
-                    if (response.status == 200) {
-                        this.items = response.data.data.items
-
-                    }
-
-                })
-                .catch(error => {
-                    if (error.response.status == 422) {
-                        this.errors = error.response.data.errors;
-                    } else {
-                        // this.toastMessage('error', error, 'check', '', 'times')
-                        console.log(error);
-                    }
-                })
-                .finally(() => {
-
-                })
-
-        },
-
-
-        async getContentData() {
-            await axios.get('/api/content', {
-                headers: {
-
-                }
-            })
-                .then(response => {
-
-                    if (response.status == 200) {
-                        this.contentItems = response.data.data.items
-
-                    }
-
-                })
-                .catch(error => {
-                    if (error.response.status == 422) {
-                        this.errors = error.response.data.errors;
-                    } else {
-                        // this.toastMessage('error', error, 'check', '', 'times')
-                        console.log(error);
-                    }
-                })
-                .finally(() => {
-
-                })
-        },
-        async getBioData() {
-            await axios.get('/api/bio-container')
-                .then(response => {
-
-                    if (response.status == 200) {
-                        this.bioItems = response.data.data.items
-
-                    }
-
-                })
-                .catch(error => {
-                    if (error.response.status == 422) {
-                        this.errors = error.response.data.errors;
-                    } else {
-                        // this.toastMessage('error', error, 'check', '', 'times')
-                        console.log(error);
-                    }
-                })
-                .finally(() => {
-
-                })
-        },
         handleFileChange(event) {
 
             this.bannerImage = event.target.files[0];

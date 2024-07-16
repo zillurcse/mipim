@@ -5,11 +5,28 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\BioContainer;
 use App\Models\Category;
+use App\Models\ContactUs;
 use App\Models\Content;
 use Inertia\Inertia;
 
 class HomeController extends Controller
 {
+    public function dashboard()
+    {
+        $bioItems = BioContainer::first();
+        $bannerItems = Banner::orderBy('order', 'asc')->get();
+        $contentItems = Content::with('category')->orderBy('order', 'asc')->get();
+        $categories = Category::orderBy('order', 'asc')->get();
+        $contactUs = ContactUs::orderBy('id', 'asc')->get();
+
+        return Inertia::render('Dashboard', [
+            'bioItems' => $bioItems,
+            'bannerItems' => $bannerItems,
+            'contentItems' => $contentItems,
+            'categories' => $categories,
+            'contactUs' => $contactUs,
+        ]);
+    }
 
     public function index()
     {

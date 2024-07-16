@@ -51,9 +51,8 @@ class CategoriesController extends Controller
         $validatedData = $request->validate($rules);
 
         $data['name'] = $validatedData['name'];
+        $data['order'] = Category::max('order') + 1;
 
-//        $path = $request->file('file')->storePublicly('public/content');
-//        $data['file'] = 'https://mipim-file.s3.amazonaws.com/' . $path;
         $category = Category::create($data);
 
         return response()->json([

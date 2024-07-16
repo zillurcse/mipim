@@ -24,6 +24,8 @@ Route::get('/projects', [HomeController::class, 'categories'])->name('categories
 Route::get('/project/{slug}', [HomeController::class, 'slugByPage']);
 
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+
+//Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//    return Inertia::render('Dashboard');
+//})->name('dashboard');

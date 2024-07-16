@@ -116,10 +116,13 @@
 import axios from 'axios';
 
 export default {
+    props:{
+        bioItems: Object
+    },
     data() {
         return {
 
-            bioItems: [],
+            // bioItems: [],
             selectedTab: 'bio',
             showModal: '',
 
@@ -137,36 +140,36 @@ export default {
 
         }
     },
-    async mounted() {
+    mounted() {
 
-        this.getBioData()
+        // this.getBioData()
 
     },
 
     methods: {
 
-        async getBioData() {
-            await axios.get('/api/bio-container')
-                .then(response => {
-
-                    if (response.status == 200) {
-                        this.bioItems = response.data.data.items
-
-                    }
-
-                })
-                .catch(error => {
-                    if (error.response.status == 422) {
-                        this.errors = error.response.data.errors;
-                    } else {
-                        // this.toastMessage('error', error, 'check', '', 'times')
-                        console.error('Error:', error);
-                    }
-                })
-                .finally(() => {
-
-                })
-        },
+        // async getBioData() {
+        //     await axios.get('/api/bio-container')
+        //         .then(response => {
+        //
+        //             if (response.status == 200) {
+        //                 this.bioItems = response.data.data.items
+        //
+        //             }
+        //
+        //         })
+        //         .catch(error => {
+        //             if (error.response.status == 422) {
+        //                 this.errors = error.response.data.errors;
+        //             } else {
+        //                 // this.toastMessage('error', error, 'check', '', 'times')
+        //                 console.error('Error:', error);
+        //             }
+        //         })
+        //         .finally(() => {
+        //
+        //         })
+        // },
         handleFileChange(event) {
 
             this.bannerImage = event.target.files[0];

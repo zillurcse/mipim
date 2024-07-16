@@ -17,30 +17,30 @@
 
             <div class=" ">
                 <div v-if="categoriesData.length > 0" class="row">
-                    <div class="col-md-6 mb-3" v-for="(categorie, index) in categoriesData " :key="categorie.id">
+                    <div class="col-md-6 mb-3" v-for="(category, index) in categoriesData " :key="category.id">
                         <drop :tag="'span'" @dragover="over = true" @dragleave="over = false"
                             @drop="handleDrop(index, ...arguments)">
 
                             <drag class="cursor-pointer h-full" :transfer-data="index" @dragstart="is_dragging = true"
                                 @dragend="is_dragging = false">
                                 <div class="p-3 border rounded-lg relative h-full">
-                                    <h2 class="text-2xl text-gray-800 mb-2">{{ categorie.name }}</h2>
+                                    <h2 class="text-2xl text-gray-800 mb-2">{{ category.name }}</h2>
 
                                     <div class="absolute top-2 right-2 text-gray-400 cursor-pointer"
-                                        @click="clickTool(categorie.id)">
+                                        @click="clickTool(category.id)">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
                                         </svg>
                                         <div class="w-52  z-10  absolute  right-0 rounded-md bg-white  text-gray-700 shadow-sm"
-                                            v-if="isOpenTool === categorie.id">
+                                            v-if="isOpenTool === category.id">
                                             <button class="cursor-pointer hover:text-red-700 p-2 border-b w-full"
-                                                @click="openCategories(categorie)">
+                                                @click="openCategories(category)">
                                                 Update categories
                                             </button>
                                             <button class="cursor-pointer hover:text-red-700 p-2 w-full"
-                                                @click="deleteCategoryItem(categorie.id)">
+                                                @click="deleteCategoryItem(category.id)">
                                                 Delete categories
                                             </button>
                                         </div>
@@ -77,12 +77,6 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Enter Title" required />
                     </div>
-                    <!-- <div class="mb-6">
-
-                        <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
-                            message</label>
-
-                    </div> -->
 
                     <div class="">
                         <button type="button" @click="uploadCategories" v-if="!isUpdate"
@@ -127,10 +121,11 @@ export default {
     components: {
         Drag, Drop,
     },
+    props:{
+        categoriesData: Array
+    },
     data() {
         return {
-
-            categoriesData: [],
             categories: '',
             updatedId: '',
             selectedTab: 'categories',
@@ -150,45 +145,16 @@ export default {
 
         }
     },
-    async mounted() {
-        await this.getCategoriesData()
+    mounted() {
+        // await this.getCategoriesData()
     },
 
     methods: {
-
-        async getCategoriesData() {
-            await axios.get('/api/categories')
-                .then(response => {
-
-                    if (response.status === 200) {
-                        this.categoriesData = response.data.data.items
-
-                    }
-
-                })
-                .catch(error => {
-                    if (error.response.status === 422) {
-                        this.errors = error.response.data.errors;
-                    } else {
-                        // this.toastMessage('error', error, 'check', '', 'times')
-                        console.error('Error:', error);
-                    }
-                })
-                .finally(() => {
-
-                })
-        },
         handleFileChange(event) {
-
             this.bannerImage = event.target.files[0];
-
-
         },
         handleContentFileChange(event) {
-
             this.contentFile = event.target.files[0];
-
-
         },
         async uploadCategories() {
             try {
@@ -206,16 +172,16 @@ export default {
                 formData.append('name', this.categories);
 
                 // Make POST request to upload the file and data
-                await axios.post('/api/categories', formData);
+                const response = await axios.post('/api/categories', formData);
 
                 // Handle success
+                if(response.status === 200){
+                    this.categoriesData.push(response.data.data)
 
-                this.getCategoriesData(); // Update content data
-                this.showModal = false; // Close the modal after successful upload
-                // Reset all data
-                this.categories = '';
-
-                this.isLoading = false;
+                    this.showModal = false;
+                    this.categories = '';
+                    this.isLoading = false;
+                }
 
             } catch (error) {
                 // Handle error

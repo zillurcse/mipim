@@ -321,7 +321,7 @@ import VueDocPreview from 'vue-doc-preview'
 import { quillEditor } from 'vue-quill-editor'
 
 export default {
-    // props:['content'],
+    props:['contentItems', 'categoriesItems'],
     components: {
         VLazyImage,
         Drag, Drop,
@@ -351,8 +351,8 @@ export default {
             over: false,
             drag: false,
 
-            contentItems: [],
-            categoriesItems: [],
+            // contentItems: [],
+            // categoriesItems: [],
             selectedTab: 'bio',
             showModal: '',
 
@@ -402,8 +402,8 @@ export default {
         }
     },
     async mounted() {
-        await this.getContentData()
-        await this.getCategoriesData()
+        // await this.getContentData()
+        // await this.getCategoriesData()
 
 
 
@@ -470,73 +470,6 @@ export default {
                 })
 
         },
-        async getContentData() {
-            await axios.get('/api/content')
-                .then(response => {
-                    if (response.status == 200) {
-                        this.contentItems = response.data.data.items
-                    }
-
-                })
-                .catch(error => {
-                    if (error.response.status == 422) {
-                        this.errors = error.response.data.errors;
-                    } else {
-                        // this.toastMessage('error', error, 'check', '', 'times')
-                        console.log(error);
-                    }
-                })
-                .finally(() => {
-
-                })
-        },
-        async getCategoriesData() {
-            await axios.get('/api/categories')
-                .then(response => {
-                    if (response.status === 200) {
-                        this.categoriesItems = response.data.data.items
-                    }
-
-                })
-                .catch(error => {
-                    if (error.response.status === 422) {
-                        this.errors = error.response.data.errors;
-                    } else {
-                        // this.toastMessage('error', error, 'check', '', 'times')
-                        console.log(error);
-                    }
-                })
-                .finally(() => {
-
-                })
-        },
-        // updateOrder() {
-
-        //     axios.post('/api/content/update/order', { contents: this.contentItems })
-        //         .then(res => {
-
-        //             this.$toasted.success(res.data.message, {
-        //                 theme: "toasted-primary",
-        //                 position: "top-center",
-        //                 duration: 5000
-        //             });
-        //             this.getContentData()
-
-        //         })
-        //         .catch(err => {
-        //             this.$toasted.show(err.response.data.message, {
-        //                 theme: "toasted-primary",
-        //                 position: "top-center",
-        //                 duration: 5000
-        //             });
-
-
-        //         })
-        //         .finally(res => {
-        //             console.log(res);
-
-        //         })
-        // },
 
         handleContentFileChange(event) {
             const file = event.target.files[0];
@@ -599,9 +532,6 @@ export default {
         }
         ,
         async uploadContentFiles() {
-            // await this.fileRecordsForUpload.forEach(record => {
-            //     this.boucher_files.push(record.file);
-            // });
             try {
                 // Assign files if they exist
                 this.boucher_files = this.fileRecordsForUpload[0]?.file;
@@ -664,35 +594,39 @@ export default {
                 // Make POST request to upload the file and data
                 const response = await axios.post('/api/content', formData);
 
-                // Handle success
-                this.getContentData(); // Update content data
-                this.showModal = false; // Close the modal after successful upload
+                if (response.status===200){
+                    // Handle success
+                    this.contentItems.push(response.data.data)
 
-                // Reset all data
-                this.title = '';
-                this.link = '';
-                this.date = '';
-                this.details = '';
-                this.position = '';
-                this.category_id = '0'
-                this.type = 'Select Type';
-                this.contentFile = null;
-                this.contentPreview = null;
-                this.facebook = '';
-                this.twitter = '';
-                this.linkedin = '';
-                this.instagram = '';
-                this.phone = '';
-                this.email = '';
+                    // this.getContentData(); // Update content data
+                    this.showModal = false; // Close the modal after successful upload
 
-                this.fileRecords = []
-                this.isLoading = false;
+                    // Reset all data
+                    this.title = '';
+                    this.link = '';
+                    this.date = '';
+                    this.details = '';
+                    this.position = '';
+                    this.category_id = '0'
+                    this.type = 'Select Type';
+                    this.contentFile = null;
+                    this.contentPreview = null;
+                    this.facebook = '';
+                    this.twitter = '';
+                    this.linkedin = '';
+                    this.instagram = '';
+                    this.phone = '';
+                    this.email = '';
 
-                this.$toasted.success(response.data.message, {
-                    theme: "toasted-primary",
-                    position: "top-center",
-                    duration: 5000
-                });
+                    this.fileRecords = []
+                    this.isLoading = false;
+
+                    this.$toasted.success(response.data.message, {
+                        theme: "toasted-primary",
+                        position: "top-center",
+                        duration: 5000
+                    });
+                }
 
             } catch (error) {
                 // Handle error
@@ -721,8 +655,6 @@ export default {
             this.fileRecordsForUpload = this.fileRecordsForUpload.concat(validFileRecords);
         },
         onBeforeDelete(fileRecord) {
-
-
             var i = this.fileRecordsForUpload.indexOf(fileRecord);
             if (i !== -1) {
                 // queued file, not yet uploaded. Just remove from the arrays
@@ -744,7 +676,6 @@ export default {
             }
         },
         deleteContentItem(id) {
-
             // Send a DELETE request to the backend with the item's ID
             axios.delete(`/api/content/${id}`)
                 .then(response => {
@@ -758,8 +689,6 @@ export default {
                 });
         },
         UpdateContent(item) {
-
-
             this.updatedId = item.id
             this.showModal = 'pdf';
             this.isUpdate = true
@@ -848,7 +777,6 @@ export default {
                 this.isOpenTool = id;
             }
         },
-
         closeModal() {
             this.showModal = false
         }

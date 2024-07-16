@@ -49,7 +49,7 @@
                                     </div>
                                 </div>
                                 <div class="boucher-box" v-if="content.boucher_files">
-                                    <h3>Boucher <span>({{ boucherFilesLength }})</span></h3>
+                                    <h3>Related Documents <span>({{ boucherFilesLength }})</span></h3>
 
                                     <div class="d-flex justify-between align-items-center py-3"
                                         v-for="(url, key) in content.boucher_files" :key="key">
@@ -150,7 +150,7 @@ export default {
 
         truncateFileName(fileName) {
             if (fileName) {
-                const maxLength = 45;
+                const maxLength = 35;
                 if (fileName.length > maxLength) {
                     return fileName.substring(0, maxLength) + "...";
                 }

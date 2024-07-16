@@ -6175,11 +6175,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     ContactUs: _Partials_Contact_us_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
     Categories: _Partials_Categories_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
   },
+  props: {
+    bioItems: Object,
+    bannerItems: Array,
+    contentItems: Array,
+    categories: Array,
+    contactUs: Array
+  },
   data: function data() {
     return {
-      items: [],
-      contentItems: [],
-      bioItems: [],
+      // items: [],
+      // contentItems: [],
+      // bioItems: [],
       selectedTab: 'bio',
       showModal: '',
       bannerImage: null,
@@ -6217,122 +6224,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       dataURL: null
     };
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return _this.getBannerData();
-
-            case 2:
-              _context.next = 4;
-              return _this.getContentData();
-
-            case 4:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }))();
+  mounted: function mounted() {// await this.getBannerData()
+    // await this.getContentData()
   },
   methods: {
-    getBannerData: function getBannerData() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return axios.get('/api/banner').then(function (response) {
-                  if (response.status == 200) {
-                    _this2.items = response.data.data.items;
-                  }
-                })["catch"](function (error) {
-                  if (error.response.status == 422) {
-                    _this2.errors = error.response.data.errors;
-                  } else {
-                    // this.toastMessage('error', error, 'check', '', 'times')
-                    console.log(error);
-                  }
-                })["finally"](function () {});
-
-              case 2:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
-    },
-    getContentData: function getContentData() {
-      var _this3 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _context3.next = 2;
-                return axios.get('/api/content', {
-                  headers: {}
-                }).then(function (response) {
-                  if (response.status == 200) {
-                    _this3.contentItems = response.data.data.items;
-                  }
-                })["catch"](function (error) {
-                  if (error.response.status == 422) {
-                    _this3.errors = error.response.data.errors;
-                  } else {
-                    // this.toastMessage('error', error, 'check', '', 'times')
-                    console.log(error);
-                  }
-                })["finally"](function () {});
-
-              case 2:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3);
-      }))();
-    },
-    getBioData: function getBioData() {
-      var _this4 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                _context4.next = 2;
-                return axios.get('/api/bio-container').then(function (response) {
-                  if (response.status == 200) {
-                    _this4.bioItems = response.data.data.items;
-                  }
-                })["catch"](function (error) {
-                  if (error.response.status == 422) {
-                    _this4.errors = error.response.data.errors;
-                  } else {
-                    // this.toastMessage('error', error, 'check', '', 'times')
-                    console.log(error);
-                  }
-                })["finally"](function () {});
-
-              case 2:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4);
-      }))();
-    },
     handleFileChange: function handleFileChange(event) {
       this.bannerImage = event.target.files[0];
     },
@@ -6340,162 +6235,162 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.contentFile = event.target.files[0];
     },
     uploadBioFiles: function uploadBioFiles() {
-      var _this5 = this;
+      var _this = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         var formData, response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
-            switch (_context5.prev = _context5.next) {
+            switch (_context.prev = _context.next) {
               case 0:
-                _context5.prev = 0;
+                _context.prev = 0;
                 // Create FormData and append all data
-                _this5.isLoading = true;
+                _this.isLoading = true;
                 formData = new FormData();
-                formData.append('title', _this5.bioTitle);
-                formData.append('description', _this5.bioDesc); // Make POST request to upload the file and data
+                formData.append('title', _this.bioTitle);
+                formData.append('description', _this.bioDesc); // Make POST request to upload the file and data
 
-                _context5.next = 7;
+                _context.next = 7;
                 return axios.post('/api/bio-container', formData);
 
               case 7:
-                response = _context5.sent;
+                response = _context.sent;
 
                 // Handle success
-                _this5.getBioData(); // Update content data
+                _this.getBioData(); // Update content data
 
 
-                _this5.showModal = false; // Close the modal after successful upload
+                _this.showModal = false; // Close the modal after successful upload
                 // Reset all data
 
-                _this5.title = '';
-                _this5.link = '';
-                _this5.type = '';
-                _this5.contentFile = null;
-                _this5.isLoading = false;
-                _context5.next = 21;
+                _this.title = '';
+                _this.link = '';
+                _this.type = '';
+                _this.contentFile = null;
+                _this.isLoading = false;
+                _context.next = 21;
                 break;
 
               case 17:
-                _context5.prev = 17;
-                _context5.t0 = _context5["catch"](0);
+                _context.prev = 17;
+                _context.t0 = _context["catch"](0);
                 // Handle error
-                _this5.isLoading = true;
-                console.error('Error:', _context5.t0);
+                _this.isLoading = true;
+                console.error('Error:', _context.t0);
 
               case 21:
               case "end":
-                return _context5.stop();
+                return _context.stop();
             }
           }
-        }, _callee5, null, [[0, 17]]);
+        }, _callee, null, [[0, 17]]);
       }))();
     },
     uploadContentFiles: function uploadContentFiles() {
-      var _this6 = this;
+      var _this2 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         var formData, response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context6.prev = _context6.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                _context6.prev = 0;
+                _context2.prev = 0;
                 // Create FormData and append all data
-                _this6.isLoading = true;
+                _this2.isLoading = true;
                 formData = new FormData();
-                formData.append('title', _this6.title);
-                formData.append('link', _this6.link);
-                formData.append('type', _this6.type);
-                formData.append('file', _this6.contentFile); // Make POST request to upload the file and data
+                formData.append('title', _this2.title);
+                formData.append('link', _this2.link);
+                formData.append('type', _this2.type);
+                formData.append('file', _this2.contentFile); // Make POST request to upload the file and data
 
-                _context6.next = 9;
+                _context2.next = 9;
                 return axios.post('/api/content', formData);
 
               case 9:
-                response = _context6.sent;
+                response = _context2.sent;
 
                 // Handle success
-                _this6.getContentData(); // Update content data
+                _this2.getContentData(); // Update content data
 
 
-                _this6.showModal = false; // Close the modal after successful upload
+                _this2.showModal = false; // Close the modal after successful upload
                 // Reset all data
 
-                _this6.title = '';
-                _this6.link = '';
-                _this6.type = '';
-                _this6.contentFile = null;
-                _this6.isLoading = false;
-                _context6.next = 23;
+                _this2.title = '';
+                _this2.link = '';
+                _this2.type = '';
+                _this2.contentFile = null;
+                _this2.isLoading = false;
+                _context2.next = 23;
                 break;
 
               case 19:
-                _context6.prev = 19;
-                _context6.t0 = _context6["catch"](0);
+                _context2.prev = 19;
+                _context2.t0 = _context2["catch"](0);
                 // Handle error
-                _this6.isLoading = true;
-                console.error('Error:', _context6.t0);
+                _this2.isLoading = true;
+                console.error('Error:', _context2.t0);
 
               case 23:
               case "end":
-                return _context6.stop();
+                return _context2.stop();
             }
           }
-        }, _callee6, null, [[0, 19]]);
+        }, _callee2, null, [[0, 19]]);
       }))();
     },
     uploadFiles: function uploadFiles() {
-      var _this7 = this;
+      var _this3 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
         var formdata, response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context7.prev = _context7.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context7.prev = 0;
+                _context3.prev = 0;
                 // Create FormData and append all data
-                _this7.isLoading = true;
+                _this3.isLoading = true;
                 formdata = new FormData();
-                formdata.append('file', _this7.bannerImage); // Make POST request to upload the file and data
+                formdata.append('file', _this3.bannerImage); // Make POST request to upload the file and data
 
-                _context7.next = 6;
+                _context3.next = 6;
                 return axios.post('/api/banner', formdata);
 
               case 6:
-                response = _context7.sent;
+                response = _context3.sent;
 
                 // Handle success
-                _this7.getBannerData();
+                _this3.getBannerData();
 
-                _this7.showModal = false;
-                _this7.isLoading = false;
-                _this7.bannerImage = null;
-                _context7.next = 17;
+                _this3.showModal = false;
+                _this3.isLoading = false;
+                _this3.bannerImage = null;
+                _context3.next = 17;
                 break;
 
               case 13:
-                _context7.prev = 13;
-                _context7.t0 = _context7["catch"](0);
+                _context3.prev = 13;
+                _context3.t0 = _context3["catch"](0);
                 // Handle error
-                _this7.isLoading = true;
-                console.error('Error:', _context7.t0);
+                _this3.isLoading = true;
+                console.error('Error:', _context3.t0);
 
               case 17:
               case "end":
-                return _context7.stop();
+                return _context3.stop();
             }
           }
-        }, _callee7, null, [[0, 13]]);
+        }, _callee3, null, [[0, 13]]);
       }))();
     },
     deleteContentItem: function deleteContentItem(id) {
-      var _this8 = this;
+      var _this4 = this;
 
       // Send a DELETE request to the backend with the item's ID
       axios["delete"]("/api/content/".concat(id)).then(function (response) {
-        _this8.getContentData(); // Assuming you want to remove the item from the frontend after successful deletion
+        _this4.getContentData(); // Assuming you want to remove the item from the frontend after successful deletion
         // You can trigger a method to refresh the list of items or remove the deleted item from the UI
 
       })["catch"](function (error) {
@@ -6503,11 +6398,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     deleteBannerItem: function deleteBannerItem(id) {
-      var _this9 = this;
+      var _this5 = this;
 
       // Send a DELETE request to the backend with the item's ID
       axios["delete"]("/api/banner/".concat(id)).then(function (response) {
-        _this9.getBannerData(); // Assuming you want to remove the item from the frontend after successful deletion
+        _this5.getBannerData(); // Assuming you want to remove the item from the frontend after successful deletion
         // You can trigger a method to refresh the list of items or remove the deleted item from the UI
 
       })["catch"](function (error) {
@@ -6707,6 +6602,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     Drop: vue_drag_drop__WEBPACK_IMPORTED_MODULE_2__.Drop,
     VueCropper: vue_cropperjs__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
+  props: {
+    bannerItems: Array
+  },
   data: function data() {
     return {
       is_dragging: false,
@@ -6726,26 +6624,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       attachments: []
     };
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _this.getBannerData();
-
-            case 1:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }))();
-  },
-  updated: function updated() {// this.cropImage()
-  },
+  mounted: function mounted() {},
+  updated: function updated() {},
   methods: {
     getCropImage: function getCropImage() {
       this.cropImage();
@@ -6753,15 +6633,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.isCroping = false;
     },
     cropImage: function cropImage() {
-      // get image data for post processing, e.g. upload or setting image src
-      // this.cropImg = this.$refs.cropper.getCroppedCanvas({ width: 1036, height: 350 }).toDataURL();
       this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL();
     },
     reset: function reset() {
       this.$refs.cropper.reset();
     },
     setImage: function setImage(e) {
-      var _this2 = this;
+      var _this = this;
 
       var file = e.target.files[0];
       this.isCroping = true;
@@ -6776,12 +6654,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
         reader.onload = function (event) {
           // Update bannerImage with the cropped result
-          _this2.bannerImage = event.target.result; // Rebuild cropperjs with the updated source
+          _this.bannerImage = event.target.result; // Rebuild cropperjs with the updated source
 
-          _this2.$refs.cropper.replace(event.target.result); // Create a new File object with the cropped data
+          _this.$refs.cropper.replace(event.target.result); // Create a new File object with the cropped data
 
 
-          var croppedFile = new File([_this2.dataURItoBlob(event.target.result)], file.name, {
+          var croppedFile = new File([_this.dataURItoBlob(event.target.result)], file.name, {
             type: file.type
           }); // Now you can use 'croppedFile' as the cropped image file
           // console.log(croppedFile);
@@ -6807,7 +6685,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }); // Adjust 'image/png' based on the image type
     },
     handleDrop: function handleDrop(to_index, from_index) {
-      var _this3 = this;
+      var _this2 = this;
 
       var temp = this.items[to_index];
       this.items[to_index] = this.items[from_index];
@@ -6817,15 +6695,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         banners: this.items
       }).then(function (res) {
         // Vue.toasted.show('hola billo');
-        _this3.$toasted.success(res.data.message, {
+        _this2.$toasted.success(res.data.message, {
           theme: "toasted-primary",
           position: "top-center",
           duration: 5000
         });
-
-        _this3.getBannerData();
       })["catch"](function (err) {
-        _this3.$toasted.show(err.response.data.message, {
+        _this2.$toasted.show(err.response.data.message, {
           theme: "toasted-primary",
           position: "top-center",
           duration: 5000
@@ -6835,123 +6711,113 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }); // console.log(to_index, from_index);
       //alert(`You dropped with data: ${JSON.stringify(data)}`);
     },
-    getBannerData: function getBannerData() {
-      var _this4 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_5__["default"].get("/api/banner").then(function (response) {
-                  if (response.status == 200) {
-                    _this4.items = response.data.data.items;
-                  }
-                })["catch"](function (error) {
-                  if (error.response.status == 422) {
-                    _this4.errors = error.response.data.errors;
-                  } else {
-                    // this.toastMessage('error', error, 'check', '', 'times')
-                    console.log(error);
-                  }
-                })["finally"](function () {});
-
-              case 2:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
-    },
+    // async getBannerData() {
+    //     await axios
+    //         .get("/api/banner")
+    //         .then((response) => {
+    //             if (response.status == 200) {
+    //                 this.items = response.data.data.items;
+    //
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             if (error.response.status == 422) {
+    //                 this.errors = error.response.data.errors;
+    //             } else {
+    //                 // this.toastMessage('error', error, 'check', '', 'times')
+    //                 console.log(error);
+    //             }
+    //         })
+    //         .finally(() => { });
+    // },
     handleFileChange: function handleFileChange(event) {
       this.bannerImage = event.target.files[0];
     },
     uploadFiles: function uploadFiles() {
-      var _this5 = this;
+      var _this3 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         var formdata, response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context.prev = _context.next) {
               case 0:
-                _context3.prev = 0;
+                _context.prev = 0;
 
-                if (!(_this5.cropImgData === null)) {
-                  _context3.next = 4;
+                if (!(_this3.cropImgData === null)) {
+                  _context.next = 4;
                   break;
                 }
 
-                _this5.$toasted.show("please fill up all fields", {
+                _this3.$toasted.show("please fill up all fields", {
                   theme: "toasted-primary",
                   position: "top-center",
                   duration: 5000
                 });
 
-                return _context3.abrupt("return", false);
+                return _context.abrupt("return", false);
 
               case 4:
                 // Create FormData and append all data
-                _this5.isLoading = true;
+                _this3.isLoading = true;
                 formdata = new FormData();
-                formdata.append("file", _this5.cropImg); // Make POST request to upload the file and data
+                formdata.append("file", _this3.cropImg); // Make POST request to upload the file and data
 
-                _context3.next = 9;
+                _context.next = 9;
                 return axios__WEBPACK_IMPORTED_MODULE_5__["default"].post("/api/banner", formdata);
 
               case 9:
-                response = _context3.sent;
+                response = _context.sent;
 
                 // console.log(response.data)
                 if (response.status === 200) {
                   // console.log(response.data.status)
                   // console.log(response.data)
-                  _this5.getBannerData();
+                  // this.getBannerData();
+                  _this3.bannerItems.push(response.data.data);
 
-                  _this5.showModal = false;
-                  _this5.isLoading = false;
-                  _this5.bannerImage = null;
+                  _this3.showModal = false;
+                  _this3.isLoading = false;
+                  _this3.bannerImage = null;
 
-                  _this5.$toasted.show(response.data.message, {
+                  _this3.$toasted.show(response.data.message, {
                     theme: "toasted-primary",
                     position: "top-center",
                     duration: 5000
                   });
 
-                  _this5.bannerImage = '';
-                  _this5.cropImg = '';
-                  _this5.cropImgData = '';
+                  _this3.bannerImage = '';
+                  _this3.cropImg = '';
+                  _this3.cropImgData = '';
                 }
 
-                _context3.next = 17;
+                _context.next = 17;
                 break;
 
               case 13:
-                _context3.prev = 13;
-                _context3.t0 = _context3["catch"](0);
+                _context.prev = 13;
+                _context.t0 = _context["catch"](0);
                 // Handle error
-                _this5.isLoading = true;
-                console.error("Error:", _context3.t0);
+                _this3.isLoading = true;
+                console.error("Error:", _context.t0);
 
               case 17:
               case "end":
-                return _context3.stop();
+                return _context.stop();
             }
           }
-        }, _callee3, null, [[0, 13]]);
+        }, _callee, null, [[0, 13]]);
       }))();
     },
     deleteBannerItem: function deleteBannerItem(id) {
-      var _this6 = this;
+      var _this4 = this;
 
       // Send a DELETE request to the backend with the item's ID
       axios__WEBPACK_IMPORTED_MODULE_5__["default"]["delete"]("/api/banner/".concat(id)).then(function (response) {
         // console.log(response.data.message);
-        _this6.getBannerData();
+        _this4.getBannerData();
 
-        _this6.$toasted.show(response.data.message, {
+        _this4.$toasted.show(response.data.message, {
           theme: "toasted-primary",
           position: "top-center",
           duration: 5000
@@ -7113,9 +6979,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    bioItems: Object
+  },
   data: function data() {
     return {
-      bioItems: [],
+      // bioItems: [],
       selectedTab: 'bio',
       showModal: '',
       isLoading: false,
@@ -7127,55 +6996,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       attachments: []
     };
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _this.getBioData();
-
-            case 1:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }))();
+  mounted: function mounted() {// this.getBioData()
   },
   methods: {
-    getBioData: function getBioData() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/bio-container').then(function (response) {
-                  if (response.status == 200) {
-                    _this2.bioItems = response.data.data.items;
-                  }
-                })["catch"](function (error) {
-                  if (error.response.status == 422) {
-                    _this2.errors = error.response.data.errors;
-                  } else {
-                    // this.toastMessage('error', error, 'check', '', 'times')
-                    console.error('Error:', error);
-                  }
-                })["finally"](function () {});
-
-              case 2:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
-    },
+    // async getBioData() {
+    //     await axios.get('/api/bio-container')
+    //         .then(response => {
+    //
+    //             if (response.status == 200) {
+    //                 this.bioItems = response.data.data.items
+    //
+    //             }
+    //
+    //         })
+    //         .catch(error => {
+    //             if (error.response.status == 422) {
+    //                 this.errors = error.response.data.errors;
+    //             } else {
+    //                 // this.toastMessage('error', error, 'check', '', 'times')
+    //                 console.error('Error:', error);
+    //             }
+    //         })
+    //         .finally(() => {
+    //
+    //         })
+    // },
     handleFileChange: function handleFileChange(event) {
       this.bannerImage = event.target.files[0];
     },
@@ -7183,66 +7028,66 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.contentFile = event.target.files[0];
     },
     uploadBioFiles: function uploadBioFiles() {
-      var _this3 = this;
+      var _this = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         var formData;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context.prev = _context.next) {
               case 0:
-                _context3.prev = 0;
+                _context.prev = 0;
 
-                if (!(_this3.bioTitle === "" || _this3.bioDesc === '')) {
-                  _context3.next = 4;
+                if (!(_this.bioTitle === "" || _this.bioDesc === '')) {
+                  _context.next = 4;
                   break;
                 }
 
-                _this3.$toasted.show("please fill up all fields", {
+                _this.$toasted.show("please fill up all fields", {
                   theme: "toasted-primary",
                   position: "top-center",
                   duration: 5000
                 });
 
-                return _context3.abrupt("return", false);
+                return _context.abrupt("return", false);
 
               case 4:
                 // Create FormData and append all data
-                _this3.isLoading = true;
+                _this.isLoading = true;
                 formData = new FormData();
-                formData.append('title', _this3.bioTitle);
-                formData.append('description', _this3.bioDesc); // Make POST request to upload the file and data
+                formData.append('title', _this.bioTitle);
+                formData.append('description', _this.bioDesc); // Make POST request to upload the file and data
 
-                _context3.next = 10;
+                _context.next = 10;
                 return axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/bio-container', formData);
 
               case 10:
                 // Handle success
-                _this3.getBioData(); // Update content data
+                _this.getBioData(); // Update content data
 
 
-                _this3.showModal = false; // Close the modal after successful upload
+                _this.showModal = false; // Close the modal after successful upload
                 // Reset all data
 
-                _this3.bioTitle = '';
-                _this3.bioDesc = '';
-                _this3.isLoading = false;
-                _context3.next = 21;
+                _this.bioTitle = '';
+                _this.bioDesc = '';
+                _this.isLoading = false;
+                _context.next = 21;
                 break;
 
               case 17:
-                _context3.prev = 17;
-                _context3.t0 = _context3["catch"](0);
+                _context.prev = 17;
+                _context.t0 = _context["catch"](0);
                 // Handle error
-                _this3.isLoading = true;
-                console.error('Error:', _context3.t0);
+                _this.isLoading = true;
+                console.error('Error:', _context.t0);
 
               case 21:
               case "end":
-                return _context3.stop();
+                return _context.stop();
             }
           }
-        }, _callee3, null, [[0, 17]]);
+        }, _callee, null, [[0, 17]]);
       }))();
     },
     updateBio: function updateBio(item) {
@@ -7252,52 +7097,52 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.bioDesc = item.description;
     },
     updateBioFiles: function updateBioFiles(id) {
-      var _this4 = this;
+      var _this2 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         var formData, response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                _context4.prev = 0;
-                _this4.isLoading = true;
+                _context2.prev = 0;
+                _this2.isLoading = true;
                 formData = new FormData();
-                formData.append('title', _this4.bioTitle);
-                formData.append('description', _this4.bioDesc);
-                _context4.next = 7;
+                formData.append('title', _this2.bioTitle);
+                formData.append('description', _this2.bioDesc);
+                _context2.next = 7;
                 return axios__WEBPACK_IMPORTED_MODULE_1__["default"].post("/api/bio-container/".concat(id), formData);
 
               case 7:
-                response = _context4.sent;
+                response = _context2.sent;
 
                 // Handle success
-                _this4.getBioData(); // Update content data
+                _this2.getBioData(); // Update content data
 
 
-                _this4.showModal = false; // Close the modal after successful upload
+                _this2.showModal = false; // Close the modal after successful upload
                 // Reset all data
 
-                _this4.bioTitle = '';
-                _this4.bioDesc = '';
-                _this4.isLoading = false;
-                _this4.isUpdate = false;
-                _context4.next = 20;
+                _this2.bioTitle = '';
+                _this2.bioDesc = '';
+                _this2.isLoading = false;
+                _this2.isUpdate = false;
+                _context2.next = 20;
                 break;
 
               case 16:
-                _context4.prev = 16;
-                _context4.t0 = _context4["catch"](0);
+                _context2.prev = 16;
+                _context2.t0 = _context2["catch"](0);
                 // Handle error
-                console.error("Error:", _context4.t0);
-                _this4.isLoading = false; // Add specific error handling as needed
+                console.error("Error:", _context2.t0);
+                _this2.isLoading = false; // Add specific error handling as needed
 
               case 20:
               case "end":
-                return _context4.stop();
+                return _context2.stop();
             }
           }
-        }, _callee4, null, [[0, 16]]);
+        }, _callee2, null, [[0, 16]]);
       }))();
     },
     clickTool: function clickTool(id) {
@@ -7452,12 +7297,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -7465,9 +7304,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     Drag: vue_drag_drop__WEBPACK_IMPORTED_MODULE_1__.Drag,
     Drop: vue_drag_drop__WEBPACK_IMPORTED_MODULE_1__.Drop
   },
+  props: {
+    categoriesData: Array
+  },
   data: function data() {
     return {
-      categoriesData: [],
       categories: '',
       updatedId: '',
       selectedTab: 'categories',
@@ -7482,56 +7323,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       attachments: []
     };
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return _this.getCategoriesData();
-
-            case 2:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }))();
+  mounted: function mounted() {// await this.getCategoriesData()
   },
   methods: {
-    getCategoriesData: function getCategoriesData() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/categories').then(function (response) {
-                  if (response.status === 200) {
-                    _this2.categoriesData = response.data.data.items;
-                  }
-                })["catch"](function (error) {
-                  if (error.response.status === 422) {
-                    _this2.errors = error.response.data.errors;
-                  } else {
-                    // this.toastMessage('error', error, 'check', '', 'times')
-                    console.error('Error:', error);
-                  }
-                })["finally"](function () {});
-
-              case 2:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
-    },
     handleFileChange: function handleFileChange(event) {
       this.bannerImage = event.target.files[0];
     },
@@ -7539,64 +7333,66 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.contentFile = event.target.files[0];
     },
     uploadCategories: function uploadCategories() {
-      var _this3 = this;
+      var _this = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var formData;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var formData, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context.prev = _context.next) {
               case 0:
-                _context3.prev = 0;
+                _context.prev = 0;
 
-                if (!(_this3.categories === "")) {
-                  _context3.next = 4;
+                if (!(_this.categories === "")) {
+                  _context.next = 4;
                   break;
                 }
 
-                _this3.$toasted.show("please fill up all fields", {
+                _this.$toasted.show("please fill up all fields", {
                   theme: "toasted-primary",
                   position: "top-center",
                   duration: 5000
                 });
 
-                return _context3.abrupt("return", false);
+                return _context.abrupt("return", false);
 
               case 4:
                 // Create FormData and append all data
-                _this3.isLoading = true;
+                _this.isLoading = true;
                 formData = new FormData();
-                formData.append('name', _this3.categories); // Make POST request to upload the file and data
+                formData.append('name', _this.categories); // Make POST request to upload the file and data
 
-                _context3.next = 9;
+                _context.next = 9;
                 return axios__WEBPACK_IMPORTED_MODULE_2__["default"].post('/api/categories', formData);
 
               case 9:
+                response = _context.sent;
+
                 // Handle success
-                _this3.getCategoriesData(); // Update content data
+                if (response.status === 200) {
+                  _this.categoriesData.push(response.data.data);
 
+                  _this.showModal = false;
+                  _this.categories = '';
+                  _this.isLoading = false;
+                }
 
-                _this3.showModal = false; // Close the modal after successful upload
-                // Reset all data
-
-                _this3.categories = '';
-                _this3.isLoading = false;
-                _context3.next = 19;
+                _context.next = 17;
                 break;
 
-              case 15:
-                _context3.prev = 15;
-                _context3.t0 = _context3["catch"](0);
+              case 13:
+                _context.prev = 13;
+                _context.t0 = _context["catch"](0);
                 // Handle error
-                _this3.isLoading = true;
-                console.error('Error:', _context3.t0);
+                _this.isLoading = true;
+                console.error('Error:', _context.t0);
 
-              case 19:
+              case 17:
               case "end":
-                return _context3.stop();
+                return _context.stop();
             }
           }
-        }, _callee3, null, [[0, 15]]);
+        }, _callee, null, [[0, 13]]);
       }))();
     },
     openCategories: function openCategories(item) {
@@ -7606,14 +7402,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.categories = item.name;
     },
     deleteCategoryItem: function deleteCategoryItem(id) {
-      var _this4 = this;
+      var _this2 = this;
 
       // Send a DELETE request to the backend with the item's ID
       axios__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("/api/categories/".concat(id)).then(function (response) {
         // console.log(response.data.message);
-        _this4.getCategoriesData();
+        _this2.getCategoriesData();
 
-        _this4.$toasted.show(response.data.message, {
+        _this2.$toasted.show(response.data.message, {
           theme: "toasted-primary",
           position: "top-center",
           duration: 5000
@@ -7625,54 +7421,54 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     updateCategories: function updateCategories(id) {
-      var _this5 = this;
+      var _this3 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         var formData, response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                _context4.prev = 0;
-                _this5.isLoading = true;
+                _context2.prev = 0;
+                _this3.isLoading = true;
                 formData = new FormData();
-                formData.append('name', _this5.categories);
-                _context4.next = 6;
-                return axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/api/categories/".concat(_this5.updatedId), formData);
+                formData.append('name', _this3.categories);
+                _context2.next = 6;
+                return axios__WEBPACK_IMPORTED_MODULE_2__["default"].post("/api/categories/".concat(_this3.updatedId), formData);
 
               case 6:
-                response = _context4.sent;
+                response = _context2.sent;
 
                 // Handle success
-                _this5.getCategoriesData(); // Update content data
+                _this3.getCategoriesData(); // Update content data
 
 
-                _this5.showModal = false; // Close the modal after successful upload
+                _this3.showModal = false; // Close the modal after successful upload
                 // Reset all data
 
-                _this5.categories = '';
-                _this5.isLoading = false;
-                _this5.isUpdate = false;
-                _context4.next = 18;
+                _this3.categories = '';
+                _this3.isLoading = false;
+                _this3.isUpdate = false;
+                _context2.next = 18;
                 break;
 
               case 14:
-                _context4.prev = 14;
-                _context4.t0 = _context4["catch"](0);
+                _context2.prev = 14;
+                _context2.t0 = _context2["catch"](0);
                 // Handle error
-                console.error("Error:", _context4.t0);
-                _this5.isLoading = false; // Add specific error handling as needed
+                console.error("Error:", _context2.t0);
+                _this3.isLoading = false; // Add specific error handling as needed
 
               case 18:
               case "end":
-                return _context4.stop();
+                return _context2.stop();
             }
           }
-        }, _callee4, null, [[0, 14]]);
+        }, _callee2, null, [[0, 14]]);
       }))();
     },
     handleDrop: function handleDrop(to_index, from_index) {
-      var _this6 = this;
+      var _this4 = this;
 
       var temp = this.categoriesData[to_index];
       this.categoriesData[to_index] = this.categoriesData[from_index];
@@ -7683,15 +7479,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }).then(function (res) {
         console.log(res);
 
-        _this6.$toasted.success(res.data.message, {
+        _this4.$toasted.success(res.data.message, {
           theme: "toasted-primary",
           position: "top-center",
           duration: 5000
         });
 
-        _this6.getCategoriesData();
+        _this4.getCategoriesData();
       })["catch"](function (err) {
-        _this6.$toasted.show(err.response.data.message, {
+        _this4.$toasted.show(err.response.data.message, {
           theme: "toasted-primary",
           position: "top-center",
           duration: 5000
@@ -7726,15 +7522,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 //
 //
 //
@@ -7851,9 +7639,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['contactUs'],
   data: function data() {
     return {
-      contactInfos: [],
+      // contactInfos: [],
       selectedTab: "contact",
       showModal: "",
       isLoading: false,
@@ -7861,62 +7650,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       isUpdate: false
     };
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _this.getContactInfo();
-
-            case 1:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }))();
+  mounted: function mounted() {// this.getContactInfo();
   },
   methods: {
-    getContactInfo: function getContactInfo() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1__["default"].get("/api/contact-us").then(function (response) {
-                  if (response.status == 200) {
-                    _this2.contactInfos = response.data.data.items;
-                  }
-                })["catch"](function (error) {
-                  console.error(error);
-                })["finally"](function () {});
-
-              case 2:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
-    },
+    // async getContactInfo() {
+    //     await axios
+    //         .get("/api/contact-us")
+    //         .then((response) => {
+    //             if (response.status == 200) {
+    //                 this.contactInfos = response.data.data.items;
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.error(error);
+    //         })
+    //         .finally(() => { });
+    // },
     deleteContactInfo: function deleteContactInfo(id) {
-      var _this3 = this;
+      var _this = this;
 
       // Send a DELETE request to the backend with the item's ID
-      axios__WEBPACK_IMPORTED_MODULE_1__["default"]["delete"]("/api/contact-us/".concat(id)).then(function (response) {
-        _this3.$toasted.success(response.data.message, {
+      axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/contact-us/".concat(id)).then(function (response) {
+        _this.$toasted.success(response.data.message, {
           theme: "toasted-primary",
           position: "top-center",
           duration: 5000
         });
 
-        _this3.getContactInfo();
+        _this.getContactInfo();
       })["catch"](function (error) {
         console.error(error); // Handle error if needed
       });
@@ -8284,7 +8045,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  // props:['content'],
+  props: ['contentItems', 'categoriesItems'],
   components: {
     VLazyImage: (v_lazy_image__WEBPACK_IMPORTED_MODULE_1___default()),
     Drag: vue_drag_drop__WEBPACK_IMPORTED_MODULE_2__.Drag,
@@ -8331,8 +8092,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       isUpdate: false,
       over: false,
       drag: false,
-      contentItems: [],
-      categoriesItems: [],
+      // contentItems: [],
+      // categoriesItems: [],
       selectedTab: 'bio',
       showModal: '',
       isLoading: false,
@@ -8382,22 +8143,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     };
   },
-  mounted: function mounted() {
-    var _this = this;
+  mounted: function mounted() {// await this.getContentData()
+    // await this.getCategoriesData()
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return _this.getContentData();
-
-            case 2:
-              _context.next = 4;
-              return _this.getCategoriesData();
-
-            case 4:
             case "end":
               return _context.stop();
           }
@@ -8437,7 +8190,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       document.getElementById('file').setAttribute('accept', this.acceptedExtensions);
     },
     handleDrop: function handleDrop(to_index, from_index) {
-      var _this2 = this;
+      var _this = this;
 
       var temp = this.contentItems[to_index];
       this.contentItems[to_index] = this.contentItems[from_index];
@@ -8446,15 +8199,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       axios__WEBPACK_IMPORTED_MODULE_5__["default"].post('/api/content/update/order', {
         contents: this.contentItems
       }).then(function (res) {
-        _this2.$toasted.success(res.data.message, {
+        _this.$toasted.success(res.data.message, {
           theme: "toasted-primary",
           position: "top-center",
           duration: 5000
         });
 
-        _this2.getContentData();
+        _this.getContentData();
       })["catch"](function (err) {
-        _this2.$toasted.show(err.response.data.message, {
+        _this.$toasted.show(err.response.data.message, {
           theme: "toasted-primary",
           position: "top-center",
           duration: 5000
@@ -8463,89 +8216,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         console.log(res);
       });
     },
-    getContentData: function getContentData() {
-      var _this3 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_5__["default"].get('/api/content').then(function (response) {
-                  if (response.status == 200) {
-                    _this3.contentItems = response.data.data.items;
-                  }
-                })["catch"](function (error) {
-                  if (error.response.status == 422) {
-                    _this3.errors = error.response.data.errors;
-                  } else {
-                    // this.toastMessage('error', error, 'check', '', 'times')
-                    console.log(error);
-                  }
-                })["finally"](function () {});
-
-              case 2:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
-    },
-    getCategoriesData: function getCategoriesData() {
-      var _this4 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _context3.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_5__["default"].get('/api/categories').then(function (response) {
-                  if (response.status === 200) {
-                    _this4.categoriesItems = response.data.data.items;
-                  }
-                })["catch"](function (error) {
-                  if (error.response.status === 422) {
-                    _this4.errors = error.response.data.errors;
-                  } else {
-                    // this.toastMessage('error', error, 'check', '', 'times')
-                    console.log(error);
-                  }
-                })["finally"](function () {});
-
-              case 2:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3);
-      }))();
-    },
-    // updateOrder() {
-    //     axios.post('/api/content/update/order', { contents: this.contentItems })
-    //         .then(res => {
-    //             this.$toasted.success(res.data.message, {
-    //                 theme: "toasted-primary",
-    //                 position: "top-center",
-    //                 duration: 5000
-    //             });
-    //             this.getContentData()
-    //         })
-    //         .catch(err => {
-    //             this.$toasted.show(err.response.data.message, {
-    //                 theme: "toasted-primary",
-    //                 position: "top-center",
-    //                 duration: 5000
-    //             });
-    //         })
-    //         .finally(res => {
-    //             console.log(res);
-    //         })
-    // },
     handleContentFileChange: function handleContentFileChange(event) {
-      var _this5 = this;
+      var _this2 = this;
 
       var file = event.target.files[0];
       var allowedTypes = {
@@ -8577,12 +8249,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       reader.onload = function () {
         var interval = setInterval(function () {
-          _this5.progress += 5; // Increment progress by 5%
+          _this2.progress += 5; // Increment progress by 5%
 
-          if (_this5.progress >= 100) {
+          if (_this2.progress >= 100) {
             clearInterval(interval);
-            _this5.contentPreview = reader.result;
-            _this5.uploading = false;
+            _this2.contentPreview = reader.result;
+            _this2.uploading = false;
           }
         }, 500); // Set previewImage to base64 string
       };
@@ -8591,150 +8263,152 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.contentFile = file;
     },
     uploadContentFiles: function uploadContentFiles() {
-      var _this6 = this;
+      var _this3 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        var _this6$fileRecordsFor, _this6$fileRecordsFor2, _this6$fileRecordsFor3, _this6$fileRecordsFor4, _this6$fileRecordsFor5, socialLinks, getInTuch, formData, response;
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var _this3$fileRecordsFor, _this3$fileRecordsFor2, _this3$fileRecordsFor3, _this3$fileRecordsFor4, _this3$fileRecordsFor5, socialLinks, getInTuch, formData, response;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                _context4.prev = 0;
+                _context2.prev = 0;
                 // Assign files if they exist
-                _this6.boucher_files = (_this6$fileRecordsFor = _this6.fileRecordsForUpload[0]) === null || _this6$fileRecordsFor === void 0 ? void 0 : _this6$fileRecordsFor.file;
-                _this6.boucher_files1 = (_this6$fileRecordsFor2 = _this6.fileRecordsForUpload[1]) === null || _this6$fileRecordsFor2 === void 0 ? void 0 : _this6$fileRecordsFor2.file;
-                _this6.boucher_files2 = (_this6$fileRecordsFor3 = _this6.fileRecordsForUpload[2]) === null || _this6$fileRecordsFor3 === void 0 ? void 0 : _this6$fileRecordsFor3.file;
-                _this6.boucher_files3 = (_this6$fileRecordsFor4 = _this6.fileRecordsForUpload[3]) === null || _this6$fileRecordsFor4 === void 0 ? void 0 : _this6$fileRecordsFor4.file;
-                _this6.boucher_files4 = (_this6$fileRecordsFor5 = _this6.fileRecordsForUpload[4]) === null || _this6$fileRecordsFor5 === void 0 ? void 0 : _this6$fileRecordsFor5.file;
+                _this3.boucher_files = (_this3$fileRecordsFor = _this3.fileRecordsForUpload[0]) === null || _this3$fileRecordsFor === void 0 ? void 0 : _this3$fileRecordsFor.file;
+                _this3.boucher_files1 = (_this3$fileRecordsFor2 = _this3.fileRecordsForUpload[1]) === null || _this3$fileRecordsFor2 === void 0 ? void 0 : _this3$fileRecordsFor2.file;
+                _this3.boucher_files2 = (_this3$fileRecordsFor3 = _this3.fileRecordsForUpload[2]) === null || _this3$fileRecordsFor3 === void 0 ? void 0 : _this3$fileRecordsFor3.file;
+                _this3.boucher_files3 = (_this3$fileRecordsFor4 = _this3.fileRecordsForUpload[3]) === null || _this3$fileRecordsFor4 === void 0 ? void 0 : _this3$fileRecordsFor4.file;
+                _this3.boucher_files4 = (_this3$fileRecordsFor5 = _this3.fileRecordsForUpload[4]) === null || _this3$fileRecordsFor5 === void 0 ? void 0 : _this3$fileRecordsFor5.file;
 
-                if (!(_this6.type === "Speaker")) {
-                  _context4.next = 12;
+                if (!(_this3.type === "Speaker")) {
+                  _context2.next = 12;
                   break;
                 }
 
-                if (!(_this6.title === "" || _this6.date === "" || _this6.details === "" || _this6.contentFile === null || _this6.position === "")) {
-                  _context4.next = 10;
+                if (!(_this3.title === "" || _this3.date === "" || _this3.details === "" || _this3.contentFile === null || _this3.position === "")) {
+                  _context2.next = 10;
                   break;
                 }
 
-                _this6.$toasted.show("Please fill up all fields", {
+                _this3.$toasted.show("Please fill up all fields", {
                   theme: "toasted-primary",
                   position: "top-center",
                   duration: 5000
                 });
 
-                return _context4.abrupt("return", false);
+                return _context2.abrupt("return", false);
 
               case 10:
-                _context4.next = 15;
+                _context2.next = 15;
                 break;
 
               case 12:
-                if (!(_this6.title === "" || _this6.link === '' || _this6.type === "" || _this6.contentFile === null)) {
-                  _context4.next = 15;
+                if (!(_this3.title === "" || _this3.link === '' || _this3.type === "" || _this3.contentFile === null)) {
+                  _context2.next = 15;
                   break;
                 }
 
-                _this6.$toasted.show("Please fill up all fields", {
+                _this3.$toasted.show("Please fill up all fields", {
                   theme: "toasted-primary",
                   position: "top-center",
                   duration: 5000
                 });
 
-                return _context4.abrupt("return", false);
+                return _context2.abrupt("return", false);
 
               case 15:
                 socialLinks = {
-                  facebook: _this6.facebook,
-                  twitter: _this6.twitter,
-                  linkedin: _this6.linkedin,
-                  instagram: _this6.instagram
+                  facebook: _this3.facebook,
+                  twitter: _this3.twitter,
+                  linkedin: _this3.linkedin,
+                  instagram: _this3.instagram
                 };
                 getInTuch = {
-                  email: _this6.email,
-                  phone: _this6.phone
+                  email: _this3.email,
+                  phone: _this3.phone
                 }; // Create FormData and append all data
 
-                _this6.isLoading = true;
+                _this3.isLoading = true;
                 formData = new FormData();
-                formData.append('title', _this6.title);
-                formData.append('category_id', _this6.category_id);
-                formData.append('link', _this6.link);
-                formData.append('type', _this6.type);
-                formData.append('date', _this6.date);
-                formData.append('details', _this6.details);
-                formData.append('position', _this6.position);
-                formData.append('file', _this6.contentFile); // Conditionally append each boucher file if it exists
+                formData.append('title', _this3.title);
+                formData.append('category_id', _this3.category_id);
+                formData.append('link', _this3.link);
+                formData.append('type', _this3.type);
+                formData.append('date', _this3.date);
+                formData.append('details', _this3.details);
+                formData.append('position', _this3.position);
+                formData.append('file', _this3.contentFile); // Conditionally append each boucher file if it exists
 
-                if (_this6.boucher_files) formData.append('boucher_files', _this6.boucher_files);
-                if (_this6.boucher_files1) formData.append('boucher_files1', _this6.boucher_files1);
-                if (_this6.boucher_files2) formData.append('boucher_files2', _this6.boucher_files2);
-                if (_this6.boucher_files3) formData.append('boucher_files3', _this6.boucher_files3);
-                if (_this6.boucher_files4) formData.append('boucher_files4', _this6.boucher_files4);
+                if (_this3.boucher_files) formData.append('boucher_files', _this3.boucher_files);
+                if (_this3.boucher_files1) formData.append('boucher_files1', _this3.boucher_files1);
+                if (_this3.boucher_files2) formData.append('boucher_files2', _this3.boucher_files2);
+                if (_this3.boucher_files3) formData.append('boucher_files3', _this3.boucher_files3);
+                if (_this3.boucher_files4) formData.append('boucher_files4', _this3.boucher_files4);
                 formData.append('social_links', JSON.stringify(socialLinks));
                 formData.append('get_in_touch', JSON.stringify(getInTuch)); // Make POST request to upload the file and data
 
-                _context4.next = 36;
+                _context2.next = 36;
                 return axios__WEBPACK_IMPORTED_MODULE_5__["default"].post('/api/content', formData);
 
               case 36:
-                response = _context4.sent;
+                response = _context2.sent;
 
-                // Handle success
-                _this6.getContentData(); // Update content data
+                if (response.status === 200) {
+                  // Handle success
+                  _this3.contentItems.push(response.data.data); // this.getContentData(); // Update content data
 
 
-                _this6.showModal = false; // Close the modal after successful upload
-                // Reset all data
+                  _this3.showModal = false; // Close the modal after successful upload
+                  // Reset all data
 
-                _this6.title = '';
-                _this6.link = '';
-                _this6.date = '';
-                _this6.details = '';
-                _this6.position = '';
-                _this6.category_id = '0';
-                _this6.type = 'Select Type';
-                _this6.contentFile = null;
-                _this6.contentPreview = null;
-                _this6.facebook = '';
-                _this6.twitter = '';
-                _this6.linkedin = '';
-                _this6.instagram = '';
-                _this6.phone = '';
-                _this6.email = '';
-                _this6.fileRecords = [];
-                _this6.isLoading = false;
+                  _this3.title = '';
+                  _this3.link = '';
+                  _this3.date = '';
+                  _this3.details = '';
+                  _this3.position = '';
+                  _this3.category_id = '0';
+                  _this3.type = 'Select Type';
+                  _this3.contentFile = null;
+                  _this3.contentPreview = null;
+                  _this3.facebook = '';
+                  _this3.twitter = '';
+                  _this3.linkedin = '';
+                  _this3.instagram = '';
+                  _this3.phone = '';
+                  _this3.email = '';
+                  _this3.fileRecords = [];
+                  _this3.isLoading = false;
 
-                _this6.$toasted.success(response.data.message, {
-                  theme: "toasted-primary",
-                  position: "top-center",
-                  duration: 5000
-                });
+                  _this3.$toasted.success(response.data.message, {
+                    theme: "toasted-primary",
+                    position: "top-center",
+                    duration: 5000
+                  });
+                }
 
-                _context4.next = 64;
+                _context2.next = 45;
                 break;
 
-              case 59:
-                _context4.prev = 59;
-                _context4.t0 = _context4["catch"](0);
+              case 40:
+                _context2.prev = 40;
+                _context2.t0 = _context2["catch"](0);
                 // Handle error
-                _this6.isLoading = false;
+                _this3.isLoading = false;
 
-                _this6.$toasted.show(_context4.t0.response.data.message, {
+                _this3.$toasted.show(_context2.t0.response.data.message, {
                   theme: "toasted-primary",
                   position: "top-center",
                   duration: 5000
                 });
 
-                console.error('Error:', _context4.t0);
+                console.error('Error:', _context2.t0);
 
-              case 64:
+              case 45:
               case "end":
-                return _context4.stop();
+                return _context2.stop();
             }
           }
-        }, _callee4, null, [[0, 59]]);
+        }, _callee2, null, [[0, 40]]);
       }))();
     },
     uploadFiles: function uploadFiles() {
@@ -8776,11 +8450,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     deleteContentItem: function deleteContentItem(id) {
-      var _this7 = this;
+      var _this4 = this;
 
       // Send a DELETE request to the backend with the item's ID
       axios__WEBPACK_IMPORTED_MODULE_5__["default"]["delete"]("/api/content/".concat(id)).then(function (response) {
-        _this7.getContentData(); // Assuming you want to remove the item from the frontend after successful deletion
+        _this4.getContentData(); // Assuming you want to remove the item from the frontend after successful deletion
         // You can trigger a method to refresh the list of items or remove the deleted item from the UI
 
       })["catch"](function (error) {
@@ -8808,91 +8482,91 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.fileRecords = item.social_links.fileRecords;
     },
     updateContentFiles: function updateContentFiles() {
-      var _this8 = this;
+      var _this5 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
         var formData, response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context5.prev = _context5.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context5.prev = 0;
-                _this8.isLoading = true;
+                _context3.prev = 0;
+                _this5.isLoading = true;
                 formData = new FormData();
 
-                if (_this8.title) {
-                  formData.append('title', _this8.title);
+                if (_this5.title) {
+                  formData.append('title', _this5.title);
                 }
 
-                if (_this8.link) {
-                  formData.append('link', _this8.link);
+                if (_this5.link) {
+                  formData.append('link', _this5.link);
                 }
 
-                if (_this8.type) {
-                  formData.append('type', _this8.type);
+                if (_this5.type) {
+                  formData.append('type', _this5.type);
                 }
 
-                if (_this8.date) {
-                  formData.append('date', _this8.date);
+                if (_this5.date) {
+                  formData.append('date', _this5.date);
                 }
 
-                if (_this8.details) {
-                  formData.append('details', _this8.details);
+                if (_this5.details) {
+                  formData.append('details', _this5.details);
                 }
 
-                if (_this8.position) {
-                  formData.append('position', _this8.position);
+                if (_this5.position) {
+                  formData.append('position', _this5.position);
                 }
 
-                if (_this8.contentFile) {
-                  formData.append('file', _this8.contentFile);
+                if (_this5.contentFile) {
+                  formData.append('file', _this5.contentFile);
                 }
 
-                _context5.next = 12;
-                return axios__WEBPACK_IMPORTED_MODULE_5__["default"].post("/api/content/".concat(_this8.updatedId), formData);
+                _context3.next = 12;
+                return axios__WEBPACK_IMPORTED_MODULE_5__["default"].post("/api/content/".concat(_this5.updatedId), formData);
 
               case 12:
-                response = _context5.sent;
+                response = _context3.sent;
 
                 // Handle success
-                _this8.getContentData(); // Update content data
+                _this5.getContentData(); // Update content data
 
 
-                _this8.showModal = false; // Close the modal after successful upload
+                _this5.showModal = false; // Close the modal after successful upload
                 // Reset all data
 
-                _this8.title = '';
-                _this8.link = '';
-                _this8.date = '';
-                _this8.details = '';
-                _this8.position = '';
-                _this8.type = 'Select Type';
-                _this8.contentFile = null;
-                _this8.contentPreview = null;
-                _this8.isLoading = false;
+                _this5.title = '';
+                _this5.link = '';
+                _this5.date = '';
+                _this5.details = '';
+                _this5.position = '';
+                _this5.type = 'Select Type';
+                _this5.contentFile = null;
+                _this5.contentPreview = null;
+                _this5.isLoading = false;
 
-                _this8.$toasted.success(response.data.message, {
+                _this5.$toasted.success(response.data.message, {
                   theme: "toasted-primary",
                   position: "top-center",
                   duration: 5000
                 });
 
-                _context5.next = 31;
+                _context3.next = 31;
                 break;
 
               case 27:
-                _context5.prev = 27;
-                _context5.t0 = _context5["catch"](0);
+                _context3.prev = 27;
+                _context3.t0 = _context3["catch"](0);
                 // Handle error
-                console.error("Error:", _context5.t0);
-                _this8.isLoading = false; // Add specific error handling as needed
+                console.error("Error:", _context3.t0);
+                _this5.isLoading = false; // Add specific error handling as needed
 
               case 31:
               case "end":
-                return _context5.stop();
+                return _context3.stop();
             }
           }
-        }, _callee5, null, [[0, 27]]);
+        }, _callee3, null, [[0, 27]]);
       }))();
     },
     clickTool: function clickTool(id) {
@@ -10078,7 +9752,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     truncateFileName: function truncateFileName(fileName) {
       if (fileName) {
-        var maxLength = 45;
+        var maxLength = 35;
 
         if (fileName.length > maxLength) {
           return fileName.substring(0, maxLength) + "...";
@@ -65517,15 +65191,22 @@ var render = function () {
               ]),
               _vm._v(" "),
               _vm.selectedTab === "bio"
-                ? _c("Bio")
+                ? _c("Bio", { attrs: { bioItems: _vm.bioItems } })
                 : _vm.selectedTab === "banner"
-                ? _c("Banner")
+                ? _c("Banner", { attrs: { bannerItems: _vm.bannerItems } })
                 : _vm.selectedTab === "categories"
-                ? _c("Categories")
+                ? _c("Categories", {
+                    attrs: { categoriesData: _vm.categories },
+                  })
                 : _vm.selectedTab === "content"
-                ? _c("Content")
+                ? _c("Content", {
+                    attrs: {
+                      contentItems: _vm.contentItems,
+                      categoriesItems: _vm.categories,
+                    },
+                  })
                 : _vm.selectedTab === "contact"
-                ? _c("contact-us")
+                ? _c("contact-us", { attrs: { contactUs: _vm.contactUs } })
                 : _vm._e(),
             ],
             1
@@ -65610,11 +65291,11 @@ var render = function () {
       _vm._v(" "),
       _c("div", { staticClass: "my-4" }, [
         _c("div", {}, [
-          _vm.items.length > 0
+          _vm.bannerItems.length > 0
             ? _c(
                 "div",
                 { staticClass: "row" },
-                _vm._l(_vm.items, function (item, index) {
+                _vm._l(_vm.bannerItems, function (item, index) {
                   return _c(
                     "div",
                     { key: item.id, staticClass: "col-md-6 mb-3" },
@@ -66562,10 +66243,10 @@ var render = function () {
             ? _c(
                 "div",
                 { staticClass: "row" },
-                _vm._l(_vm.categoriesData, function (categorie, index) {
+                _vm._l(_vm.categoriesData, function (category, index) {
                   return _c(
                     "div",
-                    { key: categorie.id, staticClass: "col-md-6 mb-3" },
+                    { key: category.id, staticClass: "col-md-6 mb-3" },
                     [
                       _c(
                         "drop",
@@ -66618,7 +66299,7 @@ var render = function () {
                                       staticClass:
                                         "text-2xl text-gray-800 mb-2",
                                     },
-                                    [_vm._v(_vm._s(categorie.name))]
+                                    [_vm._v(_vm._s(category.name))]
                                   ),
                                   _vm._v(" "),
                                   _c(
@@ -66628,7 +66309,7 @@ var render = function () {
                                         "absolute top-2 right-2 text-gray-400 cursor-pointer",
                                       on: {
                                         click: function ($event) {
-                                          return _vm.clickTool(categorie.id)
+                                          return _vm.clickTool(category.id)
                                         },
                                       },
                                     },
@@ -66656,7 +66337,7 @@ var render = function () {
                                         ]
                                       ),
                                       _vm._v(" "),
-                                      _vm.isOpenTool === categorie.id
+                                      _vm.isOpenTool === category.id
                                         ? _c(
                                             "div",
                                             {
@@ -66672,7 +66353,7 @@ var render = function () {
                                                   on: {
                                                     click: function ($event) {
                                                       return _vm.openCategories(
-                                                        categorie
+                                                        category
                                                       )
                                                     },
                                                   },
@@ -66692,7 +66373,7 @@ var render = function () {
                                                   on: {
                                                     click: function ($event) {
                                                       return _vm.deleteCategoryItem(
-                                                        categorie.id
+                                                        category.id
                                                       )
                                                     },
                                                   },
@@ -66984,11 +66665,11 @@ var render = function () {
       _vm._v(" "),
       _c("div", { staticClass: "my-4" }, [
         _c("div", { staticClass: " " }, [
-          _vm.contactInfos.length > 0
+          _vm.contactUs.length > 0
             ? _c(
                 "div",
                 { staticClass: "row" },
-                _vm._l(_vm.contactInfos, function (item) {
+                _vm._l(_vm.contactUs, function (item) {
                   return _c(
                     "div",
                     { key: item.id, staticClass: "col-md-6 mb-3" },
@@ -70728,7 +70409,7 @@ var render = function () {
                           { staticClass: "boucher-box" },
                           [
                             _c("h3", [
-                              _vm._v("Boucher "),
+                              _vm._v("Related Documents "),
                               _c("span", [
                                 _vm._v(
                                   "(" + _vm._s(_vm.boucherFilesLength) + ")"
