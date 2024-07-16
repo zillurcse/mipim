@@ -748,6 +748,8 @@ export default {
                 });
         },
         UpdateContent(item) {
+            console.log(item.social_links, item.social_links.facebook);
+
             this.updatedId = item.id
             this.showModal = 'pdf';
             this.isUpdate = true
@@ -758,8 +760,14 @@ export default {
             this.position = item.position;
             this.type = item.type;
             this.contentFile = item.file;
-            this.contentPreview = item.file
-
+            this.contentPreview = item.file;
+            this.email = item.get_in_touch.email;
+            this.phone = item.get_in_touch.phone;
+            this.facebook = item.social_links.facebook;
+            this.twitter = item.social_links.twitter;
+            this.linkedin = item.social_links.linkedin;
+            this.instagram = item.social_links.instagram;
+            this.fileRecords = item.social_links.fileRecords
         },
         async updateContentFiles() {
             try {

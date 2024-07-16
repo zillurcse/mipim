@@ -1,6 +1,6 @@
 <template>
     <div class="container mx-auto bg-white p-0">
-        <MainLayoutVue>
+        <MainLayoutVue :contentItems="contentItems">
             <section class="about-section">
                 <div class="container">
                     <div>
@@ -37,6 +37,11 @@
 
 import MainLayoutVue from '../Layouts/MainLayout.vue';
 export default {
+    props: {
+
+        contentItems: Array,
+
+    },
     components: {
 
         MainLayoutVue

@@ -29,12 +29,18 @@ class HomeController extends Controller
 
     public function about()
     {
-        return Inertia::render('About');
+        $contentItems = Content::with('category')->orderBy('order', 'asc')->get();
+        return Inertia::render('About', [
+            'contentItems' => $contentItems,
+        ]);
     }
 
     public function contact()
     {
-        return Inertia::render('Contact');
+        $contentItems = Content::with('category')->orderBy('order', 'asc')->get();
+        return Inertia::render('Contact', [
+            'contentItems' => $contentItems,
+        ]);
     }
     public function categories()
     {

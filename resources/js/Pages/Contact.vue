@@ -1,6 +1,6 @@
 <template>
     <div class="container mx-auto bg-white p-0">
-        <MainLayoutVue>
+        <MainLayoutVue :contentItems="contentItems">
             <section class="contact-section">
                 <div class="container">
                     <div>
@@ -165,6 +165,11 @@ export default {
 
         MainLayoutVue,
         vSelect
+    },
+    props: {
+
+        contentItems: Array,
+
     },
     data() {
         return {

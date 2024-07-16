@@ -32,9 +32,23 @@
                                 <li class="nav-item">
                                     <Link class="nav-link " href="/about" target="_self" title="About">About</Link>
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <Link class="nav-link " href="/projects" target="_self" title="categorie">
                                         Projects</Link>
+                                </li> -->
+                                <li class="nav-item dropdown">
+                                    <Link class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    Projects
+                                    </Link>
+                                    <ul class="dropdown-menu dropdown-menu-scrollable" aria-labelledby="navbarDropdown">
+                                        <li v-for="(  content, index  ) in  contentItems " :key="index">
+                                            <Link class="dropdown-item" :href="'project/' + content.slug">
+                                            {{ content.title }}
+                                            </Link>
+                                        </li>
+
+                                    </ul>
                                 </li>
                                 <li class="nav-item">
                                     <Link class="nav-link " href="/contact" target="_self" title="Contact us">Contact us
@@ -116,7 +130,8 @@ import { Link } from '@inertiajs/inertia-vue'
 
 export default {
     props: {
-        bannerItems: Array
+        bannerItems: Array,
+        contentItems: Array
     },
     components: {
         Link,
@@ -134,4 +149,10 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.dropdown-menu-scrollable {
+    max-height: 300px;
+    /* Adjust the height as needed */
+    overflow-y: auto;
+}
+</style>

@@ -1,6 +1,6 @@
 <template>
     <div class="container mx-auto bg-white p-0">
-        <MainLayoutVue :bannerItems="bannerItems">
+        <MainLayoutVue :bannerItems="bannerItems" :contentItems="contentItems">
 
 
             <section class="text-section">
@@ -20,10 +20,8 @@
             </section>
             <div class="py-10">
                 <div class="container  data-box-row">
-                    <carousel :autoplay="false" :nav="true" :margin="20" :autoHeight="true"
-                        :responsive="{ 0: { items: 1, nav: true }, 600: { items: 2, nav: true }, 1000: { items: 3, nav: true } }">
-
-                        <div v-for="(  content, index  ) in  contentItems " :key="index" class="h-100 ">
+                    <div class="row">
+                        <div v-for="(  content, index  ) in  contentItems " :key="index" class="col-md-4 mb-3">
                             <Link :href="'project/' + content.slug" class="styles-item relative">
                             <div class="styles-image">
                                 <img :src="content.file" alt="Banner" />
@@ -58,13 +56,20 @@
                                     Find out more
                                 </span>
                                 <span class="global-arrow-button-image">
-                                    <img src="https://newmurabba.com/-/jssmedia/Project/Murabba/murabba-site//images/ico_6x12_angle_right.svg"
-                                        alt="image" loading="lazy" class="w-5" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                                    </svg>
+
                                 </span>
                             </div>
                             </Link>
                         </div>
-                    </carousel>
+                    </div>
+
+
+
                 </div>
             </div>
         </MainLayoutVue>
@@ -194,11 +199,12 @@ export default {
 }
 
 .styles-item {
-
     display: block;
     background-color: #9A5626;
     text-decoration: none;
     height: 100%;
+    transition: all .3s ease-in;
+    overflow: hidden;
 }
 
 .styles-image {
@@ -215,14 +221,16 @@ export default {
     height: 100%;
     object-fit: cover;
     object-position: center;
+    transition: all .3s ease-in;
+
 }
 
 .styles-data {
     padding: 24px;
-    /* height: 274px; */
+    height: 208px;
     position: relative;
-
     background: #9A5626;
+    transition: all .3s ease-in;
 }
 
 .styles-auto {
@@ -234,6 +242,8 @@ export default {
     font-family: 12px;
     color: #fff;
     margin-bottom: 6px;
+    transition: all .3s ease-in;
+
 }
 
 .styles-title {
@@ -246,6 +256,8 @@ export default {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    transition: all .3s ease-in;
+
 }
 
 .styles-description {
@@ -259,11 +271,13 @@ export default {
     -webkit-box-orient: vertical;
     overflow: hidden;
     margin-bottom: 24px;
+    transition: all .3s ease-in;
+
 }
 
 .global-arrow-button {
     position: absolute;
-    bottom: 30px;
+    bottom: 24px;
     left: 28px;
 }
 
@@ -274,8 +288,21 @@ export default {
     color: #fff;
 }
 
-.global-arrow-button-image img {
-    width: 16px !important;
+.global-arrow-button-image {
+    color: #fff;
+}
+
+.styles-item:hover {
+    background: #111;
+}
+
+.styles-item:hover .styles-data {
+    background: #111;
+
+}
+
+.styles-item:hover .styles-image img {
+    transform: scale(1.03);
 }
 
 .owl-nav {
