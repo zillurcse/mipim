@@ -140,20 +140,26 @@ export default {
 
     methods: {
         removeFileExtension(fileName) {
-            return fileName.replace(/\.[^/.]+$/, ""); // Remove the file extension
+            if (fileName && typeof fileName ==='string'){
+                return fileName.replace(/\.[^/.]+$/, "");
+            }
         },
 
         truncateFileName(fileName) {
-            const maxLength = 45;
-            if (fileName.length > maxLength) {
-                return fileName.substring(0, maxLength) + "...";
+            if (fileName){
+                const maxLength = 45;
+                if (fileName.length > maxLength) {
+                    return fileName.substring(0, maxLength) + "...";
+                }
+                return fileName;
             }
-            return fileName;
         },
 
         getFileType(fileName) {
-            const extension = fileName.split('.').pop();
-            return extension.toUpperCase() + " FILE";
+            if (fileName && typeof fileName ==='string'){
+                const extension = fileName.split('.').pop();
+                return extension.toUpperCase() + " FILE";
+            }
         }
     }
 }
