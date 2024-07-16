@@ -33,12 +33,12 @@
                                     <Link class="nav-link " href="/about" target="_self" title="About">About</Link>
                                 </li>
                                 <li class="nav-item">
-                                    <Link class="nav-link " href="/contact" target="_self" title="Contact us">Contact us
-                                    </Link>
+                                    <Link class="nav-link " href="/projects" target="_self" title="categorie">
+                                        Projects</Link>
                                 </li>
                                 <li class="nav-item">
-                                    <Link class="nav-link " href="/projects" target="_self" title="categorie">
-                                    Projects</Link>
+                                    <Link class="nav-link " href="/contact" target="_self" title="Contact us">Contact us
+                                    </Link>
                                 </li>
                             </ul>
                         </div>
