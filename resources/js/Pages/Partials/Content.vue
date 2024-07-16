@@ -717,7 +717,8 @@ export default {
             this.twitter = social_links_decode.twitter;
             this.linkedin = social_links_decode.linkedin;
             this.instagram = social_links_decode.instagram;
-            this.oldFileRecords = boucher_files_decode
+            this.oldFileRecords = boucher_files_decode;
+            this.category_id = item.category_id
         },
         async updateContentFiles() {
             try {
