@@ -8692,6 +8692,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this6.type = 'Select Type';
                 _this6.contentFile = null;
                 _this6.contentPreview = null;
+                _this6.facebook = '';
+                _this6.twitter = '';
+                _this6.linkedin = '';
+                _this6.instagram = '';
+                _this6.phone = '';
+                _this6.email = '';
+                _this6.fileRecords = [];
                 _this6.isLoading = false;
 
                 _this6.$toasted.success(response.data.message, {
@@ -8700,11 +8707,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   duration: 5000
                 });
 
-                _context4.next = 57;
+                _context4.next = 64;
                 break;
 
-              case 52:
-                _context4.prev = 52;
+              case 59:
+                _context4.prev = 59;
                 _context4.t0 = _context4["catch"](0);
                 // Handle error
                 _this6.isLoading = false;
@@ -8717,12 +8724,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 console.error('Error:', _context4.t0);
 
-              case 57:
+              case 64:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, null, [[0, 52]]);
+        }, _callee4, null, [[0, 59]]);
       }))();
     },
     uploadFiles: function uploadFiles() {
