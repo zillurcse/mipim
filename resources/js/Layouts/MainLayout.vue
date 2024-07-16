@@ -44,7 +44,7 @@
                                     <ul class="dropdown-menu dropdown-menu-scrollable" aria-labelledby="navbarDropdown">
                                         <li v-for="(  content, index  ) in  contentItems " :key="index">
                                             <Link class="dropdown-item" :href="'project/' + content.slug">
-                                            {{ content.title }}
+                                            {{ content.title.substring(0, 20) }}
                                             </Link>
                                         </li>
 

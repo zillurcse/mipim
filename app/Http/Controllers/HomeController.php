@@ -56,6 +56,7 @@ class HomeController extends Controller
 
 
         $bannerItems = Banner::orderBy('order', 'asc')->get();
+        $contentItems = Content::with('category')->orderBy('order', 'asc')->get();
 
         if (!$data) {
             return abort(404);
@@ -63,7 +64,8 @@ class HomeController extends Controller
 
         return Inertia::render('Project', [
             'content' => $data,
-            'bannerItems' => $bannerItems
+            'bannerItems' => $bannerItems,
+            'contentItems' => $contentItems,
         ]);
     }
 }

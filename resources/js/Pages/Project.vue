@@ -1,6 +1,6 @@
 <template>
     <div class="container mx-auto bg-white p-0">
-        <MainLayoutVue :bannerItems="bannerItems">
+        <MainLayoutVue :bannerItems="bannerItems" :contentItems="contentItems">
             <section class="about-section">
                 <div class="container">
                     <div>
@@ -32,7 +32,8 @@
                                                     clip-rule="evenodd" />
                                             </svg>
                                         </div>
-                                        <span v-if="content.get_in_touch.phone"> {{ content.get_in_touch.phone }} </span>
+                                        <span v-if="content.get_in_touch.phone"> {{ content.get_in_touch.phone }}
+                                        </span>
                                     </div>
                                     <div class="d-flex gap-2 align-items-center ">
                                         <div class="icon">
@@ -50,7 +51,8 @@
                                 <div class="boucher-box" v-if="content.boucher_files">
                                     <h3>Boucher <span>({{ boucherFilesLength }})</span></h3>
 
-                                    <div class="d-flex justify-between align-items-center py-3" v-for="(url, key) in content.boucher_files" :key="key">
+                                    <div class="d-flex justify-between align-items-center py-3"
+                                        v-for="(url, key) in content.boucher_files" :key="key">
                                         <div class="d-flex align-items-center gap-3">
                                             <svg width="18" height="23" viewBox="0 0 18 23" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -71,7 +73,7 @@
 
                                             <div class="d-flex flex-col boucher-text uppercase">
                                                 <p>{{ truncateFileName(removeFileExtension(key)) }}</p>
-                                                <span>{{  getFileType(key) }}</span>
+                                                <span>{{ getFileType(key) }}</span>
                                             </div>
                                         </div>
                                         <div class="d-flex gap-3 align-items-center">
@@ -121,6 +123,7 @@ export default {
     props: {
         content: Object,
         bannerItems: Array,
+        contentItems: Array
     },
     components: {
         MainLayoutVue
@@ -140,13 +143,13 @@ export default {
 
     methods: {
         removeFileExtension(fileName) {
-            if (fileName && typeof fileName ==='string'){
+            if (fileName && typeof fileName === 'string') {
                 return fileName.replace(/\.[^/.]+$/, "");
             }
         },
 
         truncateFileName(fileName) {
-            if (fileName){
+            if (fileName) {
                 const maxLength = 45;
                 if (fileName.length > maxLength) {
                     return fileName.substring(0, maxLength) + "...";
@@ -156,7 +159,7 @@ export default {
         },
 
         getFileType(fileName) {
-            if (fileName && typeof fileName ==='string'){
+            if (fileName && typeof fileName === 'string') {
                 const extension = fileName.split('.').pop();
                 return extension.toUpperCase() + " FILE";
             }
