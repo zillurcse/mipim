@@ -42,7 +42,8 @@
                                           data-bs-toggle="dropdown" aria-expanded="false">
                                         Projects
                                     </Link>
-                                    <ul class="dropdown-menu dropdown-menu-scrollable" aria-labelledby="navbarDropdown">
+                                    <ul class="dropdown-menu dropdown-menu-scrollable scrollbar-hidden"
+                                        aria-labelledby="navbarDropdown">
                                         <li v-for="(  content, index  ) in  contentItems " :key="index">
                                             <Link class="dropdown-item" :href="slugByRoute(content.slug)">
                                                 {{ content.title.substring(0, 20) }}
@@ -156,5 +157,11 @@ export default {
     max-height: 300px;
     /* Adjust the height as needed */
     overflow-y: auto;
+}
+
+.scrollbar-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    /* Firefox */
 }
 </style>
