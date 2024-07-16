@@ -10034,20 +10034,26 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {},
   methods: {
     removeFileExtension: function removeFileExtension(fileName) {
-      return fileName.replace(/\.[^/.]+$/, ""); // Remove the file extension
+      if (fileName && typeof fileName === 'string') {
+        return fileName.replace(/\.[^/.]+$/, "");
+      }
     },
     truncateFileName: function truncateFileName(fileName) {
-      var maxLength = 45;
+      if (fileName) {
+        var maxLength = 45;
 
-      if (fileName.length > maxLength) {
-        return fileName.substring(0, maxLength) + "...";
+        if (fileName.length > maxLength) {
+          return fileName.substring(0, maxLength) + "...";
+        }
+
+        return fileName;
       }
-
-      return fileName;
     },
     getFileType: function getFileType(fileName) {
-      var extension = fileName.split('.').pop();
-      return extension.toUpperCase() + " FILE";
+      if (fileName && typeof fileName === 'string') {
+        var extension = fileName.split('.').pop();
+        return extension.toUpperCase() + " FILE";
+      }
     }
   }
 });
