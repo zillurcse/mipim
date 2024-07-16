@@ -70572,7 +70572,7 @@ var render = function () {
                           _vm._v(" "),
                           _vm._l(
                             _vm.content.boucher_files,
-                            function (item, key) {
+                            function (url, key) {
                               return _c(
                                 "div",
                                 {
@@ -70681,7 +70681,7 @@ var render = function () {
                                         "a",
                                         {
                                           attrs: {
-                                            href: item,
+                                            href: url,
                                             target: "_blank",
                                           },
                                         },

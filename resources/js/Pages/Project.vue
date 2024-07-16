@@ -50,7 +50,7 @@
                                 <div class="boucher-box" v-if="content.boucher_files">
                                     <h3>Boucher <span>({{ boucherFilesLength }})</span></h3>
 
-                                    <div class="d-flex justify-between align-items-center py-3" v-for="(item, key) in content.boucher_files" :key="key">
+                                    <div class="d-flex justify-between align-items-center py-3" v-for="(url, key) in content.boucher_files" :key="key">
                                         <div class="d-flex align-items-center gap-3">
                                             <svg width="18" height="23" viewBox="0 0 18 23" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -76,7 +76,7 @@
                                         </div>
                                         <div class="d-flex gap-3 align-items-center">
 
-                                            <a :href="item" target="_blank">
+                                            <a :href="url" target="_blank">
                                                 <svg width="18" height="18" viewBox="0 0 18 18" fill="#9a5626"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <g clip-path="url(#clip0_220_19)">
