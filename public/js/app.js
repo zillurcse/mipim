@@ -6712,25 +6712,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }); // console.log(to_index, from_index);
       //alert(`You dropped with data: ${JSON.stringify(data)}`);
     },
-    // async getBannerData() {
-    //     await axios
-    //         .get("/api/banner")
-    //         .then((response) => {
-    //             if (response.status == 200) {
-    //                 this.items = response.data.data.items;
-    //
-    //             }
-    //         })
-    //         .catch((error) => {
-    //             if (error.response.status == 422) {
-    //                 this.errors = error.response.data.errors;
-    //             } else {
-    //                 // this.toastMessage('error', error, 'check', '', 'times')
-    //                 console.log(error);
-    //             }
-    //         })
-    //         .finally(() => { });
-    // },
     handleFileChange: function handleFileChange(event) {
       this.bannerImage = event.target.files[0];
     },
@@ -6810,13 +6791,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee, null, [[0, 13]]);
       }))();
     },
-    deleteBannerItem: function deleteBannerItem(id) {
+    deleteBannerItem: function deleteBannerItem(id, index) {
       var _this4 = this;
 
       // Send a DELETE request to the backend with the item's ID
       axios__WEBPACK_IMPORTED_MODULE_5__["default"]["delete"]("/api/banner/".concat(id)).then(function (response) {
-        // console.log(response.data.message);
-        _this4.getBannerData();
+        _this4.$delete(_this4.bannerItems, index);
 
         _this4.$toasted.show(response.data.message, {
           theme: "toasted-primary",
@@ -7311,6 +7291,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       categories: '',
+      category_index: '',
       updatedId: '',
       selectedTab: 'categories',
       showModal: '',
@@ -7402,26 +7383,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.isUpdate = true;
       this.categories = item.name;
     },
-    deleteCategoryItem: function deleteCategoryItem(id) {
+    deleteCategoryItem: function deleteCategoryItem(id, index) {
       var _this2 = this;
 
       // Send a DELETE request to the backend with the item's ID
       axios__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("/api/categories/".concat(id)).then(function (response) {
-        // console.log(response.data.message);
-        _this2.getCategoriesData();
+        _this2.$delete(_this2.categoriesData, index);
 
         _this2.$toasted.show(response.data.message, {
           theme: "toasted-primary",
           position: "top-center",
           duration: 5000
-        }); // Assuming you want to remove the item from the frontend after successful deletion
-        // You can trigger a method to refresh the list of items or remove the deleted item from the UI
-
+        });
       })["catch"](function (error) {
         console.error("Error deleting resource:", error); // Handle error if needed
       });
     },
-    updateCategories: function updateCategories(id) {
+    updateCategories: function updateCategories() {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
@@ -7441,31 +7419,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context2.sent;
 
                 // Handle success
-                _this3.getCategoriesData(); // Update content data
+                if (response.status === 200) {
+                  _this3.$set(_this3.categoriesData, _this3.category_index, response.data.data);
 
+                  _this3.showModal = false; // Reset all data
 
-                _this3.showModal = false; // Close the modal after successful upload
-                // Reset all data
+                  _this3.categories = '';
+                  _this3.isLoading = false;
+                  _this3.isUpdate = false;
+                }
 
-                _this3.categories = '';
-                _this3.isLoading = false;
-                _this3.isUpdate = false;
-                _context2.next = 18;
+                _context2.next = 14;
                 break;
 
-              case 14:
-                _context2.prev = 14;
+              case 10:
+                _context2.prev = 10;
                 _context2.t0 = _context2["catch"](0);
                 // Handle error
                 console.error("Error:", _context2.t0);
                 _this3.isLoading = false; // Add specific error handling as needed
 
-              case 18:
+              case 14:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 14]]);
+        }, _callee2, null, [[0, 10]]);
       }))();
     },
     handleDrop: function handleDrop(to_index, from_index) {
@@ -7497,11 +7476,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         console.log(res);
       });
     },
-    clickTool: function clickTool(id) {
-      if (this.isOpenTool == id) {
+    clickTool: function clickTool(id, index) {
+      if (this.isOpenTool === id) {
         this.isOpenTool = -1;
+        this.category_index = index;
       } else {
         this.isOpenTool = id;
+        this.category_index = null;
       }
     },
     closeModal: function closeModal() {
@@ -8040,6 +8021,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -8123,6 +8109,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       linkedin: '',
       instagram: '',
       updatedId: null,
+      current_index: null,
       email: '',
       phone: '',
       uploading: false,
@@ -8131,6 +8118,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       attachments: [],
       fileTypeError: '',
       fileRecords: [],
+      oldFileRecords: [],
       fileRecord: [],
       boucher_files: [],
       boucher_files1: [],
@@ -8450,19 +8438,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.deleteUploadedFile(fileRecord);
       }
     },
-    deleteContentItem: function deleteContentItem(id) {
+    deleteContentItem: function deleteContentItem(id, index) {
       var _this4 = this;
 
-      // Send a DELETE request to the backend with the item's ID
       axios__WEBPACK_IMPORTED_MODULE_5__["default"]["delete"]("/api/content/".concat(id)).then(function (response) {
-        _this4.getContentData(); // Assuming you want to remove the item from the frontend after successful deletion
-        // You can trigger a method to refresh the list of items or remove the deleted item from the UI
-
+        _this4.$delete(_this4.contentItems, index);
       })["catch"](function (error) {
         console.error('Error deleting resource:', error); // Handle error if needed
       });
     },
-    UpdateContent: function UpdateContent(item) {
+    UpdateContent: function UpdateContent(item, index) {
+      var get_in_touch_decode = JSON.parse(item.get_in_touch);
+      var social_links_decode = JSON.parse(item.social_links);
+      var boucher_files_decode = JSON.parse(item.boucher_files);
+      console.log(item);
+      this.current_index = index;
       this.updatedId = item.id;
       this.showModal = 'pdf';
       this.isUpdate = true;
@@ -8474,13 +8464,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.type = item.type;
       this.contentFile = item.file;
       this.contentPreview = item.file;
-      this.email = item.get_in_touch.email;
-      this.phone = item.get_in_touch.phone;
-      this.facebook = item.social_links.facebook;
-      this.twitter = item.social_links.twitter;
-      this.linkedin = item.social_links.linkedin;
-      this.instagram = item.social_links.instagram;
-      this.fileRecords = item.social_links.fileRecords;
+      this.email = get_in_touch_decode.email;
+      this.phone = get_in_touch_decode.phone;
+      this.facebook = social_links_decode.facebook;
+      this.twitter = social_links_decode.twitter;
+      this.linkedin = social_links_decode.linkedin;
+      this.instagram = social_links_decode.instagram;
+      this.oldFileRecords = boucher_files_decode;
     },
     updateContentFiles: function updateContentFiles() {
       var _this5 = this;
@@ -8529,45 +8519,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 12:
                 response = _context3.sent;
 
-                // Handle success
-                _this5.getContentData(); // Update content data
+                if (response.status === 200) {
+                  // Handle success
+                  _this5.$set(_this5.contentItems, _this5.current_index, response.data.data);
 
+                  _this5.showModal = false; // Reset all data
 
-                _this5.showModal = false; // Close the modal after successful upload
-                // Reset all data
+                  _this5.title = '';
+                  _this5.link = '';
+                  _this5.date = '';
+                  _this5.details = '';
+                  _this5.position = '';
+                  _this5.type = 'Select Type';
+                  _this5.contentFile = null;
+                  _this5.contentPreview = null;
+                  _this5.isLoading = false;
 
-                _this5.title = '';
-                _this5.link = '';
-                _this5.date = '';
-                _this5.details = '';
-                _this5.position = '';
-                _this5.type = 'Select Type';
-                _this5.contentFile = null;
-                _this5.contentPreview = null;
-                _this5.isLoading = false;
+                  _this5.$toasted.success(response.data.message, {
+                    theme: "toasted-primary",
+                    position: "top-center",
+                    duration: 5000
+                  });
+                }
 
-                _this5.$toasted.success(response.data.message, {
-                  theme: "toasted-primary",
-                  position: "top-center",
-                  duration: 5000
-                });
-
-                _context3.next = 31;
+                _context3.next = 20;
                 break;
 
-              case 27:
-                _context3.prev = 27;
+              case 16:
+                _context3.prev = 16;
                 _context3.t0 = _context3["catch"](0);
                 // Handle error
                 console.error("Error:", _context3.t0);
                 _this5.isLoading = false; // Add specific error handling as needed
 
-              case 31:
+              case 20:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[0, 27]]);
+        }, _callee3, null, [[0, 16]]);
       }))();
     },
     clickTool: function clickTool(id) {
@@ -65410,7 +65400,8 @@ var render = function () {
                                                   on: {
                                                     click: function ($event) {
                                                       return _vm.deleteBannerItem(
-                                                        item.id
+                                                        item.id,
+                                                        index
                                                       )
                                                     },
                                                   },
@@ -66310,7 +66301,10 @@ var render = function () {
                                         "absolute top-2 right-2 text-gray-400 cursor-pointer",
                                       on: {
                                         click: function ($event) {
-                                          return _vm.clickTool(category.id)
+                                          return _vm.clickTool(
+                                            category.id,
+                                            index
+                                          )
                                         },
                                       },
                                     },
@@ -66374,7 +66368,8 @@ var render = function () {
                                                   on: {
                                                     click: function ($event) {
                                                       return _vm.deleteCategoryItem(
-                                                        category.id
+                                                        category.id,
+                                                        index
                                                       )
                                                     },
                                                   },
@@ -67295,15 +67290,16 @@ var render = function () {
                                                         click: function (
                                                           $event
                                                         ) {
-                                                          return _vm.deleteContentItem(
-                                                            item.id
+                                                          return _vm.UpdateContent(
+                                                            item,
+                                                            index
                                                           )
                                                         },
                                                       },
                                                     },
                                                     [
                                                       _vm._v(
-                                                        "\n                                                Delete Content\n                                            "
+                                                        "\n                                                Update Content\n                                            "
                                                       ),
                                                     ]
                                                   ),
@@ -67317,15 +67313,16 @@ var render = function () {
                                                         click: function (
                                                           $event
                                                         ) {
-                                                          return _vm.UpdateContent(
-                                                            item
+                                                          return _vm.deleteContentItem(
+                                                            item.id,
+                                                            index
                                                           )
                                                         },
                                                       },
                                                     },
                                                     [
                                                       _vm._v(
-                                                        "\n                                                Update Content\n                                            "
+                                                        "\n                                                Delete Content\n                                            "
                                                       ),
                                                     ]
                                                   ),
@@ -67997,6 +67994,18 @@ var render = function () {
                   : _vm._e(),
                 _vm._v(" "),
                 _c("div", { staticClass: "mb-6" }, [
+                  _vm.oldFileRecords
+                    ? _c("div", [
+                        _c(
+                          "ul",
+                          _vm._l(_vm.oldFileRecords, function (url, key) {
+                            return _c("li", [_vm._v(_vm._s(key))])
+                          }),
+                          0
+                        ),
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
                   _c(
                     "label",
                     {

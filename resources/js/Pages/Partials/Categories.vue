@@ -27,7 +27,7 @@
                                     <h2 class="text-2xl text-gray-800 mb-2">{{ category.name }}</h2>
 
                                     <div class="absolute top-2 right-2 text-gray-400 cursor-pointer"
-                                        @click="clickTool(category.id)">
+                                        @click="clickTool(category.id, index)">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -40,7 +40,7 @@
                                                 Update categories
                                             </button>
                                             <button class="cursor-pointer hover:text-red-700 p-2 w-full"
-                                                @click="deleteCategoryItem(category.id)">
+                                                @click="deleteCategoryItem(category.id, index)">
                                                 Delete categories
                                             </button>
                                         </div>
@@ -127,6 +127,7 @@ export default {
     data() {
         return {
             categories: '',
+            category_index: '',
             updatedId: '',
             selectedTab: 'categories',
             showModal: '',
@@ -200,20 +201,17 @@ export default {
         },
 
 
-        deleteCategoryItem(id) {
+        deleteCategoryItem(id, index) {
             // Send a DELETE request to the backend with the item's ID
             axios
                 .delete(`/api/categories/${id}`)
                 .then((response) => {
-                    // console.log(response.data.message);
-                    this.getCategoriesData();
+                    this.$delete(this.categoriesData, index);
                     this.$toasted.show(response.data.message, {
                         theme: "toasted-primary",
                         position: "top-center",
                         duration: 5000
                     });
-                    // Assuming you want to remove the item from the frontend after successful deletion
-                    // You can trigger a method to refresh the list of items or remove the deleted item from the UI
                 })
                 .catch((error) => {
                     console.error("Error deleting resource:", error);
@@ -221,7 +219,7 @@ export default {
                 });
         },
 
-        async updateCategories(id) {
+        async updateCategories() {
             try {
                 this.isLoading = true;
 
@@ -232,13 +230,16 @@ export default {
                 const response = await axios.post(`/api/categories/${this.updatedId}`, formData);
 
                 // Handle success
-                this.getCategoriesData(); // Update content data
-                this.showModal = false; // Close the modal after successful upload
-                // Reset all data
-                this.categories = '';
+                if (response.status===200){
+                    this.$set(this.categoriesData, this.category_index, response.data.data);
+                    this.showModal = false;
+                    // Reset all data
+                    this.categories = '';
 
-                this.isLoading = false;
-                this.isUpdate = false;
+                    this.isLoading = false;
+                    this.isUpdate = false;
+                }
+
             } catch (error) {
                 // Handle error
                 console.error("Error:", error);
@@ -280,11 +281,13 @@ export default {
 
         },
 
-        clickTool(id) {
-            if (this.isOpenTool == id) {
+        clickTool(id, index) {
+            if (this.isOpenTool === id) {
                 this.isOpenTool = -1
+                this.category_index = index
             } else {
                 this.isOpenTool = id;
+                this.category_index = null
             }
         },
 

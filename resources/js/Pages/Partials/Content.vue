@@ -46,12 +46,12 @@
                                             <div class="w-40 p-3 absolute  right-0 rounded-md bg-white text-gray-700 "
                                                 v-if="isOpenTool === item.id">
                                                 <button class="cursor-pointer hover:text-red-700"
-                                                    @click="deleteContentItem(item.id)">
-                                                    Delete Content
+                                                        @click="UpdateContent(item, index)">
+                                                    Update Content
                                                 </button>
                                                 <button class="cursor-pointer hover:text-red-700"
-                                                    @click="UpdateContent(item)">
-                                                    Update Content
+                                                    @click="deleteContentItem(item.id, index)">
+                                                    Delete Content
                                                 </button>
                                             </div>
 
@@ -216,6 +216,11 @@
                             placeholder="Enter position" required />
                     </div>
                     <div class="mb-6">
+                        <div v-if="oldFileRecords">
+                            <ul>
+                                <li v-for="(url, key) in oldFileRecords">{{ key }}</li>
+                            </ul>
+                        </div>
 
                         <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Boucher
@@ -378,6 +383,7 @@ export default {
             linkedin: '',
             instagram: '',
             updatedId: null,
+            current_index: null,
             email: '',
             phone: '',
 
@@ -389,6 +395,7 @@ export default {
 
             fileTypeError: '',
             fileRecords: [],
+            oldFileRecords: [],
             fileRecord: [],
             boucher_files: [],
             boucher_files1: [],
@@ -675,20 +682,24 @@ export default {
                 this.deleteUploadedFile(fileRecord);
             }
         },
-        deleteContentItem(id) {
-            // Send a DELETE request to the backend with the item's ID
+        deleteContentItem(id, index) {
             axios.delete(`/api/content/${id}`)
                 .then(response => {
-                    this.getContentData()
-                    // Assuming you want to remove the item from the frontend after successful deletion
-                    // You can trigger a method to refresh the list of items or remove the deleted item from the UI
+                    this.$delete(this.contentItems, index);
                 })
                 .catch(error => {
                     console.error('Error deleting resource:', error);
                     // Handle error if needed
                 });
         },
-        UpdateContent(item) {
+        UpdateContent(item, index) {
+
+            const get_in_touch_decode = JSON.parse(item.get_in_touch)
+            const social_links_decode = JSON.parse(item.social_links)
+            const boucher_files_decode = JSON.parse(item.boucher_files)
+            console.log(item)
+
+            this.current_index = index
             this.updatedId = item.id
             this.showModal = 'pdf';
             this.isUpdate = true
@@ -700,69 +711,63 @@ export default {
             this.type = item.type;
             this.contentFile = item.file;
             this.contentPreview = item.file;
-            this.email = item.get_in_touch.email;
-            this.phone = item.get_in_touch.phone;
-            this.facebook = item.social_links.facebook;
-            this.twitter = item.social_links.twitter;
-            this.linkedin = item.social_links.linkedin;
-            this.instagram = item.social_links.instagram;
-            this.fileRecords = item.social_links.fileRecords
+            this.email = get_in_touch_decode.email;
+            this.phone = get_in_touch_decode.phone;
+            this.facebook = social_links_decode.facebook;
+            this.twitter = social_links_decode.twitter;
+            this.linkedin = social_links_decode.linkedin;
+            this.instagram = social_links_decode.instagram;
+            this.oldFileRecords = boucher_files_decode
         },
         async updateContentFiles() {
             try {
                 this.isLoading = true;
                 let formData = new FormData();
-
-
                 if (this.title) {
                     formData.append('title', this.title);
                 }
-
                 if (this.link) {
                     formData.append('link', this.link);
                 }
-
                 if (this.type) {
                     formData.append('type', this.type);
                 }
-
                 if (this.date) {
                     formData.append('date', this.date);
                 }
-
                 if (this.details) {
                     formData.append('details', this.details);
                 }
-
                 if (this.position) {
                     formData.append('position', this.position);
                 }
-
                 if (this.contentFile) {
                     formData.append('file', this.contentFile);
                 }
-
                 const response = await axios.post(`/api/content/${this.updatedId}`, formData);
 
-                // Handle success
-                this.getContentData(); // Update content data
-                this.showModal = false; // Close the modal after successful upload
-                // Reset all data
-                this.title = '';
-                this.link = '';
-                this.date = '';
-                this.details = '';
-                this.position = '';
+                if (response.status===200){
+                    // Handle success
+                    this.$set(this.contentItems, this.current_index, response.data.data);
+                    this.showModal = false;
+                    // Reset all data
+                    this.title = '';
+                    this.link = '';
+                    this.date = '';
+                    this.details = '';
+                    this.position = '';
 
-                this.type = 'Select Type';
-                this.contentFile = null;
-                this.contentPreview = null
-                this.isLoading = false;
-                this.$toasted.success(response.data.message, {
-                    theme: "toasted-primary",
-                    position: "top-center",
-                    duration: 5000
-                });
+                    this.type = 'Select Type';
+                    this.contentFile = null;
+                    this.contentPreview = null
+                    this.isLoading = false;
+                    this.$toasted.success(response.data.message, {
+                        theme: "toasted-primary",
+                        position: "top-center",
+                        duration: 5000
+                    });
+                }
+
             } catch (error) {
                 // Handle error
                 console.error("Error:", error);

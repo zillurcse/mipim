@@ -35,7 +35,7 @@
                                         <div class="w-40 p-3 absolute right-0 rounded-md bg-white text-gray-700"
                                             v-if="isOpenTool === item.id">
                                             <button class="cursor-pointer hover:text-red-700"
-                                                @click="deleteBannerItem(item.id)">
+                                                @click="deleteBannerItem(item.id, index)">
                                                 Delete Banner
                                             </button>
                                         </div>
@@ -262,25 +262,6 @@ export default {
             // console.log(to_index, from_index);
             //alert(`You dropped with data: ${JSON.stringify(data)}`);
         },
-        // async getBannerData() {
-        //     await axios
-        //         .get("/api/banner")
-        //         .then((response) => {
-        //             if (response.status == 200) {
-        //                 this.items = response.data.data.items;
-        //
-        //             }
-        //         })
-        //         .catch((error) => {
-        //             if (error.response.status == 422) {
-        //                 this.errors = error.response.data.errors;
-        //             } else {
-        //                 // this.toastMessage('error', error, 'check', '', 'times')
-        //                 console.log(error);
-        //             }
-        //         })
-        //         .finally(() => { });
-        // },
 
         handleFileChange(event) {
             this.bannerImage = event.target.files[0];
@@ -333,13 +314,12 @@ export default {
 
         },
 
-        deleteBannerItem(id) {
+        deleteBannerItem(id, index) {
             // Send a DELETE request to the backend with the item's ID
             axios
                 .delete(`/api/banner/${id}`)
                 .then((response) => {
-                    // console.log(response.data.message);
-                    this.getBannerData();
+                    this.$delete(this.bannerItems, index);
                     this.$toasted.show(response.data.message, {
                         theme: "toasted-primary",
                         position: "top-center",
