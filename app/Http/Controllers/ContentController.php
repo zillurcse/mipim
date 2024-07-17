@@ -64,6 +64,7 @@ class ContentController extends Controller
             'title' => 'required|string|max:255',
             'type' => 'required|string|max:255',
             'details' => 'nullable|string',
+            'link' => 'nullable|string',
             'position' => 'nullable|integer',
             'file' => 'nullable|file', // Ensure the file is actually a file
             'boucher_files' => 'nullable', // Ensure the file is actually a file

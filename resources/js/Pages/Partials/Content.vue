@@ -46,7 +46,7 @@
                                             <div class="w-40 p-3 absolute  right-0 rounded-md bg-white text-gray-700 "
                                                 v-if="isOpenTool === item.id">
                                                 <button class="cursor-pointer hover:text-red-700"
-                                                        @click="UpdateContent(item, index)">
+                                                    @click="UpdateContent(item, index)">
                                                     Update Content
                                                 </button>
                                                 <button class="cursor-pointer hover:text-red-700"
@@ -58,9 +58,15 @@
                                         </div>
                                     </figure>
 
-                                    <h2 class="text-xl text-gray-800 font-semibold">{{ item.title }}</h2>
-                                    <h3 class="text-lg text-gray-700 font-medium">{{ item.type }}</h3>
-                                    <h4 class="text-base text-gray-700 font-medium break-words">{{ item.link }}</h4>
+                                    <h2 v-if="item.title" class="text-xl text-gray-800 font-semibold">
+                                        {{ item.title.substring(0, 50) }}
+                                    </h2>
+                                    <h3 v-if="item.type" class="text-lg text-gray-700 font-medium">
+                                        {{ item.type.substring(0, 20) }}
+                                    </h3>
+                                    <h4 v-if="item.link" class="text-base text-gray-700 font-medium break-words">
+                                        {{ item.link.substring(0, 50) }}
+                                    </h4>
                                     <div v-html="item.details" class="overflow-hidden"
                                         style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;">
                                     </div>
@@ -216,11 +222,27 @@
                             placeholder="Enter position" required />
                     </div>
                     <div class="mb-6">
+                        <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Old Boucher Files:
+                        </label>
                         <div v-if="oldFileRecords">
                             <ul>
-                                <li v-for="(url, key) in oldFileRecords">{{ key }}</li>
+                                <li v-for="(url, key) in oldFileRecords" :key="key"
+                                    class="flex justify-between items-center text-base font-medium text-gray-900 list-disc ">
+                                    {{ key }}
+                                    <span class="cursor-pointer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-5">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M6 18 18 6M6 6l12 12" />
+                                        </svg>
+                                    </span>
+                                </li>
                             </ul>
                         </div>
+                    </div>
+                    <div class="mb-6">
+
 
                         <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Boucher
@@ -326,7 +348,7 @@ import VueDocPreview from 'vue-doc-preview'
 import { quillEditor } from 'vue-quill-editor'
 
 export default {
-    props:['contentItems', 'categoriesItems'],
+    props: ['contentItems', 'categoriesItems'],
     components: {
         VLazyImage,
         Drag, Drop,
@@ -556,8 +578,8 @@ export default {
                         });
                         return false;
                     }
-                } else if (this.title === "" || this.link === '' || this.type === "" || this.contentFile === null) {
-                    this.$toasted.show("Please fill up all fields", {
+                } else if (this.title === "" || this.category_id === "0" || this.details === '') {
+                    this.$toasted.show("Please fill up required fields", {
                         theme: "toasted-primary",
                         position: "top-center",
                         duration: 5000
@@ -601,7 +623,7 @@ export default {
                 // Make POST request to upload the file and data
                 const response = await axios.post('/api/content', formData);
 
-                if (response.status===200){
+                if (response.status === 200) {
                     // Handle success
                     this.contentItems.push(response.data.data)
 
@@ -742,12 +764,47 @@ export default {
                 if (this.position) {
                     formData.append('position', this.position);
                 }
+
+                formData.append('category_id', this.category_id);
+
+                const getInTuch = {
+                    email: this.email,
+                    phone: this.phone
+                }
+                formData.append('get_in_touch', JSON.stringify(getInTuch));
+
+                const socialLinks = {
+                    facebook: this.facebook,
+                    twitter: this.twitter,
+                    linkedin: this.linkedin,
+                    instagram: this.instagram,
+                };
+                formData.append('social_links', JSON.stringify(socialLinks));
+
+                this.boucher_files = this.fileRecordsForUpload[0]?.file;
+                this.boucher_files1 = this.fileRecordsForUpload[1]?.file;
+                this.boucher_files2 = this.fileRecordsForUpload[2]?.file;
+                this.boucher_files3 = this.fileRecordsForUpload[3]?.file;
+                this.boucher_files4 = this.fileRecordsForUpload[4]?.file;
+
+                if (this.boucher_files) formData.append('boucher_files', this.boucher_files);
+                if (this.boucher_files1) formData.append('boucher_files1', this.boucher_files1);
+                if (this.boucher_files2) formData.append('boucher_files2', this.boucher_files2);
+                if (this.boucher_files3) formData.append('boucher_files3', this.boucher_files3);
+                if (this.boucher_files4) formData.append('boucher_files4', this.boucher_files4);
                 if (this.contentFile) {
                     formData.append('file', this.contentFile);
                 }
+                // if (this.contentFile) {
+                //     const fileName = this.extractFileName(this.contentFile);
+                //     await this.urlToFile(this.contentFile, fileName, (file) => {
+                //         formData.append('file', file);
+                //     });
+                // }
+
                 const response = await axios.post(`/api/content/${this.updatedId}`, formData);
 
-                if (response.status===200){
+                if (response.status === 200) {
                     // Handle success
                     this.$set(this.contentItems, this.current_index, response.data.data);
                     this.showModal = false;
@@ -760,7 +817,7 @@ export default {
 
                     this.type = 'Select Type';
                     this.contentFile = null;
-                    this.contentPreview = null
+                    this.contentPreview = null;
                     this.isLoading = false;
                     this.$toasted.success(response.data.message, {
                         theme: "toasted-primary",
@@ -775,6 +832,21 @@ export default {
                 this.isLoading = false;
                 // Add specific error handling as needed
             }
+        },
+        extractFileName(url) {
+            return url.split('/').pop().split('#')[0].split('?')[0];
+        },
+        urlToFile(url, fileName, callback) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.responseType = 'blob';
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    const file = new File([xhr.response], fileName, { type: xhr.response.type });
+                    callback(file);
+                }
+            };
+            xhr.send();
         },
         clickTool(id) {
             if (this.isOpenTool == id) {
