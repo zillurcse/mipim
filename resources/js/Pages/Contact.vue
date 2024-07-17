@@ -1154,55 +1154,60 @@ export default {
             }
         },
         async submitData() {
-            this.isLoading = true
-            this.formData.is_reply = this.formData.is_reply ? 1 : 0;
+            this.isLoading = true;
+
+            // Prepare form data
             let formData = new FormData();
             formData.append('first_name', this.formData.firstName);
             formData.append('last_name', this.formData.lastName);
             formData.append('email', this.formData.email);
-            formData.append('phone_code', this.formData.countryCode.code + this.formData.phoneCode);
+            formData.append('phone_code', this.formData.phoneCode);
+            formData.append('country_code', this.formData.countryCode.code);
             formData.append('message', this.formData.message);
-            formData.append('is_reply', this.formData.is_reply);
+            formData.append('is_reply', this.formData.is_reply ? 1 : 0);
             formData.append('message_reply', this.formData.message_reply);
             formData.append('status', this.formData.status);
 
-
             try {
-                await axios.post('/api/web/contact-us', formData).then(res => {
+                // Make API call using await/async
+                let response = await axios.post('/api/web/contact-us', formData);
 
-                    this.$toasted.success(res.data.message, {
-                        theme: "toasted-primary",
-                        position: "top-center",
-                        duration: 5000
-                    });
-                    this.formData.firstName = '';
-                    this.formData.lastName = '';
-                    this.formData.email = '';
-                    this.formData.phoneCode = '';
-                    this.formData.countryCode = '';
-                    this.formData.message = '';
-                    this.formData.is_reply = '';
-                    this.formData.message_reply = '';
-                    this.formData.status = '';
-                    this.isLoading = false
+                // Handle success response
+                this.$toasted.success(response.data.message, {
+                    theme: "toasted-primary",
+                    position: "top-center",
+                    duration: 5000
+                });
 
-                }).catch(err => {
-                    this.$toasted.show(err.res.data.message, {
-                        theme: "toasted-primary",
-                        position: "top-center",
-                        duration: 5000
-                    });
-                }).finally(res => {
-                    console.log(res);
-                    this.isLoading = false
-                })
+                // Clear form data
+                this.clearFormData();
 
             } catch (error) {
-                // Handle error
+                // Handle error response
                 console.error('Error:', error);
-                // Optionally, show an error message to the user
-            }
+                this.$toasted.error(error.response.data.message, {
+                    theme: "toasted-primary",
+                    position: "top-center",
+                    duration: 5000
+                });
 
+            } finally {
+                // Ensure isLoading is set to false in all cases
+                this.isLoading = false;
+            }
+        },
+
+        clearFormData() {
+            // Clear form data
+            this.formData.firstName = '';
+            this.formData.lastName = '';
+            this.formData.email = '';
+            this.formData.phoneCode = '';
+            this.formData.countryCode = '';
+            this.formData.message = '';
+            this.formData.is_reply = '';
+            this.formData.message_reply = '';
+            this.formData.status = '';
         }
     }
 }

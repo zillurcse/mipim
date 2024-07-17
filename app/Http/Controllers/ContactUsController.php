@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactUsRequest;
 use App\Models\ContactUs;
+use App\Models\Content;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Exception;
+use Illuminate\Support\Str;
 
 class ContactUsController extends Controller
 {
@@ -39,24 +45,36 @@ class ContactUsController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ContactUsRequest $request): JsonResponse
     {
-        $data['first_name'] = $request->first_name;
-        $data['last_name'] = $request->last_name;
-        $data['email'] = $request->email;
-        $data['is_reply'] = $request->is_reply;
-        $data['phone_code'] = $request->phone_code;
-        $data['message'] = $request->message;
-        $data['message_reply'] = $request->message_reply;
-        $data['status'] = $request->status; //'sent', 'draft', 'reply'
+        try {
+            // Prepare the data for database insertion
+            $data = $request->validated();
 
-        $contact = ContactUs::create($data);
+            // Create a new contact record
+            $contact = ContactUs::create($data);
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Contact us has been updated',
-            'data' => $contact
-        ]);
+            // Return a JSON response
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Message has been sent successfully!',
+                'data' => $contact
+            ], 201);
+
+        } catch (ModelNotFoundException $e) {
+            // Handle the case where the model is not found
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Resource not found!',
+            ], 404);
+        } catch (Exception $e) {
+            // Handle general exceptions
+            return response()->json([
+                'status' => 'error',
+                'message' => 'An error occurred while processing your request.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     /**
@@ -111,4 +129,30 @@ class ContactUsController extends Controller
             return response()->json(['message' => 'Failed to delete banner'], 500);
         }
     }
+
+    public function slugGenerate()
+    {
+        Content::cursor()->each(function ($content) {
+            // Generate slug if not already set
+            if (!$content->slug) {
+                $content->slug = Str::slug($content->title, '-');
+            }
+
+            // Ensure slug is unique
+            $originalSlug = $slug = Str::slug($content->slug);
+            $counter = 1;
+
+            while (Content::where('slug', $slug)->where('id', '!=', $content->id)->exists()) {
+                $slug = $originalSlug . '-' . $counter;
+                $counter++;
+            }
+
+            // Update the record with the unique slug
+            $content->slug = $slug;
+            $content->save();
+        });
+
+        return response()->json(['slug' => true]);
+    }
+
 }

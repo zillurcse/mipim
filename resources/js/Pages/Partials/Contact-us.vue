@@ -133,19 +133,6 @@ export default {
     },
 
     methods: {
-        // async getContactInfo() {
-        //     await axios
-        //         .get("/api/contact-us")
-        //         .then((response) => {
-        //             if (response.status == 200) {
-        //                 this.contactInfos = response.data.data.items;
-        //             }
-        //         })
-        //         .catch((error) => {
-        //             console.error(error);
-        //         })
-        //         .finally(() => { });
-        // },
 
         deleteContactInfo(id) {
             // Send a DELETE request to the backend with the item's ID

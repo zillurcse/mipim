@@ -84,3 +84,4 @@ Route::get('/web/bio-container', [\App\Http\Controllers\BioContainerController::
 Route::get('/web/category', [\App\Http\Controllers\CategoriesController::class, 'index']);
 
 Route::post('/web/contact-us', [\App\Http\Controllers\ContactUsController::class, 'store']);
+Route::get('/web/slug', [\App\Http\Controllers\ContactUsController::class, 'slugGenerate']);
