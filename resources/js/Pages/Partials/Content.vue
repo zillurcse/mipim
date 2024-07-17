@@ -133,6 +133,30 @@
                             <option value="Speaker">Speaker</option>
                         </select>
                     </div>
+
+                    <div v-if="oldImageFile">
+                        <div v-if="oldImageFile && (type === 'Images' || type === 'Speaker' || type === 'URLs' || type === 'Video (YouTube)' || type === 'Social links')"
+                             class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                            <img :src="oldImageFile" alt="" class="w-1/2 mx-auto object-cover">
+                        </div>
+                        <div v-else-if="oldImageFile && (type === 'PDF' || type === 'URLs' || type === 'Video (YouTube)' || type === 'Social links')"
+                             class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                            <div class='embed-responsive h-full'>
+                                <embed :src="oldImageFile" type="application/pdf" width="100%" height="100%" />
+                            </div>
+                        </div>
+                        <div v-else-if="oldImageFile && (type === 'Documents (word, ppt, excel)' || type === 'URLs' || type === 'Video (YouTube)' || type === 'Social links')"
+                             class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                            <div class="flex flex-col gap-3 justify-center items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                     stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                          d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="mb-6 mt-6">
                         <label for="#" class="text-sm text-gray-600 block mb-1 font-semibold">Choose
                             Content</label>
@@ -168,9 +192,7 @@
                             </div>
 
 
-
-
-                            <label for="file" v-else
+                            <label for="file"
                                 class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                                 <div class="flex flex-col items-center justify-center pt-5 pb-6">
                                     <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
@@ -179,14 +201,7 @@
                                             stroke-width="2"
                                             d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                                     </svg>
-                                    <!-- <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
-                                                class="font-semibold">Click to upload</span> or drag and
-                                            drop
-                                        </p>
-                                        <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG,
-                                            JPG or
-                                            GIF
-                                            (MAX. 800x400px)</p> -->
+
                                     <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
                                             class="font-semibold">Click to upload</span> or drag and drop</p>
                                     <p class="text-xs text-gray-500 dark:text-gray-400">Allowed types:
@@ -221,16 +236,16 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Enter position" required />
                     </div>
-                    <div class="mb-6">
+                    <div class="mb-6" v-if="Object.keys(oldFileRecords).length > 0">
                         <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                            Old Boucher Files:
+                            Previous Boucher Files:
                         </label>
-                        <div v-if="oldFileRecords">
+                        <div>
                             <ul>
                                 <li v-for="(url, key) in oldFileRecords" :key="key"
                                     class="flex justify-between items-center text-base font-medium text-gray-900 list-disc ">
                                     {{ key }}
-                                    <span class="cursor-pointer">
+                                    <span class="cursor-pointer" @click="removePrevBoucherFile(url, key, id)">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="w-5">
                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -387,11 +402,13 @@ export default {
             isLoading: false,
             isOpenTool: null,
 
+            id: null,
             category_id: '0', // Store the title input value
             title: '', // Store the title input value
             link: '', // Store the link input value
             type: 'Select Type', // Store the type input value
             contentFile: null, // Store the selected file
+            oldImageFile: null, // Store the selected file
             contentPreview: null,
             acceptedTypes: 'Any', // Default accepted types
             acceptedExtensions: '',
@@ -704,6 +721,33 @@ export default {
                 this.deleteUploadedFile(fileRecord);
             }
         },
+
+        async removePrevBoucherFile(url, key, id){
+            try {
+                const response = await axios.delete('/api/content/remove/boucher-file', {
+                    data: {
+                        id: id,
+                        key: key,
+                        url: url
+                    }
+                });
+
+                if (response.status === 200) {
+                    // Show a toast message on success
+                    this.$toasted.show(response.data.message, {
+                        theme: "toasted-primary",
+                        position: "top-center",
+                        duration: 5000
+                    });
+
+                    // Remove the item from the boucher_files object
+                    this.$delete(this.oldFileRecords, key);
+                }
+            } catch (error) {
+                console.error("Error deleting resource:", error);
+                // Handle error if needed
+            }
+        },
         deleteContentItem(id, index) {
             axios.delete(`/api/content/${id}`)
                 .then(response => {
@@ -731,8 +775,8 @@ export default {
             this.details = item.details;
             this.position = item.position;
             this.type = item.type;
-            this.contentFile = item.file;
-            this.contentPreview = item.file;
+            // this.contentFile = item.file;
+            // this.contentPreview = item.file;
             this.email = get_in_touch_decode.email;
             this.phone = get_in_touch_decode.phone;
             this.facebook = social_links_decode.facebook;
@@ -740,7 +784,9 @@ export default {
             this.linkedin = social_links_decode.linkedin;
             this.instagram = social_links_decode.instagram;
             this.oldFileRecords = boucher_files_decode;
+            this.oldImageFile = item.file;
             this.category_id = item.category_id
+            this.id = item.id
         },
         async updateContentFiles() {
             try {

@@ -134,6 +134,37 @@ class ContentController extends Controller
         ]);
     }
 
+    public function deleteBoucherFile(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|integer',
+            'key' => 'required|string',
+            'url' => 'required|url',
+        ]);
+
+        $url = $request->url;
+        $key = $request->key;
+        $id = $request->id;
+        $content = Content::findOrFail($id);
+        $boucherFiles = json_decode($content->boucher_files, true);
+
+        if ($id && $key && $url){
+            if (isset($boucherFiles[$request->key])) {
+                unset($boucherFiles[$request->key]);
+            } else {
+                return response()->json([
+                    'message' => 'Key not found in boucher files',
+                ], 404);
+            }
+        }
+        $content->boucher_files = json_encode($boucherFiles);
+        $content->save();
+
+        return response()->json([
+            'message' => 'Boucher file deleted successfully',
+        ], 200);
+    }
+
 
     /**
      * Display the specified resource.
@@ -212,20 +243,37 @@ class ContentController extends Controller
         }
 
         // Handle boucher_files upload if it exists
-        $fileKeys = ['boucher_files', 'boucher_files1', 'boucher_files2', 'boucher_files3', 'boucher_files4'];
-        $boucherFiles = [];
+        $existingBoucherFiles = json_decode($content->boucher_files, true) ?? [];
 
-        foreach ($fileKeys as $key) {
-            if ($request->hasFile($key)) {
-                $boucherFilesPath = $request->file($key)->storePublicly('public/content');
-                $fullPath = 'https://mipim-file.s3.amazonaws.com/' . $boucherFilesPath;
-                $boucherFiles[] = $fullPath;
+        if ($request->hasFile('boucher_files')) {
+            $fileKeys = ['boucher_files', 'boucher_files1', 'boucher_files2', 'boucher_files3', 'boucher_files4'];
+            $newBoucherFiles = [];
+
+            foreach ($fileKeys as $key) {
+                if ($request->hasFile($key)) {
+                    $file = $request->file($key);
+                    $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                    $extension = $file->getClientOriginalExtension();
+                    $fileName = $originalFileName . '.' . $extension;
+
+                    // Ensure unique file name
+                    $counter = 1;
+                    while (isset($existingBoucherFiles[$fileName])) {
+                        $fileName = $originalFileName . '_' . $counter . '.' . $extension;
+                        $counter++;
+                    }
+
+                    $boucherFilesPath = $file->storePublicly('public/content');
+                    $fullPath = 'https://mipim-file.s3.amazonaws.com/' . $boucherFilesPath;
+                    $newBoucherFiles[$fileName] = $fullPath;
+                }
             }
-        }
 
-        if (!empty($boucherFiles)) {
-            // Prepare the data for database insertion
-            $data['boucher_files'] = json_encode($boucherFiles, true);
+            // Merge new files with existing files
+            $mergedBoucherFiles = array_merge($existingBoucherFiles, $newBoucherFiles);
+
+            // Update the content's boucher_files column
+            $data['boucher_files'] = json_encode($mergedBoucherFiles, true);
         }
 
         // Update the content in the database

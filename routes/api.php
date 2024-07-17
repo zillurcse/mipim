@@ -56,6 +56,7 @@ Route::group(['middleware' => ['api']], function () {
 
     Route::get('/content', [ContentController::class, 'index']);
     Route::post('/content', [ContentController::class, 'store']);
+    Route::delete('/content/remove/boucher-file', [ContentController::class, 'deleteBoucherFile']);
     Route::post('/content/{id}', [ContentController::class, 'update']);
     Route::post('/content/update/order', [ContentController::class, 'update_order']);
     Route::delete('/content/{id}', [ContentController::class, 'destroy']);
