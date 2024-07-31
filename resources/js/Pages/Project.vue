@@ -114,22 +114,7 @@
                                         <div class="d-flex gap-3 align-items-center">
 
                                             <a :href="content.link" target="_blank">
-                                                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                                     viewBox="0 0 25 25" style="enable-background:new 0 0 25 25;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#996C4B;}
-    .st1{fill:#FFFFFF;}
-</style>
-                                                    <circle class="st0" cx="12.5" cy="12.5" r="12.5"/>
-                                                    <g>
-	<g>
-		<path class="st1" d="M12.6,7.8c-3,0-5.7,1.6-7.7,4.3c-0.2,0.2-0.2,0.5,0,0.7c2,2.6,4.7,4.3,7.7,4.3s5.7-1.6,7.7-4.3
-			c0.2-0.2,0.2-0.5,0-0.7C18.3,9.4,15.6,7.8,12.6,7.8z M12.8,15.7c-2,0.1-3.6-1.5-3.5-3.5c0.1-1.6,1.4-3,3.1-3.1
-			c2-0.1,3.6,1.5,3.5,3.5C15.8,14.2,14.4,15.6,12.8,15.7z M12.7,14.2c-1.1,0.1-1.9-0.8-1.9-1.9c0.1-0.9,0.8-1.6,1.6-1.6
-			c1.1-0.1,1.9,0.8,1.9,1.9C14.3,13.4,13.6,14.1,12.7,14.2z"/>
-	</g>
-</g>
-</svg>
+                                                <img src="/assets/view.svg" alt="">
                                             </a>
                                         </div>
                                     </div>
