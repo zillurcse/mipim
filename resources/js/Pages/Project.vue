@@ -20,7 +20,7 @@
                             </p>
                         </div>
                         <div class="col-lg-4">
-                            <div class="box-wrapper"  v-if="content.get_in_touch || content.boucher_files">
+                            <div class="box-wrapper" v-if="content.get_in_touch || content.boucher_files">
                                 <div class="info-box" v-if="content.get_in_touch">
                                     <h3>Get in touch</h3>
                                     <div class="d-flex gap-2 align-items-center mb-2 ">
@@ -35,7 +35,7 @@
                                         <span v-if="content.get_in_touch.phone"> {{ content.get_in_touch.phone }}
                                         </span>
                                     </div>
-                                    <div class="d-flex gap-2 align-items-center ">
+                                    <div class="d-flex gap-2 align-items-center mb-2">
                                         <div class="icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" fill="none"
                                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -46,6 +46,52 @@
 
                                         </div>
                                         <span v-if="content.get_in_touch.email">{{ content.get_in_touch.email }}</span>
+                                    </div>
+                                    <div class="d-flex gap-2 align-items-center mb-2" v-if="socialLinks.facebook">
+                                        <div class="icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                viewBox="0 0 10.904 20.72">
+                                                <path id="icons8-facebook-f"
+                                                    d="M17.9,9.252H14.252V7.18c0-1.069.087-1.743,1.619-1.743h1.935V2.143A27,27,0,0,0,14.97,2a4.532,4.532,0,0,0-4.862,4.868V9.252H7V13.4h3.108V22.72h4.144V13.393h3.176Z"
+                                                    transform="translate(-7 -2)" fill="#fff" />
+                                            </svg>
+                                        </div>
+                                        <span>{{ socialLinks.facebook }}</span>
+                                    </div>
+                                    <div class="d-flex gap-2 align-items-center mb-2" v-if="socialLinks.twitter">
+                                        <div class="icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                viewBox="0 0 19.692 16">
+                                                <path id="Twitter"
+                                                    d="M19.692,1.894a8.1,8.1,0,0,1-2.32.637A4.052,4.052,0,0,0,19.148.3a8.074,8.074,0,0,1-2.566.98A4.042,4.042,0,0,0,9.592,4.039,4.085,4.085,0,0,0,9.7,4.96,11.469,11.469,0,0,1,1.372.739a4.043,4.043,0,0,0,1.25,5.392A4.007,4.007,0,0,1,.792,5.627v.051a4.041,4.041,0,0,0,3.24,3.96,4.034,4.034,0,0,1-1.065.142,3.974,3.974,0,0,1-.76-.073,4.046,4.046,0,0,0,3.774,2.806A8.116,8.116,0,0,1,.964,14.241,8.143,8.143,0,0,1,0,14.185,11.433,11.433,0,0,0,6.193,16,11.415,11.415,0,0,0,17.688,4.508c0-.176,0-.349-.012-.522a8.211,8.211,0,0,0,2.016-2.09Z"
+                                                    fill="#fff" />
+                                            </svg>
+                                        </div>
+                                        <span>{{ socialLinks.twitter }}</span>
+                                    </div>
+                                    <div class="d-flex gap-2 align-items-center mb-2" v-if="socialLinks.linkedin">
+                                        <div class="icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                viewBox="0 0 19.778 20.72">
+
+                                                <path id="icons8-linkedin-2"
+                                                    d="M10.638,24.72h-4.3V10.886h4.3ZM8.487,9a2.5,2.5,0,1,1,2.488-2.512A2.508,2.508,0,0,1,8.487,9ZM25.773,24.72H21.487V17.986c0-1.6-.032-3.663-2.233-3.663-2.233,0-2.37,1.743-2.37,3.548V24.72H12.593V10.886h4.12v1.887h.06a4.129,4.129,0,0,1,3.859-2.18c4.347,0,5.147,2.809,5.147,6.528v7.6Z"
+                                                    transform="translate(-6 -4)" fill="#fff" />
+
+                                            </svg>
+                                        </div>
+                                        <span>{{ socialLinks.linkedin }}</span>
+                                    </div>
+                                    <div class="d-flex gap-2 align-items-center mb-2" v-if="socialLinks.instagram">
+                                        <div class="icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                viewBox="0 0 20 20">
+                                                <path id="Instagram"
+                                                    d="M14.042,20H5.958A5.965,5.965,0,0,1,0,14.042V5.958A5.965,5.965,0,0,1,5.958,0h8.084A5.965,5.965,0,0,1,20,5.958v8.084A5.965,5.965,0,0,1,14.042,20ZM5.958,2.012A3.951,3.951,0,0,0,2.012,5.958v8.084a3.95,3.95,0,0,0,3.946,3.946h8.084a3.95,3.95,0,0,0,3.946-3.946V5.958a3.95,3.95,0,0,0-3.946-3.946ZM10,15.172A5.172,5.172,0,1,1,15.173,10,5.172,5.172,0,0,1,10,15.172Zm0-8.334A3.161,3.161,0,1,0,13.159,10,3.161,3.161,0,0,0,10,6.838ZM15.181,6.1a1.24,1.24,0,1,1,1.24-1.239A1.24,1.24,0,0,1,15.181,6.1Z"
+                                                    fill="#fff" />
+                                            </svg>
+                                        </div>
+                                        <span>{{ socialLinks.linkedin }}</span>
                                     </div>
                                 </div>
                                 <div class="boucher-box" v-if="content.boucher_files">
@@ -99,11 +145,17 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-between align-items-center py-3" v-if="content.type==='Video (YouTube)'">
+                                    <div class="d-flex justify-between align-items-center py-3"
+                                        v-if="content.type === 'Video (YouTube)'">
                                         <div class="d-flex align-items-center gap-3">
-                                            <svg data-v-dc917932="" width="28" height="28" viewBox="0 0 85 85" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path data-v-dc917932="" d="M37.4168 34.3579L50.6757 42.5L37.4168 50.6477V34.3579Z" fill="#996B4B"></path>
-                                                <path data-v-dc917932="" d="M42.5 0C34.0943 0 25.8774 2.49258 18.8883 7.16254C11.8992 11.8325 6.45186 18.4701 3.23514 26.2359C0.0184145 34.0018 -0.823227 42.5471 0.816645 50.7913C2.45652 59.0355 6.50425 66.6083 12.448 72.552C18.3917 78.4958 25.9645 82.5435 34.2087 84.1834C42.4529 85.8232 50.9982 84.9816 58.764 81.7649C66.5299 78.5481 73.1675 73.1008 77.8375 66.1117C82.5074 59.1226 85 50.9057 85 42.5C85 31.2283 80.5223 20.4183 72.552 12.448C64.5817 4.47766 53.7717 0 42.5 0ZM62.7546 52.728C61.9046 55.3395 59.0918 56.9276 56.5026 57.2911C47.1938 58.2809 37.8062 58.2809 28.4974 57.2911C25.9082 56.9276 23.0954 55.3395 22.2454 52.728C20.9201 45.9756 20.9201 39.03 22.2454 32.2776C23.0954 29.6382 25.9082 28.078 28.5198 27.7145C37.8286 26.7247 47.2162 26.7247 56.525 27.7145C59.1142 28.078 61.927 29.6605 62.777 32.2776C64.0949 39.0314 64.0873 45.977 62.7546 52.728Z" fill="#996B4B"></path>
+                                            <svg data-v-dc917932="" width="28" height="28" viewBox="0 0 85 85"
+                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path data-v-dc917932=""
+                                                    d="M37.4168 34.3579L50.6757 42.5L37.4168 50.6477V34.3579Z"
+                                                    fill="#996B4B"></path>
+                                                <path data-v-dc917932=""
+                                                    d="M42.5 0C34.0943 0 25.8774 2.49258 18.8883 7.16254C11.8992 11.8325 6.45186 18.4701 3.23514 26.2359C0.0184145 34.0018 -0.823227 42.5471 0.816645 50.7913C2.45652 59.0355 6.50425 66.6083 12.448 72.552C18.3917 78.4958 25.9645 82.5435 34.2087 84.1834C42.4529 85.8232 50.9982 84.9816 58.764 81.7649C66.5299 78.5481 73.1675 73.1008 77.8375 66.1117C82.5074 59.1226 85 50.9057 85 42.5C85 31.2283 80.5223 20.4183 72.552 12.448C64.5817 4.47766 53.7717 0 42.5 0ZM62.7546 52.728C61.9046 55.3395 59.0918 56.9276 56.5026 57.2911C47.1938 58.2809 37.8062 58.2809 28.4974 57.2911C25.9082 56.9276 23.0954 55.3395 22.2454 52.728C20.9201 45.9756 20.9201 39.03 22.2454 32.2776C23.0954 29.6382 25.9082 28.078 28.5198 27.7145C37.8286 26.7247 47.2162 26.7247 56.525 27.7145C59.1142 28.078 61.927 29.6605 62.777 32.2776C64.0949 39.0314 64.0873 45.977 62.7546 52.728Z"
+                                                    fill="#996B4B"></path>
                                             </svg>
 
                                             <div class="d-flex flex-col boucher-text uppercase">
@@ -144,22 +196,22 @@ export default {
         bannerItems: Array,
         contentItems: Array
     },
+    data() {
+        return {
+            socialLinks: {}
+        }
+    },
     components: {
         MainLayoutVue
     },
     computed: {
         boucherFilesLength() {
             return Object.keys(this.content.boucher_files).length;
-        }
+        },
     },
-    data() {
-        return {
-            // categoryItems: [],
-        }
+    created() {
+        this.parseSocialLinks();
     },
-    mounted() {
-    },
-
     methods: {
         removeFileExtension(fileName) {
             if (fileName && typeof fileName === 'string') {
@@ -173,16 +225,21 @@ export default {
                 if (fileName.length > maxLength) {
                     return fileName.substring(0, maxLength) + "...";
                 }
-                return fileName;
             }
         },
-
         getFileType(fileName) {
             if (fileName && typeof fileName === 'string') {
                 const extension = fileName.split('.').pop();
                 return extension.toUpperCase() + " FILE";
             }
-        }
+        },
+        parseSocialLinks() {
+            try {
+                this.socialLinks = JSON.parse(this.content.social_links);
+            } catch (error) {
+                console.error('Error parsing social_links JSON:', error);
+            }
+        },
     }
 }
 </script>
