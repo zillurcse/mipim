@@ -61,7 +61,7 @@
                                     <h2 v-if="item.title" class="text-xl text-gray-800 font-semibold">
                                         {{ item.title.substring(0, 50) }}
                                     </h2>
-                                    <h3 v-if="item.type" class="text-lg text-gray-700 font-medium">
+                                    <!-- <h3 v-if="item.type" class="text-lg text-gray-700 font-medium">
                                         {{ item.type.substring(0, 20) }}
                                     </h3>
                                     <h4 v-if="item.link" class="text-base text-gray-700 font-medium break-words">
@@ -69,7 +69,7 @@
                                     </h4>
                                     <div v-html="item.details" class="overflow-hidden"
                                         style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;">
-                                    </div>
+                                    </div> -->
                                 </div>
                             </drag>
                         </drop>
@@ -117,7 +117,7 @@
                         </select>
 
                     </div>
-                    <div class="mb-6">
+                    <!-- <div class="mb-6">
                         <label for="type"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
                         <select id="type" v-model="type" @change="updateAcceptAttribute"
@@ -132,26 +132,26 @@
                             <option value="Images">Images</option>
                             <option value="Speaker">Speaker</option>
                         </select>
-                    </div>
+                    </div> -->
 
                     <div v-if="oldImageFile">
                         <div v-if="oldImageFile && (type === 'Images' || type === 'Speaker' || type === 'URLs' || type === 'Video (YouTube)' || type === 'Social links')"
-                             class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                            class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                             <img :src="oldImageFile" alt="" class="w-1/2 mx-auto object-cover">
                         </div>
                         <div v-else-if="oldImageFile && (type === 'PDF' || type === 'URLs' || type === 'Video (YouTube)' || type === 'Social links')"
-                             class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                            class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                             <div class='embed-responsive h-full'>
                                 <embed :src="oldImageFile" type="application/pdf" width="100%" height="100%" />
                             </div>
                         </div>
                         <div v-else-if="oldImageFile && (type === 'Documents (word, ppt, excel)' || type === 'URLs' || type === 'Video (YouTube)' || type === 'Social links')"
-                             class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                            class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                             <div class="flex flex-col gap-3 justify-center items-center text-gray-600">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                     stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+                                    stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
                                     <path stroke-linecap="round" stroke-linejoin="round"
-                                          d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                        d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
                                 </svg>
                             </div>
                         </div>
@@ -159,7 +159,7 @@
 
                     <div class="mb-6 mt-6">
                         <label for="#" class="text-sm text-gray-600 block mb-1 font-semibold">Choose
-                            Content</label>
+                            Banner</label>
 
                         <div class="flex items-center justify-center w-full">
 
@@ -222,13 +222,7 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Enter Date" required />
                     </div>
-                    <div class="mb-6" v-if="type !== 'Speaker'">
-                        <label for="Link"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Link</label>
-                        <input type="Link" id="Link" v-model="link"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Enter link" required />
-                    </div>
+
                     <div class="mb-6" v-if="type === 'Speaker'">
                         <label for="position"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Position</label>
@@ -266,9 +260,9 @@
                         <div class="">
 
                             <VueFileAgent ref="vueFileAgent" :theme="'list'" :multiple="true" :deletable="true"
-                                :meta="true" :accept="'.doc,.docx,.ppt,.pdf'" :maxSize="'5MB'" :maxFiles="5"
-                                :helpText="'Only doc, ppt and pdf file allowed, Maximum : 5MB'"
-                                :errorText="{ type: 'Invalid file type. Only doc, ppt and pdf file allowed', size: 'Files should not exceed 5MB in size', }"
+                                :meta="true" :accept="'.doc,.docx,.ppt,.pdf'" :maxSize="'30MB'" :maxFiles="5"
+                                :helpText="'Only doc, ppt and pdf file allowed, Maximum : 30MB'"
+                                :errorText="{ type: 'Invalid file type. Only doc, ppt and pdf file allowed', size: 'Files should not exceed 30MB in size', }"
                                 @select="filesSelected($event)" @beforedelete="onBeforeDelete($event)"
                                 @delete="fileDeleted($event)" v-model="fileRecords"></VueFileAgent>
                         </div>
@@ -289,6 +283,7 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Enter phone number" required />
                     </div>
+
                     <div class="mb-6">
                         <label for="facebook"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Facebook</label>
@@ -316,6 +311,13 @@
                         <input type="text" id="instagram" v-model="instagram"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Enter instagram link" required />
+                    </div>
+                    <div class="mb-6" v-if="type !== 'Speaker'">
+                        <label for="Link" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> YouTube
+                            Video Link</label>
+                        <input type="Link" id="Link" v-model="link"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Enter YouTube Video Link" required />
                     </div>
                     <div class="mb-6">
                         <button type="button" @click="uploadContentFiles" v-if="!isUpdate"
@@ -406,7 +408,7 @@ export default {
             category_id: '0', // Store the title input value
             title: '', // Store the title input value
             link: '', // Store the link input value
-            type: 'Select Type', // Store the type input value
+            type: 'Images', // Store the type input value
             contentFile: null, // Store the selected file
             oldImageFile: null, // Store the selected file
             contentPreview: null,
@@ -577,6 +579,18 @@ export default {
             this.contentFile = file;
         }
         ,
+        validateFacebook() {
+            return this.facebook.includes('facebook.com');
+        },
+        validateTwitter() {
+            return this.twitter.includes('twitter.com');
+        },
+        validateLinkedIn() {
+            return this.linkedin.includes('linkedin.com');
+        },
+        validateInstagram() {
+            return this.instagram.includes('instagram.com');
+        },
         async uploadContentFiles() {
             try {
                 // Assign files if they exist
@@ -585,6 +599,10 @@ export default {
                 this.boucher_files2 = this.fileRecordsForUpload[2]?.file;
                 this.boucher_files3 = this.fileRecordsForUpload[3]?.file;
                 this.boucher_files4 = this.fileRecordsForUpload[4]?.file;
+                const isFacebookValid = this.validateFacebook();
+                const isTwitterValid = this.validateTwitter();
+                const isLinkedInValid = this.validateLinkedIn();
+                const isInstagramValid = this.validateInstagram();
 
                 if (this.type === "Speaker") {
                     if (this.title === "" || this.date === "" || this.details === "" || this.contentFile === null || this.position === "") {
@@ -602,88 +620,93 @@ export default {
                         duration: 5000
                     });
                     return false;
-                }
-
-                const socialLinks = {
-                    facebook: this.facebook,
-                    twitter: this.twitter,
-                    linkedin: this.linkedin,
-                    instagram: this.instagram,
-                };
-                const getInTuch = {
-                    email: this.email,
-                    phone: this.phone
-                }
-                // Create FormData and append all data
-                this.isLoading = true;
-                let formData = new FormData();
-                formData.append('title', this.title);
-                formData.append('category_id', this.category_id);
-                formData.append('link', this.link);
-                formData.append('type', this.type);
-                formData.append('date', this.date);
-                formData.append('details', this.details);
-                formData.append('position', this.position);
-                formData.append('file', this.contentFile);
-
-                // Conditionally append each boucher file if it exists
-                if (this.boucher_files) formData.append('boucher_files', this.boucher_files);
-                if (this.boucher_files1) formData.append('boucher_files1', this.boucher_files1);
-                if (this.boucher_files2) formData.append('boucher_files2', this.boucher_files2);
-                if (this.boucher_files3) formData.append('boucher_files3', this.boucher_files3);
-                if (this.boucher_files4) formData.append('boucher_files4', this.boucher_files4);
-
-                formData.append('social_links', JSON.stringify(socialLinks));
-                formData.append('get_in_touch', JSON.stringify(getInTuch));
-
-
-                // Make POST request to upload the file and data
-                const response = await axios.post('/api/content', formData);
-
-                if (response.status === 200) {
-                    // Handle success
-                    this.contentItems.push(response.data.data)
-
-                    // this.getContentData(); // Update content data
-                    this.showModal = false; // Close the modal after successful upload
-
-                    // Reset all data
-                    this.title = '';
-                    this.link = '';
-                    this.date = '';
-                    this.details = '';
-                    this.position = '';
-                    this.category_id = '0'
-                    this.type = 'Select Type';
-                    this.contentFile = null;
-                    this.contentPreview = null;
-                    this.facebook = '';
-                    this.twitter = '';
-                    this.linkedin = '';
-                    this.instagram = '';
-                    this.phone = '';
-                    this.email = '';
-
-                    this.fileRecords = []
-                    this.isLoading = false;
-
-                    this.$toasted.success(response.data.message, {
+                } else if (!isFacebookValid || !isTwitterValid || !isLinkedInValid || !isInstagramValid) {
+                    this.$toasted.show("Please fill up all fields correctly", {
                         theme: "toasted-primary",
                         position: "top-center",
                         duration: 5000
                     });
-                }
+                    return false;
+                } else {
+                    const socialLinks = {
+                        facebook: this.facebook,
+                        twitter: this.twitter,
+                        linkedin: this.linkedin,
+                        instagram: this.instagram,
+                    };
+                    const getInTouch = {
+                        email: this.email,
+                        phone: this.phone
+                    };
 
+                    // Create FormData and append all data
+                    this.isLoading = true;
+                    let formData = new FormData();
+                    formData.append('title', this.title);
+                    formData.append('category_id', this.category_id);
+                    formData.append('link', this.link);
+                    formData.append('type', this.type);
+                    formData.append('date', this.date);
+                    formData.append('details', this.details);
+                    formData.append('position', this.position);
+                    formData.append('file', this.contentFile);
+
+                    // Conditionally append each boucher file if it exists
+                    if (this.boucher_files) formData.append('boucher_files', this.boucher_files);
+                    if (this.boucher_files1) formData.append('boucher_files1', this.boucher_files1);
+                    if (this.boucher_files2) formData.append('boucher_files2', this.boucher_files2);
+                    if (this.boucher_files3) formData.append('boucher_files3', this.boucher_files3);
+                    if (this.boucher_files4) formData.append('boucher_files4', this.boucher_files4);
+
+                    formData.append('social_links', JSON.stringify(socialLinks));
+                    formData.append('get_in_touch', JSON.stringify(getInTouch));
+
+                    // Make POST request to upload the file and data
+                    const response = await axios.post('/api/content', formData);
+
+                    if (response.status === 200) {
+                        // Handle success
+                        this.contentItems.push(response.data.data);
+
+                        // this.getContentData(); // Update content data
+                        this.showModal = false; // Close the modal after successful upload
+
+                        // Reset all data
+                        this.title = '';
+                        this.link = '';
+                        this.date = '';
+                        this.details = '';
+                        this.position = '';
+                        this.category_id = '0';
+                        this.type = 'Select Type';
+                        this.contentFile = null;
+                        this.contentPreview = null;
+                        this.facebook = '';
+                        this.twitter = '';
+                        this.linkedin = '';
+                        this.instagram = '';
+                        this.phone = '';
+                        this.email = '';
+
+                        this.fileRecords = [];
+                        this.isLoading = false;
+
+                        this.$toasted.success(response.data.message, {
+                            theme: "toasted-primary",
+                            position: "top-center",
+                            duration: 5000
+                        });
+                    }
+                }
             } catch (error) {
-                // Handle error
-                this.isLoading = false;
-                this.$toasted.show(error.response.data.message, {
+                console.error(error);
+                this.$toasted.show("An error occurred. Please try again.", {
                     theme: "toasted-primary",
                     position: "top-center",
                     duration: 5000
                 });
-                console.error('Error:', error);
             }
+
 
         },
         uploadFiles() {
@@ -722,7 +745,7 @@ export default {
             }
         },
 
-        async removePrevBoucherFile(url, key, id){
+        async removePrevBoucherFile(url, key, id) {
             try {
                 const response = await axios.delete('/api/content/remove/boucher-file', {
                     data: {
@@ -790,86 +813,118 @@ export default {
         },
         async updateContentFiles() {
             try {
-                this.isLoading = true;
-                let formData = new FormData();
-                if (this.title) {
-                    formData.append('title', this.title);
-                }
-                if (this.link) {
-                    formData.append('link', this.link);
-                }
-                if (this.type) {
-                    formData.append('type', this.type);
-                }
-                if (this.date) {
-                    formData.append('date', this.date);
-                }
-                if (this.details) {
-                    formData.append('details', this.details);
-                }
-                if (this.position) {
-                    formData.append('position', this.position);
-                }
+                const isFacebookValid = this.validateFacebook();
+                const isTwitterValid = this.validateTwitter();
+                const isLinkedInValid = this.validateLinkedIn();
+                const isInstagramValid = this.validateInstagram();
 
-                formData.append('category_id', this.category_id);
 
-                const getInTuch = {
-                    email: this.email,
-                    phone: this.phone
-                }
-                formData.append('get_in_touch', JSON.stringify(getInTuch));
 
-                const socialLinks = {
-                    facebook: this.facebook,
-                    twitter: this.twitter,
-                    linkedin: this.linkedin,
-                    instagram: this.instagram,
-                };
-                formData.append('social_links', JSON.stringify(socialLinks));
-
-                this.boucher_files = this.fileRecordsForUpload[0]?.file;
-                this.boucher_files1 = this.fileRecordsForUpload[1]?.file;
-                this.boucher_files2 = this.fileRecordsForUpload[2]?.file;
-                this.boucher_files3 = this.fileRecordsForUpload[3]?.file;
-                this.boucher_files4 = this.fileRecordsForUpload[4]?.file;
-
-                if (this.boucher_files) formData.append('boucher_files', this.boucher_files);
-                if (this.boucher_files1) formData.append('boucher_files1', this.boucher_files1);
-                if (this.boucher_files2) formData.append('boucher_files2', this.boucher_files2);
-                if (this.boucher_files3) formData.append('boucher_files3', this.boucher_files3);
-                if (this.boucher_files4) formData.append('boucher_files4', this.boucher_files4);
-                if (this.contentFile) {
-                    formData.append('file', this.contentFile);
-                }
-                // if (this.contentFile) {
-                //     const fileName = this.extractFileName(this.contentFile);
-                //     await this.urlToFile(this.contentFile, fileName, (file) => {
-                //         formData.append('file', file);
-                //     });
-                // }
-
-                const response = await axios.post(`/api/content/${this.updatedId}`, formData);
-
-                if (response.status === 200) {
-                    // Handle success
-                    this.$set(this.contentItems, this.current_index, response.data.data);
-                    this.showModal = false;
-                    // Reset all data
-                    this.title = '';
-                    this.link = '';
-                    this.date = '';
-                    this.details = '';
-                    this.position = '';
-
-                    this.type = 'Select Type';
-                    this.contentFile = null;
-                    this.contentPreview = null;
-                    this.isLoading = false;
-                    this.$toasted.success(response.data.message, {
+                if (this.type === "Speaker") {
+                    if (this.title === "" || this.date === "" || this.details === "" || this.contentFile === null || this.position === "") {
+                        this.$toasted.show("Please fill up all fields", {
+                            theme: "toasted-primary",
+                            position: "top-center",
+                            duration: 5000
+                        });
+                        return false;
+                    }
+                } else if (this.title === "" || this.category_id === "0" || this.details === '') {
+                    this.$toasted.show("Please fill up required fields", {
                         theme: "toasted-primary",
                         position: "top-center",
                         duration: 5000
                     });
+                    return false;
+                } else if (!isFacebookValid || !isTwitterValid || !isLinkedInValid || !isInstagramValid) {
+                    this.$toasted.show("Please fill up all fields correctly", {
+                        theme: "toasted-primary",
+                        position: "top-center",
+                        duration: 5000
+                    });
+                } else {
+
+                    this.isLoading = true;
+                    let formData = new FormData();
+                    if (this.title) {
+                        formData.append('title', this.title);
+                    }
+                    if (this.link) {
+                        formData.append('link', this.link);
+                    }
+                    if (this.type) {
+                        formData.append('type', this.type);
+                    }
+                    if (this.date) {
+                        formData.append('date', this.date);
+                    }
+                    if (this.details) {
+                        formData.append('details', this.details);
+                    }
+                    if (this.position) {
+                        formData.append('position', this.position);
+                    }
+
+                    formData.append('category_id', this.category_id);
+
+                    const getInTuch = {
+                        email: this.email,
+                        phone: this.phone
+                    }
+                    formData.append('get_in_touch', JSON.stringify(getInTuch));
+
+                    const socialLinks = {
+                        facebook: this.facebook,
+                        twitter: this.twitter,
+                        linkedin: this.linkedin,
+                        instagram: this.instagram,
+                    };
+                    formData.append('social_links', JSON.stringify(socialLinks));
+
+                    this.boucher_files = this.fileRecordsForUpload[0]?.file;
+                    this.boucher_files1 = this.fileRecordsForUpload[1]?.file;
+                    this.boucher_files2 = this.fileRecordsForUpload[2]?.file;
+                    this.boucher_files3 = this.fileRecordsForUpload[3]?.file;
+                    this.boucher_files4 = this.fileRecordsForUpload[4]?.file;
+
+                    if (this.boucher_files) formData.append('boucher_files', this.boucher_files);
+                    if (this.boucher_files1) formData.append('boucher_files1', this.boucher_files1);
+                    if (this.boucher_files2) formData.append('boucher_files2', this.boucher_files2);
+                    if (this.boucher_files3) formData.append('boucher_files3', this.boucher_files3);
+                    if (this.boucher_files4) formData.append('boucher_files4', this.boucher_files4);
+                    if (this.contentFile) {
+                        formData.append('file', this.contentFile);
+                    }
+                    // if (this.contentFile) {
+                    //     const fileName = this.extractFileName(this.contentFile);
+                    //     await this.urlToFile(this.contentFile, fileName, (file) => {
+                    //         formData.append('file', file);
+                    //     });
+                    // }
+
+                    const response = await axios.post(`/api/content/${this.updatedId}`, formData);
+
+                    if (response.status === 200) {
+                        // Handle success
+                        this.$set(this.contentItems, this.current_index, response.data.data);
+                        this.showModal = false;
+                        // Reset all data
+                        this.title = '';
+                        this.link = '';
+                        this.date = '';
+                        this.details = '';
+                        this.position = '';
+
+                        this.type = 'Select Type';
+                        this.contentFile = null;
+                        this.contentPreview = null;
+                        this.isLoading = false;
+                        this.$toasted.success(response.data.message, {
+                            theme: "toasted-primary",
+                            position: "top-center",
+                            duration: 5000
+                        });
+                    }
                 }
 
             } catch (error) {

@@ -316,6 +316,7 @@ footer p {
     align-items: center;
     background-color: #9a5626;
     color: #fff;
+    flex-shrink: 0;
 }
 
 .info-box {
