@@ -56,7 +56,7 @@
                                                     transform="translate(-7 -2)" fill="#fff" />
                                             </svg>
                                         </div>
-                                        <span>{{ socialLinks.facebook }}</span>
+                                        <span>{{ facebookLastSegment }}</span>
                                     </div>
                                     <div class="d-flex gap-2 align-items-center mb-2" v-if="socialLinks.twitter">
                                         <div class="icon">
@@ -67,7 +67,7 @@
                                                     fill="#fff" />
                                             </svg>
                                         </div>
-                                        <span>{{ socialLinks.twitter }}</span>
+                                        <span>{{ twitterLastSegment }}</span>
                                     </div>
                                     <div class="d-flex gap-2 align-items-center mb-2" v-if="socialLinks.linkedin">
                                         <div class="icon">
@@ -80,7 +80,7 @@
 
                                             </svg>
                                         </div>
-                                        <span>{{ socialLinks.linkedin }}</span>
+                                        <span>{{ linkedinLastSegment }}</span>
                                     </div>
                                     <div class="d-flex gap-2 align-items-center mb-2" v-if="socialLinks.instagram">
                                         <div class="icon">
@@ -91,7 +91,7 @@
                                                     fill="#fff" />
                                             </svg>
                                         </div>
-                                        <span>{{ socialLinks.linkedin }}</span>
+                                        <span>{{ instagramLastSegment }}</span>
                                     </div>
                                 </div>
                                 <div class="boucher-box" v-if="content.boucher_files">
@@ -193,11 +193,30 @@ export default {
         boucherFilesLength() {
             return Object.keys(this.content.boucher_files).length;
         },
+        facebookLastSegment() {
+            return this.getLastSegment(this.socialLinks.facebook);
+        },
+        twitterLastSegment() {
+            return this.getLastSegment(this.socialLinks.twitter);
+        },
+        linkedinLastSegment() {
+            return this.getLastSegment(this.socialLinks.linkedin);
+        },
+        instagramLastSegment() {
+            return this.getLastSegment(this.socialLinks.instagram);
+        }
     },
     created() {
         this.parseSocialLinks();
     },
     methods: {
+        getLastSegment(url) {
+            if (url) {
+                const parts = url.split('/').filter(part => part); // Filter out empty strings
+                return parts[parts.length - 1].replace(/[-_]/g, ' ').trim(); // Replace dashes and underscores with spaces, and trim any extra spaces
+            }
+            return '';
+        },
         removeFileExtension(fileName) {
             if (fileName && typeof fileName === 'string') {
                 return fileName.replace(/\.[^/.]+$/, "");

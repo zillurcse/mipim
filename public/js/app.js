@@ -8061,6 +8061,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 
 
@@ -8127,7 +8129,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       // Store the title input value
       link: '',
       // Store the link input value
-      type: 'Select Type',
+      type: 'Images',
       // Store the type input value
       contentFile: null,
       // Store the selected file
@@ -8289,11 +8291,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       reader.readAsDataURL(file);
       this.contentFile = file;
     },
+    validateFacebook: function validateFacebook() {
+      return this.facebook.includes('facebook.com');
+    },
+    validateTwitter: function validateTwitter() {
+      return this.twitter.includes('twitter.com');
+    },
+    validateLinkedIn: function validateLinkedIn() {
+      return this.linkedin.includes('linkedin.com');
+    },
+    validateInstagram: function validateInstagram() {
+      return this.instagram.includes('instagram.com');
+    },
     uploadContentFiles: function uploadContentFiles() {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var _this3$fileRecordsFor, _this3$fileRecordsFor2, _this3$fileRecordsFor3, _this3$fileRecordsFor4, _this3$fileRecordsFor5, socialLinks, getInTuch, formData, response;
+        var _this3$fileRecordsFor, _this3$fileRecordsFor2, _this3$fileRecordsFor3, _this3$fileRecordsFor4, _this3$fileRecordsFor5, isFacebookValid, isTwitterValid, isLinkedInValid, isInstagramValid, socialLinks, getInTouch, formData, response;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
@@ -8306,14 +8320,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this3.boucher_files2 = (_this3$fileRecordsFor3 = _this3.fileRecordsForUpload[2]) === null || _this3$fileRecordsFor3 === void 0 ? void 0 : _this3$fileRecordsFor3.file;
                 _this3.boucher_files3 = (_this3$fileRecordsFor4 = _this3.fileRecordsForUpload[3]) === null || _this3$fileRecordsFor4 === void 0 ? void 0 : _this3$fileRecordsFor4.file;
                 _this3.boucher_files4 = (_this3$fileRecordsFor5 = _this3.fileRecordsForUpload[4]) === null || _this3$fileRecordsFor5 === void 0 ? void 0 : _this3$fileRecordsFor5.file;
+                isFacebookValid = _this3.validateFacebook();
+                isTwitterValid = _this3.validateTwitter();
+                isLinkedInValid = _this3.validateLinkedIn();
+                isInstagramValid = _this3.validateInstagram();
 
                 if (!(_this3.type === "Speaker")) {
-                  _context2.next = 12;
+                  _context2.next = 16;
                   break;
                 }
 
                 if (!(_this3.title === "" || _this3.date === "" || _this3.details === "" || _this3.contentFile === null || _this3.position === "")) {
-                  _context2.next = 10;
+                  _context2.next = 14;
                   break;
                 }
 
@@ -8325,13 +8343,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 return _context2.abrupt("return", false);
 
-              case 10:
-                _context2.next = 15;
+              case 14:
+                _context2.next = 49;
                 break;
 
-              case 12:
+              case 16:
                 if (!(_this3.title === "" || _this3.category_id === "0" || _this3.details === '')) {
-                  _context2.next = 15;
+                  _context2.next = 21;
                   break;
                 }
 
@@ -8343,14 +8361,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 return _context2.abrupt("return", false);
 
-              case 15:
+              case 21:
+                if (!(!isFacebookValid || !isTwitterValid || !isLinkedInValid || !isInstagramValid)) {
+                  _context2.next = 26;
+                  break;
+                }
+
+                _this3.$toasted.show("Please fill up all fields correctly", {
+                  theme: "toasted-primary",
+                  position: "top-center",
+                  duration: 5000
+                });
+
+                return _context2.abrupt("return", false);
+
+              case 26:
                 socialLinks = {
                   facebook: _this3.facebook,
                   twitter: _this3.twitter,
                   linkedin: _this3.linkedin,
                   instagram: _this3.instagram
                 };
-                getInTuch = {
+                getInTouch = {
                   email: _this3.email,
                   phone: _this3.phone
                 }; // Create FormData and append all data
@@ -8372,12 +8404,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (_this3.boucher_files3) formData.append('boucher_files3', _this3.boucher_files3);
                 if (_this3.boucher_files4) formData.append('boucher_files4', _this3.boucher_files4);
                 formData.append('social_links', JSON.stringify(socialLinks));
-                formData.append('get_in_touch', JSON.stringify(getInTuch)); // Make POST request to upload the file and data
+                formData.append('get_in_touch', JSON.stringify(getInTouch)); // Make POST request to upload the file and data
 
-                _context2.next = 36;
+                _context2.next = 47;
                 return axios__WEBPACK_IMPORTED_MODULE_5__["default"].post('/api/content', formData);
 
-              case 36:
+              case 47:
                 response = _context2.sent;
 
                 if (response.status === 200) {
@@ -8413,29 +8445,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
                 }
 
-                _context2.next = 45;
+              case 49:
+                _context2.next = 55;
                 break;
 
-              case 40:
-                _context2.prev = 40;
+              case 51:
+                _context2.prev = 51;
                 _context2.t0 = _context2["catch"](0);
-                // Handle error
-                _this3.isLoading = false;
+                console.error(_context2.t0);
 
-                _this3.$toasted.show(_context2.t0.response.data.message, {
+                _this3.$toasted.show("An error occurred. Please try again.", {
                   theme: "toasted-primary",
                   position: "top-center",
                   duration: 5000
                 });
 
-                console.error('Error:', _context2.t0);
-
-              case 45:
+              case 55:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 40]]);
+        }, _callee2, null, [[0, 51]]);
       }))();
     },
     uploadFiles: function uploadFiles() {
@@ -8567,13 +8597,70 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this6 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        var _this6$fileRecordsFor, _this6$fileRecordsFor2, _this6$fileRecordsFor3, _this6$fileRecordsFor4, _this6$fileRecordsFor5, formData, getInTuch, socialLinks, response;
+        var isFacebookValid, isTwitterValid, isLinkedInValid, isInstagramValid, _this6$fileRecordsFor, _this6$fileRecordsFor2, _this6$fileRecordsFor3, _this6$fileRecordsFor4, _this6$fileRecordsFor5, formData, getInTuch, socialLinks, response;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
                 _context4.prev = 0;
+                isFacebookValid = _this6.validateFacebook();
+                isTwitterValid = _this6.validateTwitter();
+                isLinkedInValid = _this6.validateLinkedIn();
+                isInstagramValid = _this6.validateInstagram();
+
+                if (!(_this6.type === "Speaker")) {
+                  _context4.next = 11;
+                  break;
+                }
+
+                if (!(_this6.title === "" || _this6.date === "" || _this6.details === "" || _this6.contentFile === null || _this6.position === "")) {
+                  _context4.next = 9;
+                  break;
+                }
+
+                _this6.$toasted.show("Please fill up all fields", {
+                  theme: "toasted-primary",
+                  position: "top-center",
+                  duration: 5000
+                });
+
+                return _context4.abrupt("return", false);
+
+              case 9:
+                _context4.next = 48;
+                break;
+
+              case 11:
+                if (!(_this6.title === "" || _this6.category_id === "0" || _this6.details === '')) {
+                  _context4.next = 16;
+                  break;
+                }
+
+                _this6.$toasted.show("Please fill up required fields", {
+                  theme: "toasted-primary",
+                  position: "top-center",
+                  duration: 5000
+                });
+
+                return _context4.abrupt("return", false);
+
+              case 16:
+                if (!(!isFacebookValid || !isTwitterValid || !isLinkedInValid || !isInstagramValid)) {
+                  _context4.next = 20;
+                  break;
+                }
+
+                _this6.$toasted.show("Please fill up all fields correctly", {
+                  theme: "toasted-primary",
+                  position: "top-center",
+                  duration: 5000
+                });
+
+                _context4.next = 48;
+                break;
+
+              case 20:
                 _this6.isLoading = true;
                 formData = new FormData();
 
@@ -8635,10 +8722,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 // }
 
 
-                _context4.next = 27;
+                _context4.next = 46;
                 return axios__WEBPACK_IMPORTED_MODULE_5__["default"].post("/api/content/".concat(_this6.updatedId), formData);
 
-              case 27:
+              case 46:
                 response = _context4.sent;
 
                 if (response.status === 200) {
@@ -8664,22 +8751,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
                 }
 
-                _context4.next = 35;
+              case 48:
+                _context4.next = 54;
                 break;
 
-              case 31:
-                _context4.prev = 31;
+              case 50:
+                _context4.prev = 50;
                 _context4.t0 = _context4["catch"](0);
                 // Handle error
                 console.error("Error:", _context4.t0);
                 _this6.isLoading = false; // Add specific error handling as needed
 
-              case 35:
+              case 54:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, null, [[0, 31]]);
+        }, _callee4, null, [[0, 50]]);
       }))();
     },
     extractFileName: function extractFileName(url) {
@@ -9930,12 +10018,35 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     boucherFilesLength: function boucherFilesLength() {
       return Object.keys(this.content.boucher_files).length;
+    },
+    facebookLastSegment: function facebookLastSegment() {
+      return this.getLastSegment(this.socialLinks.facebook);
+    },
+    twitterLastSegment: function twitterLastSegment() {
+      return this.getLastSegment(this.socialLinks.twitter);
+    },
+    linkedinLastSegment: function linkedinLastSegment() {
+      return this.getLastSegment(this.socialLinks.linkedin);
+    },
+    instagramLastSegment: function instagramLastSegment() {
+      return this.getLastSegment(this.socialLinks.instagram);
     }
   },
   created: function created() {
     this.parseSocialLinks();
   },
   methods: {
+    getLastSegment: function getLastSegment(url) {
+      if (url) {
+        var parts = url.split('/').filter(function (part) {
+          return part;
+        }); // Filter out empty strings
+
+        return parts[parts.length - 1].replace(/[-_]/g, ' ').trim(); // Replace dashes and underscores with spaces, and trim any extra spaces
+      }
+
+      return '';
+    },
     removeFileExtension: function removeFileExtension(fileName) {
       if (fileName && typeof fileName === 'string') {
         return fileName.replace(/\.[^/.]+$/, "");
@@ -15972,7 +16083,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.ql-container.ql-snow {\r\n    min-height: 200px;\n}\n.is_dragging {\r\n    overflow: hidden;\r\n    border: 1px dotted #9A5626 !important;\n}\n.vue-file-agent .file-input {\r\n    position: absolute;\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    opacity: 0;\r\n    z-index: 10;\r\n    cursor: pointer;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.ql-container.ql-snow {\n    min-height: 200px;\n}\n.is_dragging {\n    overflow: hidden;\n    border: 1px dotted #9A5626 !important;\n}\n.vue-file-agent .file-input {\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    opacity: 0;\n    z-index: 10;\n    cursor: pointer;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -67558,56 +67669,6 @@ var render = function () {
                                         ]
                                       )
                                     : _vm._e(),
-                                  _vm._v(" "),
-                                  item.type
-                                    ? _c(
-                                        "h3",
-                                        {
-                                          staticClass:
-                                            "text-lg text-gray-700 font-medium",
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                    " +
-                                              _vm._s(
-                                                item.type.substring(0, 20)
-                                              ) +
-                                              "\n                                "
-                                          ),
-                                        ]
-                                      )
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  item.link
-                                    ? _c(
-                                        "h4",
-                                        {
-                                          staticClass:
-                                            "text-base text-gray-700 font-medium break-words",
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                                    " +
-                                              _vm._s(
-                                                item.link.substring(0, 50)
-                                              ) +
-                                              "\n                                "
-                                          ),
-                                        ]
-                                      )
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _c("div", {
-                                    staticClass: "overflow-hidden",
-                                    staticStyle: {
-                                      display: "-webkit-box",
-                                      "-webkit-line-clamp": "2",
-                                      "-webkit-box-orient": "vertical",
-                                    },
-                                    domProps: {
-                                      innerHTML: _vm._s(item.details),
-                                    },
-                                  }),
                                 ]
                               ),
                             ]
@@ -67812,92 +67873,6 @@ var render = function () {
                   ),
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "mb-6" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass:
-                        "block mb-2 text-sm font-medium text-gray-900 dark:text-white",
-                      attrs: { for: "type" },
-                    },
-                    [_vm._v("Type")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.type,
-                          expression: "type",
-                        },
-                      ],
-                      staticClass:
-                        "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
-                      attrs: { id: "type" },
-                      on: {
-                        change: [
-                          function ($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function (o) {
-                                return o.selected
-                              })
-                              .map(function (o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.type = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          },
-                          _vm.updateAcceptAttribute,
-                        ],
-                      },
-                    },
-                    [
-                      _c("option", { attrs: { value: "Select Type" } }, [
-                        _vm._v("Select Type"),
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "PDF" } }, [
-                        _vm._v("PDF"),
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "Video (YouTube)" } }, [
-                        _vm._v("Video (YouTube)"),
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "option",
-                        { attrs: { value: "Documents (word, ppt, excel)" } },
-                        [
-                          _vm._v(
-                            "Documents (word, ppt, excel)\n                        "
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "Social links" } }, [
-                        _vm._v("Social links"),
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "URLs" } }, [
-                        _vm._v("URLs"),
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "Images" } }, [
-                        _vm._v("Images"),
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "Speaker" } }, [
-                        _vm._v("Speaker"),
-                      ]),
-                    ]
-                  ),
-                ]),
-                _vm._v(" "),
                 _vm.oldImageFile
                   ? _c("div", [
                       _vm.oldImageFile &&
@@ -68004,7 +67979,7 @@ var render = function () {
                         "text-sm text-gray-600 block mb-1 font-semibold",
                       attrs: { for: "#" },
                     },
-                    [_vm._v("Choose\n                        Content")]
+                    [_vm._v("Choose\n                        Banner")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -68244,48 +68219,6 @@ var render = function () {
                     ])
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.type !== "Speaker"
-                  ? _c("div", { staticClass: "mb-6" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass:
-                            "block mb-2 text-sm font-medium text-gray-900 dark:text-white",
-                          attrs: { for: "Link" },
-                        },
-                        [_vm._v("Link")]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.link,
-                            expression: "link",
-                          },
-                        ],
-                        staticClass:
-                          "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
-                        attrs: {
-                          type: "Link",
-                          id: "Link",
-                          placeholder: "Enter link",
-                          required: "",
-                        },
-                        domProps: { value: _vm.link },
-                        on: {
-                          input: function ($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.link = $event.target.value
-                          },
-                        },
-                      }),
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
                 _vm.type === "Speaker"
                   ? _c("div", { staticClass: "mb-6" }, [
                       _c(
@@ -68436,13 +68369,13 @@ var render = function () {
                           deletable: true,
                           meta: true,
                           accept: ".doc,.docx,.ppt,.pdf",
-                          maxSize: "5MB",
+                          maxSize: "30MB",
                           maxFiles: 5,
                           helpText:
-                            "Only doc, ppt and pdf file allowed, Maximum : 5MB",
+                            "Only doc, ppt and pdf file allowed, Maximum : 30MB",
                           errorText: {
                             type: "Invalid file type. Only doc, ppt and pdf file allowed",
-                            size: "Files should not exceed 5MB in size",
+                            size: "Files should not exceed 30MB in size",
                           },
                         },
                         on: {
@@ -68708,6 +68641,48 @@ var render = function () {
                     },
                   }),
                 ]),
+                _vm._v(" "),
+                _vm.type !== "Speaker"
+                  ? _c("div", { staticClass: "mb-6" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass:
+                            "block mb-2 text-sm font-medium text-gray-900 dark:text-white",
+                          attrs: { for: "Link" },
+                        },
+                        [_vm._v(" YouTube\n                        Video Link")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.link,
+                            expression: "link",
+                          },
+                        ],
+                        staticClass:
+                          "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                        attrs: {
+                          type: "Link",
+                          id: "Link",
+                          placeholder: "Enter YouTube Video Link",
+                          required: "",
+                        },
+                        domProps: { value: _vm.link },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.link = $event.target.value
+                          },
+                        },
+                      }),
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
                 _c("div", { staticClass: "mb-6" }, [
                   !_vm.isUpdate
@@ -70855,9 +70830,7 @@ var render = function () {
                                       ]),
                                       _vm._v(" "),
                                       _c("span", [
-                                        _vm._v(
-                                          _vm._s(_vm.socialLinks.facebook)
-                                        ),
+                                        _vm._v(_vm._s(_vm.facebookLastSegment)),
                                       ]),
                                     ]
                                   )
@@ -70896,7 +70869,7 @@ var render = function () {
                                       ]),
                                       _vm._v(" "),
                                       _c("span", [
-                                        _vm._v(_vm._s(_vm.socialLinks.twitter)),
+                                        _vm._v(_vm._s(_vm.twitterLastSegment)),
                                       ]),
                                     ]
                                   )
@@ -70936,9 +70909,7 @@ var render = function () {
                                       ]),
                                       _vm._v(" "),
                                       _c("span", [
-                                        _vm._v(
-                                          _vm._s(_vm.socialLinks.linkedin)
-                                        ),
+                                        _vm._v(_vm._s(_vm.linkedinLastSegment)),
                                       ]),
                                     ]
                                   )
@@ -70978,7 +70949,7 @@ var render = function () {
                                       _vm._v(" "),
                                       _c("span", [
                                         _vm._v(
-                                          _vm._s(_vm.socialLinks.linkedin)
+                                          _vm._s(_vm.instagramLastSegment)
                                         ),
                                       ]),
                                     ]
