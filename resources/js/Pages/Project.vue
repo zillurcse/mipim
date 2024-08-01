@@ -79,22 +79,7 @@
                                         <div class="d-flex gap-3 align-items-center">
 
                                             <a :href="url" target="_blank">
-                                                <svg width="18" height="18" viewBox="0 0 18 18" fill="#9a5626"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <g clip-path="url(#clip0_220_19)">
-                                                        <path
-                                                            d="M8.97534 16.8658C13.3151 16.8658 16.8164 13.3644 16.8164 8.97534C16.8164 4.5863 13.3151 1.08493 8.97534 1.08493C4.63562 1.08493 1.13425 4.5863 1.13425 8.97534C1.13425 13.3644 4.63562 16.8658 8.97534 16.8658ZM8.97534 0C13.9562 0 17.9507 4.04384 17.9507 8.97534C17.9507 13.9562 13.9068 17.9507 8.97534 17.9507C4.04384 18 0 13.9562 0 8.97534C0 4.04384 4.04384 0 8.97534 0Z"
-                                                            fill="#9a5626" />
-                                                        <path
-                                                            d="M8.43276 13.2658V2.81097H9.567V13.2658L12.5259 10.3069L13.3149 11.0959L9.36974 15.0411C9.17248 15.2384 8.77796 15.2384 8.5807 15.0411L4.6355 11.0959L5.42454 10.3069L8.43276 13.2658Z"
-                                                            fill="#9a5626" />
-                                                    </g>
-                                                    <defs>
-                                                        <clipPath id="clip0_220_19">
-                                                            <rect width="18" height="18" fill="white" />
-                                                        </clipPath>
-                                                    </defs>
-                                                </svg>
+                                                <img src="/assets/view.svg" alt="" style="height: 30px">
 
                                             </a>
                                         </div>
@@ -114,7 +99,7 @@
                                         <div class="d-flex gap-3 align-items-center">
 
                                             <a :href="content.link" target="_blank">
-                                                <img src="/assets/view.svg" alt="">
+                                                <img src="/assets/view.svg" alt="" style="height: 30px">
                                             </a>
                                         </div>
                                     </div>
