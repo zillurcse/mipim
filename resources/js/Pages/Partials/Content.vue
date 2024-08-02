@@ -316,7 +316,7 @@
                     <div class="mb-6">
                         <div class="flex justify-between items-center">
                             <label class="block mb-2 text-12 text-stromgreay">
-                                Product Videos
+                                Videos
                             </label>
                             <label class="block mb-2 text-xs text-brand cursor-pointer font-semibold"
                                 @click="addVideoLink">
