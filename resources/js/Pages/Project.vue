@@ -32,7 +32,7 @@
                                                     clip-rule="evenodd" />
                                             </svg>
                                         </div>
-                                        <span v-if="content.get_in_touch.phone"> {{ content.get_in_touch.phone }}
+                                        <span style="color: #9A5626" v-if="content.get_in_touch.phone"> {{ content.get_in_touch.phone }}
                                         </span>
                                     </div>
                                     <div class="d-flex gap-2 align-items-center mb-2">
@@ -45,7 +45,7 @@
                                             </svg>
 
                                         </div>
-                                        <span v-if="content.get_in_touch.email">{{ content.get_in_touch.email }}</span>
+                                        <span style="color: #9A5626" v-if="content.get_in_touch.email">{{ content.get_in_touch.email }}</span>
                                     </div>
                                     <div class="d-flex gap-2 align-items-center mb-2" v-if="socialLinks.facebook">
                                         <div class="icon">
@@ -56,7 +56,7 @@
                                                     transform="translate(-7 -2)" fill="#fff" />
                                             </svg>
                                         </div>
-                                        <a :href="socialLinks.facebook">{{ facebookLastSegment }}</a>
+                                        <a target="_blank" style="color: #9A5626; text-decoration: none" :href="socialLinks.facebook">{{ facebookLastSegment }}</a>
                                     </div>
                                     <div class="d-flex gap-2 align-items-center mb-2" v-if="socialLinks.twitter">
                                         <div class="icon">
@@ -67,7 +67,7 @@
                                                     fill="#fff" />
                                             </svg>
                                         </div>
-                                        <a :href="socialLinks.twitter">{{ twitterLastSegment }}</a>
+                                        <a target="_blank" style="color: #9A5626; text-decoration: none" :href="socialLinks.twitter">{{ twitterLastSegment }}</a>
                                     </div>
                                     <div class="d-flex gap-2 align-items-center mb-2" v-if="socialLinks.linkedin">
                                         <div class="icon">
@@ -80,7 +80,7 @@
 
                                             </svg>
                                         </div>
-                                        <a :href="socialLinks.linkedin">{{ linkedinLastSegment }}</a>
+                                        <a target="_blank" style="color: #9A5626; text-decoration: none" :href="socialLinks.linkedin">{{ linkedinLastSegment }}</a>
                                     </div>
                                     <div class="d-flex gap-2 align-items-center mb-2" v-if="socialLinks.instagram">
                                         <div class="icon">
@@ -91,7 +91,7 @@
                                                     fill="#fff" />
                                             </svg>
                                         </div>
-                                        <a :href="socialLinks.instagram">{{ instagramLastSegment }}</a>
+                                        <a target="_blank" style="color: #9A5626; text-decoration: none" :href="socialLinks.instagram">{{ instagramLastSegment }}</a>
                                     </div>
                                 </div>
                                 <div class="boucher-box" v-if="content.boucher_files">
