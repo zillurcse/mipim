@@ -10035,6 +10035,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -10046,7 +10052,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      socialLinks: {}
+      socialLinks: {},
+      videos: null
     };
   },
   components: {
@@ -10071,6 +10078,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.parseSocialLinks();
+    this.videos = JSON.parse(this.content.videos_link);
   },
   methods: {
     getLastSegment: function getLastSegment(url) {
@@ -16144,7 +16152,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.about-section[data-v-a1152200] {\r\n    padding: 50px 35px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.about-section[data-v-a1152200] {\n    padding: 50px 35px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -68693,7 +68701,7 @@ var render = function () {
                           { staticClass: "block mb-2 text-12 text-stromgreay" },
                           [
                             _vm._v(
-                              "\n                            Product Videos\n                        "
+                              "\n                            Videos\n                        "
                             ),
                           ]
                         ),
@@ -71293,102 +71301,101 @@ var render = function () {
                                   }
                                 ),
                                 _vm._v(" "),
-                                _vm.content.type === "Video (YouTube)"
-                                  ? _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "d-flex justify-between align-items-center py-3",
-                                      },
-                                      [
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "d-flex align-items-center gap-3",
-                                          },
-                                          [
-                                            _c(
-                                              "svg",
-                                              {
+                                _vm._l(_vm.videos, function (video, i) {
+                                  return _c(
+                                    "div",
+                                    {
+                                      key: i,
+                                      staticClass:
+                                        "d-flex justify-between align-items-center py-3",
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "d-flex align-items-center gap-3",
+                                        },
+                                        [
+                                          _c(
+                                            "svg",
+                                            {
+                                              attrs: {
+                                                "data-v-dc917932": "",
+                                                width: "28",
+                                                height: "28",
+                                                viewBox: "0 0 85 85",
+                                                fill: "none",
+                                                xmlns:
+                                                  "http://www.w3.org/2000/svg",
+                                              },
+                                            },
+                                            [
+                                              _c("path", {
                                                 attrs: {
                                                   "data-v-dc917932": "",
-                                                  width: "28",
-                                                  height: "28",
-                                                  viewBox: "0 0 85 85",
-                                                  fill: "none",
-                                                  xmlns:
-                                                    "http://www.w3.org/2000/svg",
+                                                  d: "M37.4168 34.3579L50.6757 42.5L37.4168 50.6477V34.3579Z",
+                                                  fill: "#996B4B",
                                                 },
-                                              },
-                                              [
-                                                _c("path", {
-                                                  attrs: {
-                                                    "data-v-dc917932": "",
-                                                    d: "M37.4168 34.3579L50.6757 42.5L37.4168 50.6477V34.3579Z",
-                                                    fill: "#996B4B",
-                                                  },
-                                                }),
-                                                _vm._v(" "),
-                                                _c("path", {
-                                                  attrs: {
-                                                    "data-v-dc917932": "",
-                                                    d: "M42.5 0C34.0943 0 25.8774 2.49258 18.8883 7.16254C11.8992 11.8325 6.45186 18.4701 3.23514 26.2359C0.0184145 34.0018 -0.823227 42.5471 0.816645 50.7913C2.45652 59.0355 6.50425 66.6083 12.448 72.552C18.3917 78.4958 25.9645 82.5435 34.2087 84.1834C42.4529 85.8232 50.9982 84.9816 58.764 81.7649C66.5299 78.5481 73.1675 73.1008 77.8375 66.1117C82.5074 59.1226 85 50.9057 85 42.5C85 31.2283 80.5223 20.4183 72.552 12.448C64.5817 4.47766 53.7717 0 42.5 0ZM62.7546 52.728C61.9046 55.3395 59.0918 56.9276 56.5026 57.2911C47.1938 58.2809 37.8062 58.2809 28.4974 57.2911C25.9082 56.9276 23.0954 55.3395 22.2454 52.728C20.9201 45.9756 20.9201 39.03 22.2454 32.2776C23.0954 29.6382 25.9082 28.078 28.5198 27.7145C37.8286 26.7247 47.2162 26.7247 56.525 27.7145C59.1142 28.078 61.927 29.6605 62.777 32.2776C64.0949 39.0314 64.0873 45.977 62.7546 52.728Z",
-                                                    fill: "#996B4B",
-                                                  },
-                                                }),
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "div",
-                                              {
-                                                staticClass:
-                                                  "d-flex flex-col boucher-text uppercase",
-                                              },
-                                              [
-                                                _c("p", [
-                                                  _vm._v("Video (YouTube)"),
-                                                ]),
-                                                _vm._v(" "),
-                                                _c("span", [_vm._v("Youtube")]),
-                                              ]
-                                            ),
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "d-flex gap-3 align-items-center",
-                                          },
-                                          [
-                                            _c(
-                                              "a",
-                                              {
+                                              }),
+                                              _vm._v(" "),
+                                              _c("path", {
                                                 attrs: {
-                                                  href: _vm.content.link,
-                                                  target: "_blank",
+                                                  "data-v-dc917932": "",
+                                                  d: "M42.5 0C34.0943 0 25.8774 2.49258 18.8883 7.16254C11.8992 11.8325 6.45186 18.4701 3.23514 26.2359C0.0184145 34.0018 -0.823227 42.5471 0.816645 50.7913C2.45652 59.0355 6.50425 66.6083 12.448 72.552C18.3917 78.4958 25.9645 82.5435 34.2087 84.1834C42.4529 85.8232 50.9982 84.9816 58.764 81.7649C66.5299 78.5481 73.1675 73.1008 77.8375 66.1117C82.5074 59.1226 85 50.9057 85 42.5C85 31.2283 80.5223 20.4183 72.552 12.448C64.5817 4.47766 53.7717 0 42.5 0ZM62.7546 52.728C61.9046 55.3395 59.0918 56.9276 56.5026 57.2911C47.1938 58.2809 37.8062 58.2809 28.4974 57.2911C25.9082 56.9276 23.0954 55.3395 22.2454 52.728C20.9201 45.9756 20.9201 39.03 22.2454 32.2776C23.0954 29.6382 25.9082 28.078 28.5198 27.7145C37.8286 26.7247 47.2162 26.7247 56.525 27.7145C59.1142 28.078 61.927 29.6605 62.777 32.2776C64.0949 39.0314 64.0873 45.977 62.7546 52.728Z",
+                                                  fill: "#996B4B",
                                                 },
+                                              }),
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "d-flex flex-col boucher-text uppercase",
+                                            },
+                                            [
+                                              _c("p", [
+                                                _vm._v("Video (YouTube)"),
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("span", [_vm._v("Youtube")]),
+                                            ]
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "d-flex gap-3 align-items-center",
+                                        },
+                                        [
+                                          _c(
+                                            "a",
+                                            {
+                                              attrs: {
+                                                href: video.videos_link,
+                                                target: "_blank",
                                               },
-                                              [
-                                                _c("img", {
-                                                  staticStyle: {
-                                                    height: "30px",
-                                                  },
-                                                  attrs: {
-                                                    src: "/assets/view.svg",
-                                                    alt: "",
-                                                  },
-                                                }),
-                                              ]
-                                            ),
-                                          ]
-                                        ),
-                                      ]
-                                    )
-                                  : _vm._e(),
+                                            },
+                                            [
+                                              _c("img", {
+                                                staticStyle: { height: "30px" },
+                                                attrs: {
+                                                  src: "/assets/view.svg",
+                                                  alt: "",
+                                                },
+                                              }),
+                                            ]
+                                          ),
+                                        ]
+                                      ),
+                                    ]
+                                  )
+                                }),
                               ],
                               2
                             )
