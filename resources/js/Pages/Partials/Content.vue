@@ -58,7 +58,7 @@
                                         </div>
                                     </figure>
 
-                                    <h2 v-if="item.title" class="text-xl text-gray-800 font-semibold">
+                                    <h2 v-if="item.title" class=" text-gray-800 font-semibold" style="font-size: 15px;">
                                         {{ item.title.substring(0, 50) }}
                                     </h2>
                                     <!-- <h3 v-if="item.type" class="text-lg text-gray-700 font-medium">
@@ -312,13 +312,34 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Enter instagram link" required />
                     </div>
-                    <div class="mb-6" v-if="type !== 'Speaker'">
-                        <label for="Link" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> YouTube
-                            Video Link</label>
-                        <input type="Link" id="Link" v-model="link"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Enter YouTube Video Link" required />
+
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center">
+                            <label class="block mb-2 text-12 text-stromgreay">
+                                Product Videos
+                            </label>
+                            <label class="block mb-2 text-xs text-brand cursor-pointer font-semibold"
+                                @click="addVideoLink">
+                                ADD VIDEO LINK
+                            </label>
+                        </div>
+                        <div v-for="(video, index) in videos" :key="index" class="mb-4">
+                            <div class="flex justify-between items-center relative">
+                                <input type="text" v-model="video.videos_link"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Enter YouTube Video Link" required />
+                                <button v-if="videos.length > 1" @click="removeVideoLink(index)"
+                                    class=" absolute -right-1 -top-1 w-5 h-5 rounded-full bg-red-600 flex justify-center items-center text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                    </svg>
+
+                                </button>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="mb-6">
                         <button type="button" @click="uploadContentFiles" v-if="!isUpdate"
                             class="text-white flex items-center justify-center gap-4  bg-brand hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 h-12  text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -427,6 +448,9 @@ export default {
             current_index: null,
             email: '',
             phone: '',
+            videos: [
+                { videos_link: '' }
+            ],
 
             uploading: false,
             progress: 0,
@@ -639,12 +663,12 @@ export default {
                         phone: this.phone
                     };
 
+
                     // Create FormData and append all data
                     this.isLoading = true;
                     let formData = new FormData();
                     formData.append('title', this.title);
                     formData.append('category_id', this.category_id);
-                    formData.append('link', this.link);
                     formData.append('type', this.type);
                     formData.append('date', this.date);
                     formData.append('details', this.details);
@@ -660,6 +684,7 @@ export default {
 
                     formData.append('social_links', JSON.stringify(socialLinks));
                     formData.append('get_in_touch', JSON.stringify(getInTouch));
+                    formData.append('videos_link', JSON.stringify(this.videos));
 
                     // Make POST request to upload the file and data
                     const response = await axios.post('/api/content', formData);
@@ -786,6 +811,8 @@ export default {
             const get_in_touch_decode = JSON.parse(item.get_in_touch)
             const social_links_decode = JSON.parse(item.social_links)
             const boucher_files_decode = JSON.parse(item.boucher_files)
+            const videos_link = JSON.parse(item.videos_link)
+
             console.log(item)
 
             this.current_index = index
@@ -810,6 +837,7 @@ export default {
             this.oldImageFile = item.file;
             this.category_id = item.category_id
             this.id = item.id
+            this.videos = videos_link
         },
         async updateContentFiles() {
             try {
@@ -880,6 +908,7 @@ export default {
                         instagram: this.instagram,
                     };
                     formData.append('social_links', JSON.stringify(socialLinks));
+                    formData.append('videos_link', JSON.stringify(this.videos));
 
                     this.boucher_files = this.fileRecordsForUpload[0]?.file;
                     this.boucher_files1 = this.fileRecordsForUpload[1]?.file;
@@ -958,7 +987,15 @@ export default {
         },
         closeModal() {
             this.showModal = false
-        }
+        },
+        addVideoLink() {
+            this.videos.push({ videos_link: '' });
+        },
+        removeVideoLink(index) {
+            if (this.videos.length > 1) {
+                this.videos.splice(index, 1);
+            }
+        },
 
     },
 }

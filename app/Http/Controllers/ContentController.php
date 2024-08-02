@@ -70,7 +70,7 @@ class ContentController extends Controller
             'boucher_files' => 'nullable', // Ensure the file is actually a file
             'social_links' => 'required|json',
             'get_in_touch' => 'required|json',
-
+            'videos_link' => 'required|json'
         ];
 
         // Validate the request
@@ -81,6 +81,8 @@ class ContentController extends Controller
         $data['title'] = $validatedData['title'];
         $data['social_links'] = $validatedData['social_links'];
         $data['get_in_touch'] = $validatedData['get_in_touch'];
+        $data['videos_link'] = $validatedData['videos_link'];
+
 
         // Generate a unique slug
         $slug = Str::slug($data['title']);
@@ -148,7 +150,7 @@ class ContentController extends Controller
         $content = Content::findOrFail($id);
         $boucherFiles = json_decode($content->boucher_files, true);
 
-        if ($id && $key && $url){
+        if ($id && $key && $url) {
             if (isset($boucherFiles[$request->key])) {
                 unset($boucherFiles[$request->key]);
             } else {
@@ -207,6 +209,8 @@ class ContentController extends Controller
             'boucher_files' => 'nullable', // Ensure the file is actually a file
             'social_links' => 'required|json',
             'get_in_touch' => 'required|json',
+            'videos_link' => 'required|json'
+
         ];
 
         // Validate the request
@@ -221,6 +225,8 @@ class ContentController extends Controller
         $data['title'] = $validatedData['title'];
         $data['social_links'] = $validatedData['social_links'];
         $data['get_in_touch'] = $validatedData['get_in_touch'];
+        $data['videos_link'] = $validatedData['videos_link'];
+
 
         // Generate a unique slug if the title has changed
         if ($content->title !== $data['title']) {
