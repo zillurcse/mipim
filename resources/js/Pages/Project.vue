@@ -137,7 +137,7 @@
                                         </div>
                                     </div>
                                     <div class="d-flex justify-between align-items-center py-3"
-                                        v-for="(video,i) in videos" :key="i">
+                                        v-for="(video, i) in videos" :key="i">
                                         <div class="d-flex align-items-center gap-3">
                                             <svg data-v-dc917932="" width="28" height="28" viewBox="0 0 85 85"
                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -150,7 +150,7 @@
                                             </svg>
 
                                             <div class="d-flex flex-col boucher-text uppercase">
-                                                <p>Video (YouTube)</p>
+                                                <p>{{ video.videos_caption }}</p>
                                                 <span>Youtube</span>
                                             </div>
                                         </div>

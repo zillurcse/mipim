@@ -8084,6 +8084,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 
@@ -8174,7 +8177,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       email: '',
       phone: '',
       videos: [{
-        videos_link: ''
+        videos_link: '',
+        videos_caption: ''
       }],
       uploading: false,
       progress: 0,
@@ -8594,7 +8598,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var social_links_decode = JSON.parse(item.social_links);
       var boucher_files_decode = JSON.parse(item.boucher_files);
       var videos_link = JSON.parse(item.videos_link);
-      console.log(item);
+      console.log(item); // console.log(videos_link)
+
       this.current_index = index;
       this.updatedId = item.id;
       this.showModal = 'pdf';
@@ -8828,7 +8833,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     addVideoLink: function addVideoLink() {
       this.videos.push({
-        videos_link: ''
+        videos_link: '',
+        videos_caption: ''
       });
     },
     removeVideoLink: function removeVideoLink(index) {
@@ -68694,7 +68700,9 @@ var render = function () {
                   [
                     _c(
                       "div",
-                      { staticClass: "flex justify-between items-center" },
+                      {
+                        staticClass: "flex justify-between items-center gap-2",
+                      },
                       [
                         _c(
                           "label",
@@ -68728,7 +68736,7 @@ var render = function () {
                           "div",
                           {
                             staticClass:
-                              "flex justify-between items-center relative",
+                              "flex justify-between gap-2 items-center relative",
                           },
                           [
                             _c("input", {
@@ -68756,6 +68764,37 @@ var render = function () {
                                   _vm.$set(
                                     video,
                                     "videos_link",
+                                    $event.target.value
+                                  )
+                                },
+                              },
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: video.videos_caption,
+                                  expression: "video.videos_caption",
+                                },
+                              ],
+                              staticClass:
+                                "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                              attrs: {
+                                type: "text",
+                                placeholder: "Enter Video Caption",
+                                required: "",
+                              },
+                              domProps: { value: video.videos_caption },
+                              on: {
+                                input: function ($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    video,
+                                    "videos_caption",
                                     $event.target.value
                                   )
                                 },
@@ -71357,7 +71396,9 @@ var render = function () {
                                             },
                                             [
                                               _c("p", [
-                                                _vm._v("Video (YouTube)"),
+                                                _vm._v(
+                                                  _vm._s(video.videos_caption)
+                                                ),
                                               ]),
                                               _vm._v(" "),
                                               _c("span", [_vm._v("Youtube")]),

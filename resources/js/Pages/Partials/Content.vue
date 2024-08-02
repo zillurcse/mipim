@@ -314,7 +314,7 @@
                     </div>
 
                     <div class="mb-6">
-                        <div class="flex justify-between items-center">
+                        <div class="flex justify-between items-center gap-2">
                             <label class="block mb-2 text-12 text-stromgreay">
                                 Videos
                             </label>
@@ -324,10 +324,13 @@
                             </label>
                         </div>
                         <div v-for="(video, index) in videos" :key="index" class="mb-4">
-                            <div class="flex justify-between items-center relative">
+                            <div class="flex justify-between gap-2 items-center relative">
                                 <input type="text" v-model="video.videos_link"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Enter YouTube Video Link" required />
+                                <input type="text" v-model="video.videos_caption"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Enter Video Caption" required />
                                 <button v-if="videos.length > 1" @click="removeVideoLink(index)"
                                     class=" absolute -right-1 -top-1 w-5 h-5 rounded-full bg-red-600 flex justify-center items-center text-white">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -449,7 +452,7 @@ export default {
             email: '',
             phone: '',
             videos: [
-                { videos_link: '' }
+                { videos_link: '', videos_caption: '' }
             ],
 
             uploading: false,
@@ -806,6 +809,7 @@ export default {
                     // Handle error if needed
                 });
         },
+
         UpdateContent(item, index) {
 
             const get_in_touch_decode = JSON.parse(item.get_in_touch)
@@ -814,6 +818,8 @@ export default {
             const videos_link = JSON.parse(item.videos_link)
 
             console.log(item)
+
+            // console.log(videos_link)
 
             this.current_index = index
             this.updatedId = item.id
@@ -989,7 +995,7 @@ export default {
             this.showModal = false
         },
         addVideoLink() {
-            this.videos.push({ videos_link: '' });
+            this.videos.push({ videos_link: '', videos_caption: '' });
         },
         removeVideoLink(index) {
             if (this.videos.length > 1) {
