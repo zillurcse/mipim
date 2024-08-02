@@ -837,7 +837,7 @@ export default {
             this.oldImageFile = item.file;
             this.category_id = item.category_id
             this.id = item.id
-            this.videos = videos_link
+            this.videos = videos_link===null?[]:videos_link
         },
         async updateContentFiles() {
             try {
