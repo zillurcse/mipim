@@ -56,7 +56,7 @@
                                                     transform="translate(-7 -2)" fill="#fff" />
                                             </svg>
                                         </div>
-                                        <span>{{ facebookLastSegment }}</span>
+                                        <a :href="socialLinks.facebook">{{ facebookLastSegment }}</a>
                                     </div>
                                     <div class="d-flex gap-2 align-items-center mb-2" v-if="socialLinks.twitter">
                                         <div class="icon">
@@ -67,7 +67,7 @@
                                                     fill="#fff" />
                                             </svg>
                                         </div>
-                                        <span>{{ twitterLastSegment }}</span>
+                                        <a :href="socialLinks.twitter">{{ twitterLastSegment }}</a>
                                     </div>
                                     <div class="d-flex gap-2 align-items-center mb-2" v-if="socialLinks.linkedin">
                                         <div class="icon">
@@ -80,7 +80,7 @@
 
                                             </svg>
                                         </div>
-                                        <span>{{ linkedinLastSegment }}</span>
+                                        <a :href="socialLinks.linkedin">{{ linkedinLastSegment }}</a>
                                     </div>
                                     <div class="d-flex gap-2 align-items-center mb-2" v-if="socialLinks.instagram">
                                         <div class="icon">
@@ -91,7 +91,7 @@
                                                     fill="#fff" />
                                             </svg>
                                         </div>
-                                        <span>{{ instagramLastSegment }}</span>
+                                        <a :href="socialLinks.instagram">{{ instagramLastSegment }}</a>
                                     </div>
                                 </div>
                                 <div class="boucher-box" v-if="content.boucher_files">
