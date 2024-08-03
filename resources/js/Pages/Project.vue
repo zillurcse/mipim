@@ -150,7 +150,7 @@
                                             </svg>
 
                                             <div class="d-flex flex-col boucher-text uppercase">
-                                                <p>{{ video.videos_caption }}</p>
+                                                <p>{{ truncateFileName(video.videos_caption) }}</p>
                                                 <span>Youtube</span>
                                             </div>
                                         </div>
