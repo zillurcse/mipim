@@ -257,7 +257,7 @@ export default {
     -webkit-box-orient: vertical;
     overflow: hidden;
     transition: all .3s ease-in;
-
+    font-family: "Zaha", sans-serif !important;
 }
 
 .styles-description {

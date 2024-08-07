@@ -24,8 +24,13 @@
                             <drag class="cursor-pointer h-full" :transfer-data="index" @dragstart="is_dragging = true"
                                 @dragend="is_dragging = false">
                                 <div class="p-3 border rounded-lg relative h-full">
-                                    <h2 class="text-2xl text-gray-800 mb-2">{{ category.name }}</h2>
+                                    <p class="text-gray-800 mb-2" style="font-size: 15px;">
 
+                                        {{
+                    category.name.length > 110 ? category.name.substring(0, 110) + "..." :
+                        category.name
+                }}
+                                    </p>
                                     <div class="absolute top-2 right-2 text-gray-400 cursor-pointer"
                                         @click="clickTool(category.id, index)">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -121,7 +126,7 @@ export default {
     components: {
         Drag, Drop,
     },
-    props:{
+    props: {
         categoriesData: Array
     },
     data() {
@@ -176,7 +181,7 @@ export default {
                 const response = await axios.post('/api/categories', formData);
 
                 // Handle success
-                if(response.status === 200){
+                if (response.status === 200) {
                     this.categoriesData.push(response.data.data)
 
                     this.showModal = false;
@@ -230,7 +235,7 @@ export default {
                 const response = await axios.post(`/api/categories/${this.updatedId}`, formData);
 
                 // Handle success
-                if (response.status===200){
+                if (response.status === 200) {
                     this.$set(this.categoriesData, this.category_index, response.data.data);
                     this.showModal = false;
                     // Reset all data

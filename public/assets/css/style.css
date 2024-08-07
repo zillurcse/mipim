@@ -5,6 +5,11 @@
     /* Add more src lines for other font formats if needed */
 }
 
+@font-face {
+    font-family: 'Calibri';
+    src: url('../Font/calibri/Calibri\ Regular/Calibri Regular.ttf') format('woff2'),
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -12,7 +17,7 @@
 }
 
 body {
-    font-family: "Zaha", sans-serif !important;
+    font-family: "Calibri", sans-serif !important;
     background-color: #F5F5F5;
     overflow-x: hidden !important;
     overflow-y: auto !important;
@@ -29,6 +34,14 @@ img {
 
 .text-brand {
     color: #9A5626;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: "Zaha", sans-serif !important;
 }
 
 h1,
